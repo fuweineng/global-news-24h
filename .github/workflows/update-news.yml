@@ -1,0 +1,35 @@
+name: Update News
+
+on:
+  schedule:
+    # 每 30 分钟运行一次 (UTC 时间)
+    - cron: '*/30 * * * *'
+  workflow_dispatch:  # 允许手动触发
+
+jobs:
+  fetch-news:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+      
+      - name: Fetch news
+        run: python src/fetch_news.py
+      
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add data/news.json
+          git diff --staged --quiet || git commit -m "Update news: $(date -u)"
+          git push
