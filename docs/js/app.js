@@ -1,7 +1,9 @@
-// Global News App - 24inf.cn Style with Translation
+// Global News App - Enhanced with Search & Stats
 let allArticles = [];
+let filteredArticles = [];
 let currentFilter = 'all';
-let currentLang = 'zh'; // 'zh' or 'en'
+let currentSearch = '';
+let currentLang = 'zh';
 let isDarkMode = false;
 
 // Translations
@@ -15,12 +17,20 @@ const translations = {
         filterWorld: '🌍 国际',
         filterPolitics: '🏛️ 政治',
         filterBusiness: '💼 商业',
+        filterFinance: '📈 财经',
         filterTechnology: '💻 科技',
+        filterStartups: '🚀 创业',
         filterScience: '🔬 科学',
         filterSports: '⚽ 体育',
         filterEntertainment: '🎬 娱乐',
+        filterMusic: '🎵 音乐',
         filterAsia: '🌏 亚洲',
         filterChina: '🇨🇳 中国',
+        filterJapan: '🇯🇵 日本',
+        filterKorea: '🇰🇷 韩国',
+        filterEurope: '🇪🇺 欧洲',
+        filterUS: '🇺🇸 美国',
+        filterUK: '🇬🇧 英国',
         updateFreq: '每 30 分钟更新',
         dataSource: '数据来自全球 RSS 源',
         viewOnGithub: '查看 GitHub',
@@ -34,7 +44,12 @@ const translations = {
         hoursAgo: '{n}小时前',
         today: '今天',
         yesterday: '昨天',
-        readMore: '阅读原文'
+        readMore: '阅读原文',
+        searchPlaceholder: '搜索新闻...',
+        search: '搜索',
+        totalArticles: '总新闻数',
+        sources: '新闻源',
+        lastUpdate: '最后更新'
     },
     en: {
         title: '24Hr Global News',
@@ -45,12 +60,20 @@ const translations = {
         filterWorld: '🌍 World',
         filterPolitics: '🏛️ Politics',
         filterBusiness: '💼 Business',
+        filterFinance: '📈 Finance',
         filterTechnology: '💻 Tech',
+        filterStartups: '🚀 Startups',
         filterScience: '🔬 Science',
         filterSports: '⚽ Sports',
         filterEntertainment: '🎬 Entertainment',
+        filterMusic: '🎵 Music',
         filterAsia: '🌏 Asia',
         filterChina: '🇨🇳 China',
+        filterJapan: '🇯🇵 Japan',
+        filterKorea: '🇰🇷 Korea',
+        filterEurope: '🇪🇺 Europe',
+        filterUS: '🇺🇸 US',
+        filterUK: '🇬🇧 UK',
         updateFreq: 'Updated every 30 minutes',
         dataSource: 'Data from global RSS feeds',
         viewOnGithub: 'View on GitHub',
@@ -64,13 +87,17 @@ const translations = {
         hoursAgo: '{n}h ago',
         today: 'Today',
         yesterday: 'Yesterday',
-        readMore: 'Read'
+        readMore: 'Read',
+        searchPlaceholder: 'Search news...',
+        search: 'Search',
+        totalArticles: 'Total Articles',
+        sources: 'Sources',
+        lastUpdate: 'Last Update'
     }
 };
 
-// Initialize theme and language
+// Initialize
 function initSettings() {
-    // Load theme preference
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') {
         isDarkMode = true;
@@ -79,12 +106,10 @@ function initSettings() {
         document.getElementById('theme-text').textContent = translations[currentLang].lightMode;
     }
     
-    // Load language preference
     const savedLang = localStorage.getItem('lang') || 'zh';
     setLanguage(savedLang);
 }
 
-// Toggle language (UI + content translation)
 function toggleLanguage() {
     currentLang = currentLang === 'zh' ? 'en' : 'zh';
     localStorage.setItem('lang', currentLang);
@@ -93,14 +118,10 @@ function toggleLanguage() {
     document.getElementById('lang-icon').textContent = currentLang === 'zh' ? '🇨🇳' : '🇺🇸';
     document.getElementById('lang-text').textContent = t.langName;
     
-    // Update UI translations
     updateUITranslations();
-    
-    // Re-render news with selected language
-    renderNews(filterNews(allArticles, currentFilter));
+    renderNews(filterArticles());
 }
 
-// Update UI translations
 function updateUITranslations() {
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
@@ -109,12 +130,12 @@ function updateUITranslations() {
         }
     });
     
-    // Update theme text
     const t = translations[currentLang];
     document.getElementById('theme-text').textContent = isDarkMode ? t.lightMode : t.darkMode;
+    document.getElementById('search-input').placeholder = t.searchPlaceholder;
+    document.querySelector('.search-btn').textContent = t.search;
 }
 
-// Toggle dark/light mode
 function toggleTheme() {
     isDarkMode = !isDarkMode;
     document.body.classList.toggle('dark-mode');
@@ -125,7 +146,6 @@ function toggleTheme() {
     document.getElementById('theme-text').textContent = isDarkMode ? t.lightMode : t.darkMode;
 }
 
-// Set language
 function setLanguage(lang) {
     currentLang = lang;
     localStorage.setItem('lang', lang);
@@ -137,23 +157,24 @@ function setLanguage(lang) {
     updateUITranslations();
 }
 
-// Fetch news data
 async function fetchNews() {
     try {
         const response = await fetch('./data/news.json');
-        if (!response.ok) {
-            throw new Error('Failed to load news data');
-        }
+        if (!response.ok) throw new Error('Failed to load news data');
+        
         const data = await response.json();
         allArticles = data.articles;
         
-        // Update last updated time
         const updateTime = new Date(data.updated);
         const t = translations[currentLang];
-        document.getElementById('last-updated').textContent = 
-            `${t.updateFreq.split(' ')[0]}: ${formatUpdateTime(updateTime)}`;
+        document.getElementById('last-updated').textContent = `${t.lastUpdate}: ${formatUpdateTime(updateTime)}`;
         
-        renderNews(allArticles);
+        // Update stats
+        document.getElementById('stat-total').textContent = data.total;
+        document.getElementById('stat-sources').textContent = data.sources_count;
+        
+        filteredArticles = allArticles;
+        renderNews(filteredArticles);
     } catch (error) {
         console.error('Error fetching news:', error);
         const t = translations[currentLang];
@@ -166,27 +187,22 @@ async function fetchNews() {
     }
 }
 
-// Format update time
 function formatUpdateTime(date) {
     const now = new Date();
-    const diff = Math.floor((now - date) / 60000); // minutes
+    const diff = Math.floor((now - date) / 60000);
     
     if (diff < 1) return translations[currentLang].justNow;
     if (diff < 60) return translations[currentLang].minutesAgo.replace('{n}', diff);
     if (diff < 1440) return translations[currentLang].hoursAgo.replace('{n}', Math.floor(diff / 60));
     
     return date.toLocaleTimeString(currentLang === 'zh' ? 'zh-CN' : 'en-US', {
-        month: 'short',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
+        month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
     });
 }
 
-// Format relative time for cards
 function formatRelativeTime(date) {
     const now = new Date();
-    const diff = Math.floor((now - date) / 60000); // minutes
+    const diff = Math.floor((now - date) / 60000);
     const t = translations[currentLang];
     
     if (diff < 1) return { date: t.today, time: t.justNow };
@@ -205,35 +221,57 @@ function formatRelativeTime(date) {
     };
 }
 
-// Filter news
-function filterNews(articles, category) {
-    if (category === 'all') return articles;
-    return articles.filter(article => {
-        const categories = article.categories || [article.category];
-        if (category === 'asia') {
-            return article.country && ['CN', 'JP', 'KR', 'HK', 'TW', 'SG'].includes(article.country);
+function filterArticles() {
+    let articles = allArticles;
+    
+    // Category filter
+    if (currentFilter !== 'all') {
+        if (currentFilter === 'asia') {
+            articles = articles.filter(a => a.country && ['CN', 'JP', 'KR', 'HK', 'TW', 'SG', 'TH'].includes(a.country));
+        } else if (['china', 'japan', 'korea', 'taiwan', 'singapore', 'thailand', 'europe', 'us', 'uk'].includes(currentFilter)) {
+            const countryMap = {
+                china: ['CN', 'HK'],
+                japan: ['JP'],
+                korea: ['KR'],
+                taiwan: ['TW'],
+                singapore: ['SG'],
+                thailand: ['TH'],
+                europe: ['GB', 'DE', 'FR'],
+                us: ['US'],
+                uk: ['GB']
+            };
+            const countries = countryMap[currentFilter] || [currentFilter.toUpperCase()];
+            articles = articles.filter(a => a.country && countries.includes(a.country));
+        } else {
+            articles = articles.filter(a => {
+                const categories = a.categories || [a.category];
+                return categories.includes(currentFilter);
+            });
         }
-        return categories.includes(category);
-    });
+    }
+    
+    // Search filter
+    if (currentSearch.trim()) {
+        const searchLower = currentSearch.toLowerCase();
+        articles = articles.filter(a => {
+            const title = (a.title_zh || a.title).toLowerCase();
+            const summary = (a.summary_zh || a.summary || '').toLowerCase();
+            const source = (a.source || '').toLowerCase();
+            return title.includes(searchLower) || summary.includes(searchLower) || source.includes(searchLower);
+        });
+    }
+    
+    return articles;
 }
 
-// Get article title based on language
 function getArticleTitle(article) {
-    if (currentLang === 'zh' && article.title_zh) {
-        return article.title_zh;
-    }
-    return article.title;
+    return (currentLang === 'zh' && article.title_zh) ? article.title_zh : article.title;
 }
 
-// Get article summary based on language
 function getArticleSummary(article) {
-    if (currentLang === 'zh' && article.summary_zh) {
-        return article.summary_zh;
-    }
-    return article.summary;
+    return (currentLang === 'zh' && article.summary_zh) ? article.summary_zh : article.summary;
 }
 
-// Render news cards
 function renderNews(articles) {
     const container = document.getElementById('news-container');
     const t = translations[currentLang];
@@ -281,26 +319,36 @@ function renderNews(articles) {
     }).join('');
 }
 
+function handleSearch() {
+    currentSearch = document.getElementById('search-input').value;
+    filteredArticles = filterArticles();
+    renderNews(filteredArticles);
+}
+
 // Event listeners
 document.addEventListener('DOMContentLoaded', () => {
     initSettings();
     
-    // Language toggle
     document.getElementById('lang-toggle').addEventListener('click', toggleLanguage);
-    
-    // Theme toggle
     document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
     
-    // Filter buttons
     document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             currentFilter = btn.getAttribute('data-category');
-            renderNews(filterNews(allArticles, currentFilter));
+            filteredArticles = filterArticles();
+            renderNews(filteredArticles);
         });
     });
     
-    // Fetch news
+    document.querySelector('.search-btn').addEventListener('click', handleSearch);
+    document.getElementById('search-input').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') handleSearch();
+    });
+    
     fetchNews();
+    
+    // Auto-refresh every 5 minutes
+    setInterval(fetchNews, 300000);
 });

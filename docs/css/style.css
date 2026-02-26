@@ -69,7 +69,7 @@ header {
 }
 
 .header-content {
-    max-width: 1400px;
+    max-width: 1600px;
     margin: 0 auto;
     display: flex;
     align-items: center;
@@ -110,7 +110,7 @@ header {
     white-space: nowrap;
 }
 
-/* ========== CONTROLS (Dark Mode + Language) ========== */
+/* ========== CONTROLS ========== */
 .header-controls {
     display: flex;
     align-items: center;
@@ -145,39 +145,32 @@ header {
     color: white;
 }
 
-.lang-select {
-    padding: 0.5rem 0.75rem;
-    background: var(--bg-tertiary);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-sm);
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-    cursor: pointer;
-    outline: none;
-}
-
-.lang-select:hover, .lang-select:focus {
-    border-color: var(--accent-color);
-}
-
-/* ========== FILTERS ========== */
+/* ========== FILTERS - Two Row Layout ========== */
 .filters {
     background: var(--bg-primary);
     border-bottom: 1px solid var(--border-color);
     padding: 0.75rem 1.5rem;
     display: flex;
+    flex-wrap: wrap;
     gap: 0.5rem;
-    overflow-x: auto;
-    scrollbar-width: thin;
+    max-width: 1600px;
+    margin: 0 auto;
 }
 
-.filters::-webkit-scrollbar {
-    height: 4px;
+.filter-group {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin-right: 1rem;
+    margin-bottom: 0.5rem;
 }
 
-.filters::-webkit-scrollbar-thumb {
-    background: var(--border-color);
-    border-radius: 2px;
+.filter-group-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    padding: 0.25rem 0.5rem;
 }
 
 .filter-btn {
@@ -205,9 +198,56 @@ header {
     color: white;
 }
 
+/* ========== SEARCH BOX ========== */
+.search-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0.75rem 1.5rem;
+    background: var(--bg-primary);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.search-box {
+    display: flex;
+    gap: 0.5rem;
+    max-width: 600px;
+}
+
+.search-input {
+    flex: 1;
+    padding: 0.5rem 0.875rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.search-input:focus {
+    border-color: var(--accent-color);
+}
+
+.search-btn {
+    padding: 0.5rem 1rem;
+    background: var(--accent-color);
+    border: none;
+    border-radius: var(--radius-sm);
+    color: white;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: background 0.2s ease;
+}
+
+.search-btn:hover {
+    background: var(--accent-hover);
+}
+
 /* ========== MAIN CONTENT ========== */
 main {
-    max-width: 1400px;
+    max-width: 1600px;
     margin: 0 auto;
     padding: 1.5rem;
 }
@@ -217,7 +257,7 @@ main {
     gap: 1rem;
 }
 
-/* ========== NEWS CARD - High Density Style ========== */
+/* ========== NEWS CARD ========== */
 .news-card {
     background: var(--card-bg);
     border: 1px solid var(--border-color);
@@ -237,7 +277,6 @@ main {
     transform: translateX(4px);
 }
 
-/* Time column */
 .news-card .time-col {
     display: flex;
     flex-direction: column;
@@ -261,7 +300,6 @@ main {
     font-variant-numeric: tabular-nums;
 }
 
-/* Content column */
 .news-card .content-col {
     min-width: 0;
 }
@@ -328,7 +366,6 @@ main {
     overflow: hidden;
 }
 
-/* Meta column */
 .news-card .meta-col {
     display: flex;
     flex-direction: column;
@@ -362,6 +399,31 @@ main {
 
 .news-card .external-link:hover {
     background: var(--bg-tertiary);
+}
+
+/* ========== STATS BAR ========== */
+.stats-bar {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0.75rem 1.5rem;
+    background: var(--bg-primary);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.stat-value {
+    font-weight: 700;
+    color: var(--accent-color);
 }
 
 /* ========== LOADING & ERROR STATES ========== */
@@ -450,6 +512,16 @@ footer a:hover {
         padding: 0.75rem 1rem;
     }
     
+    .filter-group {
+        width: 100%;
+        flex-wrap: wrap;
+        margin-right: 0;
+    }
+    
+    .search-container {
+        padding: 0.75rem 1rem;
+    }
+    
     main {
         padding: 1rem;
     }
@@ -468,6 +540,11 @@ footer a:hover {
     .news-card .meta-col {
         flex-direction: row;
         align-items: center;
+    }
+    
+    .stats-bar {
+        padding: 0.75rem 1rem;
+        gap: 1rem;
     }
 }
 
