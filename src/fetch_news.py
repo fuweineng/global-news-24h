@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Global News Fetcher with Local Translation (Ollama)
-从 RSS 源抓取新闻，使用本地 Ollama 翻译并生成 JSON 数据
+Global News Fetcher with Alibaba Cloud Bailian (Qwen) Translation
+从 RSS 源抓取新闻，使用阿里云百炼 Qwen 模型翻译并生成 JSON 数据
 """
 
 import feedparser
@@ -13,12 +13,50 @@ import time
 import re
 import urllib.request
 import urllib.error
+import urllib.parse
 
-# 本地 Ollama API
-OLLAMA_API = "http://localhost:11434/api/generate"
+# 阿里云百炼 API (Qwen)
+# 获取 API Key: https://bailian.console.aliyun.com/
+DASHSCOPE_API_KEY = ""  # 从环境变量或配置文件读取
+DASHSCOPE_API_URL = "https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation"
+
+# 翻译开关
+USE_TRANSLATION = True
+TRANSLATION_MODEL = "qwen-turbo"  # 快速且便宜，适合翻译
+
+def get_api_key():
+    """获取阿里云 API Key"""
+    # 1. 从环境变量
+    import os
+    if os.environ.get('DASHSCOPE_API_KEY'):
+        return os.environ['DASHSCOPE_API_KEY']
+    
+    # 2. 从 OpenClaw auth-profiles.json
+    auth_file = Path.home() / '.openclaw' / 'agents' / 'main' / 'agent' / 'auth-profiles.json'
+    if auth_file.exists():
+        try:
+            with open(auth_file, 'r') as f:
+                auth = json.load(f)
+                if 'dashscope' in auth and auth['dashscope'].get('apiKey'):
+                    return auth['dashscope']['apiKey']
+        except:
+            pass
+    
+    # 3. 从项目配置
+    config_file = Path('config.json')
+    if config_file.exists():
+        try:
+            with open(config_file, 'r') as f:
+                config = json.load(f)
+                if config.get('dashscope_api_key'):
+                    return config['dashscope_api_key']
+        except:
+            pass
+    
+    return ""
 
 def translate_text(text: str, source_lang: str = "en", target_lang: str = "zh") -> str:
-    """使用本地 Ollama 翻译文本"""
+    """使用阿里云百炼 Qwen 翻译文本"""
     if not text or len(text.strip()) == 0:
         return text
     
@@ -30,41 +68,57 @@ def translate_text(text: str, source_lang: str = "en", target_lang: str = "zh") 
     if not is_mostly_english(text):
         return text
     
+    api_key = get_api_key()
+    if not api_key:
+        print("⚠️  未配置阿里云 API Key，跳过翻译")
+        return text
+    
     try:
         # 限制文本长度
-        text = text[:400]
+        text = text[:500]
         
         # 构建提示词
-        prompt = f"Translate the following text from {source_lang} to {target_lang}. Only output the translation, nothing else:\n\n{text}"
+        system_prompt = f"You are a professional translator. Translate from {source_lang} to {target_lang}. Output ONLY the translation, no explanations."
+        user_prompt = text
         
         # 构建请求
         data = json.dumps({
-            "model": "qwen2.5:7b",
-            "prompt": prompt,
-            "stream": False,
-            "options": {
+            "model": TRANSLATION_MODEL,
+            "input": {
+                "messages": [
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_prompt}
+                ]
+            },
+            "parameters": {
                 "temperature": 0.3,
-                "num_predict": 512
+                "max_tokens": 512
             }
         }).encode('utf-8')
         
         req = urllib.request.Request(
-            OLLAMA_API,
+            DASHSCOPE_API_URL,
             data=data,
-            headers={'Content-Type': 'application/json'},
+            headers={
+                'Content-Type': 'application/json',
+                'Authorization': f'Bearer {api_key}'
+            },
             method='POST'
         )
         
         with urllib.request.urlopen(req, timeout=30) as response:
             result = json.loads(response.read().decode('utf-8'))
             
-            if 'response' in result:
-                translated = result['response'].strip()
+            if 'output' in result and 'choices' in result['output']:
+                translated = result['output']['choices'][0]['message']['content'].strip()
                 # 清理翻译结果
                 translated = re.sub(r'\s+', ' ', translated).strip()
                 if translated and translated != text:
                     return translated
     
+    except urllib.error.HTTPError as e:
+        error_body = e.read().decode('utf-8') if e.fp else str(e)
+        print(f"⚠️  API error {e.code}: {error_body[:200]}")
     except Exception as e:
         print(f"⚠️  Translation error: {e}")
     
@@ -119,26 +173,37 @@ def parse_rss_feed(url: str, source_name: str, source_lang: str = "en") -> list:
 
 def translate_articles(articles: list, target_lang: str = "zh") -> list:
     """批量翻译新闻"""
-    print(f"🌐 Translating {len(articles)} articles to {target_lang}...")
+    if not USE_TRANSLATION:
+        print("⏭️  跳过翻译")
+        return articles
+    
+    api_key = get_api_key()
+    if not api_key:
+        print("⚠️  未配置阿里云 API Key，跳过翻译")
+        return articles
+    
+    print(f"🌐 使用阿里云 Qwen 翻译 {len(articles)} 篇文章...")
     
     translated_count = 0
     failed_count = 0
+    skipped_count = 0
     
     for i, article in enumerate(articles, 1):
         # 跳过已经是中文的文章
         if article.get('original_lang') == 'zh' or contains_chinese(article['title']):
             article['title_zh'] = article['title']
             article['summary_zh'] = article['summary']
+            skipped_count += 1
             continue
         
-        print(f"  [{i}/{len(articles)}] Translating: {article['title'][:50]}...")
+        print(f"  [{i}/{len(articles)}] {article['source']}: {article['title'][:40]}...")
         
         article['title_zh'] = translate_text(article['title'], 'en', target_lang)
-        time.sleep(0.1)  # Ollama 本地调用，短暂延迟即可
+        time.sleep(0.2)  # API 限流保护
         
         if article['summary']:
             article['summary_zh'] = translate_text(article['summary'], 'en', target_lang)
-            time.sleep(0.1)
+            time.sleep(0.2)
         else:
             article['summary_zh'] = ''
         
@@ -148,7 +213,7 @@ def translate_articles(articles: list, target_lang: str = "zh") -> list:
         else:
             failed_count += 1
     
-    print(f"✅ Translated {translated_count} articles, {failed_count} unchanged")
+    print(f"✅ 翻译完成：{translated_count} 篇成功，{failed_count} 篇失败，{skipped_count} 篇跳过 (已是中文)")
     return articles
 
 def deduplicate_articles(articles: list) -> list:
@@ -164,8 +229,18 @@ def deduplicate_articles(articles: list) -> list:
     return unique
 
 def main():
-    print("🌍 Global News Fetcher started (with Ollama Translation)")
+    print("🌍 Global News Fetcher (阿里云百炼 Qwen 翻译)")
     print("=" * 50)
+    
+    # 检查 API Key
+    api_key = get_api_key()
+    if api_key:
+        print(f"✅ 阿里云 API Key 已配置")
+    else:
+        print("⚠️  未配置阿里云 API Key")
+        print("   获取方式：https://bailian.console.aliyun.com/")
+        print("   配置方法：添加到 ~/.openclaw/agents/main/agent/auth-profiles.json")
+        print("   或在项目根目录创建 config.json，添加 dashscope_api_key")
     
     # 加载配置
     sources_file = Path('src/sources.json')
@@ -200,7 +275,7 @@ def main():
     print(f"📰 Total articles: {len(all_articles)}")
     print(f"✨ Unique articles: {len(unique_articles)}")
     
-    # 翻译文章 (英文→中文，使用本地 Ollama)
+    # 翻译文章 (英文→中文，使用阿里云百炼 Qwen)
     unique_articles = translate_articles(unique_articles, 'zh')
     
     # 按时间排序
