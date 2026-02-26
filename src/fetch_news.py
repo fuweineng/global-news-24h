@@ -26,9 +26,13 @@ def translate_text(text: str, source_lang: str = "en", target_lang: str = "zh") 
     if contains_chinese(text) and target_lang == "zh":
         return text
     
+    # 只翻译纯英文内容
+    if not is_mostly_english(text):
+        return text
+    
     try:
         # 限制文本长度 (API 限制 500 字符)
-        text = text[:500]
+        text = text[:400]
         
         # 构建请求
         params = urllib.parse.urlencode({
@@ -39,20 +43,31 @@ def translate_text(text: str, source_lang: str = "en", target_lang: str = "zh") 
         url = f"{TRANSLATE_API}?{params}"
         
         # 发送请求
-        req = urllib.request.Request(url, headers={'User-Agent': 'GlobalNewsFetcher/1.0'})
-        with urllib.request.urlopen(req, timeout=5) as response:
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        with urllib.request.urlopen(req, timeout=8) as response:
             data = json.loads(response.read().decode('utf-8'))
             
             if 'responseData' in data and 'translatedText' in data['responseData']:
                 translated = data['responseData']['translatedText']
                 # 清理翻译结果
                 translated = re.sub(r'\s+', ' ', translated).strip()
-                return translated
+                # 确保翻译结果不是原文
+                if translated != text and len(translated) > 0:
+                    return translated
     except Exception as e:
         print(f"⚠️  Translation error: {e}")
     
     # 翻译失败时返回原文
     return text
+
+def is_mostly_english(text: str) -> bool:
+    """检查文本是否主要是英文"""
+    if not text:
+        return False
+    # 计算英文字母比例
+    english_chars = sum(1 for c in text if c.isascii() and c.isalpha())
+    ratio = english_chars / len(text) if len(text) > 0 else 0
+    return ratio > 0.8
 
 def contains_chinese(text: str) -> bool:
     """检查文本是否包含中文"""
