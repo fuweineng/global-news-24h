@@ -5,7 +5,7 @@ let currentFilter = 'all';
 // Fetch news data
 async function fetchNews() {
     try {
-        const response = await fetch('../data/news.json');
+        const response = await fetch('./data/news.json');
         if (!response.ok) {
             throw new Error('Failed to load news data');
         }
