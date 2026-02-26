@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Global News Fetcher with Translation
-从 RSS 源抓取新闻，翻译并生成 JSON 数据
+Global News Fetcher with Local Translation (Ollama)
+从 RSS 源抓取新闻，使用本地 Ollama 翻译并生成 JSON 数据
 """
 
 import feedparser
@@ -12,13 +12,13 @@ import hashlib
 import time
 import re
 import urllib.request
-import urllib.parse
+import urllib.error
 
-# 翻译 API (使用 MyMemory 免费 API)
-TRANSLATE_API = "https://api.mymemory.translated.net/get"
+# 本地 Ollama API
+OLLAMA_API = "http://localhost:11434/api/generate"
 
 def translate_text(text: str, source_lang: str = "en", target_lang: str = "zh") -> str:
-    """翻译文本 (使用 MyMemory 免费 API)"""
+    """使用本地 Ollama 翻译文本"""
     if not text or len(text.strip()) == 0:
         return text
     
@@ -31,47 +31,57 @@ def translate_text(text: str, source_lang: str = "en", target_lang: str = "zh") 
         return text
     
     try:
-        # 限制文本长度 (API 限制 500 字符)
+        # 限制文本长度
         text = text[:400]
         
+        # 构建提示词
+        prompt = f"Translate the following text from {source_lang} to {target_lang}. Only output the translation, nothing else:\n\n{text}"
+        
         # 构建请求
-        params = urllib.parse.urlencode({
-            'q': text,
-            'langpair': f"{source_lang}|{target_lang}"
-        })
+        data = json.dumps({
+            "model": "qwen2.5:7b",
+            "prompt": prompt,
+            "stream": False,
+            "options": {
+                "temperature": 0.3,
+                "num_predict": 512
+            }
+        }).encode('utf-8')
         
-        url = f"{TRANSLATE_API}?{params}"
+        req = urllib.request.Request(
+            OLLAMA_API,
+            data=data,
+            headers={'Content-Type': 'application/json'},
+            method='POST'
+        )
         
-        # 发送请求
-        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-        with urllib.request.urlopen(req, timeout=8) as response:
-            data = json.loads(response.read().decode('utf-8'))
+        with urllib.request.urlopen(req, timeout=30) as response:
+            result = json.loads(response.read().decode('utf-8'))
             
-            if 'responseData' in data and 'translatedText' in data['responseData']:
-                translated = data['responseData']['translatedText']
+            if 'response' in result:
+                translated = result['response'].strip()
                 # 清理翻译结果
                 translated = re.sub(r'\s+', ' ', translated).strip()
-                # 确保翻译结果不是原文
-                if translated != text and len(translated) > 0:
+                if translated and translated != text:
                     return translated
+    
     except Exception as e:
         print(f"⚠️  Translation error: {e}")
     
     # 翻译失败时返回原文
     return text
 
+def contains_chinese(text: str) -> bool:
+    """检查文本是否包含中文"""
+    return bool(re.search(r'[\u4e00-\u9fff]', text))
+
 def is_mostly_english(text: str) -> bool:
     """检查文本是否主要是英文"""
     if not text:
         return False
-    # 计算英文字母比例
     english_chars = sum(1 for c in text if c.isascii() and c.isalpha())
     ratio = english_chars / len(text) if len(text) > 0 else 0
     return ratio > 0.8
-
-def contains_chinese(text: str) -> bool:
-    """检查文本是否包含中文"""
-    return bool(re.search(r'[\u4e00-\u9fff]', text))
 
 def parse_rss_feed(url: str, source_name: str, source_lang: str = "en") -> list:
     """解析 RSS 源"""
@@ -79,8 +89,7 @@ def parse_rss_feed(url: str, source_name: str, source_lang: str = "en") -> list:
         feed = feedparser.parse(url)
         articles = []
         
-        for entry in feed.entries[:15]:  # 每个源取 15 条
-            # 解析时间
+        for entry in feed.entries[:15]:
             published = ''
             if hasattr(entry, 'published_parsed') and entry.published_parsed:
                 try:
@@ -89,7 +98,6 @@ def parse_rss_feed(url: str, source_name: str, source_lang: str = "en") -> list:
                 except:
                     published = entry.get('published', '')
             
-            # 清理 HTML 标签
             title = re.sub(r'<[^>]+>', '', entry.title).strip()
             summary = re.sub(r'<[^>]+>', '', entry.get('summary', entry.get('description', ''))).strip()[:300]
             
@@ -114,6 +122,8 @@ def translate_articles(articles: list, target_lang: str = "zh") -> list:
     print(f"🌐 Translating {len(articles)} articles to {target_lang}...")
     
     translated_count = 0
+    failed_count = 0
+    
     for i, article in enumerate(articles, 1):
         # 跳过已经是中文的文章
         if article.get('original_lang') == 'zh' or contains_chinese(article['title']):
@@ -121,21 +131,24 @@ def translate_articles(articles: list, target_lang: str = "zh") -> list:
             article['summary_zh'] = article['summary']
             continue
         
-        # 翻译标题和摘要
         print(f"  [{i}/{len(articles)}] Translating: {article['title'][:50]}...")
         
         article['title_zh'] = translate_text(article['title'], 'en', target_lang)
-        time.sleep(0.3)  # 避免 API 限流
+        time.sleep(0.1)  # Ollama 本地调用，短暂延迟即可
         
         if article['summary']:
             article['summary_zh'] = translate_text(article['summary'], 'en', target_lang)
-            time.sleep(0.3)
+            time.sleep(0.1)
         else:
             article['summary_zh'] = ''
         
-        translated_count += 1
+        # 检查翻译是否成功
+        if article['title_zh'] != article['title']:
+            translated_count += 1
+        else:
+            failed_count += 1
     
-    print(f"✅ Translated {translated_count} articles")
+    print(f"✅ Translated {translated_count} articles, {failed_count} unchanged")
     return articles
 
 def deduplicate_articles(articles: list) -> list:
@@ -151,7 +164,7 @@ def deduplicate_articles(articles: list) -> list:
     return unique
 
 def main():
-    print("🌍 Global News Fetcher started")
+    print("🌍 Global News Fetcher started (with Ollama Translation)")
     print("=" * 50)
     
     # 加载配置
@@ -173,12 +186,12 @@ def main():
         # 添加分类信息
         for article in articles:
             article['categories'] = source.get('categories', ['general'])
-            article['category'] = source.get('categories', ['general'])[0]  # 主分类
+            article['category'] = source.get('categories', ['general'])[0]
             article['country'] = source.get('country', 'US')
             article['language'] = source.get('language', 'en')
         
         all_articles.extend(articles)
-        time.sleep(0.5)  # 避免请求过快
+        time.sleep(0.3)
     
     print("=" * 50)
     
@@ -187,7 +200,7 @@ def main():
     print(f"📰 Total articles: {len(all_articles)}")
     print(f"✨ Unique articles: {len(unique_articles)}")
     
-    # 翻译文章 (英文→中文)
+    # 翻译文章 (英文→中文，使用本地 Ollama)
     unique_articles = translate_articles(unique_articles, 'zh')
     
     # 按时间排序
@@ -202,7 +215,7 @@ def main():
         'total': len(unique_articles),
         'sources_count': len(config['sources']),
         'category_groups': config.get('categoryGroups', {}),
-        'articles': unique_articles[:100]  # 只保留最新 100 条
+        'articles': unique_articles[:100]
     }
     
     # 保存到 data/news.json

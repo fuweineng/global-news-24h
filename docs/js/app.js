@@ -1,9 +1,8 @@
 // Global News App - 24inf.cn Style with Translation
 let allArticles = [];
 let currentFilter = 'all';
-let currentLang = 'zh';
+let currentLang = 'zh'; // 'zh' or 'en'
 let isDarkMode = false;
-let showTranslation = true; // 默认显示翻译
 
 // Translations
 const translations = {
@@ -11,8 +10,7 @@ const translations = {
         title: '24 小时全球新闻',
         darkMode: '暗黑',
         lightMode: '白天',
-        showOriginal: '显示原文',
-        showTranslated: '显示翻译',
+        langName: '中文',
         filterAll: '全部',
         filterWorld: '🌍 国际',
         filterPolitics: '🏛️ 政治',
@@ -42,8 +40,7 @@ const translations = {
         title: '24Hr Global News',
         darkMode: 'Dark',
         lightMode: 'Light',
-        showOriginal: 'Show Original',
-        showTranslated: 'Show Translation',
+        langName: 'English',
         filterAll: 'All',
         filterWorld: '🌍 World',
         filterPolitics: '🏛️ Politics',
@@ -82,30 +79,39 @@ function initSettings() {
         document.getElementById('theme-text').textContent = translations[currentLang].lightMode;
     }
     
-    // Load translation preference
-    const savedTranslate = localStorage.getItem('translate');
-    if (savedTranslate === 'false') {
-        showTranslation = false;
-        document.getElementById('translate-icon').textContent = '🇺🇸';
-        document.getElementById('translate-text').textContent = translations[currentLang].showTranslated;
-    }
-    
     // Load language preference
     const savedLang = localStorage.getItem('lang') || 'zh';
     setLanguage(savedLang);
 }
 
-// Toggle translation
-function toggleTranslation() {
-    showTranslation = !showTranslation;
-    localStorage.setItem('translate', showTranslation);
+// Toggle language (UI + content translation)
+function toggleLanguage() {
+    currentLang = currentLang === 'zh' ? 'en' : 'zh';
+    localStorage.setItem('lang', currentLang);
     
     const t = translations[currentLang];
-    document.getElementById('translate-icon').textContent = showTranslation ? '🇨🇳' : '🇺🇸';
-    document.getElementById('translate-text').textContent = showTranslation ? t.showOriginal : t.showTranslated;
+    document.getElementById('lang-icon').textContent = currentLang === 'zh' ? '🇨🇳' : '🇺🇸';
+    document.getElementById('lang-text').textContent = t.langName;
     
-    // Re-render news
+    // Update UI translations
+    updateUITranslations();
+    
+    // Re-render news with selected language
     renderNews(filterNews(allArticles, currentFilter));
+}
+
+// Update UI translations
+function updateUITranslations() {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[currentLang][key]) {
+            el.textContent = translations[currentLang][key];
+        }
+    });
+    
+    // Update theme text
+    const t = translations[currentLang];
+    document.getElementById('theme-text').textContent = isDarkMode ? t.lightMode : t.darkMode;
 }
 
 // Toggle dark/light mode
@@ -123,22 +129,12 @@ function toggleTheme() {
 function setLanguage(lang) {
     currentLang = lang;
     localStorage.setItem('lang', lang);
-    document.getElementById('lang-select').value = lang;
     
-    // Update all translated elements
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (translations[lang][key]) {
-            el.textContent = translations[lang][key];
-        }
-    });
-    
-    // Update translation toggle text
     const t = translations[lang];
-    document.getElementById('translate-text').textContent = showTranslation ? t.showOriginal : t.showTranslated;
+    document.getElementById('lang-icon').textContent = lang === 'zh' ? '🇨🇳' : '🇺🇸';
+    document.getElementById('lang-text').textContent = t.langName;
     
-    // Re-render news with new language
-    renderNews(filterNews(allArticles, currentFilter));
+    updateUITranslations();
 }
 
 // Fetch news data
@@ -221,17 +217,17 @@ function filterNews(articles, category) {
     });
 }
 
-// Get article title (with or without translation)
+// Get article title based on language
 function getArticleTitle(article) {
-    if (showTranslation && article.title_zh) {
+    if (currentLang === 'zh' && article.title_zh) {
         return article.title_zh;
     }
     return article.title;
 }
 
-// Get article summary (with or without translation)
+// Get article summary based on language
 function getArticleSummary(article) {
-    if (showTranslation && article.summary_zh) {
+    if (currentLang === 'zh' && article.summary_zh) {
         return article.summary_zh;
     }
     return article.summary;
@@ -277,7 +273,7 @@ function renderNews(articles) {
                 <div class="meta-col">
                     <span class="category-tag">${article.category}</span>
                     <a href="${article.link}" target="_blank" rel="noopener" class="external-link">
-                        ↗ <span>${currentLang === 'zh' ? t.readMore : t.readMore}</span>
+                        ↗ <span>${t.readMore}</span>
                     </a>
                 </div>
             </article>
@@ -289,16 +285,11 @@ function renderNews(articles) {
 document.addEventListener('DOMContentLoaded', () => {
     initSettings();
     
-    // Translation toggle
-    document.getElementById('translate-toggle').addEventListener('click', toggleTranslation);
+    // Language toggle
+    document.getElementById('lang-toggle').addEventListener('click', toggleLanguage);
     
     // Theme toggle
     document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
-    
-    // Language select
-    document.getElementById('lang-select').addEventListener('change', (e) => {
-        setLanguage(e.target.value);
-    });
     
     // Filter buttons
     document.querySelectorAll('.filter-btn').forEach(btn => {
