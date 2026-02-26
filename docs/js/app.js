@@ -1,41 +1,28 @@
-// Global News App - 24inf.cn Style
+// Global News App - 24inf.cn Style with Translation
 let allArticles = [];
 let currentFilter = 'all';
-let currentLang = 'en';
+let currentLang = 'zh';
 let isDarkMode = false;
+let showTranslation = true; // 默认显示翻译
 
 // Translations
 const translations = {
-    en: {
-        title: '24Hr Global News',
-        darkMode: 'Dark',
-        lightMode: 'Light',
-        filterAll: 'All News',
-        filterGeneral: 'General',
-        filterBusiness: 'Business',
-        filterAsia: 'Asia',
-        updateFreq: 'Updated every 30 minutes',
-        dataSource: 'Data from global RSS feeds',
-        viewOnGithub: 'View on GitHub',
-        loading: 'Loading news...',
-        error: 'Unable to load news',
-        retry: 'Please check back in a few minutes',
-        noNews: 'No news found',
-        adjustFilters: 'Try adjusting your filters',
-        justNow: 'Just now',
-        minutesAgo: '{n}m ago',
-        hoursAgo: '{n}h ago',
-        today: 'Today',
-        yesterday: 'Yesterday'
-    },
     zh: {
         title: '24 小时全球新闻',
         darkMode: '暗黑',
         lightMode: '白天',
-        filterAll: '全部新闻',
-        filterGeneral: '综合',
-        filterBusiness: '商业',
-        filterAsia: '亚洲',
+        showOriginal: '显示原文',
+        showTranslated: '显示翻译',
+        filterAll: '全部',
+        filterWorld: '🌍 国际',
+        filterPolitics: '🏛️ 政治',
+        filterBusiness: '💼 商业',
+        filterTechnology: '💻 科技',
+        filterScience: '🔬 科学',
+        filterSports: '⚽ 体育',
+        filterEntertainment: '🎬 娱乐',
+        filterAsia: '🌏 亚洲',
+        filterChina: '🇨🇳 中国',
         updateFreq: '每 30 分钟更新',
         dataSource: '数据来自全球 RSS 源',
         viewOnGithub: '查看 GitHub',
@@ -48,7 +35,39 @@ const translations = {
         minutesAgo: '{n}分钟前',
         hoursAgo: '{n}小时前',
         today: '今天',
-        yesterday: '昨天'
+        yesterday: '昨天',
+        readMore: '阅读原文'
+    },
+    en: {
+        title: '24Hr Global News',
+        darkMode: 'Dark',
+        lightMode: 'Light',
+        showOriginal: 'Show Original',
+        showTranslated: 'Show Translation',
+        filterAll: 'All',
+        filterWorld: '🌍 World',
+        filterPolitics: '🏛️ Politics',
+        filterBusiness: '💼 Business',
+        filterTechnology: '💻 Tech',
+        filterScience: '🔬 Science',
+        filterSports: '⚽ Sports',
+        filterEntertainment: '🎬 Entertainment',
+        filterAsia: '🌏 Asia',
+        filterChina: '🇨🇳 China',
+        updateFreq: 'Updated every 30 minutes',
+        dataSource: 'Data from global RSS feeds',
+        viewOnGithub: 'View on GitHub',
+        loading: 'Loading news...',
+        error: 'Unable to load news',
+        retry: 'Please check back in a few minutes',
+        noNews: 'No news found',
+        adjustFilters: 'Try adjusting your filters',
+        justNow: 'Just now',
+        minutesAgo: '{n}m ago',
+        hoursAgo: '{n}h ago',
+        today: 'Today',
+        yesterday: 'Yesterday',
+        readMore: 'Read'
     }
 };
 
@@ -63,9 +82,30 @@ function initSettings() {
         document.getElementById('theme-text').textContent = translations[currentLang].lightMode;
     }
     
+    // Load translation preference
+    const savedTranslate = localStorage.getItem('translate');
+    if (savedTranslate === 'false') {
+        showTranslation = false;
+        document.getElementById('translate-icon').textContent = '🇺🇸';
+        document.getElementById('translate-text').textContent = translations[currentLang].showTranslated;
+    }
+    
     // Load language preference
-    const savedLang = localStorage.getItem('lang') || 'en';
+    const savedLang = localStorage.getItem('lang') || 'zh';
     setLanguage(savedLang);
+}
+
+// Toggle translation
+function toggleTranslation() {
+    showTranslation = !showTranslation;
+    localStorage.setItem('translate', showTranslation);
+    
+    const t = translations[currentLang];
+    document.getElementById('translate-icon').textContent = showTranslation ? '🇨🇳' : '🇺🇸';
+    document.getElementById('translate-text').textContent = showTranslation ? t.showOriginal : t.showTranslated;
+    
+    // Re-render news
+    renderNews(filterNews(allArticles, currentFilter));
 }
 
 // Toggle dark/light mode
@@ -92,6 +132,10 @@ function setLanguage(lang) {
             el.textContent = translations[lang][key];
         }
     });
+    
+    // Update translation toggle text
+    const t = translations[lang];
+    document.getElementById('translate-text').textContent = showTranslation ? t.showOriginal : t.showTranslated;
     
     // Re-render news with new language
     renderNews(filterNews(allArticles, currentFilter));
@@ -169,11 +213,28 @@ function formatRelativeTime(date) {
 function filterNews(articles, category) {
     if (category === 'all') return articles;
     return articles.filter(article => {
+        const categories = article.categories || [article.category];
         if (category === 'asia') {
-            return article.country && ['CN', 'JP', 'KR', 'IN', 'SG', 'HK', 'TW'].includes(article.country);
+            return article.country && ['CN', 'JP', 'KR', 'HK', 'TW', 'SG'].includes(article.country);
         }
-        return article.category === category;
+        return categories.includes(category);
     });
+}
+
+// Get article title (with or without translation)
+function getArticleTitle(article) {
+    if (showTranslation && article.title_zh) {
+        return article.title_zh;
+    }
+    return article.title;
+}
+
+// Get article summary (with or without translation)
+function getArticleSummary(article) {
+    if (showTranslation && article.summary_zh) {
+        return article.summary_zh;
+    }
+    return article.summary;
 }
 
 // Render news cards
@@ -194,7 +255,8 @@ function renderNews(articles) {
     container.innerHTML = articles.map(article => {
         const pubDate = new Date(article.published);
         const timeInfo = formatRelativeTime(pubDate);
-        const countryName = getCountryName(article.country);
+        const title = getArticleTitle(article);
+        const summary = getArticleSummary(article);
         
         return `
             <article class="news-card">
@@ -205,17 +267,17 @@ function renderNews(articles) {
                 <div class="content-col">
                     <div class="source-row">
                         <span class="source">${article.source}</span>
-                        ${countryName ? `<span class="country">${countryName}</span>` : ''}
+                        <span class="country">${article.country}</span>
                     </div>
                     <h3 class="title">
-                        <a href="${article.link}" target="_blank" rel="noopener">${article.title}</a>
+                        <a href="${article.link}" target="_blank" rel="noopener">${title}</a>
                     </h3>
-                    ${article.summary ? `<p class="summary">${article.summary}</p>` : ''}
+                    ${summary ? `<p class="summary">${summary}</p>` : ''}
                 </div>
                 <div class="meta-col">
-                    ${article.category ? `<span class="category-tag">${article.category}</span>` : ''}
+                    <span class="category-tag">${article.category}</span>
                     <a href="${article.link}" target="_blank" rel="noopener" class="external-link">
-                        ↗ <span>${currentLang === 'zh' ? '阅读原文' : 'Read'}</span>
+                        ↗ <span>${currentLang === 'zh' ? t.readMore : t.readMore}</span>
                     </a>
                 </div>
             </article>
@@ -223,20 +285,12 @@ function renderNews(articles) {
     }).join('');
 }
 
-// Get country name
-function getCountryName(code) {
-    const names = {
-        US: 'US', GB: 'UK', CN: 'CN', JP: 'JP', KR: 'KR',
-        IN: 'IN', SG: 'SG', HK: 'HK', TW: 'TW', DE: 'DE',
-        FR: 'FR', IT: 'IT', ES: 'ES', RU: 'RU', BR: 'BR',
-        CA: 'CA', AU: 'AU', QA: 'QA', AE: 'AE'
-    };
-    return names[code] || code;
-}
-
 // Event listeners
 document.addEventListener('DOMContentLoaded', () => {
     initSettings();
+    
+    // Translation toggle
+    document.getElementById('translate-toggle').addEventListener('click', toggleTranslation);
     
     // Theme toggle
     document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
