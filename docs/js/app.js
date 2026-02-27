@@ -1,8 +1,8 @@
 // 全球新闻 24H - Inoreader 风格
 let allArticles = [];
 let filteredArticles = [];
-let enabledCategories = ['world','politics','business','finance','technology','science'];
-let enabledSources = [];
+let enabledCategories = [];  // 空数组表示全选
+let enabledSources = [];     // 空数组表示全选
 let currentLang = 'zh';
 let isDarkMode = false;
 
@@ -17,8 +17,9 @@ function init() {
     const saved = localStorage.getItem('newsSettings');
     if (saved) {
         const s = JSON.parse(saved);
-        enabledCategories = s.categories || enabledCategories;
-        enabledSources = s.sources || [];
+        // 如果保存了空数组或 undefined，表示全选
+        enabledCategories = s.categories !== undefined ? s.categories : [];
+        enabledSources = s.sources !== undefined ? s.sources : [];
     }
     const theme = localStorage.getItem('theme');
     if (theme === 'dark') {
@@ -67,6 +68,7 @@ function populateSourceFilters() {
     }
     
     container.innerHTML = sources.map(source => {
+        // 空数组表示全选，所以 checked
         const checked = enabledSources.length === 0 || enabledSources.includes(source) ? 'checked' : '';
         return `<label class="source-item">
             <input type="checkbox" value="${source}" ${checked}>
@@ -93,11 +95,16 @@ function toggleLang() {
 }
 
 function syncSettingsUI() {
+    // 获取所有可用的分类
+    const allCategories = [...new Set(allArticles.map(a => a.category))];
     document.querySelectorAll('#category-filters input').forEach(cb => {
-        cb.checked = enabledCategories.includes(cb.value);
+        // 空数组表示全选
+        const isChecked = enabledCategories.length === 0 || enabledCategories.includes(cb.value);
+        cb.checked = isChecked;
     });
     document.querySelectorAll('#source-filters input').forEach(cb => {
-        cb.checked = enabledSources.length === 0 || enabledSources.includes(cb.value);
+        const isChecked = enabledSources.length === 0 || enabledSources.includes(cb.value);
+        cb.checked = isChecked;
     });
 }
 
@@ -110,7 +117,8 @@ function applySettings() {
 }
 
 function resetSettings() {
-    enabledCategories = ['world','politics','business','finance','technology','science','sports','entertainment'];
+    // 重置为全选（空数组）
+    enabledCategories = [];
     enabledSources = [];
     syncSettingsUI();
     filterAndRender();
@@ -118,7 +126,8 @@ function resetSettings() {
 
 function filterAndRender() {
     filteredArticles = allArticles.filter(a => {
-        const catMatch = enabledCategories.includes(a.category);
+        // 空数组表示全选
+        const catMatch = enabledCategories.length === 0 || enabledCategories.includes(a.category);
         const srcMatch = enabledSources.length === 0 || enabledSources.includes(a.source);
         return catMatch && srcMatch;
     });
