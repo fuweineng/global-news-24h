@@ -2,7 +2,7 @@
 let allArticles = [];
 let filteredArticles = [];
 let enabledCategories = ['world','politics','business','finance','technology','science'];
-let enabledSources = ['Reuters','BBC','CNN','NHK','DW','France24','Al Jazeera','Bloomberg','CNBC','TechCrunch','The Verge','Wired','ESPN','Variety'];
+let enabledSources = [];
 let currentLang = 'zh';
 let isDarkMode = false;
 
@@ -10,7 +10,7 @@ const categoryNames = {
     world:'国际', politics:'政治', business:'商业', finance:'财经',
     technology:'科技', science:'科学', sports:'体育', entertainment:'娱乐',
     asia:'亚洲', china:'中国', us:'美国', uk:'英国', europe:'欧洲', 
-    japan:'日本', korea:'韩国', startups:'创业'
+    startups:'创业'
 };
 
 function init() {
@@ -18,7 +18,7 @@ function init() {
     if (saved) {
         const s = JSON.parse(saved);
         enabledCategories = s.categories || enabledCategories;
-        enabledSources = s.sources || enabledSources;
+        enabledSources = s.sources || [];
     }
     const theme = localStorage.getItem('theme');
     if (theme === 'dark') {
@@ -43,7 +43,24 @@ function setupEventListeners() {
 function toggleSettings() {
     const panel = document.getElementById('settings-panel');
     panel.classList.toggle('hidden');
-    if (!panel.classList.contains('hidden')) syncSettingsUI();
+    if (!panel.classList.contains('hidden')) {
+        syncSettingsUI();
+        populateSourceFilters();
+    }
+}
+
+function populateSourceFilters() {
+    const container = document.getElementById('source-filters');
+    const sources = [...new Set(allArticles.map(a => a.source))];
+    if (sources.length === 0) return;
+    
+    container.innerHTML = sources.map(source => {
+        const checked = enabledSources.length === 0 || enabledSources.includes(source) ? 'checked' : '';
+        return `<label class="source-item">
+            <input type="checkbox" value="${source}" ${checked}>
+            <span>${source}</span>
+        </label>`;
+    }).join('');
 }
 
 function toggleTheme() {
@@ -57,7 +74,7 @@ function toggleLang() {
     currentLang = currentLang === 'zh' ? 'en' : 'zh';
     localStorage.setItem('lang', currentLang);
     document.getElementById('lang-btn').textContent = currentLang === 'zh' ? '🇨🇳' : '🇺🇸';
-    // 重新渲染，确保中文模式显示翻译后的内容
+    // 重新渲染，语言切换时新闻文本也要跟着变
     renderNews();
 }
 
@@ -66,7 +83,7 @@ function syncSettingsUI() {
         cb.checked = enabledCategories.includes(cb.value);
     });
     document.querySelectorAll('#source-filters input').forEach(cb => {
-        cb.checked = enabledSources.includes(cb.value);
+        cb.checked = enabledSources.length === 0 || enabledSources.includes(cb.value);
     });
 }
 
@@ -80,14 +97,17 @@ function applySettings() {
 
 function resetSettings() {
     enabledCategories = ['world','politics','business','finance','technology','science','sports','entertainment'];
-    enabledSources = ['Reuters','BBC','CNN','NHK','DW','France24','Al Jazeera','Bloomberg','CNBC','TechCrunch','The Verge','Wired','ESPN','Variety'];
+    enabledSources = [];
     syncSettingsUI();
+    filterAndRender();
 }
 
 function filterAndRender() {
-    filteredArticles = allArticles.filter(a => 
-        enabledCategories.includes(a.category) && enabledSources.includes(a.source)
-    );
+    filteredArticles = allArticles.filter(a => {
+        const catMatch = enabledCategories.includes(a.category);
+        const srcMatch = enabledSources.length === 0 || enabledSources.includes(a.source);
+        return catMatch && srcMatch;
+    });
     renderNews();
 }
 
@@ -101,12 +121,12 @@ function formatTime(dateStr) {
 }
 
 function getNewsText(article) {
-    // 中文模式优先显示翻译后的一句话摘要
+    // 中文模式：显示翻译后的摘要
     if (currentLang === 'zh') {
         if (article.one_line) return article.one_line;
         if (article.translated_title) return article.translated_title;
     }
-    // 英文模式或无翻译时显示原标题
+    // 英文模式：显示原标题
     return article.title;
 }
 
