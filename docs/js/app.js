@@ -6,7 +6,12 @@ let enabledSources = ['Reuters','BBC','CNN','NHK','DW','France24'];
 let currentLang = 'zh';
 let isDarkMode = false;
 
-// 初始化
+const categoryNames = {
+    world:'国际', politics:'政治', business:'商业', finance:'财经',
+    technology:'科技', science:'科学', sports:'体育', entertainment:'娱乐',
+    asia:'亚洲', china:'中国', us:'美国', uk:'英国', europe:'欧洲', japan:'日本', korea:'韩国'
+};
+
 function init() {
     const saved = localStorage.getItem('newsSettings');
     if (saved) {
@@ -37,9 +42,7 @@ function setupEventListeners() {
 function toggleSettings() {
     const panel = document.getElementById('settings-panel');
     panel.classList.toggle('hidden');
-    if (!panel.classList.contains('hidden')) {
-        syncSettingsUI();
-    }
+    if (!panel.classList.contains('hidden')) syncSettingsUI();
 }
 
 function toggleTheme() {
@@ -66,14 +69,9 @@ function syncSettingsUI() {
 }
 
 function applySettings() {
-    enabledCategories = Array.from(document.querySelectorAll('#category-filters input:checked'))
-        .map(cb => cb.value);
-    enabledSources = Array.from(document.querySelectorAll('#source-filters input:checked'))
-        .map(cb => cb.value);
-    localStorage.setItem('newsSettings', JSON.stringify({
-        categories: enabledCategories,
-        sources: enabledSources
-    }));
+    enabledCategories = Array.from(document.querySelectorAll('#category-filters input:checked')).map(cb => cb.value);
+    enabledSources = Array.from(document.querySelectorAll('#source-filters input:checked')).map(cb => cb.value);
+    localStorage.setItem('newsSettings', JSON.stringify({ categories: enabledCategories, sources: enabledSources }));
     toggleSettings();
     filterAndRender();
 }
@@ -86,8 +84,7 @@ function resetSettings() {
 
 function filterAndRender() {
     filteredArticles = allArticles.filter(a => 
-        enabledCategories.includes(a.category) && 
-        enabledSources.includes(a.source)
+        enabledCategories.includes(a.category) && enabledSources.includes(a.source)
     );
     renderNews();
 }
@@ -107,23 +104,24 @@ function renderNews() {
         container.innerHTML = '<div class="empty-state">暂无新闻，请调整筛选条件</div>';
         return;
     }
+    
     container.innerHTML = filteredArticles.map(a => {
         const time = a.time || formatTime(a.published);
         const text = (currentLang === 'zh' && a.one_line) ? a.one_line : a.title;
-        const catName = {
-            world:'国际',politics:'政治',business:'商业',finance:'财经',
-            technology:'科技',science:'科学',sports:'体育',entertainment:'娱乐',
-            asia:'亚洲',china:'中国',us:'美国',uk:'英国',europe:'欧洲'
-        }[a.category] || a.category;
+        const catName = categoryNames[a.category] || a.category;
+        
         return `
             <div class="news-item">
                 <span class="news-time">${time}</span>
-                <span class="news-source">${a.source}</span>
+                <div class="news-source-wrap">
+                    <span class="news-source">${a.source}</span>
+                </div>
                 <span class="news-text">${text}</span>
                 <span class="news-category">${catName}</span>
             </div>
         `;
     }).join('');
+    
     document.getElementById('stat-total').textContent = filteredArticles.length;
     document.getElementById('update-time').textContent = 
         allArticles.length > 0 ? formatTime(allArticles[0].published) : '--:--';
@@ -140,7 +138,7 @@ async function fetchNews() {
     } catch (e) {
         console.error('Fetch error:', e);
         document.getElementById('news-container').innerHTML = 
-            '<div class="empty-state">加载失败，请刷新</div>';
+            '<div class="empty-state">加载失败，请刷新页面</div>';
     }
 }
 
