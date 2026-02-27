@@ -1,8 +1,8 @@
 // 全球新闻 24H - Inoreader 风格
 let allArticles = [];
 let filteredArticles = [];
-let enabledCategories = [];  // 空数组表示全选
-let enabledSources = [];     // 空数组表示全选
+let enabledCategories = [];
+let enabledSources = [];
 let currentLang = 'zh';
 let isDarkMode = false;
 
@@ -17,16 +17,17 @@ function init() {
     const saved = localStorage.getItem('newsSettings');
     if (saved) {
         const s = JSON.parse(saved);
-        // 如果保存了空数组或 undefined，表示全选
         enabledCategories = s.categories !== undefined ? s.categories : [];
         enabledSources = s.sources !== undefined ? s.sources : [];
     }
+    const savedLang = localStorage.getItem('lang');
+    if (savedLang) currentLang = savedLang;
     const theme = localStorage.getItem('theme');
     if (theme === 'dark') {
         isDarkMode = true;
-        document.body.classList.add('dark-mode');
         document.getElementById('theme-btn').textContent = '☀️';
     }
+    updateLangButton();
     setupEventListeners();
     fetchNews();
     setInterval(fetchNews, 300000);
@@ -66,9 +67,7 @@ function populateSourceFilters() {
         container.innerHTML = '<div class="empty-state">暂无来源</div>';
         return;
     }
-    
     container.innerHTML = sources.map(source => {
-        // 空数组表示全选，所以 checked
         const checked = enabledSources.length === 0 || enabledSources.includes(source) ? 'checked' : '';
         return `<label class="source-item">
             <input type="checkbox" value="${source}" ${checked}>
@@ -88,23 +87,21 @@ function toggleTheme() {
 function toggleLang() {
     currentLang = currentLang === 'zh' ? 'en' : 'zh';
     localStorage.setItem('lang', currentLang);
+    updateLangButton();
+    renderNews();  // 重新渲染
+}
+
+function updateLangButton() {
     const langBtn = document.getElementById('lang-btn');
     if (langBtn) langBtn.textContent = currentLang === 'zh' ? '🇨🇳' : '🇺🇸';
-    // 重新渲染，语言切换时新闻文本也要跟着变
-    renderNews();
 }
 
 function syncSettingsUI() {
-    // 获取所有可用的分类
-    const allCategories = [...new Set(allArticles.map(a => a.category))];
     document.querySelectorAll('#category-filters input').forEach(cb => {
-        // 空数组表示全选
-        const isChecked = enabledCategories.length === 0 || enabledCategories.includes(cb.value);
-        cb.checked = isChecked;
+        cb.checked = enabledCategories.length === 0 || enabledCategories.includes(cb.value);
     });
     document.querySelectorAll('#source-filters input').forEach(cb => {
-        const isChecked = enabledSources.length === 0 || enabledSources.includes(cb.value);
-        cb.checked = isChecked;
+        cb.checked = enabledSources.length === 0 || enabledSources.includes(cb.value);
     });
 }
 
@@ -117,7 +114,6 @@ function applySettings() {
 }
 
 function resetSettings() {
-    // 重置为全选（空数组）
     enabledCategories = [];
     enabledSources = [];
     syncSettingsUI();
@@ -126,7 +122,6 @@ function resetSettings() {
 
 function filterAndRender() {
     filteredArticles = allArticles.filter(a => {
-        // 空数组表示全选
         const catMatch = enabledCategories.length === 0 || enabledCategories.includes(a.category);
         const srcMatch = enabledSources.length === 0 || enabledSources.includes(a.source);
         return catMatch && srcMatch;
@@ -144,12 +139,16 @@ function formatTime(dateStr) {
 }
 
 function getNewsText(article) {
-    // 中文模式：显示翻译后的摘要
+    // 中文模式
     if (currentLang === 'zh') {
-        if (article.one_line && article.one_line !== article.title) return article.one_line;
-        if (article.translated_title) return article.translated_title;
+        // 优先显示翻译后的摘要
+        if (article.one_line && article.one_line !== article.title) {
+            return article.one_line;
+        }
+        // 没有翻译时，显示原标题 + 标记
+        return article.title;
     }
-    // 英文模式：显示原标题
+    // 英文模式
     return article.title;
 }
 
@@ -203,7 +202,6 @@ async function fetchNews() {
     }
 }
 
-// 确保 DOM 加载完成后初始化
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
 } else {
