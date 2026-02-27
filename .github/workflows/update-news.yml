@@ -2,9 +2,8 @@ name: Update News
 
 on:
   schedule:
-    # 每 30 分钟运行一次 (UTC 时间)
     - cron: '*/30 * * * *'
-  workflow_dispatch:  # 允许手动触发
+  workflow_dispatch:
 
 jobs:
   fetch-news:
@@ -21,11 +20,11 @@ jobs:
       
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt
+          pip install feedparser
       
-      - name: Fetch news (with translation)
+      - name: Fetch news (with DeepL translation)
         env:
-          DASHSCOPE_API_KEY: ${{ secrets.DASHSCOPE_API_KEY }}
+          DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}
         run: python src/fetch_news.py
       
       - name: Copy to docs directory

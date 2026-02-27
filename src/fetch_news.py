@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""全球新闻抓取 - 多来源 + 中文摘要"""
+"""全球新闻抓取 - DeepL 翻译"""
 
 import feedparser
 import json
@@ -7,69 +7,52 @@ from datetime import datetime, timezone
 from pathlib import Path
 import hashlib
 import time
-import re
 import os
 import urllib.request
 
-DASHSCOPE_API_URL = "https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation"
+DEEPL_API_URL = "https://api-free.deepl.com/v2/translate"
 
 def get_api_key():
-    # 优先从环境变量获取
-    if os.environ.get('DASHSCOPE_API_KEY'):
-        return os.environ.get('DASHSCOPE_API_KEY')
-    # 尝试从 GitHub Secrets 获取（Actions 环境）
-    if os.environ.get('DASHSCOPE_API_KEY_SECRET'):
-        return os.environ.get('DASHSCOPE_API_KEY_SECRET')
+    api_key = os.environ.get('DEEPL_API_KEY', '')
+    if api_key:
+        print(f"✅ DeepL API Key 已配置")
+        return api_key
+    print("⚠️ 未找到 DEEPL_API_KEY 环境变量")
     return ""
 
-def summarize_batch(articles, api_key):
-    """为所有英文新闻生成中文摘要"""
+def translate_batch(articles, api_key):
+    """使用 DeepL 翻译新闻标题为中文"""
     if not api_key:
         print("⚠️ 无 API Key，跳过翻译")
         for a in articles:
             a['one_line'] = a['title']
         return articles
     
-    print(f"🤖 生成中文摘要 {len(articles)} 篇...")
+    print(f"🤖 DeepL 翻译 {len(articles)} 篇...")
     
-    for i in range(0, len(articles), 5):
-        batch = articles[i:i+5]
-        input_text = "\n".join([f"{j+1}. {a['title']}" for j, a in enumerate(batch)])
-        
-        prompt = f"""你是专业新闻编辑。将以下英文新闻标题翻译成中文客观摘要。
-要求：
-- 每篇一行，保持顺序
-- 客观陈述事实，去掉主观形容词
-- 中文输出，保留英文专有名词（公司名、人名等）
-- 每句 20-40 字
-
-英文新闻：
-{input_text}
-
-中文摘要："""
+    # 批量翻译，每次最多 50 篇
+    for i in range(0, len(articles), 50):
+        batch = articles[i:i+50]
+        texts = [a['title'] for a in batch]
         
         try:
             req = urllib.request.Request(
-                DASHSCOPE_API_URL,
-                data=json.dumps({
-                    "model": "qwen-turbo",
-                    "input": {"messages": [{"role": "user", "content": prompt}]},
-                    "parameters": {"temperature": 0.1, "max_tokens": 500}
+                DEEPL_API_URL,
+                data=urllib.parse.urlencode({
+                    'auth_key': api_key,
+                    'text': texts,
+                    'target_lang': 'ZH',
+                    'tag_handling': 'html',
+                    'preserve_format': 'true'
                 }).encode(),
-                headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
+                headers={"Content-Type": "application/x-www-form-urlencoded"}
             )
-            with urllib.request.urlopen(req, timeout=90) as resp:
+            with urllib.request.urlopen(req, timeout=60) as resp:
                 result = json.loads(resp.read().decode())
-                content = result.get('output', {}).get('choices', [{}])[0].get('message', {}).get('content', '')
-                lines = content.strip().split('\n')
+                translations = result.get('translations', [])
                 for j, article in enumerate(batch):
-                    if j < len(lines):
-                        line = re.sub(r'^\d+[\.\)]\s*', '', lines[j]).strip()
-                        # 确保是中文
-                        if line and any('\u4e00' <= c <= '\u9fff' for c in line):
-                            article['one_line'] = line
-                        else:
-                            article['one_line'] = article['title']
+                    if j < len(translations):
+                        article['one_line'] = translations[j]['text']
                     else:
                         article['one_line'] = article['title']
         except Exception as e:
@@ -78,7 +61,7 @@ def summarize_batch(articles, api_key):
                 a['one_line'] = a['title']
         time.sleep(0.5)
     
-    print("✅ 摘要完成")
+    print("✅ 翻译完成")
     return articles
 
 def fetch_news():
@@ -134,12 +117,11 @@ def fetch_news():
 
 def main():
     api_key = get_api_key()
-    print(f"API Key: {'已配置' if api_key else '未配置'}")
     articles = fetch_news()
     if not articles:
         return
     
-    articles = summarize_batch(articles, api_key)
+    articles = translate_batch(articles, api_key)
     
     data = {
         'updated': datetime.now(timezone.utc).isoformat(),
