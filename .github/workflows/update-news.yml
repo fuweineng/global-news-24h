@@ -23,7 +23,9 @@ jobs:
         run: |
           pip install -r requirements.txt
       
-      - name: Fetch news
+      - name: Fetch news (with translation)
+        env:
+          DASHSCOPE_API_KEY: ${{ secrets.DASHSCOPE_API_KEY }}
         run: python src/fetch_news.py
       
       - name: Copy to docs directory
