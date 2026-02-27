@@ -32,16 +32,24 @@ function init() {
 }
 
 function setupEventListeners() {
-    document.getElementById('settings-btn').addEventListener('click', toggleSettings);
-    document.getElementById('close-settings').addEventListener('click', toggleSettings);
-    document.getElementById('theme-btn').addEventListener('click', toggleTheme);
-    document.getElementById('lang-btn').addEventListener('click', toggleLang);
-    document.getElementById('apply-settings').addEventListener('click', applySettings);
-    document.getElementById('reset-settings').addEventListener('click', resetSettings);
+    const settingsBtn = document.getElementById('settings-btn');
+    const closeBtn = document.getElementById('close-settings');
+    const themeBtn = document.getElementById('theme-btn');
+    const langBtn = document.getElementById('lang-btn');
+    const applyBtn = document.getElementById('apply-settings');
+    const resetBtn = document.getElementById('reset-settings');
+    
+    if (settingsBtn) settingsBtn.addEventListener('click', toggleSettings);
+    if (closeBtn) closeBtn.addEventListener('click', toggleSettings);
+    if (themeBtn) themeBtn.addEventListener('click', toggleTheme);
+    if (langBtn) langBtn.addEventListener('click', toggleLang);
+    if (applyBtn) applyBtn.addEventListener('click', applySettings);
+    if (resetBtn) resetBtn.addEventListener('click', resetSettings);
 }
 
 function toggleSettings() {
     const panel = document.getElementById('settings-panel');
+    if (!panel) return;
     panel.classList.toggle('hidden');
     if (!panel.classList.contains('hidden')) {
         syncSettingsUI();
@@ -51,8 +59,12 @@ function toggleSettings() {
 
 function populateSourceFilters() {
     const container = document.getElementById('source-filters');
+    if (!container) return;
     const sources = [...new Set(allArticles.map(a => a.source))];
-    if (sources.length === 0) return;
+    if (sources.length === 0) {
+        container.innerHTML = '<div class="empty-state">暂无来源</div>';
+        return;
+    }
     
     container.innerHTML = sources.map(source => {
         const checked = enabledSources.length === 0 || enabledSources.includes(source) ? 'checked' : '';
@@ -67,13 +79,15 @@ function toggleTheme() {
     isDarkMode = !isDarkMode;
     document.body.classList.toggle('dark-mode');
     localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-    document.getElementById('theme-btn').textContent = isDarkMode ? '☀️' : '🌙';
+    const themeBtn = document.getElementById('theme-btn');
+    if (themeBtn) themeBtn.textContent = isDarkMode ? '☀️' : '🌙';
 }
 
 function toggleLang() {
     currentLang = currentLang === 'zh' ? 'en' : 'zh';
     localStorage.setItem('lang', currentLang);
-    document.getElementById('lang-btn').textContent = currentLang === 'zh' ? '🇨🇳' : '🇺🇸';
+    const langBtn = document.getElementById('lang-btn');
+    if (langBtn) langBtn.textContent = currentLang === 'zh' ? '🇨🇳' : '🇺🇸';
     // 重新渲染，语言切换时新闻文本也要跟着变
     renderNews();
 }
@@ -123,7 +137,7 @@ function formatTime(dateStr) {
 function getNewsText(article) {
     // 中文模式：显示翻译后的摘要
     if (currentLang === 'zh') {
-        if (article.one_line) return article.one_line;
+        if (article.one_line && article.one_line !== article.title) return article.one_line;
         if (article.translated_title) return article.translated_title;
     }
     // 英文模式：显示原标题
@@ -132,6 +146,8 @@ function getNewsText(article) {
 
 function renderNews() {
     const container = document.getElementById('news-container');
+    if (!container) return;
+    
     if (filteredArticles.length === 0) {
         container.innerHTML = '<div class="empty-state">暂无新闻，请调整筛选条件</div>';
         return;
@@ -154,11 +170,13 @@ function renderNews() {
         `;
     }).join('');
     
-    document.getElementById('stat-total').textContent = filteredArticles.length;
-    document.getElementById('update-time').textContent = 
-        allArticles.length > 0 ? formatTime(allArticles[0].published) : '--:--';
-    document.getElementById('last-updated').textContent = 
-        allArticles.length > 0 ? `${formatTime(allArticles[0].published)} 更新` : '';
+    const statTotal = document.getElementById('stat-total');
+    const updateTime = document.getElementById('update-time');
+    const lastUpdated = document.getElementById('last-updated');
+    
+    if (statTotal) statTotal.textContent = filteredArticles.length;
+    if (updateTime) updateTime.textContent = allArticles.length > 0 ? formatTime(allArticles[0].published) : '--:--';
+    if (lastUpdated) lastUpdated.textContent = allArticles.length > 0 ? `${formatTime(allArticles[0].published)} 更新` : '';
 }
 
 async function fetchNews() {
@@ -169,9 +187,16 @@ async function fetchNews() {
         filterAndRender();
     } catch (e) {
         console.error('Fetch error:', e);
-        document.getElementById('news-container').innerHTML = 
-            '<div class="empty-state">加载失败，请刷新页面</div>';
+        const container = document.getElementById('news-container');
+        if (container) {
+            container.innerHTML = '<div class="empty-state">加载失败，请刷新页面</div>';
+        }
     }
 }
 
-document.addEventListener('DOMContentLoaded', init);
+// 确保 DOM 加载完成后初始化
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    init();
+}
