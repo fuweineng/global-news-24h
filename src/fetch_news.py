@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Global News Fetcher with Alibaba Cloud Bailian (Qwen) Translation
-从 RSS 源抓取新闻，使用阿里云百炼 Qwen 模型翻译并生成 JSON 数据
+Global News Fetcher - 客观一句话新闻
+从 RSS 源抓取新闻，使用 Qwen 模型生成客观的一句话摘要
 """
 
 import feedparser
@@ -12,24 +12,15 @@ import hashlib
 import time
 import re
 import os
-from typing import List, Dict, Optional
+import urllib.request
+from typing import List, Dict
 
-# 阿里云百炼 API (Qwen)
 DASHSCOPE_API_URL = "https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation"
 
-# 翻译配置
-USE_TRANSLATION = True
-BATCH_TRANSLATE = True
-MAX_BATCH_SIZE = 10
-CACHE_TRANSLATION = True
-
 def get_api_key() -> str:
-    """获取阿里云 API Key"""
-    # 1. 从环境变量 (GitHub Actions)
+    """获取 API Key"""
     if os.environ.get('DASHSCOPE_API_KEY'):
         return os.environ.get('DASHSCOPE_API_KEY')
-    
-    # 2. 从 OpenClaw auth-profiles.json
     auth_file = Path.home() / '.openclaw' / 'agents' / 'main' / 'agent' / 'auth-profiles.json'
     if auth_file.exists():
         try:
@@ -37,107 +28,73 @@ def get_api_key() -> str:
                 auth = json.load(f)
                 if 'dashscope' in auth and auth['dashscope'].get('apiKey'):
                     return auth['dashscope']['apiKey']
-        except:
-            pass
-    
+        except: pass
     return ""
 
 def contains_chinese(text: str) -> bool:
-    """检查是否包含中文"""
     return bool(re.search(r'[\u4e00-\u9fff]', text))
 
 def is_mostly_english(text: str) -> bool:
-    """检查是否主要是英文"""
-    if not text:
-        return False
+    if not text: return False
     letters = sum(1 for c in text if c.isalpha())
-    if letters == 0:
-        return False
-    english = sum(1 for c in text if c.isascii() and c.isalpha())
-    return english / letters > 0.8
+    if letters == 0: return False
+    return sum(1 for c in text if c.isascii() and c.isalpha()) / letters > 0.8
 
-def translate_text_batch(texts: List[str], api_key: str) -> List[str]:
-    """批量翻译文本"""
-    if not texts or not api_key:
-        return [''] * len(texts)
-    
-    # 构建批量翻译请求
-    batch_text = "\n".join([f"{i+1}. {t}" for i, t in enumerate(texts[:MAX_BATCH_SIZE]) if t and is_mostly_english(t)])
-    
-    if not batch_text:
-        return [''] * len(texts)
-    
-    prompt = f"""Translate the following English news titles to Chinese. Keep proper nouns (names, companies) in English. Return ONLY the translations, one per line, in the same order:
-
-{batch_text}"""
-
-    try:
-        req = urllib.request.Request(
-            DASHSCOPE_API_URL,
-            data=json.dumps({
-                "model": "qwen-turbo",
-                "input": {"messages": [{"role": "user", "content": prompt}]},
-                "parameters": {"temperature": 0.3}
-            }).encode(),
-            headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
-        )
-        
-        with urllib.request.urlopen(req, timeout=30) as resp:
-            result = json.loads(resp.read().decode())
-            translated = result['output']['choices'][0]['message']['content'].strip()
-            
-            # 解析翻译结果
-            translations = []
-            for line in translated.split('\n'):
-                line = re.sub(r'^\d+[\.\)]\s*', '', line).strip()
-                if line:
-                    translations.append(line)
-            
-            return translations
-    except Exception as e:
-        print(f"⚠️ 翻译失败：{e}")
-        return [''] * len(texts)
-
-def translate_articles(articles: List[Dict], api_key: str) -> List[Dict]:
-    """翻译文章标题和摘要"""
-    if not api_key:
-        print("⚠️ 未配置 API Key，跳过翻译")
-        for article in articles:
-            article['title_zh'] = article['title']
-            article['summary_zh'] = article['summary']
+def summarize_news_batch(articles: List[Dict], api_key: str) -> List[Dict]:
+    """使用 Qwen 生成客观一句话摘要"""
+    if not api_key or not articles:
+        for a in articles:
+            a['one_line'] = a['title']
         return articles
     
-    print(f"🔄 开始翻译 {len(articles)} 篇文章...")
-    translated_count = 0
+    print(f"🤖 生成一句话摘要 {len(articles)} 篇...")
     
-    # 批量翻译标题
-    for i in range(0, len(articles), MAX_BATCH_SIZE):
-        batch = articles[i:i+MAX_BATCH_SIZE]
-        titles = [a['title'] for a in batch if a['title'] and is_mostly_english(a['title']) and not contains_chinese(a['title'])]
+    # 批量处理，每批 5 篇
+    for i in range(0, len(articles), 5):
+        batch = articles[i:i+5]
+        input_text = "\n".join([f"{j+1}. {a['title']}" for j, a in enumerate(batch)])
         
-        if titles:
-            translations = translate_text_batch(titles, api_key)
-            for j, article in enumerate(batch):
-                if article['title'] in titles and is_mostly_english(article['title']) and not contains_chinese(article['title']):
-                    idx = titles.index(article['title'])
-                    article['title_zh'] = translations[idx] if idx < len(translations) and translations[idx] else article['title']
-                else:
-                    article['title_zh'] = article['title']
+        prompt = f"""你是客观新闻编辑。将以下新闻标题改写成客观的一句话新闻摘要。
+要求：
+- 每篇一行，保持原顺序
+- 去掉主观形容词（如"shocking", "amazing"等）
+- 只陈述事实，不加评价
+- 中文输出，保留英文专有名词
+- 每句 20-40 字
+
+新闻：
+{input_text}
+
+摘要："""
         
-        time.sleep(0.5)  # 避免 API 限流
+        try:
+            req = urllib.request.Request(
+                DASHSCOPE_API_URL,
+                data=json.dumps({
+                    "model": "qwen-turbo",
+                    "input": {"messages": [{"role": "user", "content": prompt}]},
+                    "parameters": {"temperature": 0.1}
+                }).encode(),
+                headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
+            )
+            with urllib.request.urlopen(req, timeout=60) as resp:
+                result = json.loads(resp.read().decode())
+                lines = result['output']['choices'][0]['message']['content'].strip().split('\n')
+                
+                for j, article in enumerate(batch):
+                    if j < len(lines):
+                        line = re.sub(r'^\d+[\.\)]\s*', '', lines[j]).strip()
+                        article['one_line'] = line if line else article['title']
+                    else:
+                        article['one_line'] = article['title']
+        except Exception as e:
+            print(f"⚠️ 摘要失败：{e}")
+            for a in batch:
+                a['one_line'] = a['title']
+        
+        time.sleep(0.3)
     
-    # 翻译摘要（简化版，只翻译前 50 篇）
-    for article in articles[:50]:
-        if article.get('summary') and is_mostly_english(article['summary']) and not contains_chinese(article['summary']):
-            try:
-                summary_trans = translate_text_batch([article['summary'][:500]], api_key)
-                article['summary_zh'] = summary_trans[0] if summary_trans and summary_trans[0] else article['summary']
-            except:
-                article['summary_zh'] = article['summary']
-        else:
-            article['summary_zh'] = article['summary']
-    
-    print(f"✅ 翻译完成")
+    print("✅ 摘要完成")
     return articles
 
 def fetch_news() -> List[Dict]:
@@ -151,47 +108,49 @@ def fetch_news() -> List[Dict]:
         sources = json.load(f)['sources']
     
     articles = []
-    print(f"📰 开始抓取 {len(sources)} 个新闻源...")
+    print(f"📰 抓取 {len(sources)} 个源...")
     
     for source in sources:
         try:
             feed = feedparser.parse(source['rss'])
-            for entry in feed.entries[:10]:  # 每个源最多 10 篇
+            for entry in feed.entries[:10]:
+                # 格式化时间：HH:MM
+                pub_time = entry.get('published', '')
+                try:
+                    dt = datetime.fromisoformat(pub_time.replace('Z', '+00:00'))
+                    time_str = dt.strftime('%H:%M')
+                except:
+                    time_str = '--:--'
+                
                 article = {
                     'id': hashlib.md5(f"{source['id']}-{entry.title}".encode()).hexdigest()[:12],
                     'title': entry.title,
                     'link': entry.link,
                     'published': entry.get('published', datetime.now(timezone.utc).isoformat()),
+                    'time': time_str,  # HH:MM 格式
                     'source': source['name'],
                     'summary': entry.get('summary', '')[:200],
                     'original_lang': source.get('language', 'en'),
-                    'categories': source.get('categories', []),
                     'category': source['categories'][0] if source.get('categories') else 'world',
-                    'country': source.get('country', 'US'),
-                    'language': source.get('language', 'en')
+                    'country': source.get('country', 'US')
                 }
                 articles.append(article)
         except Exception as e:
-            print(f"⚠️ {source['name']} 抓取失败：{e}")
-        
-        time.sleep(0.3)
+            print(f"⚠️ {source['name']} 失败：{e}")
+        time.sleep(0.2)
     
-    print(f"✅ 抓取完成：{len(articles)} 篇文章")
+    print(f"✅ 抓取 {len(articles)} 篇")
     return articles
 
 def main():
-    """主函数"""
     api_key = get_api_key()
-    
-    # 抓取新闻
     articles = fetch_news()
     if not articles:
         return
     
-    # 翻译
-    articles = translate_articles(articles, api_key)
+    # 生成一句话摘要
+    articles = summarize_news_batch(articles, api_key)
     
-    # 生成数据
     data = {
         'updated': datetime.now(timezone.utc).isoformat(),
         'total': len(articles),
@@ -199,7 +158,6 @@ def main():
         'articles': articles
     }
     
-    # 保存
     data_dir = Path('data')
     data_dir.mkdir(exist_ok=True)
     

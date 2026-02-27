@@ -3,100 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>24Hr Global News - International News Feed</title>
+    <title>24Hr Global News</title>
     <link rel="stylesheet" href="css/style.css">
-    <meta name="description" content="Real-time international news aggregation from global sources">
 </head>
 <body>
     <header>
         <div class="header-content">
-            <div class="header-left">
-                <h1><span class="emoji">🌍</span> <span data-i18n="title">24 小时全球新闻</span></h1>
-                <div id="last-updated" class="update-time">Loading...</div>
-            </div>
-            <div class="header-controls">
-                <button id="lang-toggle" class="control-btn" title="切换语言">
+            <h1><span class="emoji">🌍</span> <span data-i18n="title">24 小时全球新闻</span></h1>
+            <div class="controls">
+                <button id="lang-toggle" class="btn">
                     <span id="lang-icon">🇨🇳</span>
                     <span id="lang-text">中文</span>
                 </button>
-                <button id="theme-toggle" class="control-btn" title="Toggle dark mode">
+                <button id="theme-toggle" class="btn">
                     <span id="theme-icon">🌙</span>
-                    <span id="theme-text" data-i18n="darkMode">暗黑</span>
                 </button>
             </div>
         </div>
     </header>
     
-    <!-- Stats Bar -->
-    <div class="stats-bar">
-        <div class="stat-item">
-            <span data-i18n="totalArticles">总新闻数</span>: <span class="stat-value" id="stat-total">0</span>
-        </div>
-        <div class="stat-item">
-            <span data-i18n="sources">新闻源</span>: <span class="stat-value" id="stat-sources">0</span>
-        </div>
-        <div class="stat-item">
-            <span data-i18n="lastUpdate">最后更新</span>: <span class="stat-value" id="last-update-stat">-</span>
-        </div>
+    <div class="stats">
+        <span><span data-i18n="totalArticles">总数</span>: <strong id="stat-total">0</strong></span>
+        <span><span data-i18n="sources">来源</span>: <strong id="stat-sources">0</strong></span>
+        <span>最后更新：<strong id="last-update-stat">-</strong></span>
     </div>
     
-    <!-- Search -->
-    <div class="search-container">
-        <div class="search-box">
-            <input type="text" id="search-input" class="search-input" data-i18n-placeholder="searchPlaceholder" placeholder="搜索新闻...">
-            <button class="search-btn" data-i18n="search">搜索</button>
-        </div>
+    <div class="search-box">
+        <input type="text" id="search-input" class="search-input" placeholder="搜索...">
+        <button class="btn" data-i18n="search">搜索</button>
     </div>
     
-    <!-- Filters -->
     <nav class="filters">
-        <div class="filter-group">
-            <button class="filter-btn active" data-category="all" data-i18n="filterAll">全部</button>
-        </div>
-        
-        <div class="filter-group">
-            <span class="filter-group-label">分类</span>
-            <button class="filter-btn" data-category="world" data-i18n="filterWorld">🌍 国际</button>
-            <button class="filter-btn" data-category="politics" data-i18n="filterPolitics">🏛️ 政治</button>
-            <button class="filter-btn" data-category="business" data-i18n="filterBusiness">💼 商业</button>
-            <button class="filter-btn" data-category="finance" data-i18n="filterFinance">📈 财经</button>
-            <button class="filter-btn" data-category="technology" data-i18n="filterTechnology">💻 科技</button>
-            <button class="filter-btn" data-category="startups" data-i18n="filterStartups">🚀 创业</button>
-            <button class="filter-btn" data-category="science" data-i18n="filterScience">🔬 科学</button>
-        </div>
-        
-        <div class="filter-group">
-            <span class="filter-group-label">娱乐</span>
-            <button class="filter-btn" data-category="sports" data-i18n="filterSports">⚽ 体育</button>
-            <button class="filter-btn" data-category="entertainment" data-i18n="filterEntertainment">🎬 娱乐</button>
-            <button class="filter-btn" data-category="music" data-i18n="filterMusic">🎵 音乐</button>
-        </div>
-        
-        <div class="filter-group">
-            <span class="filter-group-label">地区</span>
-            <button class="filter-btn" data-category="asia" data-i18n="filterAsia">🌏 亚洲</button>
-            <button class="filter-btn" data-category="china" data-i18n="filterChina">🇨🇳 中国</button>
-            <button class="filter-btn" data-category="japan" data-i18n="filterJapan">🇯🇵 日本</button>
-            <button class="filter-btn" data-category="korea" data-i18n="filterKorea">🇰🇷 韩国</button>
-            <button class="filter-btn" data-category="europe" data-i18n="filterEurope">🇪🇺 欧洲</button>
-            <button class="filter-btn" data-category="us" data-i18n="filterUS">🇺🇸 美国</button>
-            <button class="filter-btn" data-category="uk" data-i18n="filterUK">🇬🇧 英国</button>
-        </div>
+        <button class="filter-btn active" data-category="all" data-i18n="filterAll">全部</button>
+        <button class="filter-btn" data-category="world">🌍 国际</button>
+        <button class="filter-btn" data-category="politics">🏛️ 政治</button>
+        <button class="filter-btn" data-category="business">💼 商业</button>
+        <button class="filter-btn" data-category="finance">📈 财经</button>
+        <button class="filter-btn" data-category="technology">💻 科技</button>
+        <button class="filter-btn" data-category="startups">🚀 创业</button>
+        <button class="filter-btn" data-category="science">🔬 科学</button>
+        <button class="filter-btn" data-category="sports">⚽ 体育</button>
+        <button class="filter-btn" data-category="entertainment">🎬 娱乐</button>
+        <button class="filter-btn" data-category="asia">🌏 亚洲</button>
+        <button class="filter-btn" data-category="china">🇨🇳 中国</button>
+        <button class="filter-btn" data-category="us">🇺🇸 美国</button>
+        <button class="filter-btn" data-category="uk">🇬🇧 英国</button>
+        <button class="filter-btn" data-category="europe">🇪🇺 欧洲</button>
     </nav>
     
     <main>
-        <div id="news-container" class="news-grid">
-            <div class="loading">Loading news...</div>
+        <div id="news-container" class="news-list">
+            <div class="loading">加载中...</div>
         </div>
     </main>
     
     <footer>
-        <p>🔄 <span data-i18n="updateFreq">每 30 分钟更新</span> | 📰 <span data-i18n="dataSource">数据来自全球 RSS 源</span></p>
-        <p class="github-link">
-            <a href="https://github.com/fuoweineng/global-news-24h" target="_blank">
-                <span data-i18n="viewOnGithub">查看 GitHub</span>
-            </a>
-        </p>
+        <p>🔄 每 30 分钟更新 | 📰 全球 RSS 源</p>
+        <p><a href="https://github.com/fuweineng/global-news-24h" target="_blank">GitHub</a></p>
     </footer>
     
     <script src="js/app.js"></script>
