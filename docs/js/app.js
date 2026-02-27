@@ -2,14 +2,15 @@
 let allArticles = [];
 let filteredArticles = [];
 let enabledCategories = ['world','politics','business','finance','technology','science'];
-let enabledSources = ['Reuters','BBC','CNN','NHK','DW','France24'];
+let enabledSources = ['Reuters','BBC','CNN','NHK','DW','France24','Al Jazeera','Bloomberg','CNBC','TechCrunch','The Verge','Wired','ESPN','Variety'];
 let currentLang = 'zh';
 let isDarkMode = false;
 
 const categoryNames = {
     world:'国际', politics:'政治', business:'商业', finance:'财经',
     technology:'科技', science:'科学', sports:'体育', entertainment:'娱乐',
-    asia:'亚洲', china:'中国', us:'美国', uk:'英国', europe:'欧洲', japan:'日本', korea:'韩国'
+    asia:'亚洲', china:'中国', us:'美国', uk:'英国', europe:'欧洲', 
+    japan:'日本', korea:'韩国', startups:'创业'
 };
 
 function init() {
@@ -56,6 +57,7 @@ function toggleLang() {
     currentLang = currentLang === 'zh' ? 'en' : 'zh';
     localStorage.setItem('lang', currentLang);
     document.getElementById('lang-btn').textContent = currentLang === 'zh' ? '🇨🇳' : '🇺🇸';
+    // 重新渲染，确保中文模式显示翻译后的内容
     renderNews();
 }
 
@@ -77,8 +79,8 @@ function applySettings() {
 }
 
 function resetSettings() {
-    enabledCategories = ['world','politics','business','finance','technology','science'];
-    enabledSources = ['Reuters','BBC','CNN','NHK','DW','France24'];
+    enabledCategories = ['world','politics','business','finance','technology','science','sports','entertainment'];
+    enabledSources = ['Reuters','BBC','CNN','NHK','DW','France24','Al Jazeera','Bloomberg','CNBC','TechCrunch','The Verge','Wired','ESPN','Variety'];
     syncSettingsUI();
 }
 
@@ -98,6 +100,16 @@ function formatTime(dateStr) {
     } catch { return '--:--'; }
 }
 
+function getNewsText(article) {
+    // 中文模式优先显示翻译后的一句话摘要
+    if (currentLang === 'zh') {
+        if (article.one_line) return article.one_line;
+        if (article.translated_title) return article.translated_title;
+    }
+    // 英文模式或无翻译时显示原标题
+    return article.title;
+}
+
 function renderNews() {
     const container = document.getElementById('news-container');
     if (filteredArticles.length === 0) {
@@ -107,7 +119,7 @@ function renderNews() {
     
     container.innerHTML = filteredArticles.map(a => {
         const time = a.time || formatTime(a.published);
-        const text = (currentLang === 'zh' && a.one_line) ? a.one_line : a.title;
+        const text = getNewsText(a);
         const catName = categoryNames[a.category] || a.category;
         
         return `
