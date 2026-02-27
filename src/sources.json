@@ -1,555 +1,85 @@
 {
   "sources": [
     {
-      "id": "reuters",
+      "id": "reuters-world",
       "name": "Reuters",
       "country": "US",
       "language": "en",
-      "categories": ["world", "politics", "business"],
-      "rss": "https://feeds.reuters.com/reuters/topNews"
+      "categories": ["world", "politics"],
+      "rss": "https://feeds.reuters.com/reuters/topNews",
+      "priority": 1
     },
     {
       "id": "reuters-business",
-      "name": "Reuters Business",
+      "name": "Reuters",
       "country": "US",
       "language": "en",
       "categories": ["business", "finance"],
-      "rss": "https://feeds.reuters.com/reuters/businessNews"
+      "rss": "https://feeds.reuters.com/reuters/businessNews",
+      "priority": 1
     },
     {
       "id": "reuters-tech",
-      "name": "Reuters Technology",
+      "name": "Reuters",
       "country": "US",
       "language": "en",
       "categories": ["technology"],
-      "rss": "https://feeds.reuters.com/reuters/technologyNews"
+      "rss": "https://feeds.reuters.com/reuters/technologyNews",
+      "priority": 1
     },
     {
-      "id": "bbc",
-      "name": "BBC News",
+      "id": "bbc-world",
+      "name": "BBC",
       "country": "GB",
       "language": "en",
-      "categories": ["world", "politics", "technology"],
-      "rss": "http://feeds.bbci.co.uk/news/world/rss.xml"
+      "categories": ["world"],
+      "rss": "http://feeds.bbci.co.uk/news/world/rss.xml",
+      "priority": 2
     },
     {
       "id": "bbc-business",
-      "name": "BBC Business",
+      "name": "BBC",
       "country": "GB",
       "language": "en",
-      "categories": ["business", "finance"],
-      "rss": "http://feeds.bbci.co.uk/news/business/rss.xml"
+      "categories": ["business"],
+      "rss": "http://feeds.bbci.co.uk/news/business/rss.xml",
+      "priority": 2
     },
     {
-      "id": "bbc-tech",
-      "name": "BBC Technology",
-      "country": "GB",
-      "language": "en",
-      "categories": ["technology"],
-      "rss": "http://feeds.bbci.co.uk/news/technology/rss.xml"
-    },
-    {
-      "id": "cnn",
+      "id": "cnn-top",
       "name": "CNN",
       "country": "US",
       "language": "en",
       "categories": ["world", "politics"],
-      "rss": "http://rss.cnn.com/rss/edition_world.rss"
+      "rss": "http://rss.cnn.com/rss/edition.rss",
+      "priority": 2
     },
     {
-      "id": "cnn-business",
-      "name": "CNN Business",
-      "country": "US",
-      "language": "en",
-      "categories": ["business", "finance"],
-      "rss": "http://rss.cnn.com/rss/money_latest.rss"
-    },
-    {
-      "id": "cnn-tech",
-      "name": "CNN Tech",
-      "country": "US",
-      "language": "en",
-      "categories": ["technology"],
-      "rss": "http://rss.cnn.com/rss/edition_technology.rss"
-    },
-    {
-      "id": "nhk",
-      "name": "NHK World",
+      "id": "nhk-world",
+      "name": "NHK",
       "country": "JP",
       "language": "en",
-      "categories": ["asia", "japan"],
-      "rss": "https://www3.nhk.or.jp/nhkworld/en/news/feeds/rss/index.xml"
+      "categories": ["asia", "world"],
+      "rss": "https://www3.nhk.or.jp/nhkworld/en/news/rss/",
+      "priority": 2
     },
     {
-      "id": "dw",
-      "name": "Deutsche Welle",
+      "id": "dw-top",
+      "name": "DW",
       "country": "DE",
       "language": "en",
       "categories": ["world", "europe"],
-      "rss": "https://rss.dw.com/xml/rss-en-all"
+      "rss": "https://rss.dw.com/xml/rss-en-all",
+      "priority": 2
     },
     {
       "id": "france24",
-      "name": "France 24",
+      "name": "France24",
       "country": "FR",
       "language": "en",
-      "categories": ["world", "europe"],
-      "rss": "https://www.france24.com/en/rss"
-    },
-    {
-      "id": "scmp",
-      "name": "South China Morning Post",
-      "country": "HK",
-      "language": "en",
-      "categories": ["asia", "china"],
-      "rss": "https://www.scmp.com/rss/318224/feed"
-    },
-    {
-      "id": "economist",
-      "name": "The Economist",
-      "country": "GB",
-      "language": "en",
-      "categories": ["business", "finance", "world"],
-      "rss": "https://www.economist.com/the-world-this-week/rss.xml"
-    },
-    {
-      "id": "bloomberg",
-      "name": "Bloomberg",
-      "country": "US",
-      "language": "en",
-      "categories": ["business", "finance", "technology"],
-      "rss": "https://www.bloomberg.com/politics/feed"
-    },
-    {
-      "id": "bloomberg-markets",
-      "name": "Bloomberg Markets",
-      "country": "US",
-      "language": "en",
-      "categories": ["finance", "business"],
-      "rss": "https://www.bloomberg.com/markets/rss"
-    },
-    {
-      "id": "aljazeera",
-      "name": "Al Jazeera",
-      "country": "QA",
-      "language": "en",
-      "categories": ["world", "middle-east"],
-      "rss": "https://www.aljazeera.com/xml/rss/all.xml"
-    },
-    {
-      "id": "techcrunch",
-      "name": "TechCrunch",
-      "country": "US",
-      "language": "en",
-      "categories": ["technology", "startups"],
-      "rss": "https://techcrunch.com/feed/"
-    },
-    {
-      "id": "wired",
-      "name": "Wired",
-      "country": "US",
-      "language": "en",
-      "categories": ["technology", "science"],
-      "rss": "https://www.wired.com/feed/rss"
-    },
-    {
-      "id": "ars-technica",
-      "name": "Ars Technica",
-      "country": "US",
-      "language": "en",
-      "categories": ["technology", "science"],
-      "rss": "https://feeds.arstechnica.com/arstechnica/index"
-    },
-    {
-      "id": "the-verge",
-      "name": "The Verge",
-      "country": "US",
-      "language": "en",
-      "categories": ["technology", "science"],
-      "rss": "https://www.theverge.com/rss/index.xml"
-    },
-    {
-      "id": "engadget",
-      "name": "Engadget",
-      "country": "US",
-      "language": "en",
-      "categories": ["technology"],
-      "rss": "https://www.engadget.com/rss.xml"
-    },
-    {
-      "id": "zdnet",
-      "name": "ZDNet",
-      "country": "US",
-      "language": "en",
-      "categories": ["technology", "business"],
-      "rss": "https://www.zdnet.com/topic/innovation/rss.xml"
-    },
-    {
-      "id": "espn",
-      "name": "ESPN",
-      "country": "US",
-      "language": "en",
-      "categories": ["sports"],
-      "rss": "http://www.espn.com/espn/rss/news"
-    },
-    {
-      "id": "bbc-sport",
-      "name": "BBC Sport",
-      "country": "GB",
-      "language": "en",
-      "categories": ["sports"],
-      "rss": "http://feeds.bbci.co.uk/sport/rss.xml"
-    },
-    {
-      "id": "sky-sports",
-      "name": "Sky Sports",
-      "country": "GB",
-      "language": "en",
-      "categories": ["sports"],
-      "rss": "https://www.skysports.com/rss/12277"
-    },
-    {
-      "id": "variety",
-      "name": "Variety",
-      "country": "US",
-      "language": "en",
-      "categories": ["entertainment"],
-      "rss": "https://variety.com/feed/"
-    },
-    {
-      "id": "hollywood-reporter",
-      "name": "The Hollywood Reporter",
-      "country": "US",
-      "language": "en",
-      "categories": ["entertainment"],
-      "rss": "https://www.hollywoodreporter.com/feed"
-    },
-    {
-      "id": "entertainment-weekly",
-      "name": "Entertainment Weekly",
-      "country": "US",
-      "language": "en",
-      "categories": ["entertainment"],
-      "rss": "https://ew.com/feed/"
-    },
-    {
-      "id": "rolling-stone",
-      "name": "Rolling Stone",
-      "country": "US",
-      "language": "en",
-      "categories": ["entertainment", "music"],
-      "rss": "https://www.rollingstone.com/feed/"
-    },
-    {
-      "id": "nature",
-      "name": "Nature",
-      "country": "GB",
-      "language": "en",
-      "categories": ["science"],
-      "rss": "https://www.nature.com/nature.rss"
-    },
-    {
-      "id": "scientific-american",
-      "name": "Scientific American",
-      "country": "US",
-      "language": "en",
-      "categories": ["science"],
-      "rss": "https://www.scientificamerican.com/rss/current.xml"
-    },
-    {
-      "id": "new-scientist",
-      "name": "New Scientist",
-      "country": "GB",
-      "language": "en",
-      "categories": ["science"],
-      "rss": "https://www.newscientist.com/feed/home/"
-    },
-    {
-      "id": "space",
-      "name": "Space.com",
-      "country": "US",
-      "language": "en",
-      "categories": ["science"],
-      "rss": "https://www.space.com/feeds/all"
-    },
-    {
-      "id": "xinhua",
-      "name": "新华网",
-      "country": "CN",
-      "language": "zh",
-      "categories": ["china", "world"],
-      "rss": "http://www.xinhuanet.com/politics/2015lh/xwzx_2015lh.xml"
-    },
-    {
-      "id": "people-daily",
-      "name": "人民网",
-      "country": "CN",
-      "language": "zh",
-      "categories": ["china", "politics"],
-      "rss": "http://politics.people.com.cn/rss/1024.xml"
-    },
-    {
-      "id": "caixin",
-      "name": "财新",
-      "country": "CN",
-      "language": "zh",
-      "categories": ["business", "finance", "china"],
-      "rss": "https://www.caixin.com/rss/finance/"
-    },
-    {
-      "id": "caixin-tech",
-      "name": "财新科技",
-      "country": "CN",
-      "language": "zh",
-      "categories": ["technology", "china"],
-      "rss": "https://www.caixin.com/rss/tech/"
-    },
-    {
-      "id": "36kr",
-      "name": "36 氪",
-      "country": "CN",
-      "language": "zh",
-      "categories": ["technology", "business", "startups"],
-      "rss": "https://36kr.com/feed"
-    },
-    {
-      "id": "huxiu",
-      "name": "虎嗅",
-      "country": "CN",
-      "language": "zh",
-      "categories": ["technology", "business"],
-      "rss": "https://www.huxiu.com/rss/0.xml"
-    },
-    {
-      "id": "nikkei-asia",
-      "name": "Nikkei Asia",
-      "country": "JP",
-      "language": "en",
-      "categories": ["asia", "business"],
-      "rss": "https://asia.nikkei.com/rss"
-    },
-    {
-      "id": "korea-times",
-      "name": "The Korea Times",
-      "country": "KR",
-      "language": "en",
-      "categories": ["asia", "korea"],
-      "rss": "https://www.koreatimes.co.kr/rss/national.html"
-    },
-    {
-      "id": "korea-herald",
-      "name": "The Korea Herald",
-      "country": "KR",
-      "language": "en",
-      "categories": ["asia", "korea"],
-      "rss": "http://www.koreaherald.com/common/rss_xml.php?ct=1"
-    },
-    {
-      "id": "taiwan-news",
-      "name": "Taiwan News",
-      "country": "TW",
-      "language": "en",
-      "categories": ["asia", "taiwan"],
-      "rss": "https://www.taiwannews.com.tw/ch/index.rss"
-    },
-    {
-      "id": "straitstimes",
-      "name": "The Straits Times",
-      "country": "SG",
-      "language": "en",
-      "categories": ["asia", "singapore"],
-      "rss": "https://www.straitstimes.com/rss/news"
-    },
-    {
-      "id": "bangkok-post",
-      "name": "Bangkok Post",
-      "country": "TH",
-      "language": "en",
-      "categories": ["asia", "thailand"],
-      "rss": "https://www.bangkokpost.com/rss/rss.php?type=news"
-    },
-    {
-      "id": "guardian",
-      "name": "The Guardian",
-      "country": "GB",
-      "language": "en",
-      "categories": ["world", "politics"],
-      "rss": "https://www.theguardian.com/world/rss"
-    },
-    {
-      "id": "guardian-business",
-      "name": "The Guardian Business",
-      "country": "GB",
-      "language": "en",
-      "categories": ["business", "finance"],
-      "rss": "https://www.theguardian.com/uk/business/rss"
-    },
-    {
-      "id": "guardian-tech",
-      "name": "The Guardian Tech",
-      "country": "GB",
-      "language": "en",
-      "categories": ["technology"],
-      "rss": "https://www.theguardian.com/technology/rss"
-    },
-    {
-      "id": "independent",
-      "name": "The Independent",
-      "country": "GB",
-      "language": "en",
-      "categories": ["world", "politics"],
-      "rss": "https://www.independent.co.uk/rss"
-    },
-    {
-      "id": "sky-news",
-      "name": "Sky News",
-      "country": "GB",
-      "language": "en",
-      "categories": ["world", "politics"],
-      "rss": "https://news.sky.com/rss"
-    },
-    {
-      "id": "fox-news",
-      "name": "Fox News",
-      "country": "US",
-      "language": "en",
-      "categories": ["world", "politics"],
-      "rss": "http://feeds.foxnews.com/foxnews/national"
-    },
-    {
-      "id": "fox-business",
-      "name": "Fox Business",
-      "country": "US",
-      "language": "en",
-      "categories": ["business", "finance"],
-      "rss": "http://feeds.foxnews.com/foxbusiness/latest"
-    },
-    {
-      "id": "wsj",
-      "name": "Wall Street Journal",
-      "country": "US",
-      "language": "en",
-      "categories": ["business", "finance", "world"],
-      "rss": "https://feeds.a.dj.com/rss/RSSWorldNews.xml"
-    },
-    {
-      "id": "nytimes",
-      "name": "New York Times",
-      "country": "US",
-      "language": "en",
-      "categories": ["world", "politics"],
-      "rss": "https://rss.nytimes.com/services/xml/rss/nyt/World.xml"
-    },
-    {
-      "id": "nytimes-business",
-      "name": "NYT Business",
-      "country": "US",
-      "language": "en",
-      "categories": ["business", "finance"],
-      "rss": "https://rss.nytimes.com/services/xml/rss/nyt/Business.xml"
-    },
-    {
-      "id": "nytimes-tech",
-      "name": "NYT Technology",
-      "country": "US",
-      "language": "en",
-      "categories": ["technology"],
-      "rss": "https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml"
-    },
-    {
-      "id": "washington-post",
-      "name": "Washington Post",
-      "country": "US",
-      "language": "en",
-      "categories": ["world", "politics"],
-      "rss": "https://feeds.washingtonpost.com/rss/world"
-    },
-    {
-      "id": "politico",
-      "name": "Politico",
-      "country": "US",
-      "language": "en",
-      "categories": ["politics"],
-      "rss": "https://www.politico.com/rss/politics08.xml"
-    },
-    {
-      "id": "axios",
-      "name": "Axios",
-      "country": "US",
-      "language": "en",
-      "categories": ["politics", "technology", "business"],
-      "rss": "https://www.axios.com/rss/all.xml"
-    },
-    {
-      "id": "financial-times",
-      "name": "Financial Times",
-      "country": "GB",
-      "language": "en",
-      "categories": ["business", "finance"],
-      "rss": "https://www.ft.com/?format=rss"
-    },
-    {
-      "id": "cnbc",
-      "name": "CNBC",
-      "country": "US",
-      "language": "en",
-      "categories": ["business", "finance", "technology"],
-      "rss": "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=10001147"
-    },
-    {
-      "id": "marketwatch",
-      "name": "MarketWatch",
-      "country": "US",
-      "language": "en",
-      "categories": ["finance", "business"],
-      "rss": "https://feeds.marketwatch.com/marketwatch/topstories/"
-    },
-    {
-      "id": "investing",
-      "name": "Investing.com",
-      "country": "US",
-      "language": "en",
-      "categories": ["finance"],
-      "rss": "https://cn.investing.com/rss/rss.rss"
-    },
-    {
-      "id": "mit-tech-review",
-      "name": "MIT Technology Review",
-      "country": "US",
-      "language": "en",
-      "categories": ["technology", "science"],
-      "rss": "https://www.technologyreview.com/feed/"
-    },
-    {
-      "id": "ieee-spectrum",
-      "name": "IEEE Spectrum",
-      "country": "US",
-      "language": "en",
-      "categories": ["technology", "science"],
-      "rss": "https://spectrum.ieee.org/rss/feed.xml"
+      "categories": ["world"],
+      "rss": "https://www.france24.com/en/rss",
+      "priority": 2
     }
-  ],
-  "categoryGroups": {
-    "world": "🌍 国际",
-    "politics": "🏛️ 政治",
-    "business": "💼 商业",
-    "finance": "📈 财经",
-    "technology": "💻 科技",
-    "startups": "🚀 创业",
-    "science": "🔬 科学",
-    "sports": "⚽ 体育",
-    "entertainment": "🎬 娱乐",
-    "music": "🎵 音乐",
-    "asia": "🌏 亚洲",
-    "china": "🇨🇳 中国",
-    "japan": "🇯🇵 日本",
-    "korea": "🇰🇷 韩国",
-    "taiwan": "🇹🇼 台湾",
-    "singapore": "🇸🇬 新加坡",
-    "thailand": "🇹🇭 泰国",
-    "europe": "🇪🇺 欧洲",
-    "middle-east": "🌍 中东",
-    "us": "🇺🇸 美国",
-    "uk": "🇬🇧 英国"
-  }
+  ]
 }

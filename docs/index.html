@@ -3,63 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>24Hr Global News</title>
+    <title>全球新闻 24H</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <header>
         <div class="header-content">
-            <h1><span class="emoji">🌍</span> <span data-i18n="title">24 小时全球新闻</span></h1>
-            <div class="controls">
-                <button id="lang-toggle" class="btn">
-                    <span id="lang-icon">🇨🇳</span>
-                    <span id="lang-text">中文</span>
-                </button>
-                <button id="theme-toggle" class="btn">
-                    <span id="theme-icon">🌙</span>
-                </button>
+            <div class="header-left">
+                <h1>🌍 全球新闻</h1>
+                <span class="update-time" id="last-updated">--:-- 更新</span>
+            </div>
+            <div class="header-right">
+                <button id="settings-btn" class="icon-btn" title="设置">⚙️</button>
+                <button id="theme-btn" class="icon-btn" title="主题">🌙</button>
+                <button id="lang-btn" class="icon-btn" title="语言">🇨🇳</button>
             </div>
         </div>
     </header>
     
-    <div class="stats">
-        <span><span data-i18n="totalArticles">总数</span>: <strong id="stat-total">0</strong></span>
-        <span><span data-i18n="sources">来源</span>: <strong id="stat-sources">0</strong></span>
-        <span>最后更新：<strong id="last-update-stat">-</strong></span>
-    </div>
-    
-    <div class="search-box">
-        <input type="text" id="search-input" class="search-input" placeholder="搜索...">
-        <button class="btn" data-i18n="search">搜索</button>
-    </div>
-    
-    <nav class="filters">
-        <button class="filter-btn active" data-category="all" data-i18n="filterAll">全部</button>
-        <button class="filter-btn" data-category="world">🌍 国际</button>
-        <button class="filter-btn" data-category="politics">🏛️ 政治</button>
-        <button class="filter-btn" data-category="business">💼 商业</button>
-        <button class="filter-btn" data-category="finance">📈 财经</button>
-        <button class="filter-btn" data-category="technology">💻 科技</button>
-        <button class="filter-btn" data-category="startups">🚀 创业</button>
-        <button class="filter-btn" data-category="science">🔬 科学</button>
-        <button class="filter-btn" data-category="sports">⚽ 体育</button>
-        <button class="filter-btn" data-category="entertainment">🎬 娱乐</button>
-        <button class="filter-btn" data-category="asia">🌏 亚洲</button>
-        <button class="filter-btn" data-category="china">🇨🇳 中国</button>
-        <button class="filter-btn" data-category="us">🇺🇸 美国</button>
-        <button class="filter-btn" data-category="uk">🇬🇧 英国</button>
-        <button class="filter-btn" data-category="europe">🇪🇺 欧洲</button>
-    </nav>
-    
-    <main>
-        <div id="news-container" class="news-list">
-            <div class="loading">加载中...</div>
+    <!-- 设置面板 -->
+    <div id="settings-panel" class="settings-panel hidden">
+        <div class="settings-content">
+            <div class="settings-header">
+                <h3>⚙️ 设置</h3>
+                <button id="close-settings" class="close-btn">✕</button>
+            </div>
+            
+            <div class="settings-section">
+                <h4>📰 新闻分类</h4>
+                <div class="category-list" id="category-filters">
+                    <label class="category-item">
+                        <input type="checkbox" value="world" checked>
+                        <span>🌍 国际</span>
+                    </label>
+                    <label class="category-item">
+                        <input type="checkbox" value="politics" checked>
+                        <span>🏛️ 政治</span>
+                    </label>
+                    <label class="category-item">
+                        <input type="checkbox" value="business" checked>
+                        <span>💼 商业</span>
+                    </label>
+                    <label class="category-item">
+                        <input type="checkbox" value="finance" checked>
+                        <span>📈 财经</span>
+                    </label>
+                    <label class="category-item">
+                        <input type="checkbox" value="technology" checked>
+                        <span>💻 科技</span>
+                    </label>
+                    <label class="category-item">
+                        <input type="checkbox" value="science" checked>
+                        <span>🔬 科学</span>
+                    </label>
+                    <label class="category-item">
+                        <input type="checkbox" value="sports">
+                        <span>⚽ 体育</span>
+                    </label>
+                    <label class="category-item">
+                        <input type="checkbox" value="entertainment">
+                        <span>🎬 娱乐</span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <h4>🌐 新闻来源</h4>
+                <div class="source-list" id="source-filters">
+                    <label class="source-item">
+                        <input type="checkbox" value="Reuters" checked>
+                        <span>Reuters (路透社)</span>
+                    </label>
+                    <label class="source-item">
+                        <input type="checkbox" value="BBC" checked>
+                        <span>BBC</span>
+                    </label>
+                    <label class="source-item">
+                        <input type="checkbox" value="CNN" checked>
+                        <span>CNN</span>
+                    </label>
+                    <label class="source-item">
+                        <input type="checkbox" value="NHK" checked>
+                        <span>NHK</span>
+                    </label>
+                    <label class="source-item">
+                        <input type="checkbox" value="DW" checked>
+                        <span>DW</span>
+                    </label>
+                    <label class="source-item">
+                        <input type="checkbox" value="France24" checked>
+                        <span>France 24</span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="settings-actions">
+                <button id="apply-settings" class="btn-primary">应用</button>
+                <button id="reset-settings" class="btn-secondary">重置</button>
+            </div>
         </div>
+    </div>
+    
+    <!-- 新闻列表 -->
+    <main>
+        <div id="news-container"></div>
     </main>
     
     <footer>
-        <p>🔄 每 30 分钟更新 | 📰 全球 RSS 源</p>
-        <p><a href="https://github.com/fuweineng/global-news-24h" target="_blank">GitHub</a></p>
+        <span id="stat-total">0</span> 条新闻 | 最后更新：<span id="update-time">--:--</span>
     </footer>
     
     <script src="js/app.js"></script>

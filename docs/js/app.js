@@ -1,91 +1,95 @@
-// Global News App - 客观一句话新闻
+// 全球新闻 24H - Inoreader 风格
 let allArticles = [];
 let filteredArticles = [];
-let currentFilter = 'all';
-let currentSearch = '';
+let enabledCategories = ['world','politics','business','finance','technology','science'];
+let enabledSources = ['Reuters','BBC','CNN','NHK','DW','France24'];
 let currentLang = 'zh';
 let isDarkMode = false;
 
-const translations = {
-    zh: {
-        title: '24 小时全球新闻',
-        darkMode: '暗黑',
-        lightMode: '白天',
-        langName: '中文',
-        filterAll: '全部',
-        loading: '加载中...',
-        error: '无法加载新闻',
-        noNews: '没有新闻',
-        searchPlaceholder: '搜索...',
-        search: '搜索',
-        totalArticles: '总数',
-        sources: '来源'
-    },
-    en: {
-        title: '24Hr Global News',
-        darkMode: 'Dark',
-        lightMode: 'Light',
-        langName: 'English',
-        filterAll: 'All',
-        loading: 'Loading...',
-        error: 'Unable to load',
-        noNews: 'No news',
-        searchPlaceholder: 'Search...',
-        search: 'Search',
-        totalArticles: 'Total',
-        sources: 'Sources'
+// 初始化
+function init() {
+    const saved = localStorage.getItem('newsSettings');
+    if (saved) {
+        const s = JSON.parse(saved);
+        enabledCategories = s.categories || enabledCategories;
+        enabledSources = s.sources || enabledSources;
     }
-};
-
-function initSettings() {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
+    const theme = localStorage.getItem('theme');
+    if (theme === 'dark') {
         isDarkMode = true;
         document.body.classList.add('dark-mode');
-        document.getElementById('theme-icon').textContent = '☀️';
+        document.getElementById('theme-btn').textContent = '☀️';
     }
-    currentLang = localStorage.getItem('lang') || 'zh';
-    updateUILang();
+    setupEventListeners();
+    fetchNews();
+    setInterval(fetchNews, 300000);
 }
 
-function toggleLanguage() {
-    currentLang = currentLang === 'zh' ? 'en' : 'zh';
-    localStorage.setItem('lang', currentLang);
-    updateUILang();
-    renderNews(filterArticles());
+function setupEventListeners() {
+    document.getElementById('settings-btn').addEventListener('click', toggleSettings);
+    document.getElementById('close-settings').addEventListener('click', toggleSettings);
+    document.getElementById('theme-btn').addEventListener('click', toggleTheme);
+    document.getElementById('lang-btn').addEventListener('click', toggleLang);
+    document.getElementById('apply-settings').addEventListener('click', applySettings);
+    document.getElementById('reset-settings').addEventListener('click', resetSettings);
 }
 
-function updateUILang() {
-    const t = translations[currentLang];
-    document.getElementById('lang-icon').textContent = currentLang === 'zh' ? '🇨🇳' : '🇺🇸';
-    document.getElementById('lang-text').textContent = t.langName;
-    document.getElementById('search-input').placeholder = t.searchPlaceholder;
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (t[key]) el.textContent = t[key];
-    });
+function toggleSettings() {
+    const panel = document.getElementById('settings-panel');
+    panel.classList.toggle('hidden');
+    if (!panel.classList.contains('hidden')) {
+        syncSettingsUI();
+    }
 }
 
 function toggleTheme() {
     isDarkMode = !isDarkMode;
     document.body.classList.toggle('dark-mode');
     localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-    document.getElementById('theme-icon').textContent = isDarkMode ? '☀️' : '🌙';
+    document.getElementById('theme-btn').textContent = isDarkMode ? '☀️' : '🌙';
 }
 
-function filterArticles() {
-    let articles = allArticles;
-    if (currentFilter !== 'all') {
-        articles = articles.filter(a => a.category === currentFilter);
-    }
-    if (currentSearch) {
-        const q = currentSearch.toLowerCase();
-        articles = articles.filter(a => 
-            a.title.toLowerCase().includes(q) || 
-            (a.one_line && a.one_line.toLowerCase().includes(q))
-        );
-    }
-    return articles;
+function toggleLang() {
+    currentLang = currentLang === 'zh' ? 'en' : 'zh';
+    localStorage.setItem('lang', currentLang);
+    document.getElementById('lang-btn').textContent = currentLang === 'zh' ? '🇨🇳' : '🇺🇸';
+    renderNews();
+}
+
+function syncSettingsUI() {
+    document.querySelectorAll('#category-filters input').forEach(cb => {
+        cb.checked = enabledCategories.includes(cb.value);
+    });
+    document.querySelectorAll('#source-filters input').forEach(cb => {
+        cb.checked = enabledSources.includes(cb.value);
+    });
+}
+
+function applySettings() {
+    enabledCategories = Array.from(document.querySelectorAll('#category-filters input:checked'))
+        .map(cb => cb.value);
+    enabledSources = Array.from(document.querySelectorAll('#source-filters input:checked'))
+        .map(cb => cb.value);
+    localStorage.setItem('newsSettings', JSON.stringify({
+        categories: enabledCategories,
+        sources: enabledSources
+    }));
+    toggleSettings();
+    filterAndRender();
+}
+
+function resetSettings() {
+    enabledCategories = ['world','politics','business','finance','technology','science'];
+    enabledSources = ['Reuters','BBC','CNN','NHK','DW','France24'];
+    syncSettingsUI();
+}
+
+function filterAndRender() {
+    filteredArticles = allArticles.filter(a => 
+        enabledCategories.includes(a.category) && 
+        enabledSources.includes(a.source)
+    );
+    renderNews();
 }
 
 function formatTime(dateStr) {
@@ -97,36 +101,34 @@ function formatTime(dateStr) {
     } catch { return '--:--'; }
 }
 
-function renderNews(articles) {
+function renderNews() {
     const container = document.getElementById('news-container');
-    const t = translations[currentLang];
-    
-    if (articles.length === 0) {
-        container.innerHTML = `<div class="empty-state">${t.noNews}</div>`;
+    if (filteredArticles.length === 0) {
+        container.innerHTML = '<div class="empty-state">暂无新闻，请调整筛选条件</div>';
         return;
     }
-    
-    // 单行格式：时间，新闻来源 新闻浓缩一句话
-    container.innerHTML = articles.map(article => {
-        const time = article.time || formatTime(article.published);
-        const source = article.source;
-        const text = (currentLang === 'zh' && article.one_line) ? article.one_line : article.title;
-        
+    container.innerHTML = filteredArticles.map(a => {
+        const time = a.time || formatTime(a.published);
+        const text = (currentLang === 'zh' && a.one_line) ? a.one_line : a.title;
+        const catName = {
+            world:'国际',politics:'政治',business:'商业',finance:'财经',
+            technology:'科技',science:'科学',sports:'体育',entertainment:'娱乐',
+            asia:'亚洲',china:'中国',us:'美国',uk:'英国',europe:'欧洲'
+        }[a.category] || a.category;
         return `
-            <a href="${article.link}" target="_blank" rel="noopener" class="news-line">
+            <div class="news-item">
                 <span class="news-time">${time}</span>
-                <span class="news-source">${source}</span>
+                <span class="news-source">${a.source}</span>
                 <span class="news-text">${text}</span>
-            </a>
+                <span class="news-category">${catName}</span>
+            </div>
         `;
     }).join('');
-    
-    // 更新统计
-    document.getElementById('stat-total').textContent = articles.length;
-    document.getElementById('stat-sources').textContent = allArticles.length > 0 ? 
-        new Set(allArticles.map(a => a.source)).size : 0;
-    document.getElementById('last-update-stat').textContent = 
-        allArticles.length > 0 ? formatTime(allArticles[0].published) : '-';
+    document.getElementById('stat-total').textContent = filteredArticles.length;
+    document.getElementById('update-time').textContent = 
+        allArticles.length > 0 ? formatTime(allArticles[0].published) : '--:--';
+    document.getElementById('last-updated').textContent = 
+        allArticles.length > 0 ? `${formatTime(allArticles[0].published)} 更新` : '';
 }
 
 async function fetchNews() {
@@ -134,45 +136,12 @@ async function fetchNews() {
         const resp = await fetch('data/news.json?t=' + Date.now());
         const data = await resp.json();
         allArticles = data.articles || [];
-        filteredArticles = filterArticles();
-        renderNews(filteredArticles);
-    } catch (error) {
-        console.error('Error:', error);
+        filterAndRender();
+    } catch (e) {
+        console.error('Fetch error:', e);
         document.getElementById('news-container').innerHTML = 
-            `<div class="error">${translations[currentLang].error}</div>`;
+            '<div class="empty-state">加载失败，请刷新</div>';
     }
 }
 
-// Init
-document.addEventListener('DOMContentLoaded', () => {
-    initSettings();
-    document.getElementById('lang-toggle').addEventListener('click', toggleLanguage);
-    document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
-    
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            currentFilter = btn.getAttribute('data-category');
-            filteredArticles = filterArticles();
-            renderNews(filteredArticles);
-        });
-    });
-    
-    document.querySelector('.search-btn').addEventListener('click', () => {
-        currentSearch = document.getElementById('search-input').value;
-        filteredArticles = filterArticles();
-        renderNews(filteredArticles);
-    });
-    
-    document.getElementById('search-input').addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            currentSearch = e.target.value;
-            filteredArticles = filterArticles();
-            renderNews(filteredArticles);
-        }
-    });
-    
-    fetchNews();
-    setInterval(fetchNews, 300000); // 5 分钟刷新
-});
+document.addEventListener('DOMContentLoaded', init);
