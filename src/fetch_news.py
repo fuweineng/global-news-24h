@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""全球新闻抓取 - DeepL 翻译"""
+"""全球新闻抓取 - LibreTranslate 免费翻译"""
 
 import feedparser
 import json
@@ -9,57 +9,41 @@ import hashlib
 import time
 import os
 import urllib.request
+import urllib.parse
 
-DEEPL_API_URL = "https://api-free.deepl.com/v2/translate"
+# LibreTranslate 公共服务器（免费，无需 API Key）
+LIBRETRANSLATE_URL = "https://libretranslate.com/translate"
 
-def get_api_key():
-    api_key = os.environ.get('DEEPL_API_KEY', '')
-    if api_key:
-        print(f"✅ DeepL API Key 已配置")
-        return api_key
-    print("⚠️ 未找到 DEEPL_API_KEY 环境变量")
-    return ""
-
-def translate_batch(articles, api_key):
-    """使用 DeepL 翻译新闻标题为中文"""
-    if not api_key:
-        print("⚠️ 无 API Key，跳过翻译")
-        for a in articles:
-            a['one_line'] = a['title']
+def translate_batch(articles):
+    """使用 LibreTranslate 翻译新闻标题为中文"""
+    if not articles:
         return articles
     
-    print(f"🤖 DeepL 翻译 {len(articles)} 篇...")
+    print(f"🤖 LibreTranslate 翻译 {len(articles)} 篇...")
     
-    # 批量翻译，每次最多 50 篇
-    for i in range(0, len(articles), 50):
-        batch = articles[i:i+50]
-        texts = [a['title'] for a in batch]
+    # 批量翻译
+    for i in range(0, len(articles), 10):
+        batch = articles[i:i+10]
         
-        try:
-            req = urllib.request.Request(
-                DEEPL_API_URL,
-                data=urllib.parse.urlencode({
-                    'auth_key': api_key,
-                    'text': texts,
-                    'target_lang': 'ZH',
-                    'tag_handling': 'html',
-                    'preserve_format': 'true'
-                }).encode(),
-                headers={"Content-Type": "application/x-www-form-urlencoded"}
-            )
-            with urllib.request.urlopen(req, timeout=60) as resp:
-                result = json.loads(resp.read().decode())
-                translations = result.get('translations', [])
-                for j, article in enumerate(batch):
-                    if j < len(translations):
-                        article['one_line'] = translations[j]['text']
-                    else:
-                        article['one_line'] = article['title']
-        except Exception as e:
-            print(f"⚠️ 翻译失败：{e}")
-            for a in batch:
-                a['one_line'] = a['title']
-        time.sleep(0.5)
+        for article in batch:
+            try:
+                req = urllib.request.Request(
+                    LIBRETRANSLATE_URL,
+                    data=urllib.parse.urlencode({
+                        'q': article['title'],
+                        'source': 'en',
+                        'target': 'zh',
+                        'format': 'text'
+                    }).encode(),
+                    headers={"Content-Type": "application/x-www-form-urlencoded"}
+                )
+                with urllib.request.urlopen(req, timeout=30) as resp:
+                    result = json.loads(resp.read().decode())
+                    article['one_line'] = result.get('translatedText', article['title'])
+            except Exception as e:
+                print(f"⚠️ 翻译失败：{e}")
+                article['one_line'] = article['title']
+            time.sleep(0.3)
     
     print("✅ 翻译完成")
     return articles
@@ -116,12 +100,11 @@ def fetch_news():
     return articles
 
 def main():
-    api_key = get_api_key()
     articles = fetch_news()
     if not articles:
         return
     
-    articles = translate_batch(articles, api_key)
+    articles = translate_batch(articles)
     
     data = {
         'updated': datetime.now(timezone.utc).isoformat(),

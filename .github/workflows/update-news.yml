@@ -22,9 +22,7 @@ jobs:
         run: |
           pip install feedparser
       
-      - name: Fetch news (with DeepL translation)
-        env:
-          DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}
+      - name: Fetch news (with LibreTranslate - free)
         run: python src/fetch_news.py
       
       - name: Copy to docs directory
