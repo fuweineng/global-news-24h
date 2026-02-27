@@ -2,7 +2,10 @@ name: Update News
 
 on:
   schedule:
-    - cron: '*/30 * * * *'
+    # 白天（UTC 0:00-15:00 = 北京 8:00-23:00）每 15 分钟
+    - cron: '*/15 0-15 * * *'
+    # 夜间（UTC 16:00-23:00 = 北京 0:00-7:00）每 60 分钟
+    - cron: '0 16-23 * * *'
   workflow_dispatch:
 
 jobs:
@@ -22,7 +25,7 @@ jobs:
         run: |
           pip install feedparser
       
-      - name: Fetch news (with LibreTranslate - free)
+      - name: Fetch news (with smart dedup)
         run: python src/fetch_news.py
       
       - name: Copy to docs directory
