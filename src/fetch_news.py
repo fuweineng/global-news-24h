@@ -14,36 +14,26 @@ import urllib.request
 DASHSCOPE_API_URL = "https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation"
 
 def get_api_key():
+    # 优先从环境变量获取
     if os.environ.get('DASHSCOPE_API_KEY'):
         return os.environ.get('DASHSCOPE_API_KEY')
-    auth_file = Path.home() / '.openclaw' / 'agents' / 'main' / 'agent' / 'auth-profiles.json'
-    if auth_file.exists():
-        try:
-            with open(auth_file, 'r') as f:
-                auth = json.load(f)
-                if 'dashscope' in auth and auth['dashscope'].get('apiKey'):
-                    return auth['dashscope']['apiKey']
-        except: pass
+    # 尝试从 GitHub Secrets 获取（Actions 环境）
+    if os.environ.get('DASHSCOPE_API_KEY_SECRET'):
+        return os.environ.get('DASHSCOPE_API_KEY_SECRET')
     return ""
 
 def summarize_batch(articles, api_key):
     """为所有英文新闻生成中文摘要"""
     if not api_key:
+        print("⚠️ 无 API Key，跳过翻译")
         for a in articles:
             a['one_line'] = a['title']
         return articles
     
-    # 过滤出需要翻译的英文新闻
-    en_articles = [a for a in articles if a.get('original_lang', 'en') == 'en']
-    if not en_articles:
-        for a in articles:
-            a['one_line'] = a['title']
-        return articles
+    print(f"🤖 生成中文摘要 {len(articles)} 篇...")
     
-    print(f"🤖 生成中文摘要 {len(en_articles)} 篇...")
-    
-    for i in range(0, len(en_articles), 5):
-        batch = en_articles[i:i+5]
+    for i in range(0, len(articles), 5):
+        batch = articles[i:i+5]
         input_text = "\n".join([f"{j+1}. {a['title']}" for j, a in enumerate(batch)])
         
         prompt = f"""你是专业新闻编辑。将以下英文新闻标题翻译成中文客观摘要。
@@ -64,29 +54,29 @@ def summarize_batch(articles, api_key):
                 data=json.dumps({
                     "model": "qwen-turbo",
                     "input": {"messages": [{"role": "user", "content": prompt}]},
-                    "parameters": {"temperature": 0.1}
+                    "parameters": {"temperature": 0.1, "max_tokens": 500}
                 }).encode(),
                 headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
             )
-            with urllib.request.urlopen(req, timeout=60) as resp:
+            with urllib.request.urlopen(req, timeout=90) as resp:
                 result = json.loads(resp.read().decode())
-                lines = result['output']['choices'][0]['message']['content'].strip().split('\n')
+                content = result.get('output', {}).get('choices', [{}])[0].get('message', {}).get('content', '')
+                lines = content.strip().split('\n')
                 for j, article in enumerate(batch):
                     if j < len(lines):
                         line = re.sub(r'^\d+[\.\)]\s*', '', lines[j]).strip()
-                        article['one_line'] = line if line else article['title']
+                        # 确保是中文
+                        if line and any('\u4e00' <= c <= '\u9fff' for c in line):
+                            article['one_line'] = line
+                        else:
+                            article['one_line'] = article['title']
                     else:
                         article['one_line'] = article['title']
         except Exception as e:
             print(f"⚠️ 翻译失败：{e}")
             for a in batch:
                 a['one_line'] = a['title']
-        time.sleep(0.3)
-    
-    # 非英文新闻保持原标题
-    for a in articles:
-        if 'one_line' not in a:
-            a['one_line'] = a['title']
+        time.sleep(0.5)
     
     print("✅ 摘要完成")
     return articles
@@ -100,7 +90,6 @@ def fetch_news():
     with open(sources_file, 'r') as f:
         sources = json.load(f)['sources']
     
-    # 按优先级排序
     sources.sort(key=lambda s: s.get('priority', 99))
     
     articles = []
@@ -110,9 +99,7 @@ def fetch_news():
     for source in sources:
         try:
             feed = feedparser.parse(source['rss'])
-            # 每个源抓取 8 篇
             for entry in feed.entries[:8]:
-                # 去重
                 title_key = entry.title[:50]
                 if title_key in seen_titles:
                     continue
@@ -141,13 +128,13 @@ def fetch_news():
             print(f"⚠️ {source['name']} 失败：{e}")
         time.sleep(0.3)
     
-    # 按优先级和时间排序
     articles.sort(key=lambda a: (a.get('priority', 2), a['published']), reverse=False)
     print(f"✅ 抓取 {len(articles)} 篇（去重后）")
     return articles
 
 def main():
     api_key = get_api_key()
+    print(f"API Key: {'已配置' if api_key else '未配置'}")
     articles = fetch_news()
     if not articles:
         return
