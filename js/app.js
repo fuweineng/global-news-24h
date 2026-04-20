@@ -4,16 +4,19 @@
 
   const CDN_BASE = 'https://cdn.jsdelivr.net/gh/fuweineng/global-news-24h@main/data/';
   const NEWS_FILE = CDN_BASE + 'news.json';
-  const REFRESH_MS = 30 * 60 * 1000; // 30分钟刷新
+  const PAGE_SIZE = 30;
 
-  let articles = [];
-  let currentTab = 'hot';
+  let allArticles = [];
+  let visibleCount = PAGE_SIZE;
   let loading = false;
 
   // DOM refs
   const $newsList = document.getElementById('news-list');
   const $loading = document.getElementById('loading');
   const $empty = document.getElementById('empty');
+  const $loadMore = document.getElementById('load-more');
+  const $main = document.getElementById('main-feed');
+  const $fab = document.getElementById('fab');
 
   // ── Helpers ────────────────────────────────────────────
   function timeAgo(published) {
@@ -37,17 +40,28 @@
     return map[cat] || '📰';
   }
 
+  function esc(s) {
+    return String(s || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
   // ── Render ────────────────────────────────────────────
   function renderFeed() {
-    if (articles.length === 0) {
+    const sorted = [...allArticles].reverse(); // newest first
+    const visible = sorted.slice(0, visibleCount);
+
+    if (visible.length === 0) {
       $newsList.innerHTML = '';
       $empty.style.display = 'block';
+      $loadMore.style.display = 'none';
       return;
     }
     $empty.style.display = 'none';
 
-    const sorted = [...articles].reverse(); // newest first
-    $newsList.innerHTML = sorted.map(art => `
+    $newsList.innerHTML = visible.map(art => `
       <div class="news-item" onclick="window.open('${art.link}', '_blank')">
         <div class="news-meta">
           <span class="news-tag">${categoryTag(art.category)}</span>
@@ -57,15 +71,16 @@
         <div class="news-source">${esc(art.source)}</div>
       </div>
     `).join('');
+
+    // Show load-more if there are more
+    $loadMore.style.display = visibleCount < sorted.length ? 'block' : 'none';
   }
 
-  function esc(s) {
-    return String(s || '')
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;');
-  }
+  // ── Load more ────────────────────────────────────────────
+  window.loadMore = function() {
+    visibleCount += PAGE_SIZE;
+    renderFeed();
+  };
 
   // ── Load ──────────────────────────────────────────────
   async function loadNews() {
@@ -76,7 +91,8 @@
       const resp = await fetch(NEWS_FILE + '?t=' + Date.now());
       if (!resp.ok) throw new Error(resp.status);
       const data = await resp.json();
-      articles = data.articles || [];
+      allArticles = data.articles || [];
+      visibleCount = PAGE_SIZE;
       renderFeed();
     } catch (e) {
       console.error('loadNews failed:', e);
@@ -93,23 +109,29 @@
     if (!tab) return;
     document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
     tab.classList.add('active');
-    currentTab = tab.dataset.tab;
-    // 实际按 tab 过滤（这里简化处理，全量展示）
-    renderFeed();
   });
+
+  // ── Scroll → FAB ────────────────────────────────────
+  $main.addEventListener('scroll', () => {
+    $fab.classList.toggle('show', $main.scrollTop > 200);
+  }, { passive: true });
+
+  // ── Scroll → auto load more ─────────────────────────
+  $main.addEventListener('scroll', () => {
+    if ($main.scrollTop + $main.clientHeight >= $main.scrollHeight - 100) {
+      const sorted = [...allArticles].reverse();
+      if (visibleCount < sorted.length) {
+        visibleCount += PAGE_SIZE;
+        renderFeed();
+      }
+    }
+  }, { passive: true });
 
   // ── Scroll to top ────────────────────────────────────
   window.scrollToTop = function() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    $main.scrollTo({ top: 0, behavior: 'smooth' });
   };
-
-  // ── FAB visibility ────────────────────────────────────
-  window.addEventListener('scroll', () => {
-    const fab = document.getElementById('fab');
-    fab.style.opacity = window.scrollY > 300 ? '1' : '0';
-  }, { passive: true });
 
   // ── Boot ─────────────────────────────────────────────
   loadNews();
-  setInterval(loadNews, REFRESH_MS);
 })();

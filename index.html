@@ -9,7 +9,7 @@
 <body>
 
 <div id="app">
-  <!-- ===== HEADER ===== -->
+  <!-- ===== HEADER (fixed top) ===== -->
   <header class="header">
     <div class="header-inner">
       <span class="header-logo">Readhub</span>
@@ -19,7 +19,7 @@
     </div>
   </header>
 
-  <!-- ===== NAV ===== -->
+  <!-- ===== NAV (fixed, below header) ===== -->
   <nav class="nav" id="nav">
     <div class="nav-inner" id="nav-inner">
       <span class="nav-item active" data-tab="hot">热门话题</span>
@@ -29,12 +29,20 @@
     </div>
   </nav>
 
-  <!-- ===== MAIN FEED ===== -->
+  <!-- ===== MAIN FEED (scrollable, fills space) ===== -->
   <main class="main" id="main-feed">
     <div id="news-list"></div>
     <div class="loading" id="loading">加载中...</div>
     <div class="empty" id="empty" style="display:none">暂无资讯</div>
+    <div class="load-more" id="load-more" style="display:none">
+      <button onclick="loadMore()">加载更多</button>
+    </div>
   </main>
+
+  <!-- ===== FOOTER (fixed bottom) ===== -->
+  <footer class="footer">
+    <span>全球24h · 数据来源: Reuters · BBC · CNN</span>
+  </footer>
 
   <!-- ===== FLOATING ACTIONS ===== -->
   <div class="fab" id="fab">
