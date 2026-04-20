@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Readhub — 24小时全球科技资讯</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="app">
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <div class="header-inner">
+      <span class="header-logo">Readhub</span>
+      <div class="header-right">
+        <button class="icon-btn" id="search-btn" title="搜索">🔍</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== NAV ===== -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner" id="nav-inner">
+      <span class="nav-item active" data-tab="hot">热门话题</span>
+      <span class="nav-item" data-tab="daily">每日早报</span>
+      <span class="nav-item" data-tab="rank">排行榜</span>
+      <span class="nav-item" data-tab="ai">AI ▾</span>
+    </div>
+  </nav>
+
+  <!-- ===== MAIN FEED ===== -->
+  <main class="main" id="main-feed">
+    <div id="news-list"></div>
+    <div class="loading" id="loading">加载中...</div>
+    <div class="empty" id="empty" style="display:none">暂无资讯</div>
+  </main>
+
+  <!-- ===== FLOATING ACTIONS ===== -->
+  <div class="fab" id="fab">
+    <button class="fab-btn" onclick="scrollToTop()" title="回到顶部">↑</button>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
