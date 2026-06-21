@@ -2,7 +2,7 @@
 (function() {
   'use strict';
 
-  const CDN_BASE = 'https://cdn.jsdelivr.net/gh/fuweineng/global-news-24h@main/data/';
+  const CDN_BASE = '/data/';
   const NEWS_FILE = CDN_BASE + 'news.json';
   const PAGE_SIZE = 30;
 
