@@ -1,76 +1,61 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>全球新闻 24H</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>">
-    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>">
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#1a73e8">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="全球新闻">
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>全球24h — 国际新闻聚合</title>
+  <meta name="description" content="24小时全球新闻聚合，自动翻译中文，来自 Reuters、BBC、Bloomberg 等国际媒体">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>">
+  <meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1c1c1e" media="(prefers-color-scheme: dark)">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="全球24h">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
-        <div class="header-content">
-            <div class="header-left">
-                <h1>🌍 全球新闻</h1>
-                <span class="update-time" id="last-updated">--:-- 更新</span>
-            </div>
-            <div class="header-right">
-                <button id="settings-btn" class="icon-btn" title="设置">⚙️</button>
-                <button id="theme-btn" class="icon-btn" title="主题">🌙</button>
-                <button id="lang-btn" class="icon-btn" title="语言">🇨🇳</button>
-            </div>
-        </div>
-    </header>
-    
-    <div id="settings-panel" class="settings-panel hidden">
-        <div class="settings-content">
-            <div class="settings-header">
-                <h3>⚙️ 设置</h3>
-                <button id="close-settings" class="close-btn">✕</button>
-            </div>
-            
-            <div class="settings-section">
-                <h4>📰 新闻分类</h4>
-                <div class="category-list" id="category-filters">
-                    <label class="category-item"><input type="checkbox" value="world" checked><span>🌍 国际</span></label>
-                    <label class="category-item"><input type="checkbox" value="politics" checked><span>🏛️ 政治</span></label>
-                    <label class="category-item"><input type="checkbox" value="business" checked><span>💼 商业</span></label>
-                    <label class="category-item"><input type="checkbox" value="finance" checked><span>📈 财经</span></label>
-                    <label class="category-item"><input type="checkbox" value="technology" checked><span>💻 科技</span></label>
-                    <label class="category-item"><input type="checkbox" value="science" checked><span>🔬 科学</span></label>
-                    <label class="category-item"><input type="checkbox" value="sports"><span>⚽ 体育</span></label>
-                    <label class="category-item"><input type="checkbox" value="entertainment"><span>🎬 娱乐</span></label>
-                </div>
-            </div>
-            
-            <div class="settings-section">
-                <h4>🌐 新闻来源</h4>
-                <div class="source-list" id="source-filters">
-                    <div class="loading">加载中...</div>
-                </div>
-            </div>
-            
-            <div class="settings-actions">
-                <button id="apply-settings" class="btn-primary">应用</button>
-                <button id="reset-settings" class="btn-secondary">重置</button>
-            </div>
-        </div>
+
+<div id="app">
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="header-left">
+        <span class="header-logo">🌍 全球24h</span>
+        <span class="header-subtitle">国际新闻 · 中文阅读</span>
+      </div>
+      <div class="header-right">
+        <span class="update-time" id="last-updated">--:-- 更新</span>
+      </div>
     </div>
-    
-    <main>
-        <div id="news-container"><div class="loading">加载中...</div></div>
-    </main>
-    
-    <footer>
-        <span id="stat-total">0</span> 条新闻 | 最后更新：<span id="update-time">--:--</span>
-    </footer>
-    
-    <script src="js/app.js"></script>
+  </header>
+
+  <!-- NAV / Category -->
+  <nav class="nav">
+    <div class="nav-inner" id="category-bar"></div>
+  </nav>
+
+  <!-- MAIN FEED -->
+  <main class="main" id="main-feed">
+    <div id="news-list"></div>
+    <div class="loading" id="loading">加载中...</div>
+    <div class="empty" id="empty" style="display:none">暂无资讯</div>
+    <div class="load-more" id="load-more" style="display:none">
+      <button onclick="loadMore()">加载更多</button>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <span>数据来源: Reuters · BBC · Bloomberg · AP · Al Jazeera · NHK · SCMP · 更多</span>
+  </footer>
+</div>
+
+<!-- FAB -->
+<div class="fab" id="fab">
+  <button class="fab-btn" onclick="scrollToTop()" title="回到顶部">↑</button>
+</div>
+
+<script src="js/app.js"></script>
 </body>
 </html>

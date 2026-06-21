@@ -2,34 +2,40 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Readhub — 24小时全球科技资讯</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>全球24h — 国际新闻聚合</title>
+  <meta name="description" content="24小时全球新闻聚合，自动翻译中文，来自 Reuters、BBC、Bloomberg 等国际媒体">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>">
+  <meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1c1c1e" media="(prefers-color-scheme: dark)">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="全球24h">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
 <div id="app">
-  <!-- ===== HEADER (fixed top) ===== -->
+  <!-- HEADER -->
   <header class="header">
     <div class="header-inner">
-      <span class="header-logo">Readhub</span>
+      <div class="header-left">
+        <span class="header-logo">🌍 全球24h</span>
+        <span class="header-subtitle">国际新闻 · 中文阅读</span>
+      </div>
       <div class="header-right">
-        <button class="icon-btn" id="search-btn" title="搜索">🔍</button>
+        <span class="update-time" id="last-updated">--:-- 更新</span>
       </div>
     </div>
   </header>
 
-  <!-- ===== NAV (fixed, below header) ===== -->
-  <nav class="nav" id="nav">
-    <div class="nav-inner" id="nav-inner">
-      <span class="nav-item active" data-tab="hot">热门话题</span>
-      <span class="nav-item" data-tab="daily">每日早报</span>
-      <span class="nav-item" data-tab="rank">排行榜</span>
-      <span class="nav-item" data-tab="ai">AI ▾</span>
-    </div>
+  <!-- NAV / Category -->
+  <nav class="nav">
+    <div class="nav-inner" id="category-bar"></div>
   </nav>
 
-  <!-- ===== MAIN FEED (scrollable, fills space) ===== -->
+  <!-- MAIN FEED -->
   <main class="main" id="main-feed">
     <div id="news-list"></div>
     <div class="loading" id="loading">加载中...</div>
@@ -39,15 +45,15 @@
     </div>
   </main>
 
-  <!-- ===== FOOTER (fixed bottom) ===== -->
+  <!-- FOOTER -->
   <footer class="footer">
-    <span>全球24h · 数据来源: Reuters · BBC · CNN</span>
+    <span>数据来源: Reuters · BBC · Bloomberg · AP · Al Jazeera · NHK · SCMP · 更多</span>
   </footer>
+</div>
 
-  <!-- ===== FLOATING ACTIONS ===== -->
-  <div class="fab" id="fab">
-    <button class="fab-btn" onclick="scrollToTop()" title="回到顶部">↑</button>
-  </div>
+<!-- FAB -->
+<div class="fab" id="fab">
+  <button class="fab-btn" onclick="scrollToTop()" title="回到顶部">↑</button>
 </div>
 
 <script src="js/app.js"></script>
