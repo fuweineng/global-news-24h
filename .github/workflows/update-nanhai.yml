@@ -33,6 +33,11 @@ jobs:
         continue-on-error: true
         run: python src/analyze_nanhai.py
 
+      # 规则 signals 层（纯标准库，无 LLM；schema 自校验通过才写）
+      - name: Build Nanhai signals
+        continue-on-error: true
+        run: python src/build_signals.py
+
       - name: Copy to docs directory
         run: |
           mkdir -p docs/data
@@ -46,12 +51,17 @@ jobs:
           else
             echo "data/analysis.json 未生成（分析失败），跳过"
           fi
+          if [ -f data/signals.json ]; then
+            cp data/signals.json docs/data/
+          else
+            echo "data/signals.json 未生成（signals 构建失败），跳过"
+          fi
 
       - name: Commit and push changes
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add data/nanhai.json docs/data/nanhai.json data/analysis.json docs/data/analysis.json 2>/dev/null || true
+          git add data/nanhai.json docs/data/nanhai.json data/analysis.json docs/data/analysis.json data/signals.json docs/data/signals.json 2>/dev/null || true
           git diff --staged --quiet || git commit -m "Update Nanhai gov news: $(date -u)"
           git pull --rebase --autostash
           git push

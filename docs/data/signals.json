@@ -1,0 +1,601 @@
+{
+  "as_of": "2026-10-17T11:36:18.255843+00:00",
+  "count": 7,
+  "dataset_version": "nanhai-2026-10-17-149",
+  "generated_at": "2026-10-17T11:36:18.255843+00:00",
+  "region": "佛山市南海区",
+  "schema_version": "1.0.0",
+  "signals": [
+    {
+      "actions": [
+        {
+          "audience": "souse",
+          "parameters": {
+            "indicator": "rent.market_avg",
+            "period": "2024-02"
+          },
+          "requires_human": true,
+          "suggested_step": "人工复核该租金基准是否仍适用于当前挂牌/补贴测算，勿以旧价直接定价",
+          "type": "review",
+          "urgency": "medium"
+        }
+      ],
+      "audience": [
+        "souse"
+      ],
+      "change": {
+        "abs": null,
+        "baseline": null,
+        "direction": "flat",
+        "method": "level_observation",
+        "mom": null,
+        "pct": null,
+        "yoy": null
+      },
+      "confidence": 0.75,
+      "evidence": [
+        {
+          "doc_id": "nh69ce4c0511",
+          "published_at": "2024-02-18T00:00:00+00:00",
+          "quote": "平均22元/㎡·月！南海最新住房租金水",
+          "title": "平均22元/㎡·月！南海最新住房租金水平披露",
+          "url": "http://www.nanhai.gov.cn/fsnhzsj/gkmlpt/content/5/5903/post_5903788.html"
+        }
+      ],
+      "generated_at": "2026-10-17T11:36:18.255843+00:00",
+      "generator": {
+        "method": "rule",
+        "model": null,
+        "name": "build_signals",
+        "version": "1.0.0"
+      },
+      "impact": {
+        "affected": [
+          "souse",
+          "gate"
+        ],
+        "by_audience": {
+          "gate": "neutral",
+          "souse": "neutral"
+        },
+        "direction": "neutral",
+        "horizon": "medium",
+        "mechanism": "区域住房平均租金基准，用于校准挂牌价/补贴测算的参照系"
+      },
+      "indicator": {
+        "code": "rent.market_avg",
+        "dimension": "level",
+        "name": "住房平均租金水平",
+        "period": "2024-02",
+        "unit": "元/㎡·月",
+        "value": 22.0
+      },
+      "industries": [
+        "housing_rental"
+      ],
+      "last_confirmed_at": "2024-02-18T00:00:00+00:00",
+      "region": {
+        "district": "佛山市南海区",
+        "match_level": "district",
+        "towns": []
+      },
+      "review": {
+        "status": "auto"
+      },
+      "schema_version": "1.0.0",
+      "scope": "rent_level",
+      "signal_id": "sig_rent_level_nanhai_nh69ce4c0511_20240218",
+      "status": "stale",
+      "title": "平均22元/㎡·月！南海最新住房租金水平披露",
+      "valid_from": "2024-02-18T00:00:00+00:00",
+      "valid_until": "2025-02-17T00:00:00+00:00"
+    },
+    {
+      "actions": [
+        {
+          "audience": "souse",
+          "parameters": {
+            "indicator": "housing.rent_policy"
+          },
+          "requires_human": true,
+          "suggested_step": "核对补贴名单/政策口径，确认是否需要更新定价参数与配额",
+          "type": "verify",
+          "urgency": "medium"
+        }
+      ],
+      "audience": [
+        "souse"
+      ],
+      "change": {
+        "abs": null,
+        "baseline": null,
+        "direction": "unknown",
+        "method": "keyword_rule",
+        "mom": null,
+        "pct": null,
+        "yoy": null
+      },
+      "confidence": 0.75,
+      "evidence": [
+        {
+          "doc_id": "nh57860dae9b",
+          "published_at": "2026-07-24T00:00:00+00:00",
+          "quote": "一图读懂|《佛山市住房保障租赁补贴的实施意见》",
+          "title": "一图读懂|《佛山市住房保障租赁补贴的实施意见》",
+          "url": "http://fscz.foshan.gov.cn/cfg/zcjd2/content/post_7194279.html"
+        }
+      ],
+      "generated_at": "2026-10-17T11:36:18.255843+00:00",
+      "generator": {
+        "method": "rule",
+        "model": null,
+        "name": "build_signals",
+        "version": "1.0.0"
+      },
+      "impact": {
+        "affected": [
+          "souse",
+          "gate"
+        ],
+        "by_audience": {
+          "gate": "neutral",
+          "souse": "neutral"
+        },
+        "direction": "neutral",
+        "horizon": "medium",
+        "mechanism": "租赁补贴/租金标准政策调整，改变补贴对象与定价约束，需同步核对定价口径"
+      },
+      "indicator": {
+        "code": "housing.rent_policy",
+        "dimension": "policy",
+        "name": "住房租赁/补贴政策",
+        "period": "2026-07",
+        "unit": null,
+        "value": null
+      },
+      "industries": [
+        "public_housing",
+        "social_security"
+      ],
+      "last_confirmed_at": "2026-07-24T00:00:00+00:00",
+      "region": {
+        "district": "佛山市南海区",
+        "match_level": "district",
+        "towns": []
+      },
+      "review": {
+        "status": "auto"
+      },
+      "schema_version": "1.0.0",
+      "scope": "rent_policy",
+      "signal_id": "sig_rent_policy_nanhai_nh57860dae9b_20260724",
+      "status": "active",
+      "title": "一图读懂|《佛山市住房保障租赁补贴的实施意见》",
+      "valid_from": "2026-07-24T00:00:00+00:00",
+      "valid_until": "2027-07-24T00:00:00+00:00"
+    },
+    {
+      "actions": [
+        {
+          "audience": "souse",
+          "parameters": {
+            "indicator": "housing.rent_policy"
+          },
+          "requires_human": true,
+          "suggested_step": "核对补贴名单/政策口径，确认是否需要更新定价参数与配额",
+          "type": "verify",
+          "urgency": "medium"
+        }
+      ],
+      "audience": [
+        "souse"
+      ],
+      "change": {
+        "abs": null,
+        "baseline": null,
+        "direction": "unknown",
+        "method": "keyword_rule",
+        "mom": null,
+        "pct": null,
+        "yoy": null
+      },
+      "confidence": 0.75,
+      "evidence": [
+        {
+          "doc_id": "nh91c70102d6",
+          "published_at": "2026-03-02T00:00:00+00:00",
+          "quote": "各镇人民政府、街道办事处，各相关单位： 为培育和发展我区住房租赁市场，规范行业秩序，稳定市场预期，引导租赁双方合理定价和理性交易，促进住房租赁市场健康平稳发展，根据《住房租赁条例》（中华人民共和国国务院令第812号）、《关于发布房屋租赁市…",
+          "title": "佛山市南海区住房城乡建设和水务局关于发布佛山市南海区2025年房屋租赁市场租金水平信息的通知",
+          "url": "http://www.nanhai.gov.cn/fsnhslj/gkmlpt/content/7/7110/post_7110163.html"
+        }
+      ],
+      "generated_at": "2026-10-17T11:36:18.255843+00:00",
+      "generator": {
+        "method": "rule",
+        "model": null,
+        "name": "build_signals",
+        "version": "1.0.0"
+      },
+      "impact": {
+        "affected": [
+          "souse",
+          "gate"
+        ],
+        "by_audience": {
+          "gate": "neutral",
+          "souse": "neutral"
+        },
+        "direction": "neutral",
+        "horizon": "medium",
+        "mechanism": "租赁补贴/租金标准政策调整，改变补贴对象与定价约束，需同步核对定价口径"
+      },
+      "indicator": {
+        "code": "housing.rent_policy",
+        "dimension": "policy",
+        "name": "住房租赁/补贴政策",
+        "period": "2026-03",
+        "unit": null,
+        "value": null
+      },
+      "industries": [
+        "public_housing",
+        "social_security"
+      ],
+      "last_confirmed_at": "2026-03-02T00:00:00+00:00",
+      "region": {
+        "district": "佛山市南海区",
+        "match_level": "district",
+        "towns": []
+      },
+      "review": {
+        "status": "auto"
+      },
+      "schema_version": "1.0.0",
+      "scope": "rent_policy",
+      "signal_id": "sig_rent_policy_nanhai_nh91c70102d6_20260302",
+      "status": "active",
+      "title": "佛山市南海区住房城乡建设和水务局关于发布佛山市南海区2025年房屋租赁市场租金水平信息的通知",
+      "valid_from": "2026-03-02T00:00:00+00:00",
+      "valid_until": "2027-03-02T00:00:00+00:00"
+    },
+    {
+      "actions": [
+        {
+          "audience": "souse",
+          "parameters": {
+            "indicator": "housing.public_rental_supply"
+          },
+          "requires_human": true,
+          "suggested_step": "关注房源采购/配租进展，评估区域供给变化对定价与配额的边际影响",
+          "type": "observe",
+          "urgency": "low"
+        }
+      ],
+      "audience": [
+        "souse"
+      ],
+      "change": {
+        "abs": null,
+        "baseline": null,
+        "direction": "unknown",
+        "method": "keyword_rule",
+        "mom": null,
+        "pct": null,
+        "yoy": null
+      },
+      "confidence": 0.75,
+      "evidence": [
+        {
+          "doc_id": "nh1e7163b205",
+          "published_at": "2026-09-22T00:00:00+00:00",
+          "quote": "项目概况采购九江镇公共租赁住房房源（2027-2029）(二次)招标项目的潜在投标人应在广东省政府采购网https://gdgpo.czt.gd.gov.cn/获取招标文件，并于2026年10月14日 09时00分 （北京时间）前递交投标…",
+          "title": "采购九江镇公共租赁住房房源（2027-2029）(二次)招标公告",
+          "url": "http://www.nanhai.gov.cn/fsnhq/bmdh/sydw/ggzyjyzx/jyxx/zfcg/cggg/content/post_7312412.html"
+        }
+      ],
+      "generated_at": "2026-10-17T11:36:18.255843+00:00",
+      "generator": {
+        "method": "rule",
+        "model": null,
+        "name": "build_signals",
+        "version": "1.0.0"
+      },
+      "impact": {
+        "affected": [
+          "souse"
+        ],
+        "by_audience": {
+          "souse": "positive"
+        },
+        "direction": "positive",
+        "horizon": "medium",
+        "mechanism": "公租房房源采购/配租推进增加可租房源，缓解供给约束，利于定价与配额管理"
+      },
+      "indicator": {
+        "code": "housing.public_rental_supply",
+        "dimension": "supply",
+        "name": "公租房/保障房房源供给",
+        "period": "2026-09",
+        "unit": null,
+        "value": null
+      },
+      "industries": [
+        "public_housing",
+        "housing_rental"
+      ],
+      "last_confirmed_at": "2026-09-22T00:00:00+00:00",
+      "region": {
+        "district": "佛山市南海区",
+        "match_level": "town",
+        "towns": [
+          "九江镇"
+        ]
+      },
+      "review": {
+        "status": "auto"
+      },
+      "schema_version": "1.0.0",
+      "scope": "rent_supply",
+      "signal_id": "sig_rent_supply_jiujiang_nh1e7163b205_20260922",
+      "status": "active",
+      "title": "采购九江镇公共租赁住房房源（2027-2029）(二次)招标公告",
+      "valid_from": "2026-09-22T00:00:00+00:00",
+      "valid_until": "2027-03-21T00:00:00+00:00"
+    },
+    {
+      "actions": [
+        {
+          "audience": "souse",
+          "parameters": {
+            "indicator": "housing.public_rental_supply"
+          },
+          "requires_human": true,
+          "suggested_step": "关注房源采购/配租进展，评估区域供给变化对定价与配额的边际影响",
+          "type": "observe",
+          "urgency": "low"
+        }
+      ],
+      "audience": [
+        "souse"
+      ],
+      "change": {
+        "abs": null,
+        "baseline": null,
+        "direction": "unknown",
+        "method": "keyword_rule",
+        "mom": null,
+        "pct": null,
+        "yoy": null
+      },
+      "confidence": 0.75,
+      "evidence": [
+        {
+          "doc_id": "nhff348be347",
+          "published_at": "2026-10-15T00:00:00+00:00",
+          "quote": "项目概况西樵镇公共租赁住房房源采购项目(二次)招标项目的潜在投标人应在广东省政府采购网https://gdgpo.czt.gd.gov.cn/获取招标文件，并于2026年11月05日 09时00分 （北京时间）前递交投标文件。",
+          "title": "西樵镇公共租赁住房房源采购项目(二次)招标公告",
+          "url": "http://www.nanhai.gov.cn/fsnhq/bmdh/sydw/ggzyjyzx/jyxx/zfcg/cggg/content/post_7323831.html"
+        }
+      ],
+      "generated_at": "2026-10-17T11:36:18.255843+00:00",
+      "generator": {
+        "method": "rule",
+        "model": null,
+        "name": "build_signals",
+        "version": "1.0.0"
+      },
+      "impact": {
+        "affected": [
+          "souse"
+        ],
+        "by_audience": {
+          "souse": "positive"
+        },
+        "direction": "positive",
+        "horizon": "medium",
+        "mechanism": "公租房房源采购/配租推进增加可租房源，缓解供给约束，利于定价与配额管理"
+      },
+      "indicator": {
+        "code": "housing.public_rental_supply",
+        "dimension": "supply",
+        "name": "公租房/保障房房源供给",
+        "period": "2026-10",
+        "unit": null,
+        "value": null
+      },
+      "industries": [
+        "public_housing",
+        "housing_rental"
+      ],
+      "last_confirmed_at": "2026-10-15T00:00:00+00:00",
+      "region": {
+        "district": "佛山市南海区",
+        "match_level": "town",
+        "towns": [
+          "西樵镇"
+        ]
+      },
+      "review": {
+        "status": "auto"
+      },
+      "schema_version": "1.0.0",
+      "scope": "rent_supply",
+      "signal_id": "sig_rent_supply_xiqiao_nhff348be347_20261015",
+      "status": "active",
+      "title": "西樵镇公共租赁住房房源采购项目(二次)招标公告",
+      "valid_from": "2026-10-15T00:00:00+00:00",
+      "valid_until": "2027-04-13T00:00:00+00:00"
+    },
+    {
+      "actions": [
+        {
+          "audience": "gate",
+          "parameters": {
+            "indicator": "risk.safety_event"
+          },
+          "requires_human": true,
+          "suggested_step": "人工核实风险事件并与值班口径对齐；仅提示，不自动触发任何动作",
+          "type": "alert",
+          "urgency": "medium"
+        }
+      ],
+      "audience": [
+        "gate",
+        "souse"
+      ],
+      "change": {
+        "abs": null,
+        "baseline": null,
+        "direction": "unknown",
+        "method": "keyword_rule",
+        "mom": null,
+        "pct": null,
+        "yoy": null
+      },
+      "confidence": 0.75,
+      "evidence": [
+        {
+          "doc_id": "nh75e60c4df1",
+          "published_at": "2026-10-08T00:00:00+00:00",
+          "quote": "里水厂企消防安全开讲，五天六场培训推进“百日攻坚”",
+          "title": "里水厂企消防安全开讲，五天六场培训推进“百日攻坚”",
+          "url": "http://www.nanhai.gov.cn/fsnhq/zwgk/zwdt/zjyw/content/post_7318556.html"
+        }
+      ],
+      "generated_at": "2026-10-17T11:36:18.255843+00:00",
+      "generator": {
+        "method": "rule",
+        "model": null,
+        "name": "build_signals",
+        "version": "1.0.0"
+      },
+      "impact": {
+        "affected": [
+          "gate",
+          "souse"
+        ],
+        "by_audience": {
+          "gate": "negative",
+          "souse": "negative"
+        },
+        "direction": "negative",
+        "horizon": "short",
+        "mechanism": "安全/灾害类事件可能影响区域运营与投放节奏，需人工核实并纳入值班关注"
+      },
+      "indicator": {
+        "code": "risk.safety_event",
+        "dimension": "risk",
+        "name": "安全/灾害风险",
+        "period": "2026-10",
+        "unit": null,
+        "value": null
+      },
+      "industries": [
+        "safety"
+      ],
+      "last_confirmed_at": "2026-10-08T00:00:00+00:00",
+      "region": {
+        "district": "佛山市南海区",
+        "match_level": "town",
+        "towns": [
+          "里水镇"
+        ]
+      },
+      "review": {
+        "status": "auto"
+      },
+      "schema_version": "1.0.0",
+      "scope": "risk",
+      "signal_id": "sig_risk_lishui_nh75e60c4df1_20261008",
+      "status": "active",
+      "title": "里水厂企消防安全开讲，五天六场培训推进“百日攻坚”",
+      "valid_from": "2026-10-08T00:00:00+00:00",
+      "valid_until": "2027-01-06T00:00:00+00:00"
+    },
+    {
+      "actions": [
+        {
+          "audience": "gate",
+          "parameters": {
+            "indicator": "risk.safety_event"
+          },
+          "requires_human": true,
+          "suggested_step": "人工核实风险事件并与值班口径对齐；仅提示，不自动触发任何动作",
+          "type": "alert",
+          "urgency": "medium"
+        }
+      ],
+      "audience": [
+        "gate",
+        "souse"
+      ],
+      "change": {
+        "abs": null,
+        "baseline": null,
+        "direction": "unknown",
+        "method": "keyword_rule",
+        "mom": null,
+        "pct": null,
+        "yoy": null
+      },
+      "confidence": 0.75,
+      "evidence": [
+        {
+          "doc_id": "nh1c30f1e185",
+          "published_at": "2026-10-13T00:00:00+00:00",
+          "quote": "工作动态 | 南海区召开2026年第四季度防范重特大生产安全事故暨消防安全和森林防火工作会议",
+          "title": "工作动态 | 南海区召开2026年第四季度防范重特大生产安全事故暨消防安全和森林防火工作会议",
+          "url": "http://www.nanhai.gov.cn/fsnhq/zwgk/zwdt/bmdt/content/post_7322559.html"
+        }
+      ],
+      "generated_at": "2026-10-17T11:36:18.255843+00:00",
+      "generator": {
+        "method": "rule",
+        "model": null,
+        "name": "build_signals",
+        "version": "1.0.0"
+      },
+      "impact": {
+        "affected": [
+          "gate",
+          "souse"
+        ],
+        "by_audience": {
+          "gate": "negative",
+          "souse": "negative"
+        },
+        "direction": "negative",
+        "horizon": "short",
+        "mechanism": "安全/灾害类事件可能影响区域运营与投放节奏，需人工核实并纳入值班关注"
+      },
+      "indicator": {
+        "code": "risk.safety_event",
+        "dimension": "risk",
+        "name": "安全/灾害风险",
+        "period": "2026-10",
+        "unit": null,
+        "value": null
+      },
+      "industries": [
+        "safety"
+      ],
+      "last_confirmed_at": "2026-10-13T00:00:00+00:00",
+      "region": {
+        "district": "佛山市南海区",
+        "match_level": "district",
+        "towns": []
+      },
+      "review": {
+        "status": "auto"
+      },
+      "schema_version": "1.0.0",
+      "scope": "risk",
+      "signal_id": "sig_risk_nanhai_nh1c30f1e185_20261013",
+      "status": "active",
+      "title": "工作动态 | 南海区召开2026年第四季度防范重特大生产安全事故暨消防安全和森林防火工作会议",
+      "valid_from": "2026-10-13T00:00:00+00:00",
+      "valid_until": "2027-01-11T00:00:00+00:00"
+    }
+  ],
+  "warnings": []
+}

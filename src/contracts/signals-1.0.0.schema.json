@@ -1,0 +1,351 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://nanhai.local/contracts/signals-1.0.0.schema.json",
+  "title": "Nanhai Signals Envelope 1.0.0",
+  "description": "Four-layer pipeline (raw -> normalized -> signals -> digests) contract. This schema freezes the signals layer only. Envelope wraps a list of Signal objects produced by rule/llm/hybrid generators and consumed upstream by gate/souse. Direction semantics: change.direction is the indicator movement; impact.direction is the downstream good/bad effect. The two MUST NOT be conflated.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "dataset_version",
+    "generated_at",
+    "as_of",
+    "region",
+    "count",
+    "signals",
+    "warnings"
+  ],
+  "properties": {
+    "schema_version": {
+      "description": "Envelope contract version.",
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "dataset_version": {
+      "description": "Opaque upstream dataset revision this batch was derived from (not a schema version).",
+      "type": "string",
+      "minLength": 1
+    },
+    "generated_at": {
+      "description": "Batch generation timestamp (RFC3339, UTC). For deterministic rule runs this is derived from the source dataset 'updated' field, not wall clock.",
+      "type": "string",
+      "minLength": 1
+    },
+    "as_of": {
+      "description": "Freshness reference timestamp: signals are evaluated as if 'now' == as_of. Usually the source dataset 'updated' time.",
+      "type": "string",
+      "minLength": 1
+    },
+    "region": {
+      "description": "Region label of the whole batch.",
+      "type": "string",
+      "minLength": 1
+    },
+    "count": {
+      "description": "Number of signals in this envelope. MUST equal len(signals).",
+      "type": "integer",
+      "minimum": 0
+    },
+    "signals": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/signal" }
+    },
+    "warnings": {
+      "description": "Non-fatal extraction/validation notes for downstream consumers.",
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "definitions": {
+    "signal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "signal_id",
+        "schema_version",
+        "status",
+        "title",
+        "scope",
+        "region",
+        "industries",
+        "indicator",
+        "change",
+        "impact",
+        "confidence",
+        "evidence",
+        "audience",
+        "actions",
+        "valid_from",
+        "valid_until",
+        "last_confirmed_at",
+        "generated_at",
+        "generator",
+        "review"
+      ],
+      "properties": {
+        "signal_id": {
+          "description": "Stable id: sig_{scope}_{geo}_{slug}_{date}. Deterministic for identical input.",
+          "type": "string",
+          "pattern": "^sig_[a-z0-9_]+$"
+        },
+        "schema_version": {
+          "type": "string",
+          "const": "1.0.0"
+        },
+        "status": {
+          "description": "Lifecycle. stale = evidence older than its freshness window; expired = past valid_until.",
+          "type": "string",
+          "enum": ["draft", "active", "stale", "expired", "superseded", "rejected"]
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scope": {
+          "description": "Signal family.",
+          "type": "string",
+          "enum": [
+            "rent_level",
+            "rent_change",
+            "rent_supply",
+            "rent_policy",
+            "rent_demand",
+            "industry",
+            "macro",
+            "risk",
+            "sentiment",
+            "weather",
+            "traffic"
+          ]
+        },
+        "region": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["district", "towns", "match_level"],
+          "properties": {
+            "district": {
+              "description": "District-level label, e.g. 佛山市南海区.",
+              "type": "string",
+              "minLength": 1
+            },
+            "towns": {
+              "description": "Matched sub-district units among the 7 Nanhai towns/streets. Empty when only district-level match.",
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "match_level": {
+              "description": "Granularity at which the signal was located.",
+              "type": "string",
+              "enum": ["district", "town", "street", "unknown"]
+            }
+          }
+        },
+        "industries": {
+          "description": "Fixed-enum industry tags.",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "enum": [
+              "housing_rental",
+              "public_housing",
+              "social_security",
+              "safety",
+              "emergency",
+              "real_estate",
+              "industry",
+              "macro",
+              "weather",
+              "traffic",
+              "public_service",
+              "other"
+            ]
+          }
+        },
+        "indicator": {
+          "description": "What is being measured. value/unit/period/dimension MAY be null for qualitative signals.",
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["code", "name", "value", "unit", "period", "dimension"],
+          "properties": {
+            "code": { "type": "string", "minLength": 1 },
+            "name": { "type": "string", "minLength": 1 },
+            "value": { "type": ["number", "null"] },
+            "unit": { "type": ["string", "null"] },
+            "period": { "type": ["string", "null"] },
+            "dimension": { "type": "string", "minLength": 1 }
+          }
+        },
+        "change": {
+          "description": "Movement of indicator.value. Direction here is the INDICATOR direction, never the downstream good/bad.",
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["abs", "pct", "yoy", "mom", "method", "direction", "baseline"],
+          "properties": {
+            "abs": { "type": ["number", "null"] },
+            "pct": { "type": ["number", "null"] },
+            "yoy": { "type": ["number", "null"] },
+            "mom": { "type": ["number", "null"] },
+            "method": {
+              "description": "How the change was obtained, e.g. level_observation, keyword_rule, computed.",
+              "type": "string",
+              "minLength": 1
+            },
+            "direction": {
+              "type": "string",
+              "enum": ["up", "down", "flat", "unknown"]
+            },
+            "baseline": { "type": ["string", "null"] }
+          }
+        },
+        "impact": {
+          "description": "Downstream good/bad assessment. Direction is the EFFECT on the audience, independent of change.direction.",
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["direction", "by_audience", "horizon", "mechanism", "affected"],
+          "properties": {
+            "direction": {
+              "type": "string",
+              "enum": ["positive", "negative", "neutral", "mixed", "unknown"]
+            },
+            "by_audience": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string",
+                "enum": ["positive", "negative", "neutral", "mixed", "unknown"]
+              }
+            },
+            "horizon": {
+              "description": "short|medium|long (free-form policy value is discouraged but allowed).",
+              "type": "string",
+              "minLength": 1
+            },
+            "mechanism": {
+              "description": "Plain-language causal chain from signal to effect.",
+              "type": "string",
+              "minLength": 1
+            },
+            "affected": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          }
+        },
+        "confidence": {
+          "description": "0-1. Rule generators cap at methodology cap (0.75) to avoid false precision.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "evidence": {
+          "description": "REQUIRED NON-EMPTY. Every signal must cite at least one source document.",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["doc_id", "title", "url", "published_at", "quote"],
+            "properties": {
+              "doc_id": { "type": "string", "minLength": 1 },
+              "title": { "type": "string", "minLength": 1 },
+              "url": { "type": "string", "minLength": 1 },
+              "published_at": { "type": "string", "minLength": 1 },
+              "quote": {
+                "description": "Verbatim excerpt, PII-redacted. No personal names.",
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "audience": {
+          "description": "Consumers allowed to read this signal. rent_* -> souse; risk/macro -> gate+souse.",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "enum": ["souse", "gate", "public"]
+          }
+        },
+        "actions": {
+          "description": "REQUIRED NON-EMPTY. Suggestions only. Rule generators MUST emit requires_human=true and MUST NOT encode automated mutations.",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["audience", "type", "urgency", "suggested_step", "parameters", "requires_human"],
+            "properties": {
+              "audience": {
+                "type": "string",
+                "enum": ["souse", "gate", "public"]
+              },
+              "type": {
+                "description": "Action category, e.g. review, verify, observe, alert.",
+                "type": "string",
+                "minLength": 1
+              },
+              "urgency": {
+                "type": "string",
+                "enum": ["high", "medium", "low"]
+              },
+              "suggested_step": {
+                "type": "string",
+                "minLength": 1
+              },
+              "parameters": { "type": ["object", "null"] },
+              "requires_human": { "type": "boolean" }
+            }
+          }
+        },
+        "valid_from": {
+          "description": "Start of validity (RFC3339).",
+          "type": "string",
+          "minLength": 1
+        },
+        "valid_until": {
+          "description": "End of validity (RFC3339). REQUIRED NON-EMPTY and MUST be strictly greater than valid_from.",
+          "type": "string",
+          "minLength": 1
+        },
+        "last_confirmed_at": {
+          "description": "When the newest evidence was observed (RFC3339).",
+          "type": "string",
+          "minLength": 1
+        },
+        "generated_at": {
+          "type": "string",
+          "minLength": 1
+        },
+        "generator": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["method", "name", "version", "model"],
+          "properties": {
+            "method": {
+              "type": "string",
+              "enum": ["rule", "llm", "hybrid"]
+            },
+            "name": { "type": "string", "minLength": 1 },
+            "version": { "type": "string", "minLength": 1 },
+            "model": {
+              "description": "LLM model id for llm/hybrid; null for pure rule.",
+              "type": ["string", "null"]
+            }
+          }
+        },
+        "review": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status"],
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": ["auto", "pending", "approved", "rejected"]
+            }
+          }
+        }
+      }
+    }
+  }
+}
