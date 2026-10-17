@@ -12,6 +12,7 @@
 """
 
 import argparse
+import copy
 import hashlib
 import html as html_mod
 import http.cookiejar
@@ -499,9 +500,11 @@ def main():
     stats = build_stats(articles, tag_rules)
 
     # 内容没变化时保留原更新时间，避免产生“只改时间戳”的无意义提交
-    unchanged = bool(existing) and (
+    # 注意：合并过程中会就地修改 existing 里的字典，所以要先深拷贝快照再比较
+    snapshot = copy.deepcopy(existing)
+    unchanged = bool(snapshot) and (
         json.dumps(articles, ensure_ascii=False, sort_keys=True)
-        == json.dumps(existing, ensure_ascii=False, sort_keys=True)
+        == json.dumps(snapshot, ensure_ascii=False, sort_keys=True)
     )
 
     data = {
