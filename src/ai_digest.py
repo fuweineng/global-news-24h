@@ -49,8 +49,8 @@ IN_FILE = DATA_DIR / 'nanhai.json'
 OUT_FILE = DATA_DIR / 'ai_digest.json'
 DOCS_OUT_FILE = DOCS_DATA_DIR / 'ai_digest.json'
 
-ENDPOINT = 'https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions'
-DEFAULT_MODEL = 'qwen-plus'
+ENDPOINT = __import__('os').environ.get('AI_BASE_URL') or 'https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions'
+DEFAULT_MODEL = __import__('os').environ.get('AI_MODEL') or 'qwen-plus'
 TIMEOUT = 90          # 单次请求超时（秒）
 RETRIES = 2           # 失败后额外重试次数（总尝试 = RETRIES + 1）
 PROMPT_VERSION = 'v2-multi-period'
@@ -415,7 +415,7 @@ def main():
         return 0
 
     # ── 无 key 优雅跳过 ────────────────────────────────
-    api_key = (os.environ.get('DASHSCOPE_API_KEY') or '').strip()
+    api_key = (os.environ.get('AI_API_KEY') or os.environ.get('DASHSCOPE_API_KEY') or '').strip()
     if not api_key:
         print('⚠️ 未设置 DASHSCOPE_API_KEY，跳过 AI 解读（保留现有文件，不生成/不覆盖）')
         return 0
