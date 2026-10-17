@@ -46,3 +46,9 @@ jobs:
           git diff --staged --quiet || git commit -m "Update news: $(date -u)"
           git pull --rebase --autostash
           git push
+
+      - name: Deploy Worker (live site)
+        run: npx --yes wrangler@4 deploy -c wrangler.toml
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
