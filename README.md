@@ -106,7 +106,7 @@ Want to add more sources? Edit `src/sources.json`!
 独立模块：抓取**佛山市南海区人民政府网**政务新闻，并自动打标，重点跟踪**租金**相关条目。
 与 souse 等下游项目解耦——只产出结构化数据，不并入 souse 代码库。
 
-- 页面：`https://news.neng.page/nanhai.html`
+- 页面：`https://news.unknow.one/nanhai.html`
 - 数据：`data/nanhai.json`（同步复制到 `docs/data/nanhai.json` 供页面读取）
 - 抓取：`python src/fetch_nanhai.py`（仅用标准库，CI 无需 pip 安装）
 
