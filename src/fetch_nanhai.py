@@ -416,10 +416,13 @@ def main():
     rent_hint = re.compile(cfg['rent_hint'])
 
     existing = []
+    prev_updated = None
     if OUT_FILE.exists():
         try:
             with open(OUT_FILE, 'r', encoding='utf-8') as f:
-                existing = json.load(f).get('articles', [])
+                payload = json.load(f)
+            existing = payload.get('articles', [])
+            prev_updated = payload.get('updated')
         except Exception:
             existing = []
     existing_keys = {normalize_key(a.get('title', '')) for a in existing}
@@ -495,8 +498,14 @@ def main():
     articles = articles[: int(cfg['max_articles'])]
     stats = build_stats(articles, tag_rules)
 
+    # 内容没变化时保留原更新时间，避免产生“只改时间戳”的无意义提交
+    unchanged = bool(existing) and (
+        json.dumps(articles, ensure_ascii=False, sort_keys=True)
+        == json.dumps(existing, ensure_ascii=False, sort_keys=True)
+    )
+
     data = {
-        'updated': datetime.now(timezone.utc).isoformat(),
+        'updated': prev_updated if (unchanged and prev_updated) else datetime.now(timezone.utc).isoformat(),
         'region': cfg['region'],
         'source_name': cfg['name'],
         'total': len(articles),
@@ -506,6 +515,8 @@ def main():
     }
 
     print(f'✅ 抓取 {len(incoming)} 条（新增详情 {fetched_detail} 页），合并后 {len(articles)} 条，其中租金相关 {stats["rent"]} 条')
+    if unchanged:
+        print('ℹ️ 数据无变化，保留原 updated 时间')
 
     if args.dry_run:
         print('ℹ️ dry-run：未写入文件')
