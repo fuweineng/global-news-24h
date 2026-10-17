@@ -1,0 +1,80 @@
+{
+  "id": "nanhai-gov",
+  "name": "佛山市南海区人民政府",
+  "region": "佛山市南海区",
+  "base_url": "http://www.nanhai.gov.cn",
+  "request": {
+    "delay": 1.0,
+    "timeout": 20,
+    "max_detail_per_run": 12,
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+  },
+  "max_articles": 800,
+  "sections": [
+    {
+      "id": "gzdt",
+      "name": "工作动态",
+      "category": "工作动态",
+      "url": "/fsnhq/zwgk/zwdt/gzdt/index.html",
+      "priority": 2
+    },
+    {
+      "id": "bmdt",
+      "name": "部门动态",
+      "category": "部门动态",
+      "url": "/fsnhq/zwgk/zwdt/bmdt/index.html",
+      "priority": 3
+    },
+    {
+      "id": "zjyw",
+      "name": "镇街要闻",
+      "category": "镇街要闻",
+      "url": "/fsnhq/zwgk/zwdt/zjyw/index.html",
+      "priority": 3
+    },
+    {
+      "id": "tzgg",
+      "name": "通知公告",
+      "category": "通知公告",
+      "url": "/fsnhq/zwgk/zwdt/tzgg/index.html",
+      "priority": 1
+    },
+    {
+      "id": "nhxw",
+      "name": "南海新闻",
+      "category": "南海新闻",
+      "url": "/fsnhq/zwgk/zwdt/nhxw/index.html",
+      "priority": 2
+    }
+  ],
+  "search": {
+    "enabled": true,
+    "endpoint": "https://search.gd.gov.cn/api/search/all",
+    "referer": "https://search.gd.gov.cn/search/all/757006",
+    "page_url": "https://search.gd.gov.cn/search/all/757006?keywords=%E6%88%BF%E7%A7%9F",
+    "site_id": 757006,
+    "keywords": ["房租", "租金"],
+    "pages": 2,
+    "page_size": 20,
+    "sort": "smart",
+    "position": "title",
+    "range": "site",
+    "category": "政策公告"
+  },
+  "tags": {
+    "租金": ["租金", "房租", "租赁", "租金水平", "指导价", "押金", "廉租", "承租人"],
+    "公租房": ["公租房", "公共租赁住房", "保障性租赁住房", "保障性住房"],
+    "物业": ["物业费", "物业管理", "物业服务", "业主"],
+    "停车": ["停车费", "停车位", "停车场", "车位"],
+    "住房": ["住房", "购房", "限购", "商品房", "保障房", "公积金", "不动产权"],
+    "教育": ["教育", "学校", "学位", "招生", "幼儿园", "校外培训"],
+    "医疗": ["医疗", "医院", "卫生", "医保", "疾控", "中医药"],
+    "社保": ["社保", "养老", "低保", "救助", "就业", "补贴", "残疾"],
+    "交通": ["交通", "道路", "地铁", "公交", "出行", "轨道"],
+    "产业": ["产业", "招商", "投资", "企业", "制造", "经济", "项目", "园区"],
+    "政策": ["通知", "公告", "办法", "规定", "意见", "方案", "标准", "实施细则", "指导意见"],
+    "文化": ["文化", "旅游", "体育", "活动", "非遗", "节日", "展览"],
+    "安全": ["安全", "应急", "消防", "防汛", "台风", "整治"]
+  },
+  "rent_hint": "租金|房租|租赁|公租房|指导价|元\\s*/\\s*平方米|平方米\\s*[·•]?\\s*月|押金"
+}

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>南海政务 — 佛山南海政务新闻与租金观察 | 全球24h</title>
+  <meta name="description" content="佛山市南海区人民政府政务新闻聚合，自动标注“租金/公租房”等标签，含租金政策原文摘录">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏛</text></svg>">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏛</text></svg>">
+  <meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1c1c1e" media="(prefers-color-scheme: dark)">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="南海政务">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/nanhai.css">
+</head>
+<body>
+
+<div id="app">
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="header-left">
+        <span class="header-logo">🏛 南海政务</span>
+        <span class="header-subtitle">佛山南海 · 政务新闻与租金政策</span>
+      </div>
+      <div class="header-right">
+        <a class="nav-link" href="index.html">全球24h</a>
+        <span class="update-time" id="last-updated">--:-- 更新</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- SEARCH -->
+  <div class="nh-search">
+    <input id="nh-query" type="search" placeholder="搜索标题 / 摘要，例如：租金、公租房、停车费" autocomplete="off">
+  </div>
+
+  <!-- FILTER -->
+  <nav class="nav nh-nav">
+    <div class="nav-inner" id="category-bar"></div>
+    <div class="nav-inner nh-tag-bar" id="tag-bar"></div>
+  </nav>
+
+  <!-- LIST -->
+  <main class="main" id="main-feed">
+    <section class="nh-stats" id="nh-stats">
+      <div class="nh-stat"><span class="nh-stat-num" id="stat-total">--</span><span class="nh-stat-label">政务条目</span></div>
+      <div class="nh-stat"><span class="nh-stat-num is-rent" id="stat-rent">--</span><span class="nh-stat-label">租金相关</span></div>
+      <div class="nh-stat"><span class="nh-stat-num" id="stat-latest">--</span><span class="nh-stat-label">最新一条</span></div>
+    </section>
+    <div id="news-list"></div>
+    <div class="loading" id="loading">加载中...</div>
+    <div class="empty" id="empty" style="display:none">暂无数据</div>
+    <div class="load-more" id="load-more" style="display:none">
+      <button onclick="loadMore()">加载更多</button>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <span>数据来源: 佛山市南海区人民政府网 · 广东省政务搜索 · <a href="data/nanhai.json" target="_blank" rel="noopener">nanhai.json</a></span>
+  </footer>
+</div>
+
+<!-- FAB -->
+<div class="fab" id="fab">
+  <button class="fab-btn" onclick="scrollToTop()" title="回到顶部">↑</button>
+</div>
+
+<script src="js/nanhai.js"></script>
+</body>
+</html>

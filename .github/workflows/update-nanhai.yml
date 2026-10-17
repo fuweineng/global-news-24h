@@ -1,0 +1,48 @@
+name: Update Nanhai Gov News
+
+on:
+  schedule:
+    # 每小时 20 分抓取一次南海政务新闻（避开 update-news.yml 的整点/15 分任务）
+    - cron: '20 * * * *'
+  workflow_dispatch:
+
+# 与 update-news.yml 共用同一并发组，避免两个工作流同时推送
+concurrency:
+  group: news-update
+  cancel-in-progress: false
+
+jobs:
+  fetch-nanhai:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # 依赖 Python 标准库，无需 pip install
+      - name: Fetch Nanhai gov news
+        continue-on-error: true
+        run: python src/fetch_nanhai.py
+
+      - name: Copy to docs directory
+        run: |
+          if [ -f data/nanhai.json ]; then
+            mkdir -p docs/data
+            cp data/nanhai.json docs/data/
+          else
+            echo "data/nanhai.json 未生成（抓取失败），跳过"
+          fi
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add data/nanhai.json docs/data/nanhai.json 2>/dev/null || true
+          git diff --staged --quiet || git commit -m "Update Nanhai gov news: $(date -u)"
+          git pull --rebase --autostash
+          git push

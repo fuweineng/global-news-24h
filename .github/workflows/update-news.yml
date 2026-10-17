@@ -8,6 +8,11 @@ on:
     - cron: '0 16-23 * * *'
   workflow_dispatch:
 
+# 与 update-nanhai.yml 共用同一并发组，避免两个工作流同时推送
+concurrency:
+  group: news-update
+  cancel-in-progress: false
+
 jobs:
   fetch-news:
     runs-on: ubuntu-latest
@@ -39,4 +44,5 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add data/news.json docs/data/news.json
           git diff --staged --quiet || git commit -m "Update news: $(date -u)"
+          git pull --rebase --autostash
           git push

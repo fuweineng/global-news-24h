@@ -27,19 +27,26 @@ Visit: **https://fuoweineng.github.io/global-news-24h/**
 global-news-24h/
 ├── .github/
 │   └── workflows/
-│       └── update-news.yml      # Auto-update every 30 min
+│       ├── update-news.yml      # 国际新闻，每 15/60 分钟自动更新
+│       └── update-nanhai.yml    # 南海政务新闻，每小时自动更新
 ├── src/
-│   ├── fetch_news.py            # News fetching script
-│   └── sources.json             # RSS source configuration
+│   ├── fetch_news.py            # 国际新闻抓取脚本
+│   ├── sources.json             # RSS 源配置
+│   ├── fetch_nanhai.py          # 南海政务新闻抓取（标准库，无需额外依赖）
+│   └── nanhai_sources.json      # 南海栏目 / 搜索 / 标签规则配置
 ├── docs/
-│   ├── index.html               # Main page
+│   ├── index.html               # 国际新闻主页面
+│   ├── nanhai.html              # 南海政务页面（含“租金”标签）
 │   ├── css/
-│   │   └── style.css            # Styling
+│   │   ├── style.css            # 主站样式
+│   │   └── nanhai.css           # 南海政务页面样式
 │   └── js/
-│       └── app.js               # Frontend logic
+│       ├── app.js               # 主站逻辑
+│       └── nanhai.js            # 南海政务页面逻辑
 ├── data/
-│   └── news.json                # Generated news data
-├── requirements.txt             # Python dependencies
+│   ├── news.json                # 国际新闻数据
+│   └── nanhai.json              # 南海政务数据（供页面与 AI 分析）
+├── requirements.txt             # Python 依赖
 └── README.md                    # This file
 ```
 
@@ -93,6 +100,64 @@ Current sources include:
 | Al Jazeera | Qatar | General |
 
 Want to add more sources? Edit `src/sources.json`!
+
+## 🏛 南海政务模块（Nanhai Gov）
+
+独立模块：抓取**佛山市南海区人民政府网**政务新闻，并自动打标，重点跟踪**租金**相关条目。
+与 souse 等下游项目解耦——只产出结构化数据，不并入 souse 代码库。
+
+- 页面：`https://news.neng.page/nanhai.html`
+- 数据：`data/nanhai.json`（同步复制到 `docs/data/nanhai.json` 供页面读取）
+- 抓取：`python src/fetch_nanhai.py`（仅用标准库，CI 无需 pip 安装）
+
+### 数据来源
+
+| 来源 | 说明 |
+|------|------|
+| 南海区政府网栏目 | 工作动态 / 部门动态 / 镇街要闻 / 通知公告 / 南海新闻（每栏最新 20 条） |
+| 广东省政务搜索 API | `search.gd.gov.cn`（站点 757006）关键词「房租 / 租金」，覆盖历年政策、公示、招标等 |
+
+### 标签规则
+
+`src/nanhai_sources.json` 中 `tags` 定义关键词 → 标签映射：租金、公租房、物业、停车、住房、教育、医疗、社保、交通、产业、政策、文化、安全。
+命中租金类关键词的条目会标记 `is_rent: true`，页面上有「租金」筛选与高亮，并从正文中摘出**租金要点**句子。
+
+### nanhai.json 结构
+
+```json
+{
+  "updated": "2026-10-17T05:22:09+00:00",
+  "region": "佛山市南海区",
+  "total": 149,
+  "rent_total": 50,
+  "stats": { "by_category": {}, "by_tag": {}, "rent": 50 },
+  "articles": [
+    {
+      "id": "nh9f2c1a0b3d",
+      "title": "2026年桂城街道各项目公租房租金核准收费标准",
+      "link": "http://www.nanhai.gov.cn/...",
+      "published": "2026-06-11",
+      "category": "政策公告",
+      "source": "佛山市南海区住房城乡建设和水务局",
+      "sources": ["佛山市南海区住房城乡建设和水务局"],
+      "tags": ["租金", "公租房", "住房", "政策"],
+      "is_rent": true,
+      "summary": "……",
+      "rent_snippets": ["……租金标准……"]
+    }
+  ]
+}
+```
+
+> 下游 AI（如 souse 项目）可直接读取 `data/nanhai.json`，用 `is_rent` / `tags` / `rent_snippets` 做租金趋势与政策分析。
+
+### 手动运行
+
+```bash
+python src/fetch_nanhai.py             # 栏目 + 搜索 + 补正文详情
+python src/fetch_nanhai.py --no-detail # 只抓列表，速度更快
+python src/fetch_nanhai.py --dry-run   # 只打印统计
+```
 
 ## 🔧 Customization
 

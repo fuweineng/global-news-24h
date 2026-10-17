@@ -1,0 +1,119 @@
+/* 南海政务模块 — 复用 style.css 的变量与基础组件，仅补充本模块样式 */
+
+/* 统计条 */
+.nh-stats {
+  display: flex;
+  gap: 8px;
+  padding: 4px 0 8px;
+}
+.nh-stat {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 6px;
+  text-align: center;
+}
+.nh-stat-num { display: block; font-size: 1.05rem; font-weight: 700; }
+.nh-stat-num.is-rent { color: #c2410c; }
+.nh-stat-label { font-size: 0.68rem; color: var(--text-secondary); }
+
+/* 搜索框 */
+.nh-search { padding: 10px 12px 0; }
+.nh-search input {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  font-family: inherit;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+}
+.nh-search input:focus { outline: none; border-color: var(--accent); }
+
+/* 标签筛选栏（第二行，比分类更小） */
+.nh-nav {
+  height: auto;
+  padding-bottom: 6px;
+}
+.nh-nav .nav-inner {
+  height: auto;
+  padding: 6px 12px 0;
+}
+.nh-tag-bar { padding-top: 4px; }
+.nh-tag-bar .cat-chip { font-size: 0.68rem; padding: 2px 8px; }
+
+/* 分类 / 标签徽章 */
+.news-tag.tag-gov { background: #eef2f7; color: #4b5563; }
+.news-tag.tag-rent { background: #fff1e6; color: #c2410c; }
+.news-tag.tag-housing { background: #e8f0fe; color: #1a73e8; }
+.news-tag.tag-policy { background: #f3e8fd; color: #7b1fa2; }
+
+/* 列表项 */
+.news-item.is-rent { border-left: 3px solid #f97316; }
+.nh-summary {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-top: 6px;
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* 租金要点摘录 */
+.nh-rent {
+  margin-top: 8px;
+  padding: 8px 10px;
+  background: #fff8f1;
+  border-radius: 8px;
+}
+@media (prefers-color-scheme: dark) {
+  .nh-rent { background: #2b2118; }
+}
+.nh-rent-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #c2410c;
+  margin-bottom: 4px;
+}
+.nh-rent ul { list-style: none; }
+.nh-rent li {
+  position: relative;
+  padding-left: 12px;
+  margin-bottom: 2px;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+.nh-rent li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #f97316;
+}
+
+/* 附件（租金标准等 PDF 表格） */
+.nh-atts {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+.nh-atts-label { font-size: 0.7rem; color: var(--text-tertiary); }
+.nh-atts a {
+  font-size: 0.72rem;
+  color: var(--accent);
+  text-decoration: none;
+  background: var(--border);
+  border-radius: 6px;
+  padding: 2px 8px;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.nh-atts a:hover { background: var(--accent); color: #fff; }
