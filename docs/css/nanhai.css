@@ -117,3 +117,314 @@
   white-space: nowrap;
 }
 .nh-atts a:hover { background: var(--accent); color: #fff; }
+
+/* ── 视图切换：列表 / 分析 ───────────────────── */
+.nh-views {
+  flex-shrink: 0;
+  display: flex;
+  gap: 4px;
+  padding: 8px 12px 0;
+  background: var(--bg);
+}
+.nh-view-btn {
+  flex: 1;
+  padding: 7px 0;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.nh-view-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+/* 分析 / AI 解读模式下隐藏列表相关区块 */
+#app.mode-analyze .nh-search,
+#app.mode-analyze .nh-nav,
+#app.mode-analyze .nh-stats,
+#app.mode-analyze #news-list,
+#app.mode-analyze #loading,
+#app.mode-analyze #empty,
+#app.mode-analyze #load-more,
+#app.mode-digest .nh-search,
+#app.mode-digest .nh-nav,
+#app.mode-digest .nh-stats,
+#app.mode-digest #news-list,
+#app.mode-digest #loading,
+#app.mode-digest #empty,
+#app.mode-digest #load-more { display: none !important; }
+
+/* ── 分析区 ─────────────────────────────────── */
+.nh-analysis { padding: 4px 0 16px; }
+.nh-ana-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+.nh-ana-field { font-size: 0.78rem; color: var(--text-secondary); display: flex; align-items: center; gap: 6px; }
+.nh-ana-field select {
+  font-family: inherit;
+  font-size: 0.78rem;
+  padding: 4px 8px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  max-width: 160px;
+}
+.nh-ana-updated { font-size: 0.7rem; color: var(--text-tertiary); text-align: right; }
+.nh-ana-msg { padding: 24px 12px; text-align: center; font-size: 0.82rem; color: var(--text-secondary); }
+
+.nh-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 12px 12px;
+  margin-bottom: 10px;
+}
+.nh-card-title { font-size: 0.82rem; font-weight: 600; margin-bottom: 8px; }
+.nh-chart { width: 100%; overflow: hidden; }
+.nh-chart svg { display: block; width: 100%; height: auto; }
+.nh-chart .nh-none { font-size: 0.76rem; color: var(--text-tertiary); padding: 12px 0; text-align: center; }
+
+.nh-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+}
+.nh-lg { display: inline-flex; align-items: center; gap: 4px; }
+.nh-dot { width: 9px; height: 9px; border-radius: 2px; display: inline-block; }
+.dot-pos { background: #34c759; }
+.dot-mid { background: #aeaeb2; }
+.dot-neg { background: #ff3b30; }
+.nh-legend-tip { font-size: 0.68rem; color: var(--text-tertiary); }
+
+/* SVG 交互 */
+.nh-chart .hit { cursor: pointer; }
+.nh-chart .hit:hover { opacity: 0.8; }
+.nh-chart .hit:focus { outline: none; }
+.nh-chart text { font-size: 10px; fill: var(--text-secondary); }
+.nh-chart .axis { stroke: var(--border); stroke-width: 1; }
+.nh-chart .bar-label { fill: var(--text); font-size: 10px; }
+.nh-chart .bar-value { fill: var(--text-tertiary); font-size: 9px; }
+
+/* 点击图表后的下钻列表 */
+.nh-drill {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+}
+.nh-drill-head {
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 0.78rem; font-weight: 600; margin-bottom: 6px;
+}
+.nh-drill-close {
+  border: none; background: var(--border); color: var(--text-secondary);
+  width: 22px; height: 22px; border-radius: 50%; cursor: pointer; font-size: 0.9rem; line-height: 1;
+}
+.nh-drill-body { max-height: 260px; overflow-y: auto; }
+.nh-drill-body a {
+  display: block;
+  font-size: 0.76rem;
+  line-height: 1.5;
+  color: var(--text);
+  text-decoration: none;
+  padding: 5px 0;
+  border-top: 1px solid var(--border);
+}
+.nh-drill-body a:first-child { border-top: none; }
+.nh-drill-body a:hover { color: var(--accent); }
+.nh-drill-meta { font-size: 0.66rem; color: var(--text-tertiary); margin-right: 6px; }
+
+/* ── AI 解读区 ─────────────────────────────── */
+.nh-digest { padding: 4px 0 16px; }
+.nh-digest-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+.nh-digest-title { font-size: 0.9rem; font-weight: 700; }
+.nh-digest-meta { font-size: 0.68rem; color: var(--text-tertiary); text-align: right; }
+
+/* 期类型子切换：日 / 周 / 月 / 年 */
+.nh-digest-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.nh-digest-tab {
+  flex: 1;
+  padding: 7px 0;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.nh-digest-tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+.nh-period-head {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.nh-period-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--accent);
+  border-radius: 6px;
+  padding: 1px 8px;
+}
+.nh-period-range { font-size: 0.74rem; color: var(--text-secondary); }
+.nh-period-count { font-size: 0.7rem; color: var(--text-tertiary); margin-left: auto; }
+.nh-period-empty {
+  background: var(--surface);
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  padding: 28px 12px;
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-tertiary);
+}
+.nh-sector-list { list-style: none; }
+.nh-sector-list li {
+  position: relative;
+  padding-left: 14px;
+  margin-bottom: 4px;
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+.nh-sector-list li::before {
+  content: '·';
+  position: absolute;
+  left: 2px;
+  color: var(--accent);
+  font-weight: 700;
+}
+.nh-sector-name { color: var(--text); margin-right: 6px; }
+.nh-signal-list { list-style: none; }
+.nh-signal-list li {
+  position: relative;
+  padding-left: 16px;
+  margin-bottom: 3px;
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: var(--text);
+}
+.nh-signal-list li::before {
+  content: '◎';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+.nh-insight {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 10px;
+}
+.nh-insight-head { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; }
+.nh-insight-no {
+  flex-shrink: 0;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+}
+.nh-insight-signal { font-size: 0.86rem; font-weight: 600; line-height: 1.5; }
+.nh-insight-block { margin-top: 8px; }
+.nh-insight-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  letter-spacing: 0.02em;
+  margin-bottom: 3px;
+}
+.nh-insight-text { font-size: 0.78rem; line-height: 1.6; color: var(--text-secondary); }
+.nh-insight-actions { list-style: none; }
+.nh-insight-actions li {
+  position: relative;
+  padding-left: 16px;
+  margin-bottom: 3px;
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: var(--text);
+}
+.nh-insight-actions li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+.nh-insight-evidence { list-style: none; }
+.nh-insight-evidence li {
+  position: relative;
+  padding-left: 12px;
+  margin-bottom: 2px;
+  font-size: 0.72rem;
+  line-height: 1.6;
+}
+.nh-insight-evidence li::before {
+  content: '·';
+  position: absolute;
+  left: 2px;
+  color: var(--text-tertiary);
+}
+.nh-insight-evidence a { color: var(--accent); text-decoration: none; }
+.nh-insight-evidence a:hover { text-decoration: underline; }
+
+.nh-digest-disclaimer {
+  background: #fff4f4;
+  color: #b3261e;
+  border: 1px solid #f3c2c2;
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin-top: 4px;
+  font-size: 0.72rem;
+  line-height: 1.6;
+  font-weight: 500;
+}
+@media (prefers-color-scheme: dark) {
+  .nh-digest-disclaimer {
+    background: #2b1616;
+    color: #ff9b95;
+    border-color: #5c2a28;
+  }
+}

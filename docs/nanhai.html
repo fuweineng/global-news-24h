@@ -32,6 +32,13 @@
     </div>
   </header>
 
+  <!-- VIEW TOGGLE：列表 / 分析 / AI 解读 -->
+  <div class="nh-views" role="tablist">
+    <button class="nh-view-btn active" data-view="list" role="tab" onclick="nhSetView('list')">列表</button>
+    <button class="nh-view-btn" data-view="analyze" role="tab" onclick="nhSetView('analyze')">分析</button>
+    <button class="nh-view-btn" data-view="digest" role="tab" onclick="nhSetView('digest')">AI 解读</button>
+  </div>
+
   <!-- SEARCH -->
   <div class="nh-search">
     <input id="nh-query" type="search" placeholder="搜索标题 / 摘要，例如：租金、公租房、停车费" autocomplete="off">
@@ -45,6 +52,68 @@
 
   <!-- LIST -->
   <main class="main" id="main-feed">
+    <!-- ANALYSIS -->
+    <section class="nh-analysis" id="nh-analysis" style="display:none">
+      <div class="nh-ana-toolbar">
+        <label class="nh-ana-field">时间
+          <select id="nh-ym"></select>
+        </label>
+        <span class="nh-ana-updated" id="nh-ana-updated">--</span>
+      </div>
+      <div class="nh-ana-msg" id="nh-ana-loading">加载分析数据中…</div>
+      <div class="nh-ana-msg" id="nh-ana-empty" style="display:none">暂无分析数据（analysis.json 未生成或加载失败）</div>
+      <div id="nh-ana-body" style="display:none">
+        <div class="nh-card">
+          <div class="nh-card-title">情绪占比（按月，堆叠）</div>
+          <div class="nh-chart" id="nh-chart-sentiment"></div>
+          <div class="nh-legend">
+            <span class="nh-lg"><i class="nh-dot dot-pos"></i>正</span>
+            <span class="nh-lg"><i class="nh-dot dot-mid"></i>中</span>
+            <span class="nh-lg"><i class="nh-dot dot-neg"></i>负</span>
+            <span class="nh-legend-tip">点柱状可查看对应原文</span>
+          </div>
+        </div>
+        <div class="nh-card">
+          <div class="nh-card-title">事实类型分布</div>
+          <div class="nh-chart" id="nh-chart-fact"></div>
+        </div>
+        <div class="nh-card" id="nh-card-price" style="display:none">
+          <div class="nh-card-title">租金价格趋势</div>
+          <div class="nh-chart" id="nh-chart-price"></div>
+          <div class="nh-legend"><span class="nh-legend-tip">点数据点可打开对应原文（价格多来自正文，PDF 附件另行提取）</span></div>
+        </div>
+        <div class="nh-card">
+          <div class="nh-card-title">关键词 Top</div>
+          <div class="nh-chart" id="nh-chart-words"></div>
+        </div>
+      </div>
+      <div class="nh-drill" id="nh-drill" style="display:none">
+        <div class="nh-drill-head">
+          <span id="nh-drill-title">相关原文</span>
+          <button class="nh-drill-close" onclick="nhCloseDrill()" title="关闭">×</button>
+        </div>
+        <div class="nh-drill-body" id="nh-drill-body"></div>
+      </div>
+    </section>
+
+    <!-- AI 解读（多期聚合：日/周/月/年） -->
+    <section class="nh-digest" id="nh-digest" style="display:none">
+      <div class="nh-digest-tabs" id="nh-digest-tabs" role="tablist">
+        <button class="nh-digest-tab" data-period="day" role="tab" onclick="nhSetDigestPeriod('day')">日</button>
+        <button class="nh-digest-tab" data-period="week" role="tab" onclick="nhSetDigestPeriod('week')">周</button>
+        <button class="nh-digest-tab" data-period="month" role="tab" onclick="nhSetDigestPeriod('month')">月</button>
+        <button class="nh-digest-tab" data-period="year" role="tab" onclick="nhSetDigestPeriod('year')">年</button>
+      </div>
+      <div class="nh-digest-head">
+        <div class="nh-digest-title" id="nh-digest-title">🤖 AI 多期解读</div>
+        <div class="nh-digest-meta" id="nh-digest-meta">--</div>
+      </div>
+      <div class="nh-ana-msg" id="nh-digest-loading">加载 AI 解读中…</div>
+      <div class="nh-ana-msg" id="nh-digest-empty" style="display:none">暂无 AI 解读（ai_digest.json 未生成或加载失败）</div>
+      <div id="nh-digest-body" style="display:none"></div>
+      <div class="nh-digest-disclaimer" id="nh-digest-disclaimer" style="display:none"></div>
+    </section>
+
     <section class="nh-stats" id="nh-stats">
       <div class="nh-stat"><span class="nh-stat-num" id="stat-total">--</span><span class="nh-stat-label">政务条目</span></div>
       <div class="nh-stat"><span class="nh-stat-num is-rent" id="stat-rent">--</span><span class="nh-stat-label">租金相关</span></div>
@@ -60,7 +129,7 @@
 
   <!-- FOOTER -->
   <footer class="footer">
-    <span>数据来源: 佛山市南海区人民政府网 · 广东省政务搜索 · <a href="data/nanhai.json" target="_blank" rel="noopener">nanhai.json</a></span>
+    <span>数据来源: 佛山市南海区人民政府网 · 广东省政务搜索 · <a href="data/nanhai.json" target="_blank" rel="noopener">nanhai.json</a> · <a href="data/analysis.json" target="_blank" rel="noopener">analysis.json</a> · <a href="data/ai_digest.json" target="_blank" rel="noopener">ai_digest.json</a></span>
   </footer>
 </div>
 

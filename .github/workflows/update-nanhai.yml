@@ -29,20 +29,29 @@ jobs:
         continue-on-error: true
         run: python src/fetch_nanhai.py
 
+      - name: Analyze Nanhai gov news
+        continue-on-error: true
+        run: python src/analyze_nanhai.py
+
       - name: Copy to docs directory
         run: |
+          mkdir -p docs/data
           if [ -f data/nanhai.json ]; then
-            mkdir -p docs/data
             cp data/nanhai.json docs/data/
           else
             echo "data/nanhai.json 未生成（抓取失败），跳过"
+          fi
+          if [ -f data/analysis.json ]; then
+            cp data/analysis.json docs/data/
+          else
+            echo "data/analysis.json 未生成（分析失败），跳过"
           fi
 
       - name: Commit and push changes
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add data/nanhai.json docs/data/nanhai.json 2>/dev/null || true
+          git add data/nanhai.json docs/data/nanhai.json data/analysis.json docs/data/analysis.json 2>/dev/null || true
           git diff --staged --quiet || git commit -m "Update Nanhai gov news: $(date -u)"
           git pull --rebase --autostash
           git push

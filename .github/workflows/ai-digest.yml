@@ -1,0 +1,56 @@
+name: AI Digest Nanhai
+
+on:
+  schedule:
+    # 每天一次（UTC 01:30 = 北京 09:30），避开 update-news.yml（:00/:15/:30/:45）与 update-nanhai.yml（:20）
+    - cron: '30 1 * * *'
+  workflow_dispatch:
+
+# 与 update-news.yml / update-nanhai.yml 共用同一并发组，避免同时推送
+concurrency:
+  group: news-update
+  cancel-in-progress: false
+
+jobs:
+  ai-digest:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # 依赖 Python 标准库，无需 pip install；无 key 时脚本自行优雅跳过
+      - name: Generate AI digest
+        continue-on-error: true
+        env:
+          DASHSCOPE_API_KEY: ${{ secrets.DASHSCOPE_API_KEY }}
+        run: python src/ai_digest.py
+
+      - name: Copy to docs directory
+        run: |
+          mkdir -p docs/data
+          if [ -f data/ai_digest.json ]; then
+            cp data/ai_digest.json docs/data/
+          else
+            echo "data/ai_digest.json 未生成（无 key 或调用失败），跳过"
+          fi
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add data/ai_digest.json docs/data/ai_digest.json 2>/dev/null || true
+          git diff --staged --quiet || git commit -m "Update Nanhai AI digest: $(date -u)"
+          git pull --rebase --autostash
+          git push
+
+      - name: Deploy Worker (live site)
+        run: npx --yes wrangler@4 deploy -c wrangler.toml
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
