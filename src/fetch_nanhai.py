@@ -426,6 +426,8 @@ def main():
             prev_updated = payload.get('updated')
         except Exception:
             existing = []
+    # 抓取/合并过程中会就地修改 existing 里的字典，先留一份快照用于判断“有无变化”
+    snapshot = copy.deepcopy(existing)
     existing_keys = {normalize_key(a.get('title', '')) for a in existing}
     print(f'📚 已有 {len(existing)} 条南海政务记录')
 
@@ -500,8 +502,6 @@ def main():
     stats = build_stats(articles, tag_rules)
 
     # 内容没变化时保留原更新时间，避免产生“只改时间戳”的无意义提交
-    # 注意：合并过程中会就地修改 existing 里的字典，所以要先深拷贝快照再比较
-    snapshot = copy.deepcopy(existing)
     unchanged = bool(snapshot) and (
         json.dumps(articles, ensure_ascii=False, sort_keys=True)
         == json.dumps(snapshot, ensure_ascii=False, sort_keys=True)

@@ -143,11 +143,20 @@ Want to add more sources? Edit `src/sources.json`!
       "tags": ["租金", "公租房", "住房", "政策"],
       "is_rent": true,
       "summary": "……",
-      "rent_snippets": ["……租金标准……"]
+      "rent_snippets": ["……租金标准……"],
+      "attachments": [
+        { "name": "附件：佛山市南海区2025年公共租赁住房租金政府指导价目表.pdf",
+          "url": "http://www.nanhai.gov.cn/fsnhslj/attachment/0/596/596847/7110166.pdf" }
+      ],
+      "detail_checked": true
     }
   ]
 }
 ```
+
+- `rent_snippets`：从正文里摘出的租金相关句子，便于快速读取价格信息。
+- `attachments`：正文附件（租金标准 / 指导价目表通常是 PDF 表格，需要时可直接下载或 OCR）。
+- `detail_checked`：正文详情是否已抓取过（用于增量回填，避免重复请求）。
 
 > 下游 AI（如 souse 项目）可直接读取 `data/nanhai.json`，用 `is_rent` / `tags` / `rent_snippets` 做租金趋势与政策分析。
 
@@ -158,6 +167,27 @@ python src/fetch_nanhai.py             # 栏目 + 搜索 + 补正文详情
 python src/fetch_nanhai.py --no-detail # 只抓列表，速度更快
 python src/fetch_nanhai.py --dry-run   # 只打印统计
 ```
+
+### 部署说明（重要）
+
+`www.nanhai.gov.cn` 只对境内网络可访问，GitHub Actions 的海外 runner 会返回
+`Network is unreachable`（栏目抓不到，但 `search.gd.gov.cn` 搜索接口可用）。
+因此分两条腿跑：
+
+| 执行环境 | 频率 | 覆盖范围 |
+|----------|------|----------|
+| GitHub Actions（`update-nanhai.yml`）| 每小时 | 搜索接口（房租/租金政策、历年指导价文档）|
+| 境内服务器 cron（推荐）| 每小时 | 栏目新闻 + 搜索接口，完整数据 |
+
+境内服务器的 cron 示例（`/root/nanhai/nanhai-cron.sh`）：
+
+```bash
+35 * * * * /root/nanhai/nanhai-cron.sh
+```
+
+脚本内容：`git pull --rebase` → `python3 src/fetch_nanhai.py` → 复制到 `docs/data/` →
+有变化才 commit & push（数据无变化时保留原 `updated`，不产生空提交）。
+遇到网络抖动会自动重试。
 
 ## 🔧 Customization
 
