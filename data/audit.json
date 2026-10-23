@@ -1,203 +1,264 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-10-23T02:23:40+00:00",
-  "source_updated": "2026-10-23T01:13:32.312566+00:00",
+  "generated_at": "2026-10-23T07:57:33+00:00",
+  "source_updated": "2026-10-23T07:15:12.604824+00:00",
   "summary": {
-    "status": "fail",
-    "checks_passed": 1,
+    "status": "warn",
+    "checks_passed": 2,
     "checks_total": 4
   },
   "checks": [
     {
       "id": "coverage.title",
       "label": "标题中立化覆盖率",
-      "status": "fail",
+      "status": "warn",
       "threshold": ">= 0.90",
-      "observed": 0.2612,
+      "observed": 0.7612,
       "metric": {
-        "processed": 64,
-        "total": 245
+        "processed": 596,
+        "total": 783
       },
-      "detail": "181/245 条标题与英文原文完全相同，未走中立化"
+      "detail": "187/783 条标题与英文原文完全相同，未走中立化"
     },
     {
       "id": "coverage.summary",
       "label": "摘要中立化覆盖率",
-      "status": "fail",
+      "status": "warn",
       "threshold": ">= 0.90",
-      "observed": 0.2163,
+      "observed": 0.7433,
       "metric": {
-        "processed": 53,
-        "total": 245
+        "processed": 582,
+        "total": 783
       },
-      "detail": "192/245 条摘要与英文原文完全相同，未走中立化"
+      "detail": "201/783 条摘要与英文原文完全相同，未走中立化"
     },
     {
       "id": "coverage.by_source",
       "label": "按来源覆盖率",
-      "status": "warn",
+      "status": "pass",
       "threshold": "0% 源占比 < 0.50",
-      "observed": 0.2612,
+      "observed": 0.7612,
       "metric": {
-        "zero_rate_sources": 9,
-        "sources_total": 23
+        "zero_rate_sources": 0,
+        "sources_total": 32
       },
-      "detail": "9 个源加工率为 0（共 23 个源）：Al Jazeera、CNET、Deadline、Engadget、Hollywood Reporter、ScienceDaily、Sky Sports、The Next Web、ZDNet"
+      "detail": "全部 32 个来源均有中立化产出"
     },
     {
       "id": "neutrality",
       "label": "中立度残留",
       "status": "pass",
       "threshold": "<= 0.05",
-      "observed": 0.0312,
+      "observed": 0.0084,
       "metric": {
-        "processed": 64,
-        "hits": 2
+        "processed": 596,
+        "hits": 5
       },
-      "detail": "已加工 64 条中 2 条仍含情绪/反讽残留（3.1%）"
+      "detail": "已加工 596 条中 5 条仍含情绪/反讽残留（0.8%）"
     }
   ],
   "by_source": [
     {
       "source": "BBC",
-      "total": 25,
-      "processed": 2,
-      "rate": 0.08
+      "total": 71,
+      "processed": 47,
+      "rate": 0.662
     },
     {
-      "source": "Al Jazeera",
-      "total": 10,
-      "processed": 0,
-      "rate": 0.0
+      "source": "CBS News",
+      "total": 30,
+      "processed": 30,
+      "rate": 1.0
     },
     {
-      "source": "Ars Technica",
-      "total": 10,
-      "processed": 3,
-      "rate": 0.3
-    },
-    {
-      "source": "CNET",
-      "total": 10,
-      "processed": 0,
-      "rate": 0.0
+      "source": "CNBC",
+      "total": 30,
+      "processed": 30,
+      "rate": 1.0
     },
     {
       "source": "CNN",
-      "total": 10,
-      "processed": 1,
-      "rate": 0.1
+      "total": 30,
+      "processed": 21,
+      "rate": 0.7
     },
     {
       "source": "DW",
-      "total": 10,
-      "processed": 3,
-      "rate": 0.3
-    },
-    {
-      "source": "Deadline",
-      "total": 10,
-      "processed": 0,
-      "rate": 0.0
-    },
-    {
-      "source": "Engadget",
-      "total": 10,
-      "processed": 0,
-      "rate": 0.0
-    },
-    {
-      "source": "Financial Times",
-      "total": 10,
-      "processed": 4,
-      "rate": 0.4
-    },
-    {
-      "source": "France 24",
-      "total": 10,
-      "processed": 1,
-      "rate": 0.1
-    },
-    {
-      "source": "Hollywood Reporter",
-      "total": 10,
-      "processed": 0,
-      "rate": 0.0
+      "total": 30,
+      "processed": 21,
+      "rate": 0.7
     },
     {
       "source": "Mashable",
-      "total": 10,
-      "processed": 2,
-      "rate": 0.2
+      "total": 30,
+      "processed": 20,
+      "rate": 0.6667
     },
     {
       "source": "Nature",
+      "total": 30,
+      "processed": 30,
+      "rate": 1.0
+    },
+    {
+      "source": "Phys.org",
+      "total": 30,
+      "processed": 30,
+      "rate": 1.0
+    },
+    {
+      "source": "ScienceDaily",
+      "total": 30,
+      "processed": 20,
+      "rate": 0.6667
+    },
+    {
+      "source": "South China Morning Post",
+      "total": 30,
+      "processed": 28,
+      "rate": 0.9333
+    },
+    {
+      "source": "TechRadar",
+      "total": 30,
+      "processed": 30,
+      "rate": 1.0
+    },
+    {
+      "source": "Wired",
+      "total": 30,
+      "processed": 24,
+      "rate": 0.8
+    },
+    {
+      "source": "中新网",
+      "total": 30,
+      "processed": 30,
+      "rate": 1.0
+    },
+    {
+      "source": "中新网财经",
+      "total": 30,
+      "processed": 30,
+      "rate": 1.0
+    },
+    {
+      "source": "界面新闻",
+      "total": 29,
+      "processed": 29,
+      "rate": 1.0
+    },
+    {
+      "source": "Al Jazeera",
+      "total": 26,
+      "processed": 17,
+      "rate": 0.6538
+    },
+    {
+      "source": "CNET",
+      "total": 25,
+      "processed": 15,
+      "rate": 0.6
+    },
+    {
+      "source": "ZDNet",
+      "total": 25,
+      "processed": 15,
+      "rate": 0.6
+    },
+    {
+      "source": "France 24",
+      "total": 21,
+      "processed": 12,
+      "rate": 0.5714
+    },
+    {
+      "source": "Ars Technica",
+      "total": 20,
+      "processed": 12,
+      "rate": 0.6
+    },
+    {
+      "source": "Engadget",
+      "total": 20,
+      "processed": 10,
+      "rate": 0.5
+    },
+    {
+      "source": "Sky Sports",
+      "total": 20,
+      "processed": 10,
+      "rate": 0.5
+    },
+    {
+      "source": "TechCrunch",
+      "total": 20,
+      "processed": 11,
+      "rate": 0.55
+    },
+    {
+      "source": "Wall Street Journal",
+      "total": 20,
+      "processed": 20,
+      "rate": 1.0
+    },
+    {
+      "source": "Financial Times",
+      "total": 19,
+      "processed": 12,
+      "rate": 0.6316
+    },
+    {
+      "source": "Deadline",
+      "total": 13,
+      "processed": 3,
+      "rate": 0.2308
+    },
+    {
+      "source": "Variety",
+      "total": 12,
+      "processed": 7,
+      "rate": 0.5833
+    },
+    {
+      "source": "Hollywood Reporter",
+      "total": 11,
+      "processed": 1,
+      "rate": 0.0909
+    },
+    {
+      "source": "The Next Web",
+      "total": 11,
+      "processed": 1,
+      "rate": 0.0909
+    },
+    {
+      "source": "MarketWatch",
       "total": 10,
       "processed": 10,
       "rate": 1.0
     },
     {
-      "source": "ScienceDaily",
+      "source": "NPR",
       "total": 10,
-      "processed": 0,
-      "rate": 0.0
-    },
-    {
-      "source": "Sky Sports",
-      "total": 10,
-      "processed": 0,
-      "rate": 0.0
-    },
-    {
-      "source": "South China Morning Post",
-      "total": 10,
-      "processed": 8,
-      "rate": 0.8
-    },
-    {
-      "source": "TechCrunch",
-      "total": 10,
-      "processed": 2,
-      "rate": 0.2
-    },
-    {
-      "source": "The Next Web",
-      "total": 10,
-      "processed": 0,
-      "rate": 0.0
+      "processed": 10,
+      "rate": 1.0
     },
     {
       "source": "The Verge",
       "total": 10,
       "processed": 10,
       "rate": 1.0
-    },
-    {
-      "source": "Variety",
-      "total": 10,
-      "processed": 3,
-      "rate": 0.3
-    },
-    {
-      "source": "Wall Street Journal",
-      "total": 10,
-      "processed": 10,
-      "rate": 1.0
-    },
-    {
-      "source": "Wired",
-      "total": 10,
-      "processed": 5,
-      "rate": 0.5
-    },
-    {
-      "source": "ZDNet",
-      "total": 10,
-      "processed": 0,
-      "rate": 0.0
     }
   ],
   "neutrality_hits": [
+    {
+      "source": "South China Morning Post",
+      "title": "Robots will destroy 85 million jobs over next five years as pandemic speeds up workplace changes, WEF says",
+      "zh_title": "世界经济论坛表示，随着疫情加速工作场所的变化，机器人将在未来五年内摧毁 8500 万个工作岗位",
+      "rule": "emotion",
+      "matched": "摧毁"
+    },
     {
       "source": "The Verge",
       "title": "Sure, let’s smoosh SpaceX and Tesla together, who cares",
@@ -213,11 +274,25 @@
       "matched": "当然"
     },
     {
+      "source": "Ars Technica",
+      "title": "Meta shocked by $25B fine after N.M. refused to join multistate settlement",
+      "zh_title": "在新墨西哥州拒绝加入多州结算后， Meta 对 250 亿美元的罚款感到震惊",
+      "rule": "emotion",
+      "matched": "震惊"
+    },
+    {
       "source": "Variety",
       "title": "Oscars Predictions 2027: Is ‘You Can See Everything’ the Film That Can Take Down ‘The Odyssey’?",
       "zh_title": "奥斯卡预测 2027： “你可以看到一切”是可以摧毁“奥德赛”的电影",
       "rule": "emotion",
       "matched": "摧毁"
+    },
+    {
+      "source": "MarketWatch",
+      "title": "We have a $300,000 mortgage with a 2.75% interest rate. I want to pay it off. My husband says I’m crazy. Who’s right?",
+      "zh_title": "我们有$ 300,000 的抵押贷款，利率为 2.75%。我想还清。我丈夫说我疯了，谁说得对",
+      "rule": "emotion",
+      "matched": "疯了"
     }
   ],
   "dead_sources": [
@@ -231,45 +306,42 @@
   ],
   "footer_claims": {
     "claimed": [
-      "Reuters",
-      "BBC",
-      "Bloomberg",
-      "AP",
-      "Al Jazeera",
-      "NHK",
-      "SCMP"
+      "加载中…"
     ],
     "actually_producing": [
       "BBC",
-      "Al Jazeera",
-      "Ars Technica",
-      "CNET",
+      "CBS News",
+      "CNBC",
       "CNN",
       "DW",
-      "Deadline",
-      "Engadget",
-      "Financial Times",
-      "France 24",
-      "Hollywood Reporter",
       "Mashable",
       "Nature",
+      "Phys.org",
       "ScienceDaily",
-      "Sky Sports",
       "South China Morning Post",
-      "TechCrunch",
-      "The Next Web",
-      "The Verge",
-      "Variety",
-      "Wall Street Journal",
+      "TechRadar",
       "Wired",
-      "ZDNet"
+      "中新网",
+      "中新网财经",
+      "界面新闻",
+      "Al Jazeera",
+      "CNET",
+      "ZDNet",
+      "France 24",
+      "Ars Technica",
+      "Engadget",
+      "Sky Sports",
+      "TechCrunch",
+      "Wall Street Journal",
+      "Financial Times",
+      "Deadline",
+      "Variety",
+      "Hollywood Reporter",
+      "The Next Web",
+      "MarketWatch",
+      "NPR",
+      "The Verge"
     ],
-    "false_claims": [
-      "Reuters",
-      "Bloomberg",
-      "AP",
-      "NHK",
-      "SCMP"
-    ]
+    "false_claims": []
   }
 }
