@@ -1,0 +1,54 @@
+name: Audit News Quality
+
+on:
+  schedule:
+    # 每小时 50 分审计一次（update-news 为 0,15,30,45；update-nanhai 为 20 分）
+    - cron: '50 * * * *'
+  workflow_dispatch:
+
+# 与其他 news 工作流共用同一并发组，避免同时推送
+concurrency:
+  group: news-update
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # 依赖 Python 标准库，无需 pip install
+      - name: Audit
+        continue-on-error: true
+        run: python src/audit_news.py
+
+      - name: Copy to docs
+        run: |
+          mkdir -p docs/data
+          if [ -f data/audit.json ]; then
+            cp data/audit.json docs/data/
+          else
+            echo "data/audit.json 未生成（审计失败），跳过"
+          fi
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add data/audit.json docs/data/audit.json 2>/dev/null || true
+          git diff --staged --quiet || git commit -m "Update news audit: $(date -u)"
+          git pull --rebase --autostash
+          git push
+
+      - name: Deploy Worker (live site)
+        run: npx --yes wrangler@4 deploy -c wrangler.toml
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

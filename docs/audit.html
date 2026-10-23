@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>news 审计 — 内容中立化质量 | 全球24h</title>
+  <meta name="description" content="全球24h 新闻内容中立化质量自动审计：覆盖率、按源覆盖率、中立度残留与诚实性核对。">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚖️</text></svg>">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚖️</text></svg>">
+  <meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1c1c1e" media="(prefers-color-scheme: dark)">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="news 审计">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/audit.css">
+</head>
+<body>
+
+<div id="app">
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="header-left">
+        <span class="header-logo">⚖️ news 审计</span>
+        <span class="header-subtitle">内容中立化质量</span>
+      </div>
+      <div class="header-right">
+        <a class="nav-link" href="index.html">全球24h</a>
+        <a class="nav-link" href="nanhai.html">南海政务</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="main audit-main">
+    <div class="audit-notice" id="load-state" role="status" hidden></div>
+
+    <div class="audit-statusbar">
+      <span class="audit-updated">数据更新：<span id="generated-at">加载中…</span></span>
+      <span class="audit-summary" id="summary-status"><span class="audit-muted">加载中…</span></span>
+    </div>
+
+    <section class="audit-section">
+      <h2 class="audit-section-title">审计项</h2>
+      <div id="checks" class="audit-cards" aria-live="polite">
+        <div class="audit-empty">加载中…</div>
+      </div>
+    </section>
+
+    <section class="audit-section">
+      <h2 class="audit-section-title">按源覆盖率</h2>
+      <div id="by-source" class="audit-table-wrap">
+        <div class="audit-empty">加载中…</div>
+      </div>
+    </section>
+
+    <section class="audit-section">
+      <h2 class="audit-section-title">中立度命中</h2>
+      <div id="neutrality-hits">
+        <div class="audit-empty">加载中…</div>
+      </div>
+    </section>
+
+    <section class="audit-section">
+      <h2 class="audit-section-title">诚实性</h2>
+      <div id="honesty">
+        <div class="audit-empty">加载中…</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer audit-footer">
+    <span>数据来源: <a href="data/audit.json" target="_blank" rel="noopener">audit.json</a></span>
+    <span class="audit-disclaimer">本页为自动审计结果，仅反映当前数据快照，不代表内容已达标。</span>
+  </footer>
+</div>
+
+<script src="js/audit.js"></script>
+</body>
+</html>

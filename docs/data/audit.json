@@ -1,0 +1,275 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-10-23T02:19:29+00:00",
+  "source_updated": "2026-10-23T01:13:32.312566+00:00",
+  "summary": {
+    "status": "fail",
+    "checks_passed": 1,
+    "checks_total": 4
+  },
+  "checks": [
+    {
+      "id": "coverage.title",
+      "label": "标题中立化覆盖率",
+      "status": "fail",
+      "threshold": ">= 0.90",
+      "observed": 0.2612,
+      "metric": {
+        "processed": 64,
+        "total": 245
+      },
+      "detail": "181/245 条标题与英文原文完全相同，未走中立化"
+    },
+    {
+      "id": "coverage.summary",
+      "label": "摘要中立化覆盖率",
+      "status": "fail",
+      "threshold": ">= 0.90",
+      "observed": 0.2163,
+      "metric": {
+        "processed": 53,
+        "total": 245
+      },
+      "detail": "192/245 条摘要与英文原文完全相同，未走中立化"
+    },
+    {
+      "id": "coverage.by_source",
+      "label": "按来源覆盖率",
+      "status": "warn",
+      "threshold": "0% 源占比 < 0.50",
+      "observed": 0.2612,
+      "metric": {
+        "zero_rate_sources": 9,
+        "sources_total": 23
+      },
+      "detail": "9 个源加工率为 0（共 23 个源）：Al Jazeera、CNET、Deadline、Engadget、Hollywood Reporter、ScienceDaily、Sky Sports、The Next Web、ZDNet"
+    },
+    {
+      "id": "neutrality",
+      "label": "中立度残留",
+      "status": "pass",
+      "threshold": "<= 0.05",
+      "observed": 0.0312,
+      "metric": {
+        "processed": 64,
+        "hits": 2
+      },
+      "detail": "已加工 64 条中 2 条仍含情绪/反讽残留（3.1%）"
+    }
+  ],
+  "by_source": [
+    {
+      "source": "BBC",
+      "total": 25,
+      "processed": 2,
+      "rate": 0.08
+    },
+    {
+      "source": "Al Jazeera",
+      "total": 10,
+      "processed": 0,
+      "rate": 0.0
+    },
+    {
+      "source": "Ars Technica",
+      "total": 10,
+      "processed": 3,
+      "rate": 0.3
+    },
+    {
+      "source": "CNET",
+      "total": 10,
+      "processed": 0,
+      "rate": 0.0
+    },
+    {
+      "source": "CNN",
+      "total": 10,
+      "processed": 1,
+      "rate": 0.1
+    },
+    {
+      "source": "DW",
+      "total": 10,
+      "processed": 3,
+      "rate": 0.3
+    },
+    {
+      "source": "Deadline",
+      "total": 10,
+      "processed": 0,
+      "rate": 0.0
+    },
+    {
+      "source": "Engadget",
+      "total": 10,
+      "processed": 0,
+      "rate": 0.0
+    },
+    {
+      "source": "Financial Times",
+      "total": 10,
+      "processed": 4,
+      "rate": 0.4
+    },
+    {
+      "source": "France 24",
+      "total": 10,
+      "processed": 1,
+      "rate": 0.1
+    },
+    {
+      "source": "Hollywood Reporter",
+      "total": 10,
+      "processed": 0,
+      "rate": 0.0
+    },
+    {
+      "source": "Mashable",
+      "total": 10,
+      "processed": 2,
+      "rate": 0.2
+    },
+    {
+      "source": "Nature",
+      "total": 10,
+      "processed": 10,
+      "rate": 1.0
+    },
+    {
+      "source": "ScienceDaily",
+      "total": 10,
+      "processed": 0,
+      "rate": 0.0
+    },
+    {
+      "source": "Sky Sports",
+      "total": 10,
+      "processed": 0,
+      "rate": 0.0
+    },
+    {
+      "source": "South China Morning Post",
+      "total": 10,
+      "processed": 8,
+      "rate": 0.8
+    },
+    {
+      "source": "TechCrunch",
+      "total": 10,
+      "processed": 2,
+      "rate": 0.2
+    },
+    {
+      "source": "The Next Web",
+      "total": 10,
+      "processed": 0,
+      "rate": 0.0
+    },
+    {
+      "source": "The Verge",
+      "total": 10,
+      "processed": 10,
+      "rate": 1.0
+    },
+    {
+      "source": "Variety",
+      "total": 10,
+      "processed": 3,
+      "rate": 0.3
+    },
+    {
+      "source": "Wall Street Journal",
+      "total": 10,
+      "processed": 10,
+      "rate": 1.0
+    },
+    {
+      "source": "Wired",
+      "total": 10,
+      "processed": 5,
+      "rate": 0.5
+    },
+    {
+      "source": "ZDNet",
+      "total": 10,
+      "processed": 0,
+      "rate": 0.0
+    }
+  ],
+  "neutrality_hits": [
+    {
+      "source": "The Verge",
+      "title": "Sure, let’s smoosh SpaceX and Tesla together, who cares",
+      "zh_title": "当然，让我们把 SpaceX 和特斯拉放在一起，谁在乎",
+      "rule": "emotion",
+      "matched": "谁在乎"
+    },
+    {
+      "source": "The Verge",
+      "title": "Sure, let’s smoosh SpaceX and Tesla together, who cares",
+      "zh_title": "当然，让我们把 SpaceX 和特斯拉放在一起，谁在乎",
+      "rule": "irony",
+      "matched": "当然"
+    },
+    {
+      "source": "Variety",
+      "title": "Oscars Predictions 2027: Is ‘You Can See Everything’ the Film That Can Take Down ‘The Odyssey’?",
+      "zh_title": "奥斯卡预测 2027： “你可以看到一切”是可以摧毁“奥德赛”的电影",
+      "rule": "emotion",
+      "matched": "摧毁"
+    }
+  ],
+  "dead_sources": [
+    "Reuters",
+    "AP News",
+    "Bloomberg",
+    "ESPN",
+    "NHK World",
+    "Nikkei Asia",
+    "Scientific American"
+  ],
+  "footer_claims": {
+    "claimed": [
+      "Reuters",
+      "BBC",
+      "Bloomberg",
+      "AP",
+      "Al Jazeera",
+      "NHK",
+      "SCMP"
+    ],
+    "actually_producing": [
+      "BBC",
+      "Al Jazeera",
+      "Ars Technica",
+      "CNET",
+      "CNN",
+      "DW",
+      "Deadline",
+      "Engadget",
+      "Financial Times",
+      "France 24",
+      "Hollywood Reporter",
+      "Mashable",
+      "Nature",
+      "ScienceDaily",
+      "Sky Sports",
+      "South China Morning Post",
+      "TechCrunch",
+      "The Next Web",
+      "The Verge",
+      "Variety",
+      "Wall Street Journal",
+      "Wired",
+      "ZDNet"
+    ],
+    "false_claims": [
+      "Reuters",
+      "Bloomberg",
+      "AP",
+      "NHK",
+      "SCMP"
+    ]
+  }
+}
