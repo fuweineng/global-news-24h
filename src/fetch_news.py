@@ -19,8 +19,8 @@ CACHE_FILE = Path('data/news_cache.json')
 NEWS_FILE = Path('data/news.json')
 
 # ── 抓取规模控制 ─────────────────────────────────────
-MAX_PER_SOURCE = 30  # 每源最多取几条（原为硬编码 10，23 源里 22 源被截在 10 条）
-MAX_TOTAL = 800      # 全库总量上限，防止仓库无限膨胀
+MAX_PER_SOURCE = 10  # 每源最多取几条（回退：800+30 组合使 news.json 涨到 643KB，站点 0/6 拉取成功）
+MAX_TOTAL = 300      # 全库总量上限，防止仓库无限膨胀（回退：保证 news.json < 300KB，先恢复可用）
 
 # ── 翻译规模控制 ─────────────────────────────────────
 RETRANSLATE_LIMIT = 120      # 每轮最多补译多少条历史文章（额度有限，分轮自愈）
