@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """build_signals.py — Nanhai signals layer (P0 contract + P1 rule signals).
 
-Reads data/nanhai.json (+ data/analysis.json), applies four rule classes
-(rent.level / rent.supply / rent.policy / risk), and writes a signals envelope
-to data/signals.json and docs/data/signals.json.
+Reads data/nanhai.json (+ data/analysis.json), applies five rule classes
+(rent.level / rent.supply / rent.policy / risk / crypto), and writes a signals
+envelope to data/signals.json and docs/data/signals.json.
 
 Design constraints (see CONTRACT.md):
   * stdlib only, no LLM, no third-party deps;
@@ -52,6 +52,22 @@ RENT_POLICY_RE = re.compile(r"租赁补贴|租金指导价|公租房|保障性�
 RISK_RE = re.compile(r"事故|火灾|台风|暴雨|预警|防汛|安全|交通管制")
 # "strong" risk terms boost relevance over generic 安全 (e.g. 网络安全/食品安全).
 RISK_STRONG_RE = re.compile(r"事故|火灾|台风|暴雨|预警|防汛|森林防火|消防|生产安全|交通管制|应急")
+
+# Rule 5: crypto — surface Nanhai news that touches crypto/blockchain/digital
+# currency, linking it to the gate (crypto auto-trading) audience as ALERT ONLY.
+CRYPTO_RE = re.compile(
+    r"加密|加密货币|区块链|数字货币|数字人民币|虚拟货币|稳定币|Web3|web3|交易所|"
+    r"挖矿|矿业|链上|NFT|央行数字|CBDC|币圈|加密资产|数字资产|代币"
+)
+# Tightening/risk framing => negative for crypto trading; tailwind framing => positive.
+CRYPTO_NEG_RE = re.compile(
+    r"监管|整治|打击|禁止|取缔|风险|诈骗|骗局|洗钱|非法|处罚|查处|冻结|清退|"
+    r"限制|警示|辟谣|投诉|崩盘|跑路"
+)
+CRYPTO_POS_RE = re.compile(
+    r"数字人民币|CBDC|试点|推广|应用|支持|鼓励|创新|开放|合法|合规|牌照|落地|合作|上线"
+)
+CRYPTO_MAX = 3
 
 # PII: collapse "<姓名>等N户/人" to "某等N户/人"; never emit personal names.
 PII_NAME_COUNT_RE = re.compile(r"([\u4e00-\u9fa5]{2,4})等(\d+\s*[户人名])")
@@ -137,8 +153,8 @@ def compute_confidence(source, evidence_count, age_days, extraction_quality):
     return round(min(value, CONFIDENCE_CAP), 2)
 
 
-STALE_DAYS = {"rent_level": 365, "rent_supply": 180, "rent_policy": 365, "risk": 90}
-VALIDITY_DAYS = {"rent_level": 365, "rent_supply": 180, "rent_policy": 365, "risk": 90}
+STALE_DAYS = {"rent_level": 365, "rent_supply": 180, "rent_policy": 365, "risk": 90, "crypto": 180}
+VALIDITY_DAYS = {"rent_level": 365, "rent_supply": 180, "rent_policy": 365, "risk": 90, "crypto": 180}
 
 
 def compute_status(scope, age_days, valid_until, as_of):
@@ -420,6 +436,80 @@ def rule_keyword(scope, candidates, as_of, extraction_quality=0.7):
     return signals
 
 
+# ---------------------------------------------------------------------------
+# Rule 5: crypto — link Nanhai news to gate (crypto auto-trading), alert only
+# ---------------------------------------------------------------------------
+
+def crypto_blob(article):
+    """Title + summary + tags, the fields the crypto rule is allowed to match."""
+    parts = [article.get("title", ""), article.get("summary", "")]
+    parts.extend(article.get("tags") or [])
+    return " ".join(p for p in parts if p)
+
+
+def crypto_direction(text):
+    """Effect on gate: tightening/risk -> negative, tailwind -> positive, else neutral."""
+    if CRYPTO_NEG_RE.search(text):
+        return "negative"
+    if CRYPTO_POS_RE.search(text):
+        return "positive"
+    return "neutral"
+
+
+def rule_crypto(candidates, as_of, extraction_quality=0.7):
+    signals = []
+    for art in candidates:
+        published_dt = parse_dt(art.get("published"))
+        if not published_dt:
+            continue
+        text = crypto_blob(art)
+        region, codes = detect_region(blob(art))
+        direction = crypto_direction(text)
+        age_days = max(0, (as_of - published_dt).days)
+        conf = compute_confidence(art.get("source", ""), 1, age_days, extraction_quality)
+        quote = pick_quote(art)
+        signals.append(make_signal(
+            scope="crypto",
+            title=art.get("title", "")[:120],
+            region=region,
+            industries=["crypto"],
+            indicator={
+                "code": "crypto.nanhai_news_link",
+                "name": "南海政务动态中的加密/区块链关联",
+                "value": None,
+                "unit": None,
+                "period": art.get("published", "")[:7],
+                "dimension": "linkage",
+            },
+            change={
+                "abs": None, "pct": None, "yoy": None, "mom": None,
+                "method": "keyword_rule",
+                "direction": "unknown",
+                "baseline": None,
+            },
+            impact={
+                "direction": direction,
+                "by_audience": {"gate": direction},
+                "horizon": "short",
+                "mechanism": ("南海政务动态出现加密/区块链/数字货币相关表述，"
+                              "构成与 gate 加密币交易的信息面关联点；仅作提示，不含任何交易指令"),
+                "affected": ["gate"],
+            },
+            confidence=conf,
+            evidence=[evidence_entry(art.get("id", art.get("link", "")), art.get("title", ""),
+                                    art.get("link", ""), published_dt, quote)],
+            audience=["gate"],
+            actions=[action("gate", "alert_only", "low",
+                            "人工查看该南海新闻与加密币交易的相关性；仅作提醒，不自动下单/调仓",
+                            {"indicator": "crypto.nanhai_news_link", "require_human_review": True})],
+            published_dt=published_dt,
+            as_of=as_of,
+            geo=geo_token(codes),
+            slug=art.get("id", "crypto"),
+        ))
+    return signals
+
+
 def build_signals(nanhai, analysis, as_of):
     articles = nanhai.get("articles", [])
     signals = []
@@ -451,6 +541,14 @@ def build_signals(nanhai, analysis, as_of):
     )
     risk = _select(risk_candidate, 2)
     signals.extend(rule_keyword("risk", risk, as_of))
+
+    crypto_candidate = sorted(
+        [a for a in articles if CRYPTO_RE.search(crypto_blob(a))],
+        key=lambda a: a.get("published", ""),
+        reverse=True,
+    )
+    crypto = _select(crypto_candidate, CRYPTO_MAX)
+    signals.extend(rule_crypto(crypto, as_of))
 
     signals.sort(key=lambda s: (s["scope"], s["signal_id"]))
     return signals

@@ -32,7 +32,7 @@
 | `schema_version` | ✅ | 恒为 `1.0.0` |
 | `status` | ✅ | `draft\|active\|stale\|expired\|superseded\|rejected` |
 | `title` | ✅ | 人类可读标题 |
-| `scope` | ✅ | `rent_level\|rent_change\|rent_supply\|rent_policy\|rent_demand\|industry\|macro\|risk\|sentiment\|weather\|traffic` |
+| `scope` | ✅ | `rent_level\|rent_change\|rent_supply\|rent_policy\|rent_demand\|industry\|macro\|risk\|sentiment\|weather\|traffic\|crypto` |
 | `region` | ✅ | `{district, towns[], match_level}`；`match_level ∈ district\|town\|street\|unknown` |
 | `industries` | ✅ | 固定枚举，≥1；如 `housing_rental/public_housing/social_security/safety/...` |
 | `indicator` | ✅ | `{code,name,value,unit,period,dimension}`；定性信号可 `value/unit/period=null` |
@@ -63,8 +63,9 @@
   - `rent_level` / `rent_policy`：`valid_from + 365d`（价格/政策年度性）。
   - `rent_supply`：`valid_from + 180d`（采购/配租窗口）。
   - `risk`：`valid_from + 90d`（灾情/会议短时效；实时预警场景应缩短到 24–72h）。
+  - `crypto`：`valid_from + 180d`（政策/资讯类短窗口）。
 - `status` 判定（相对 `as_of`），**stale 优先于 expired**：
-  1. 证据年龄 > scope 时效窗（`rent_level/rent_policy` 365d、`rent_supply` 180d、`risk` 90d）→ `stale`；
+  1. 证据年龄 > scope 时效窗（`rent_level/rent_policy` 365d、`rent_supply` 180d、`risk` 90d、`crypto` 180d）→ `stale`；
   2. 否则若 `as_of > valid_until` → `expired`；
   3. 否则 `active`。
 - 首批数据偏旧（如 2024-02 的 22 元/㎡·月，相对 as_of 已 >12 个月）会被标 `stale`，这是**有意为之**：宁标旧，不假装新鲜。
@@ -82,6 +83,12 @@ confidence = min(confidence, 0.75)
 ```
 
 `source_reliability`：官方（政府/局/镇街/委员会/中心等，0.9）vs 搜索来源（0.8）。规则信号的置信度**不应**高于 0.75；高于该值须走人工审核（`review.status` 非 `auto`）。
+
+## 5.1 crypto 规则（南海新闻 ↔ 加密币关联）
+
+当南海新闻的标题/摘要/tags 命中加密/区块链/数字货币等关键词（`加密|加密货币|区块链|数字货币|数字人民币|虚拟货币|稳定币|Web3|web3|交易所|挖矿|矿业|链上|NFT|央行数字|CBDC|币圈|加密资产|数字资产|代币`）时，产出 `scope=crypto` 信号，把**南海政务动态**与 **gate（加密货币自动交易）** 关联起来：`audience=["gate"]`，`impact.by_audience.gate.direction` 按语境取 `positive`（政策利好）/`negative`（监管收紧、风险警示）/`neutral`（中性资讯），`mechanism` 说明关联点，`region` 照常识别镇街，`evidence` 带原文，`signal_id=sig_crypto_{geo}_{docid}_{date}`。
+
+**边界（gate 只提示不交易）**：crypto 信号的 `actions` 恒为 `type=alert_only` + `requires_human=true`，只是**关联提示**，**绝不**触发下单、调仓、放款等任何自动交易或资金动作（见 §6 第 4 条）。无命中则产出 0 条 crypto 信号，不硬造。
 
 ## 6. 反模式（硬约束）
 
