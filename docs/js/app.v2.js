@@ -19,6 +19,7 @@
   const $fab = document.getElementById('fab');
   const $updateTime = document.getElementById('last-updated');
   const $catBar = document.getElementById('category-bar');
+  const $footerSources = document.getElementById('footer-sources');
 
   // ── Helpers ────────────────────────────────────
   function timeAgo(published) {
@@ -145,6 +146,23 @@
     });
   }
 
+  // ── Footer sources ───────────────────────────
+  function updateFooterSources() {
+    if (!$footerSources) return;
+    const counts = {};
+    allArticles.forEach(art => {
+      const name = (art.source || '').trim();
+      if (name) counts[name] = (counts[name] || 0) + 1;
+    });
+    const names = Object.keys(counts).sort((a, b) => counts[b] - counts[a]);
+    if (!allArticles.length || names.length === 0) {
+      $footerSources.textContent = '数据来源: --';
+      return;
+    }
+    $footerSources.textContent = '数据来源: ' +
+      names.slice(0, 8).join(' · ') + ' 等 ' + names.length + ' 家';
+  }
+
   // ── Load ─────────────────────────────────────
   async function loadNews() {
     if (loading) return;
@@ -167,6 +185,7 @@
 
       initCategories();
       renderFeed();
+      updateFooterSources();
     } catch (e) {
       console.error('loadNews:', e);
       $newsList.innerHTML = '<div class="empty">加载失败，请刷新页面</div>';
