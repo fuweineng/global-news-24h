@@ -4,6 +4,7 @@
 import feedparser
 import json
 from datetime import datetime, timezone
+from email.utils import parsedate_to_datetime
 from pathlib import Path
 import hashlib
 import html
@@ -202,6 +203,54 @@ def is_chinese(text):
     cjk = sum(1 for c in text if '\u4e00' <= c <= '\u9fff')
     return cjk > len(text) * 0.3
 
+def to_iso8601(raw):
+    """把 RSS 的各种时间写法统一成 RFC3339；解析不了返回 None。"""
+    raw = clean_text(raw)
+    if not raw:
+        return None
+    dt = None
+    try:
+        dt = datetime.fromisoformat(raw.replace('Z', '+00:00'))
+    except ValueError:
+        try:
+            dt = parsedate_to_datetime(raw)
+        except (TypeError, ValueError):
+            return None
+    if dt is None:
+        return None
+    if dt.tzinfo is None:
+        # 无时区信息的一律按 UTC 处理，并显式补上时区，避免前端按本地时区瞎猜
+        dt = dt.replace(tzinfo=timezone.utc)
+    return dt.isoformat()
+
+def parse_published(entry):
+    """返回 (ISO8601 或 None, 原始字符串)。
+
+    解析失败时 published 置 None 并保留 published_raw，不用 datetime.now() 冒充发布时间。
+    """
+    raw = clean_text(entry.get('published') or entry.get('updated') or '')
+    for key in ('published_parsed', 'updated_parsed'):
+        struct_time = entry.get(key)
+        if struct_time:
+            try:
+                return datetime(*struct_time[:6], tzinfo=timezone.utc).isoformat(), raw
+            except (TypeError, ValueError):
+                pass
+    return to_iso8601(raw), raw
+
+def normalize_published(article):
+    """把历史条目里混存的 'Fri, 23 Oct 2026 ...' / ISO 统一成 RFC3339。"""
+    published = article.get('published')
+    iso = to_iso8601(published) if published else None
+    if iso:
+        article['published'] = iso
+    else:
+        raw = article.get('published_raw') or published or ''
+        article['published'] = None
+        if raw:
+            article['published_raw'] = raw
+    return article
+
 def normalize_title(title):
     """标准化标题用于去重比较"""
     title = title.lower()
@@ -372,16 +421,18 @@ def fetch_news():
                 seen_normalized.add(normalized)
 
                 try:
-                    dt = datetime.fromisoformat(entry.get('published', '').replace('Z', '+00:00'))
-                    time_str = dt.strftime('%H:%M')
-                except:
+                    published_iso, published_raw = parse_published(entry)
+                    time_str = (datetime.fromisoformat(published_iso).strftime('%H:%M')
+                                if published_iso else '--:--')
+                except Exception:
+                    published_iso, published_raw = None, clean_text(entry.get('published', ''))
                     time_str = '--:--'
 
                 article = {
                     'id': article_id,
                     'title': raw_title,
                     'link': entry.link,
-                    'published': entry.get('published', datetime.now(timezone.utc).isoformat()),
+                    'published': published_iso,
                     'time': time_str,
                     'source': source['name'],
                     'summary': clip_to_sentence(raw_summary),
@@ -392,6 +443,8 @@ def fetch_news():
                     'zh_summary': '',
                     'one_line': ''
                 }
+                if published_iso is None and published_raw:
+                    article['published_raw'] = published_raw
                 new_articles.append(article)
         except Exception as e:
             print(f"⚠️ {source['name']} 失败：{e}")
@@ -423,6 +476,10 @@ def main():
     if not new_articles and not cached_articles:
         print("ℹ️ 无新新闻")
         return
+
+    # 历史条目的 published 格式归一化（旧数据混有 RFC822 与 ISO）
+    for article in cached_articles:
+        normalize_published(article)
 
     # 1) 本轮新抓的文章：标题 + 摘要全量翻译
     translate_articles(new_articles)
