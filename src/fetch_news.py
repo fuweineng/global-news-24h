@@ -17,9 +17,13 @@ MYMEMORY_API = "https://api.mymemory.translated.net/get"
 CACHE_FILE = Path('data/news_cache.json')
 NEWS_FILE = Path('data/news.json')
 
+# ── 抓取规模控制 ─────────────────────────────────────
+MAX_PER_SOURCE = 30  # 每源最多取几条（原为硬编码 10，23 源里 22 源被截在 10 条）
+MAX_TOTAL = 800      # 全库总量上限，防止仓库无限膨胀
+
 # ── 翻译规模控制 ─────────────────────────────────────
-RETRANSLATE_LIMIT = 80       # 每轮最多补译多少条历史文章（额度有限，分轮自愈）
-TRANSLATE_MAX_CHARS = 60000  # 单轮送进翻译 API 的字符上限，防止额度被瞬间打穿
+RETRANSLATE_LIMIT = 120      # 每轮最多补译多少条历史文章（额度有限，分轮自愈）
+TRANSLATE_MAX_CHARS = 150000 # 单轮送进翻译 API 的字符上限，防止额度被瞬间打穿
 COVERAGE_TARGET = 0.90       # 中文标题覆盖率告警阈值
 TRANSLATE_RETRY_DELAYS = (0.5, 1.5, 4.0)  # 失败重试的指数退避
 MYMEMORY_QUOTA_MARK = 'MYMEMORY WARNING'
@@ -322,51 +326,67 @@ def translate_text(text, src_lang='en'):
     print(f"⚠️ 翻译失败（已重试 {len(TRANSLATE_RETRY_DELAYS)} 次）：{text[:40]} —— {last_error[:120]}")
     return None, False
 
-def translate_article(article):
-    """就地补齐单篇文章的 zh_title / zh_summary；失败时保留原值，不伪造中文。"""
+def translate_title(article):
+    """只补 zh_title：非中文（或为空）才翻；中文源直接用原文。"""
     title = clean_text(article.get('title', ''))
-    summary = clean_text(article.get('summary', ''))
     lang = article.get('original_lang', 'en')
+    if is_chinese(article.get('zh_title')):
+        return article
 
-    # 1. 中文标题：非中文（或为空）才翻；中文源直接用原文
-    if not is_chinese(article.get('zh_title')):
-        if lang == 'zh':
-            neutral_title = title
-        else:
-            neutral_title = rewrite_english_for_neutrality(neutralize_title(title), is_title=True)
-        zh_title, ok = translate_text(neutral_title, lang)
-        if ok and zh_title:
-            article['zh_title'] = polish_chinese(zh_title, is_title=True)
-        time.sleep(0.15)
-
-    # 2. 中文摘要：同理，中文源不调翻译 API
-    if summary and not is_chinese(article.get('zh_summary')):
-        neutral_summary = clip_to_sentence(summary)
-        if lang != 'zh':
-            neutral_summary = rewrite_english_for_neutrality(neutral_summary, is_title=False)
-        zh_summary, ok = translate_text(neutral_summary, lang)
-        if ok and zh_summary:
-            article['zh_summary'] = polish_chinese(zh_summary, is_title=False)
-        time.sleep(0.15)
-
+    if lang == 'zh':
+        neutral_title = title
+    else:
+        neutral_title = rewrite_english_for_neutrality(neutralize_title(title), is_title=True)
+    zh_title, ok = translate_text(neutral_title, lang)
+    if ok and zh_title:
+        article['zh_title'] = polish_chinese(zh_title, is_title=True)
+    time.sleep(0.15)
     article['zh_title'] = article.get('zh_title') or ''
-    article['zh_summary'] = article.get('zh_summary') or ''
     article['one_line'] = article['zh_title'] or title  # 向后兼容
     return article
 
-def translate_articles(articles):
-    """翻译一批文章为中文 + 中立化"""
+def translate_summary(article):
+    """只补 zh_summary：同理，中文源不调翻译 API。"""
+    summary = clean_text(article.get('summary', ''))
+    lang = article.get('original_lang', 'en')
+    if not summary or is_chinese(article.get('zh_summary')):
+        article['zh_summary'] = article.get('zh_summary') or ''
+        return article
+
+    neutral_summary = clip_to_sentence(summary)
+    if lang != 'zh':
+        neutral_summary = rewrite_english_for_neutrality(neutral_summary, is_title=False)
+    zh_summary, ok = translate_text(neutral_summary, lang)
+    if ok and zh_summary:
+        article['zh_summary'] = polish_chinese(zh_summary, is_title=False)
+    time.sleep(0.15)
+    article['zh_summary'] = article.get('zh_summary') or ''
+    return article
+
+def translate_articles(articles, what='both'):
+    """翻译一批文章。
+
+    先标题后摘要：标题是用户实际看到的正文，字符成本只有摘要的 1/5，
+    额度有限时优先保证 zh_title 覆盖率，摘要用剩余预算补。
+    """
     if not articles:
         return articles
 
-    print(f"🤖 翻译 {len(articles)} 篇...")
-    for i, article in enumerate(articles):
-        translate_article(article)
+    phases = [('标题', translate_title)]
+    if what == 'both':
+        phases.append(('摘要', translate_summary))
+
+    for label, fn in phases:
         if TRANSLATE_STATE['quota_exhausted'] or TRANSLATE_STATE['budget_exhausted']:
-            print(f"  ⏹ 已处理 {i + 1}/{len(articles)}，本轮翻译提前结束（下一轮继续）")
             break
-        if (i + 1) % 15 == 0:
-            print(f"  翻译进度 {i+1}/{len(articles)}")
+        print(f"🤖 翻译{label} {len(articles)} 篇...")
+        for i, article in enumerate(articles):
+            fn(article)
+            if TRANSLATE_STATE['quota_exhausted'] or TRANSLATE_STATE['budget_exhausted']:
+                print(f"  ⏹ {label}已处理 {i + 1}/{len(articles)}，本轮翻译提前结束（下一轮继续）")
+                break
+            if (i + 1) % 50 == 0:
+                print(f"  {label}进度 {i+1}/{len(articles)}")
 
     print(f"✅ 翻译完成（成功 {TRANSLATE_STATE['translated']} 次，失败 {TRANSLATE_STATE['failed']} 次）")
     return articles
@@ -406,7 +426,7 @@ def fetch_news():
             feed = feedparser.parse(source['rss'])
             if not feed.entries:
                 print(f"⚠️ {source['name']} 无条目：{source['rss']}")
-            for entry in feed.entries[:10]:
+            for entry in feed.entries[:MAX_PER_SOURCE]:
                 article_id = hashlib.md5(f"{source['id']}-{entry.title}".encode()).hexdigest()[:12]
 
                 if article_id in cached_ids:
@@ -491,19 +511,18 @@ def main():
         pending.sort(key=lambda a: a.get('published') or '', reverse=True)
         batch = pending[:RETRANSLATE_LIMIT]
         print(f"🔁 历史文章待补译 {len(pending)} 篇，本轮处理 {len(batch)} 篇")
-        for article in batch:
-            if TRANSLATE_STATE['quota_exhausted'] or TRANSLATE_STATE['budget_exhausted']:
-                print("  ⏹ 翻译额度受限，剩余补译留待下一轮")
-                break
-            translate_article(article)
+        translate_articles(batch)
 
     # 3) 合并：同 id 用本轮新抓的覆盖，历史文章保留
     merged = {a['id']: a for a in cached_articles}
     for a in new_articles:
         merged[a['id']] = a
     articles = list(merged.values())
+    if len(articles) > MAX_TOTAL:
+        # 超限时按发布时间保留最新的，再恢复输出顺序（priority, published）
+        articles.sort(key=lambda a: a.get('published') or '', reverse=True)
+        articles = articles[:MAX_TOTAL]
     articles.sort(key=lambda a: (a.get('priority', 2), a.get('published') or ''))
-    articles = articles[:500]
 
     updated_at = datetime.now(timezone.utc).isoformat()
     save_cache({'articles': articles, 'updated': updated_at})
