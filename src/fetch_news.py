@@ -11,6 +11,7 @@ import html
 import time
 import urllib.request
 import urllib.parse
+import urllib.error
 import re
 
 MYMEMORY_API = "https://api.mymemory.translated.net/get"
@@ -27,6 +28,7 @@ TRANSLATE_MAX_CHARS = 150000 # 单轮送进翻译 API 的字符上限，防止�
 COVERAGE_TARGET = 0.90       # 中文标题覆盖率告警阈值
 TRANSLATE_RETRY_DELAYS = (0.5, 1.5, 4.0)  # 失败重试的指数退避
 MYMEMORY_QUOTA_MARK = 'MYMEMORY WARNING'
+RSS_TIMEOUT = 15  # 单个 RSS 源的抓取超时（秒），防止挂起源拖住整个 CI
 
 # 本轮运行态：额度/预算耗尽后不再发起请求，避免 CI 被重试拖死
 TRANSLATE_STATE = {
@@ -307,7 +309,7 @@ def translate_text(text, src_lang='en'):
             status = result.get('responseStatus')
 
             # 免费额度耗尽：重试没有意义，直接熔断本轮（否则每条都要空转 3 次退避）
-            if status == 403 or MYMEMORY_QUOTA_MARK in translated.upper():
+            if status in (403, 429) or MYMEMORY_QUOTA_MARK in translated.upper():
                 TRANSLATE_STATE['quota_exhausted'] = True
                 print(f"⚠️ 翻译额度耗尽，本轮停止翻译：{text[:40]}")
                 return None, False
@@ -319,6 +321,20 @@ def translate_text(text, src_lang='en'):
             TRANSLATE_STATE['chars'] += len(text)
             TRANSLATE_STATE['translated'] += 1
             return translated, True
+        except urllib.error.HTTPError as e:
+            # 关键：urlopen 在 4xx/5xx 时抛 HTTPError，永远不会返回 response，
+            # 所以上面基于 responseStatus 的熔断对 HTTP 429/403 从未生效过。
+            # 额度耗尽必须在这里识别并立即熔断，否则每条都要空转 3 次退避 + 超时。
+            body = ''
+            try:
+                body = e.read().decode('utf-8', 'replace')
+            except Exception:
+                pass
+            if e.code in (403, 429) or MYMEMORY_QUOTA_MARK in body.upper():
+                TRANSLATE_STATE['quota_exhausted'] = True
+                print(f"⚠️ 翻译额度耗尽（HTTP {e.code}），本轮停止翻译：{text[:40]}")
+                return None, False
+            last_error = f"HTTPError {e.code}: {(body or str(e.reason))[:120]}"
         except Exception as e:
             last_error = f"{type(e).__name__}: {e}"
 
@@ -402,6 +418,21 @@ def report_coverage(articles):
               f"（翻译额度/网络受限，下一轮继续自愈；前端已用 ·EN 标记降级）")
     return rate
 
+def parse_feed(rss_url):
+    """带超时抓取并解析 RSS。
+
+    feedparser.parse(url) 内部用 urllib 但没有超时控制，挂起的源会把整个抓取阶段
+    拖到 CI 超时；这里显式 urlopen(timeout=RSS_TIMEOUT) 取字节再交给 feedparser。
+    超时/HTTP 错误直接抛出，由 fetch_news 的逐源 try/except 记为该源失败并继续。
+    """
+    req = urllib.request.Request(rss_url, headers={
+        'User-Agent': 'Mozilla/5.0 (compatible; GlobalNewsBot/1.0)',
+        'Accept': 'application/rss+xml, application/xml, text/xml, */*',
+    })
+    with urllib.request.urlopen(req, timeout=RSS_TIMEOUT) as resp:
+        raw = resp.read()
+    return feedparser.parse(raw)
+
 def fetch_news():
     sources_file = Path('src/sources.json')
     if not sources_file.exists():
@@ -423,7 +454,7 @@ def fetch_news():
 
     for source in sources:
         try:
-            feed = feedparser.parse(source['rss'])
+            feed = parse_feed(source['rss'])
             if not feed.entries:
                 print(f"⚠️ {source['name']} 无条目：{source['rss']}")
             for entry in feed.entries[:MAX_PER_SOURCE]:
