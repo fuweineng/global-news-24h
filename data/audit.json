@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-10-24T19:50:10+00:00",
-  "source_updated": "2026-10-24T18:34:52.155606+00:00",
+  "generated_at": "2026-10-24T22:44:44+00:00",
+  "source_updated": "2026-10-24T21:25:24.382096+00:00",
   "summary": {
-    "status": "pass",
-    "checks_passed": 4,
+    "status": "warn",
+    "checks_passed": 3,
     "checks_total": 4
   },
   "checks": [
@@ -13,98 +13,98 @@
       "label": "标题中立化覆盖率",
       "status": "pass",
       "threshold": ">= 0.90",
-      "observed": 0.9167,
+      "observed": 0.93,
       "metric": {
-        "processed": 275,
+        "processed": 279,
         "total": 300
       },
-      "detail": "25/300 条标题与英文原文完全相同，未走中立化"
+      "detail": "21/300 条标题与英文原文完全相同，未走中立化"
     },
     {
       "id": "coverage.summary",
       "label": "摘要中立化覆盖率",
       "status": "pass",
       "threshold": ">= 0.90",
-      "observed": 0.9767,
+      "observed": 0.9833,
       "metric": {
-        "processed": 293,
+        "processed": 295,
         "total": 300
       },
-      "detail": "7/300 条摘要与英文原文完全相同，未走中立化"
+      "detail": "5/300 条摘要与英文原文完全相同，未走中立化"
     },
     {
       "id": "coverage.by_source",
       "label": "按来源覆盖率",
-      "status": "pass",
+      "status": "warn",
       "threshold": "0% 源占比 < 0.50",
-      "observed": 0.9167,
+      "observed": 0.93,
       "metric": {
-        "zero_rate_sources": 0,
+        "zero_rate_sources": 1,
         "sources_total": 27
       },
-      "detail": "全部 27 个来源均有中立化产出"
+      "detail": "1 个源加工率为 0（共 27 个源）：中新网"
     },
     {
       "id": "neutrality",
       "label": "中立度残留",
       "status": "pass",
       "threshold": "<= 0.05",
-      "observed": 0.0073,
+      "observed": 0.0143,
       "metric": {
-        "processed": 275,
-        "hits": 2
+        "processed": 279,
+        "hits": 4
       },
-      "detail": "已加工 275 条中 2 条仍含情绪/反讽残留（0.7%）"
+      "detail": "已加工 279 条中 4 条仍含情绪/反讽残留（1.4%）"
     }
   ],
   "by_source": [
     {
       "source": "Al Jazeera",
-      "total": 27,
-      "processed": 27,
+      "total": 33,
+      "processed": 33,
       "rate": 1.0
     },
     {
       "source": "France 24",
-      "total": 26,
-      "processed": 26,
+      "total": 29,
+      "processed": 29,
       "rate": 1.0
     },
     {
-      "source": "界面新闻",
-      "total": 25,
-      "processed": 12,
-      "rate": 0.48
-    },
-    {
-      "source": "MarketWatch",
+      "source": "Engadget",
       "total": 21,
       "processed": 21,
       "rate": 1.0
     },
     {
-      "source": "Engadget",
+      "source": "MarketWatch",
       "total": 20,
       "processed": 20,
       "rate": 1.0
     },
     {
       "source": "TechRadar",
+      "total": 19,
+      "processed": 19,
+      "rate": 1.0
+    },
+    {
+      "source": "界面新闻",
+      "total": 19,
+      "processed": 9,
+      "rate": 0.4737
+    },
+    {
+      "source": "Variety",
       "total": 17,
       "processed": 17,
       "rate": 1.0
     },
     {
       "source": "中新网财经",
-      "total": 15,
-      "processed": 7,
-      "rate": 0.4667
-    },
-    {
-      "source": "Variety",
       "total": 14,
-      "processed": 14,
-      "rate": 1.0
+      "processed": 7,
+      "rate": 0.5
     },
     {
       "source": "CBS News",
@@ -113,39 +113,33 @@
       "rate": 1.0
     },
     {
-      "source": "Mashable",
-      "total": 13,
-      "processed": 13,
+      "source": "CNBC",
+      "total": 12,
+      "processed": 12,
       "rate": 1.0
     },
     {
       "source": "Phys.org",
-      "total": 11,
-      "processed": 11,
+      "total": 12,
+      "processed": 12,
       "rate": 1.0
     },
     {
-      "source": "Wired",
+      "source": "Hollywood Reporter",
       "total": 10,
       "processed": 10,
       "rate": 1.0
     },
     {
-      "source": "BBC",
-      "total": 9,
-      "processed": 9,
-      "rate": 1.0
-    },
-    {
-      "source": "CNBC",
-      "total": 9,
-      "processed": 9,
+      "source": "TechCrunch",
+      "total": 10,
+      "processed": 10,
       "rate": 1.0
     },
     {
       "source": "Deadline",
-      "total": 8,
-      "processed": 8,
+      "total": 9,
+      "processed": 9,
       "rate": 1.0
     },
     {
@@ -155,51 +149,57 @@
       "rate": 1.0
     },
     {
-      "source": "DW",
-      "total": 7,
-      "processed": 7,
-      "rate": 1.0
-    },
-    {
-      "source": "TechCrunch",
-      "total": 7,
-      "processed": 7,
-      "rate": 1.0
-    },
-    {
       "source": "The Verge",
+      "total": 8,
+      "processed": 8,
+      "rate": 1.0
+    },
+    {
+      "source": "Wired",
+      "total": 8,
+      "processed": 8,
+      "rate": 1.0
+    },
+    {
+      "source": "BBC",
       "total": 7,
       "processed": 7,
       "rate": 1.0
     },
     {
-      "source": "中新网",
-      "total": 7,
-      "processed": 3,
-      "rate": 0.4286
-    },
-    {
-      "source": "Hollywood Reporter",
-      "total": 6,
-      "processed": 6,
-      "rate": 1.0
-    },
-    {
-      "source": "NPR",
+      "source": "DW",
       "total": 6,
       "processed": 6,
       "rate": 1.0
     },
     {
       "source": "Financial Times",
-      "total": 5,
-      "processed": 5,
+      "total": 6,
+      "processed": 6,
+      "rate": 1.0
+    },
+    {
+      "source": "Mashable",
+      "total": 4,
+      "processed": 4,
       "rate": 1.0
     },
     {
       "source": "The Next Web",
-      "total": 5,
-      "processed": 5,
+      "total": 4,
+      "processed": 4,
+      "rate": 1.0
+    },
+    {
+      "source": "中新网",
+      "total": 4,
+      "processed": 0,
+      "rate": 0.0
+    },
+    {
+      "source": "NPR",
+      "total": 3,
+      "processed": 3,
       "rate": 1.0
     },
     {
@@ -230,11 +230,25 @@
       "matched": "当然"
     },
     {
+      "source": "Variety",
+      "title": "Sylvester Stallone Says Daughter’s ‘Tulsa King’ Casting Is ‘Of Course’ Nepotism: ‘Obviously We Let Them Have Every Advantage’",
+      "zh_title": "西尔维斯特史泰龙说女儿的“塔尔萨国王”选角是“当然”的裙带关系： “显然我们让他们拥有一切优势”",
+      "rule": "irony",
+      "matched": "当然"
+    },
+    {
       "source": "Deadline",
       "title": "Sylvester Stallone On Casting Daughter In ‘Tulsa King’: “Of Course It’s Nepotism, You Idiot”",
       "zh_title": "西尔维斯特·史泰龙（Sylvester Stallone）在《塔尔萨国王》（Tulsa King）中饰演女儿： “当然是裙带关系，你这个白痴”",
       "rule": "irony",
       "matched": "当然"
+    },
+    {
+      "source": "CNET",
+      "title": "Man Destroys $2,000 iPhone Duo With Dirt, Fire, Knives and Medieval Chainmail",
+      "zh_title": "男子用泥土、火焰、刀具和中世纪的链钉摧毁了$ 2,000 的 iPhone Duo",
+      "rule": "emotion",
+      "matched": "摧毁"
     }
   ],
   "dead_sources": [
@@ -253,28 +267,28 @@
     "actually_producing": [
       "Al Jazeera",
       "France 24",
-      "界面新闻",
-      "MarketWatch",
       "Engadget",
+      "MarketWatch",
       "TechRadar",
-      "中新网财经",
+      "界面新闻",
       "Variety",
+      "中新网财经",
       "CBS News",
-      "Mashable",
-      "Phys.org",
-      "Wired",
-      "BBC",
       "CNBC",
+      "Phys.org",
+      "Hollywood Reporter",
+      "TechCrunch",
       "Deadline",
       "ScienceDaily",
-      "DW",
-      "TechCrunch",
       "The Verge",
-      "中新网",
-      "Hollywood Reporter",
-      "NPR",
+      "Wired",
+      "BBC",
+      "DW",
       "Financial Times",
+      "Mashable",
       "The Next Web",
+      "中新网",
+      "NPR",
       "Ars Technica",
       "CNET",
       "联合国新闻"
