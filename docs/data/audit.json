@@ -1,24 +1,24 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-10-24T17:00:31+00:00",
-  "source_updated": "2026-10-24T16:29:03.368556+00:00",
+  "generated_at": "2026-10-24T19:50:10+00:00",
+  "source_updated": "2026-10-24T18:34:52.155606+00:00",
   "summary": {
-    "status": "warn",
-    "checks_passed": 3,
+    "status": "pass",
+    "checks_passed": 4,
     "checks_total": 4
   },
   "checks": [
     {
       "id": "coverage.title",
       "label": "标题中立化覆盖率",
-      "status": "warn",
+      "status": "pass",
       "threshold": ">= 0.90",
-      "observed": 0.8933,
+      "observed": 0.9167,
       "metric": {
-        "processed": 268,
+        "processed": 275,
         "total": 300
       },
-      "detail": "32/300 条标题与英文原文完全相同，未走中立化"
+      "detail": "25/300 条标题与英文原文完全相同，未走中立化"
     },
     {
       "id": "coverage.summary",
@@ -37,7 +37,7 @@
       "label": "按来源覆盖率",
       "status": "pass",
       "threshold": "0% 源占比 < 0.50",
-      "observed": 0.8933,
+      "observed": 0.9167,
       "metric": {
         "zero_rate_sources": 0,
         "sources_total": 27
@@ -49,92 +49,80 @@
       "label": "中立度残留",
       "status": "pass",
       "threshold": "<= 0.05",
-      "observed": 0.0,
+      "observed": 0.0073,
       "metric": {
-        "processed": 268,
-        "hits": 0
+        "processed": 275,
+        "hits": 2
       },
-      "detail": "已加工 268 条中 0 条仍含情绪/反讽残留（0.0%）"
+      "detail": "已加工 275 条中 2 条仍含情绪/反讽残留（0.7%）"
     }
   ],
   "by_source": [
     {
       "source": "Al Jazeera",
-      "total": 30,
-      "processed": 30,
+      "total": 27,
+      "processed": 27,
+      "rate": 1.0
+    },
+    {
+      "source": "France 24",
+      "total": 26,
+      "processed": 26,
       "rate": 1.0
     },
     {
       "source": "界面新闻",
-      "total": 29,
-      "processed": 16,
-      "rate": 0.5517
-    },
-    {
-      "source": "France 24",
-      "total": 22,
-      "processed": 22,
-      "rate": 1.0
-    },
-    {
-      "source": "中新网财经",
-      "total": 20,
-      "processed": 8,
-      "rate": 0.4
+      "total": 25,
+      "processed": 12,
+      "rate": 0.48
     },
     {
       "source": "MarketWatch",
-      "total": 17,
-      "processed": 17,
-      "rate": 1.0
-    },
-    {
-      "source": "Mashable",
-      "total": 17,
-      "processed": 17,
+      "total": 21,
+      "processed": 21,
       "rate": 1.0
     },
     {
       "source": "Engadget",
-      "total": 15,
-      "processed": 15,
+      "total": 20,
+      "processed": 20,
       "rate": 1.0
     },
     {
       "source": "TechRadar",
-      "total": 15,
-      "processed": 15,
+      "total": 17,
+      "processed": 17,
       "rate": 1.0
     },
     {
-      "source": "DW",
-      "total": 12,
-      "processed": 12,
-      "rate": 1.0
+      "source": "中新网财经",
+      "total": 15,
+      "processed": 7,
+      "rate": 0.4667
     },
     {
       "source": "Variety",
-      "total": 12,
-      "processed": 12,
+      "total": 14,
+      "processed": 14,
       "rate": 1.0
     },
     {
       "source": "CBS News",
-      "total": 11,
-      "processed": 11,
+      "total": 13,
+      "processed": 13,
       "rate": 1.0
     },
     {
-      "source": "CNBC",
-      "total": 11,
-      "processed": 11,
+      "source": "Mashable",
+      "total": 13,
+      "processed": 13,
       "rate": 1.0
     },
     {
-      "source": "中新网",
+      "source": "Phys.org",
       "total": 11,
-      "processed": 4,
-      "rate": 0.3636
+      "processed": 11,
+      "rate": 1.0
     },
     {
       "source": "Wired",
@@ -149,9 +137,15 @@
       "rate": 1.0
     },
     {
-      "source": "Phys.org",
+      "source": "CNBC",
       "total": 9,
       "processed": 9,
+      "rate": 1.0
+    },
+    {
+      "source": "Deadline",
+      "total": 8,
+      "processed": 8,
       "rate": 1.0
     },
     {
@@ -161,7 +155,13 @@
       "rate": 1.0
     },
     {
-      "source": "Deadline",
+      "source": "DW",
+      "total": 7,
+      "processed": 7,
+      "rate": 1.0
+    },
+    {
+      "source": "TechCrunch",
       "total": 7,
       "processed": 7,
       "rate": 1.0
@@ -173,33 +173,33 @@
       "rate": 1.0
     },
     {
+      "source": "中新网",
+      "total": 7,
+      "processed": 3,
+      "rate": 0.4286
+    },
+    {
+      "source": "Hollywood Reporter",
+      "total": 6,
+      "processed": 6,
+      "rate": 1.0
+    },
+    {
       "source": "NPR",
       "total": 6,
       "processed": 6,
       "rate": 1.0
     },
     {
-      "source": "TechCrunch",
-      "total": 6,
-      "processed": 6,
+      "source": "Financial Times",
+      "total": 5,
+      "processed": 5,
       "rate": 1.0
     },
     {
       "source": "The Next Web",
       "total": 5,
       "processed": 5,
-      "rate": 1.0
-    },
-    {
-      "source": "Financial Times",
-      "total": 4,
-      "processed": 4,
-      "rate": 1.0
-    },
-    {
-      "source": "Hollywood Reporter",
-      "total": 3,
-      "processed": 3,
       "rate": 1.0
     },
     {
@@ -221,7 +221,22 @@
       "rate": 1.0
     }
   ],
-  "neutrality_hits": [],
+  "neutrality_hits": [
+    {
+      "source": "Variety",
+      "title": "Sylvester Stallone Says Daughter’s ‘Tulsa King’ Casting is ‘Of Course’ Nepotism: ‘Obviously We Let Them Have Every Advantage’",
+      "zh_title": "西尔维斯特史泰龙说女儿的“塔尔萨国王”选角是“当然”的裙带关系： “显然我们让他们拥有一切优势”",
+      "rule": "irony",
+      "matched": "当然"
+    },
+    {
+      "source": "Deadline",
+      "title": "Sylvester Stallone On Casting Daughter In ‘Tulsa King’: “Of Course It’s Nepotism, You Idiot”",
+      "zh_title": "西尔维斯特·史泰龙（Sylvester Stallone）在《塔尔萨国王》（Tulsa King）中饰演女儿： “当然是裙带关系，你这个白痴”",
+      "rule": "irony",
+      "matched": "当然"
+    }
+  ],
   "dead_sources": [
     "Reuters",
     "AP News",
@@ -237,29 +252,29 @@
     ],
     "actually_producing": [
       "Al Jazeera",
-      "界面新闻",
       "France 24",
-      "中新网财经",
+      "界面新闻",
       "MarketWatch",
-      "Mashable",
       "Engadget",
       "TechRadar",
-      "DW",
+      "中新网财经",
       "Variety",
       "CBS News",
-      "CNBC",
-      "中新网",
+      "Mashable",
+      "Phys.org",
       "Wired",
       "BBC",
-      "Phys.org",
-      "ScienceDaily",
+      "CNBC",
       "Deadline",
-      "The Verge",
-      "NPR",
+      "ScienceDaily",
+      "DW",
       "TechCrunch",
-      "The Next Web",
-      "Financial Times",
+      "The Verge",
+      "中新网",
       "Hollywood Reporter",
+      "NPR",
+      "Financial Times",
+      "The Next Web",
       "Ars Technica",
       "CNET",
       "联合国新闻"
