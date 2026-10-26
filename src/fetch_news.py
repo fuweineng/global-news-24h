@@ -30,6 +30,22 @@ TRANSLATE_RETRY_DELAYS = (0.5, 1.5, 4.0)  # 失败重试的指数退避
 MYMEMORY_QUOTA_MARK = 'MYMEMORY WARNING'
 RSS_TIMEOUT = 15  # 单个 RSS 源的抓取超时（秒），防止挂起源拖住整个 CI
 
+# ── 派生字段与质量 ───────────────────────────────────
+SUMMARY_PER_RUN = 40     # 每轮最多补多少条中文摘要（额度有限，分轮自愈）
+SUMMARY_MAX_CHARS = 90   # 摘要只翻首句且压到 90 字内：字符成本约为全文的 1/4
+ONE_LINE_MAX_CHARS = 42  # 一句话要点的长度上限（手机上一行能读完）
+
+# 公关稿/软文特征：权威源里也混着这类，直接下沉而不是删掉（避免误杀政策稿）
+# 只用"只有公关稿才会这么写"的词；「亮相/举办/发布」这类真新闻也用，不能算
+PRESS_MARKERS = ['解决方案', '战略合作', '签约仪式', '揭牌', '荣获', '获评',
+                 '圆满落幕', '胜利召开', '重磅推出', '全新升级', '赋能', '携手',
+                 '指定用品', '独家赞助']
+# 硬新闻信号：有具体事实/数字/政策动作的才是观众会停下来的
+HARD_NEWS_KW = ['发布', '通报', '处罚', '选举', '表决', '决定', '签署', '撤销', '召回',
+                '下调', '上调', '增长', '下降', '上涨', '下跌', '辞职', '免职', '判决',
+                '事故', '地震', '台风', '暴雨', '预警', '央行', '利率', '税率', '关税',
+                '就业', '失业', '通胀', '法案', '裁决', '营收', '财报', '裁员']
+
 # 本轮运行态：额度/预算耗尽后不再发起请求，避免 CI 被重试拖死
 TRANSLATE_STATE = {
     'quota_exhausted': False,
@@ -358,7 +374,7 @@ def translate_title(article):
         article['zh_title'] = polish_chinese(zh_title, is_title=True)
     time.sleep(0.15)
     article['zh_title'] = article.get('zh_title') or ''
-    article['one_line'] = article['zh_title'] or title  # 向后兼容
+    # one_line 由 refresh_derived() 统一生成（摘要首句优先），这里不再冒充
     return article
 
 def translate_summary(article):
@@ -369,7 +385,7 @@ def translate_summary(article):
         article['zh_summary'] = article.get('zh_summary') or ''
         return article
 
-    neutral_summary = clip_to_sentence(summary)
+    neutral_summary = clip_to_sentence(summary, max_chars=SUMMARY_MAX_CHARS)
     if lang != 'zh':
         neutral_summary = rewrite_english_for_neutrality(neutral_summary, is_title=False)
     zh_summary, ok = translate_text(neutral_summary, lang)
@@ -407,12 +423,109 @@ def translate_articles(articles, what='both'):
     print(f"✅ 翻译完成（成功 {TRANSLATE_STATE['translated']} 次，失败 {TRANSLATE_STATE['failed']} 次）")
     return articles
 
+def first_sentence(text, limit=ONE_LINE_MAX_CHARS):
+    """取句首一句并压到 limit 以内，尽量断在标点上。"""
+    t = clean_text(text or '')
+    if not t:
+        return ''
+    parts = re.split(r'(?<=[。！？!?；;])', t)
+    line = (parts[0] if parts else t).strip()
+    if len(line) > limit:
+        line = line[:limit]
+        cut = max(line.rfind('，'), line.rfind('、'), line.rfind('；'), line.rfind(','))
+        if cut > limit * 0.5:
+            line = line[:cut]
+    return line.strip(' ，,。；;、')
+
+
+def build_one_line(article):
+    """一句话要点 = 中文摘要首句；没有摘要才退回标题。
+
+    旧实现 `one_line = zh_title` 让 300 条全部重复，下游（gate/souse/短视频）
+    拿不到任何比标题更细的信息。这里显式记录来源，方便排查。
+    """
+    zh_title = (article.get('zh_title') or '').strip()
+    line = first_sentence(article.get('zh_summary'))
+    if line and line != zh_title:
+        article['one_line'] = line
+        article['one_line_src'] = 'summary'
+    else:
+        article['one_line'] = zh_title or clean_text(article.get('title', ''))
+        article['one_line_src'] = 'title'
+    return article
+
+
+def is_press_release(article):
+    t = (article.get('title') or '') + (article.get('zh_title') or '')
+    return any(m in t for m in PRESS_MARKERS)
+
+
+def quality_score(article):
+    """0..100：硬新闻事实↑，软文↓，没摘要略↓。下游排序/过滤用。"""
+    t = article.get('zh_title') or article.get('title') or ''
+    score = 50
+    if any(k in t for k in HARD_NEWS_KW):
+        score += 20
+    if re.search(r'\d', t):
+        score += 10                      # 有具体数字
+    if is_press_release(article):
+        score -= 45
+    if not (article.get('zh_summary') or '').strip():
+        score -= 10
+    if article.get('priority') == 1:
+        score += 5                       # 源优先级（数字越小越重要）
+    return max(0, min(100, score))
+
+
+def refresh_derived(articles):
+    """重算派生字段。放在合并之后跑，历史条目也能立刻修好，不必等重译。"""
+    for a in articles:
+        build_one_line(a)
+        a['quality'] = quality_score(a)
+    return articles
+
+
+def backfill_summaries(articles, limit=SUMMARY_PER_RUN):
+    """摘要补译：单独排队、单独限额，不抢标题的翻译额度。"""
+    todo = [a for a in articles
+            if (a.get('summary') or '').strip()
+            and not is_chinese(a.get('zh_summary'))
+            and not is_press_release(a)]
+    todo.sort(key=lambda a: a.get('published') or '', reverse=True)
+    todo = todo[:limit]
+    if not todo:
+        return 0
+    print(f"📝 摘要补译 {len(todo)} 篇（单轮上限 {SUMMARY_PER_RUN}）")
+    done = 0
+    for i, a in enumerate(todo):
+        if TRANSLATE_STATE['quota_exhausted'] or TRANSLATE_STATE['budget_exhausted']:
+            print(f"  ⏹ 额度/预算用尽，本轮补到 {i}/{len(todo)}（下一轮继续）")
+            break
+        before = bool((a.get('zh_summary') or '').strip())
+        translate_summary(a)
+        if not before and (a.get('zh_summary') or '').strip():
+            done += 1
+    return done
+
+
 def report_coverage(articles):
     """统计中文标题覆盖率；低于阈值只告警、不让 CI 失败（数据问题不该堵住发布）。"""
     total = len(articles)
     zh = sum(1 for a in articles if is_chinese(a.get('zh_title')))
     rate = (zh / total) if total else 0.0
     print(f"📊 中文标题覆盖率：{zh}/{total} = {rate:.1%}")
+
+    # 摘要 / 一句话要点 / 软文数量：这三个才决定下游能不能直接用
+    summ = sum(1 for a in articles if is_chinese(a.get('zh_summary')))
+    lines = [a.get('one_line') or '' for a in articles if (a.get('one_line') or '').strip()]
+    uniq = len(set(lines)) / len(lines) if lines else 0.0
+    pr = sum(1 for a in articles if is_press_release(a))
+    q_avg = (sum(a.get('quality', 0) for a in articles) / total) if total else 0
+    print(f"📝 中文摘要覆盖：{summ}/{total} = {summ/total if total else 0:.1%}"
+          f"｜一句话唯一率：{uniq:.1%}｜软文嫌疑：{pr} 条｜平均质量分：{q_avg:.0f}")
+    if lines and uniq < 0.9:
+        print("⚠️ 一句话要点重复率偏高：说明摘要还没补上，正在退回标题（多轮会自愈）")
+
     if total and rate < COVERAGE_TARGET:
         print(f"⚠️ 中文覆盖率 {rate:.0%} 低于 {COVERAGE_TARGET:.0%}"
               f"（翻译额度/网络受限，下一轮继续自愈；前端已用 ·EN 标记降级）")
@@ -554,6 +667,10 @@ def main():
         articles.sort(key=lambda a: a.get('published') or '', reverse=True)
         articles = articles[:MAX_TOTAL]
     articles.sort(key=lambda a: (a.get('priority', 2), a.get('published') or ''))
+
+    # 4) 摘要补译（限额），然后重算 one_line / quality —— 历史条目一起修好
+    backfill_summaries(articles)
+    refresh_derived(articles)
 
     updated_at = datetime.now(timezone.utc).isoformat()
     save_cache({'articles': articles, 'updated': updated_at})
