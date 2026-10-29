@@ -1,127 +1,109 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-10-29T10:26:55+00:00",
-  "source_updated": "2026-10-29T04:30:35.442780+00:00",
+  "generated_at": "2026-10-29T17:05:43+00:00",
+  "source_updated": "2026-10-29T11:07:05.900904+00:00",
   "summary": {
-    "status": "warn",
-    "checks_passed": 3,
+    "status": "pass",
+    "checks_passed": 4,
     "checks_total": 4
   },
   "checks": [
     {
       "id": "coverage.title",
       "label": "标题中立化覆盖率",
-      "status": "warn",
+      "status": "pass",
       "threshold": ">= 0.90",
-      "observed": 0.88,
+      "observed": 0.9033,
       "metric": {
-        "processed": 264,
+        "processed": 271,
         "total": 300
       },
-      "detail": "36/300 条标题与英文原文完全相同，未走中立化"
+      "detail": "29/300 条标题与英文原文完全相同，未走中立化"
     },
     {
       "id": "coverage.summary",
       "label": "摘要中立化覆盖率",
       "status": "pass",
       "threshold": ">= 0.90",
-      "observed": 0.99,
+      "observed": 0.9567,
       "metric": {
-        "processed": 297,
+        "processed": 287,
         "total": 300
       },
-      "detail": "3/300 条摘要与英文原文完全相同，未走中立化"
+      "detail": "13/300 条摘要与英文原文完全相同，未走中立化"
     },
     {
       "id": "coverage.by_source",
       "label": "按来源覆盖率",
       "status": "pass",
       "threshold": "0% 源占比 < 0.50",
-      "observed": 0.88,
+      "observed": 0.9033,
       "metric": {
         "zero_rate_sources": 0,
-        "sources_total": 27
+        "sources_total": 24
       },
-      "detail": "全部 27 个来源均有中立化产出"
+      "detail": "全部 24 个来源均有中立化产出"
     },
     {
       "id": "neutrality",
       "label": "中立度残留",
       "status": "pass",
       "threshold": "<= 0.05",
-      "observed": 0.0038,
+      "observed": 0.0,
       "metric": {
-        "processed": 264,
-        "hits": 1
+        "processed": 271,
+        "hits": 0
       },
-      "detail": "已加工 264 条中 1 条仍含情绪/反讽残留（0.4%）"
+      "detail": "已加工 271 条中 0 条仍含情绪/反讽残留（0.0%）"
     }
   ],
   "by_source": [
     {
-      "source": "Al Jazeera",
-      "total": 20,
-      "processed": 20,
-      "rate": 1.0
-    },
-    {
-      "source": "Deadline",
-      "total": 20,
-      "processed": 20,
-      "rate": 1.0
-    },
-    {
-      "source": "Phys.org",
-      "total": 20,
-      "processed": 20,
-      "rate": 1.0
-    },
-    {
       "source": "界面新闻",
-      "total": 20,
-      "processed": 11,
-      "rate": 0.55
+      "total": 30,
+      "processed": 21,
+      "rate": 0.7
     },
     {
-      "source": "Variety",
+      "source": "中新网财经",
+      "total": 24,
+      "processed": 12,
+      "rate": 0.5
+    },
+    {
+      "source": "Al Jazeera",
+      "total": 23,
+      "processed": 23,
+      "rate": 1.0
+    },
+    {
+      "source": "中新网",
+      "total": 20,
+      "processed": 12,
+      "rate": 0.6
+    },
+    {
+      "source": "TechRadar",
       "total": 19,
       "processed": 19,
       "rate": 1.0
     },
     {
-      "source": "CNBC",
+      "source": "Deadline",
       "total": 17,
       "processed": 17,
       "rate": 1.0
     },
     {
-      "source": "Hollywood Reporter",
+      "source": "Mashable",
       "total": 17,
       "processed": 17,
       "rate": 1.0
     },
     {
-      "source": "TechRadar",
+      "source": "Variety",
       "total": 17,
       "processed": 17,
-      "rate": 1.0
-    },
-    {
-      "source": "中新网",
-      "total": 17,
-      "processed": 4,
-      "rate": 0.2353
-    },
-    {
-      "source": "中新网财经",
-      "total": 17,
-      "processed": 3,
-      "rate": 0.1765
-    },
-    {
-      "source": "MarketWatch",
-      "total": 16,
-      "processed": 16,
       "rate": 1.0
     },
     {
@@ -131,9 +113,51 @@
       "rate": 1.0
     },
     {
-      "source": "Mashable",
+      "source": "Hollywood Reporter",
       "total": 13,
       "processed": 13,
+      "rate": 1.0
+    },
+    {
+      "source": "NPR",
+      "total": 13,
+      "processed": 13,
+      "rate": 1.0
+    },
+    {
+      "source": "CNBC",
+      "total": 12,
+      "processed": 12,
+      "rate": 1.0
+    },
+    {
+      "source": "France 24",
+      "total": 11,
+      "processed": 11,
+      "rate": 1.0
+    },
+    {
+      "source": "Wired",
+      "total": 11,
+      "processed": 11,
+      "rate": 1.0
+    },
+    {
+      "source": "DW",
+      "total": 10,
+      "processed": 10,
+      "rate": 1.0
+    },
+    {
+      "source": "MarketWatch",
+      "total": 10,
+      "processed": 10,
+      "rate": 1.0
+    },
+    {
+      "source": "The Next Web",
+      "total": 10,
+      "processed": 10,
       "rate": 1.0
     },
     {
@@ -143,39 +167,9 @@
       "rate": 1.0
     },
     {
-      "source": "France 24",
-      "total": 9,
-      "processed": 9,
-      "rate": 1.0
-    },
-    {
-      "source": "The Verge",
-      "total": 9,
-      "processed": 9,
-      "rate": 1.0
-    },
-    {
-      "source": "CNET",
-      "total": 8,
-      "processed": 8,
-      "rate": 1.0
-    },
-    {
-      "source": "TechCrunch",
+      "source": "Phys.org",
       "total": 7,
       "processed": 7,
-      "rate": 1.0
-    },
-    {
-      "source": "NPR",
-      "total": 6,
-      "processed": 6,
-      "rate": 1.0
-    },
-    {
-      "source": "CBS News",
-      "total": 5,
-      "processed": 5,
       "rate": 1.0
     },
     {
@@ -185,51 +179,31 @@
       "rate": 1.0
     },
     {
-      "source": "Wired",
-      "total": 4,
-      "processed": 4,
-      "rate": 1.0
-    },
-    {
-      "source": "Ars Technica",
-      "total": 3,
-      "processed": 3,
-      "rate": 1.0
-    },
-    {
-      "source": "DW",
-      "total": 3,
-      "processed": 3,
-      "rate": 1.0
-    },
-    {
-      "source": "The Next Web",
-      "total": 3,
-      "processed": 3,
-      "rate": 1.0
-    },
-    {
       "source": "Engadget",
+      "total": 3,
+      "processed": 3,
+      "rate": 1.0
+    },
+    {
+      "source": "CBS News",
       "total": 2,
       "processed": 2,
       "rate": 1.0
     },
     {
-      "source": "ZDNet",
-      "total": 1,
-      "processed": 1,
+      "source": "CNET",
+      "total": 2,
+      "processed": 2,
+      "rate": 1.0
+    },
+    {
+      "source": "The Verge",
+      "total": 2,
+      "processed": 2,
       "rate": 1.0
     }
   ],
-  "neutrality_hits": [
-    {
-      "source": "MarketWatch",
-      "title": "My wife cried when I found out she had only $80,000 in her 401(k). I have $2.2 million. Am I wrong to be shocked?",
-      "zh_title": "当我发现她的 401 (k)只有$ 80,000 时，我的妻子哭了。我有$ 220 万。我感到震惊是不是错了",
-      "rule": "emotion",
-      "matched": "震惊"
-    }
-  ],
+  "neutrality_hits": [],
   "dead_sources": [
     "Reuters",
     "AP News",
@@ -244,33 +218,30 @@
       "加载中…"
     ],
     "actually_producing": [
-      "Al Jazeera",
-      "Deadline",
-      "Phys.org",
       "界面新闻",
-      "Variety",
-      "CNBC",
-      "Hollywood Reporter",
-      "TechRadar",
-      "中新网",
       "中新网财经",
-      "MarketWatch",
-      "BBC",
+      "Al Jazeera",
+      "中新网",
+      "TechRadar",
+      "Deadline",
       "Mashable",
-      "Financial Times",
-      "France 24",
-      "The Verge",
-      "CNET",
-      "TechCrunch",
+      "Variety",
+      "BBC",
+      "Hollywood Reporter",
       "NPR",
-      "CBS News",
-      "ScienceDaily",
+      "CNBC",
+      "France 24",
       "Wired",
-      "Ars Technica",
       "DW",
+      "MarketWatch",
       "The Next Web",
+      "Financial Times",
+      "Phys.org",
+      "ScienceDaily",
       "Engadget",
-      "ZDNet"
+      "CBS News",
+      "CNET",
+      "The Verge"
     ],
     "false_claims": []
   }
