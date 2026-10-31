@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-10-31T07:31:26+00:00",
-  "source_updated": "2026-10-31T04:10:41.255365+00:00",
+  "generated_at": "2026-10-31T13:54:52+00:00",
+  "source_updated": "2026-10-31T10:26:53.703501+00:00",
   "summary": {
     "status": "warn",
     "checks_passed": 3,
@@ -13,133 +13,115 @@
       "label": "标题中立化覆盖率",
       "status": "warn",
       "threshold": ">= 0.90",
-      "observed": 0.8833,
+      "observed": 0.82,
       "metric": {
-        "processed": 265,
+        "processed": 246,
         "total": 300
       },
-      "detail": "35/300 条标题与英文原文完全相同，未走中立化"
+      "detail": "54/300 条标题与英文原文完全相同，未走中立化"
     },
     {
       "id": "coverage.summary",
       "label": "摘要中立化覆盖率",
       "status": "pass",
       "threshold": ">= 0.90",
-      "observed": 0.9967,
+      "observed": 0.9667,
       "metric": {
-        "processed": 299,
+        "processed": 290,
         "total": 300
       },
-      "detail": "1/300 条摘要与英文原文完全相同，未走中立化"
+      "detail": "10/300 条摘要与英文原文完全相同，未走中立化"
     },
     {
       "id": "coverage.by_source",
       "label": "按来源覆盖率",
       "status": "pass",
       "threshold": "0% 源占比 < 0.50",
-      "observed": 0.8833,
+      "observed": 0.82,
       "metric": {
         "zero_rate_sources": 0,
-        "sources_total": 26
+        "sources_total": 24
       },
-      "detail": "全部 26 个来源均有中立化产出"
+      "detail": "全部 24 个来源均有中立化产出"
     },
     {
       "id": "neutrality",
       "label": "中立度残留",
       "status": "pass",
       "threshold": "<= 0.05",
-      "observed": 0.0075,
+      "observed": 0.0122,
       "metric": {
-        "processed": 265,
-        "hits": 2
+        "processed": 246,
+        "hits": 3
       },
-      "detail": "已加工 265 条中 2 条仍含情绪/反讽残留（0.8%）"
+      "detail": "已加工 246 条中 3 条仍含情绪/反讽残留（1.2%）"
     }
   ],
   "by_source": [
     {
-      "source": "Al Jazeera",
+      "source": "界面新闻",
+      "total": 30,
+      "processed": 14,
+      "rate": 0.4667
+    },
+    {
+      "source": "中新网财经",
       "total": 27,
-      "processed": 27,
+      "processed": 8,
+      "rate": 0.2963
+    },
+    {
+      "source": "中新网",
+      "total": 25,
+      "processed": 6,
+      "rate": 0.24
+    },
+    {
+      "source": "Al Jazeera",
+      "total": 24,
+      "processed": 24,
       "rate": 1.0
     },
     {
       "source": "Variety",
-      "total": 23,
-      "processed": 23,
-      "rate": 1.0
-    },
-    {
-      "source": "Deadline",
       "total": 22,
       "processed": 22,
       "rate": 1.0
     },
     {
-      "source": "Hollywood Reporter",
-      "total": 22,
-      "processed": 22,
+      "source": "Mashable",
+      "total": 20,
+      "processed": 20,
       "rate": 1.0
     },
     {
       "source": "TechRadar",
-      "total": 22,
-      "processed": 22,
+      "total": 19,
+      "processed": 19,
       "rate": 1.0
     },
     {
-      "source": "Phys.org",
-      "total": 21,
-      "processed": 21,
-      "rate": 1.0
-    },
-    {
-      "source": "界面新闻",
-      "total": 20,
-      "processed": 10,
-      "rate": 0.5
-    },
-    {
-      "source": "MarketWatch",
-      "total": 18,
-      "processed": 18,
-      "rate": 1.0
-    },
-    {
-      "source": "中新网财经",
-      "total": 17,
-      "processed": 4,
-      "rate": 0.2353
-    },
-    {
-      "source": "中新网",
+      "source": "Deadline",
       "total": 15,
-      "processed": 3,
-      "rate": 0.2
+      "processed": 15,
+      "rate": 1.0
     },
     {
-      "source": "Mashable",
+      "source": "Hollywood Reporter",
+      "total": 14,
+      "processed": 14,
+      "rate": 1.0
+    },
+    {
+      "source": "France 24",
       "total": 13,
       "processed": 13,
       "rate": 1.0
     },
     {
-      "source": "Ars Technica",
-      "total": 9,
-      "processed": 9,
-      "rate": 1.0
-    },
-    {
-      "source": "BBC",
-      "total": 9,
-      "processed": 9,
-      "rate": 1.0
-    },
-    {
-      "source": "CNBC",
-      "total": 9,
-      "processed": 9,
+      "source": "NPR",
+      "total": 10,
+      "processed": 10,
       "rate": 1.0
     },
     {
@@ -149,67 +131,73 @@
       "rate": 1.0
     },
     {
-      "source": "CBS News",
+      "source": "Wired",
+      "total": 9,
+      "processed": 9,
+      "rate": 1.0
+    },
+    {
+      "source": "BBC",
+      "total": 8,
+      "processed": 8,
+      "rate": 1.0
+    },
+    {
+      "source": "Financial Times",
+      "total": 8,
+      "processed": 8,
+      "rate": 1.0
+    },
+    {
+      "source": "CNBC",
       "total": 7,
       "processed": 7,
       "rate": 1.0
     },
     {
-      "source": "CNET",
-      "total": 5,
-      "processed": 5,
+      "source": "DW",
+      "total": 7,
+      "processed": 7,
       "rate": 1.0
     },
     {
-      "source": "France 24",
-      "total": 5,
-      "processed": 5,
+      "source": "CBS News",
+      "total": 6,
+      "processed": 6,
+      "rate": 1.0
+    },
+    {
+      "source": "Phys.org",
+      "total": 6,
+      "processed": 6,
       "rate": 1.0
     },
     {
       "source": "The Next Web",
+      "total": 6,
+      "processed": 6,
+      "rate": 1.0
+    },
+    {
+      "source": "Ars Technica",
       "total": 5,
       "processed": 5,
+      "rate": 1.0
+    },
+    {
+      "source": "MarketWatch",
+      "total": 5,
+      "processed": 5,
+      "rate": 1.0
+    },
+    {
+      "source": "CNET",
+      "total": 4,
+      "processed": 4,
       "rate": 1.0
     },
     {
       "source": "The Verge",
-      "total": 5,
-      "processed": 5,
-      "rate": 1.0
-    },
-    {
-      "source": "DW",
-      "total": 4,
-      "processed": 4,
-      "rate": 1.0
-    },
-    {
-      "source": "Financial Times",
-      "total": 4,
-      "processed": 4,
-      "rate": 1.0
-    },
-    {
-      "source": "Engadget",
-      "total": 3,
-      "processed": 3,
-      "rate": 1.0
-    },
-    {
-      "source": "Wired",
-      "total": 3,
-      "processed": 3,
-      "rate": 1.0
-    },
-    {
-      "source": "NPR",
-      "total": 2,
-      "processed": 2,
-      "rate": 1.0
-    },
-    {
-      "source": "ZDNet",
       "total": 1,
       "processed": 1,
       "rate": 1.0
@@ -229,6 +217,13 @@
       "zh_title": "马丁·斯科塞斯（Martin Scorsese）解释赛斯·罗根（Seth Rogen）如何“毁掉”了他的“克利奥帕特拉”电影： “金正恩没有幽默感”",
       "rule": "emotion",
       "matched": "毁掉"
+    },
+    {
+      "source": "Al Jazeera",
+      "title": "Dead dolphins, naval mines: Russia-Ukraine war destroys the Black Sea",
+      "zh_title": "死海豚、水雷：俄乌战争摧毁黑海",
+      "rule": "emotion",
+      "matched": "摧毁"
     }
   ],
   "dead_sources": [
@@ -245,32 +240,30 @@
       "加载中…"
     ],
     "actually_producing": [
-      "Al Jazeera",
-      "Variety",
-      "Deadline",
-      "Hollywood Reporter",
-      "TechRadar",
-      "Phys.org",
       "界面新闻",
-      "MarketWatch",
       "中新网财经",
       "中新网",
+      "Al Jazeera",
+      "Variety",
       "Mashable",
-      "Ars Technica",
-      "BBC",
-      "CNBC",
-      "TechCrunch",
-      "CBS News",
-      "CNET",
+      "TechRadar",
+      "Deadline",
+      "Hollywood Reporter",
       "France 24",
-      "The Next Web",
-      "The Verge",
-      "DW",
-      "Financial Times",
-      "Engadget",
-      "Wired",
       "NPR",
-      "ZDNet"
+      "TechCrunch",
+      "Wired",
+      "BBC",
+      "Financial Times",
+      "CNBC",
+      "DW",
+      "CBS News",
+      "Phys.org",
+      "The Next Web",
+      "Ars Technica",
+      "MarketWatch",
+      "CNET",
+      "The Verge"
     ],
     "false_claims": []
   }
