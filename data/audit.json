@@ -1,24 +1,24 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-10-31T01:05:12+00:00",
-  "source_updated": "2026-10-31T00:21:55.424683+00:00",
+  "generated_at": "2026-10-31T07:31:26+00:00",
+  "source_updated": "2026-10-31T04:10:41.255365+00:00",
   "summary": {
-    "status": "pass",
-    "checks_passed": 4,
+    "status": "warn",
+    "checks_passed": 3,
     "checks_total": 4
   },
   "checks": [
     {
       "id": "coverage.title",
       "label": "标题中立化覆盖率",
-      "status": "pass",
+      "status": "warn",
       "threshold": ">= 0.90",
-      "observed": 0.9533,
+      "observed": 0.8833,
       "metric": {
-        "processed": 286,
+        "processed": 265,
         "total": 300
       },
-      "detail": "14/300 条标题与英文原文完全相同，未走中立化"
+      "detail": "35/300 条标题与英文原文完全相同，未走中立化"
     },
     {
       "id": "coverage.summary",
@@ -37,7 +37,7 @@
       "label": "按来源覆盖率",
       "status": "pass",
       "threshold": "0% 源占比 < 0.50",
-      "observed": 0.9533,
+      "observed": 0.8833,
       "metric": {
         "zero_rate_sources": 0,
         "sources_total": 26
@@ -49,23 +49,41 @@
       "label": "中立度残留",
       "status": "pass",
       "threshold": "<= 0.05",
-      "observed": 0.007,
+      "observed": 0.0075,
       "metric": {
-        "processed": 286,
+        "processed": 265,
         "hits": 2
       },
-      "detail": "已加工 286 条中 2 条仍含情绪/反讽残留（0.7%）"
+      "detail": "已加工 265 条中 2 条仍含情绪/反讽残留（0.8%）"
     }
   ],
   "by_source": [
     {
+      "source": "Al Jazeera",
+      "total": 27,
+      "processed": 27,
+      "rate": 1.0
+    },
+    {
       "source": "Variety",
-      "total": 24,
-      "processed": 24,
+      "total": 23,
+      "processed": 23,
       "rate": 1.0
     },
     {
       "source": "Deadline",
+      "total": 22,
+      "processed": 22,
+      "rate": 1.0
+    },
+    {
+      "source": "Hollywood Reporter",
+      "total": 22,
+      "processed": 22,
+      "rate": 1.0
+    },
+    {
+      "source": "TechRadar",
       "total": 22,
       "processed": 22,
       "rate": 1.0
@@ -77,133 +95,103 @@
       "rate": 1.0
     },
     {
-      "source": "TechRadar",
-      "total": 20,
-      "processed": 20,
-      "rate": 1.0
-    },
-    {
-      "source": "Al Jazeera",
-      "total": 19,
-      "processed": 19,
-      "rate": 1.0
-    },
-    {
-      "source": "MarketWatch",
-      "total": 19,
-      "processed": 19,
-      "rate": 1.0
-    },
-    {
-      "source": "CNBC",
-      "total": 16,
-      "processed": 16,
-      "rate": 1.0
-    },
-    {
-      "source": "Hollywood Reporter",
-      "total": 16,
-      "processed": 16,
-      "rate": 1.0
-    },
-    {
-      "source": "BBC",
-      "total": 12,
-      "processed": 12,
-      "rate": 1.0
-    },
-    {
-      "source": "France 24",
-      "total": 12,
-      "processed": 12,
-      "rate": 1.0
-    },
-    {
-      "source": "Mashable",
-      "total": 12,
-      "processed": 12,
-      "rate": 1.0
-    },
-    {
-      "source": "The Next Web",
-      "total": 12,
-      "processed": 12,
-      "rate": 1.0
-    },
-    {
-      "source": "Ars Technica",
-      "total": 11,
-      "processed": 11,
-      "rate": 1.0
-    },
-    {
-      "source": "TechCrunch",
-      "total": 11,
-      "processed": 11,
-      "rate": 1.0
-    },
-    {
       "source": "界面新闻",
-      "total": 10,
-      "processed": 5,
+      "total": 20,
+      "processed": 10,
       "rate": 0.5
     },
     {
-      "source": "Financial Times",
-      "total": 9,
-      "processed": 9,
-      "rate": 1.0
-    },
-    {
-      "source": "The Verge",
-      "total": 9,
-      "processed": 9,
+      "source": "MarketWatch",
+      "total": 18,
+      "processed": 18,
       "rate": 1.0
     },
     {
       "source": "中新网财经",
-      "total": 9,
+      "total": 17,
       "processed": 4,
-      "rate": 0.4444
+      "rate": 0.2353
     },
     {
-      "source": "CNET",
-      "total": 6,
-      "processed": 6,
+      "source": "中新网",
+      "total": 15,
+      "processed": 3,
+      "rate": 0.2
+    },
+    {
+      "source": "Mashable",
+      "total": 13,
+      "processed": 13,
       "rate": 1.0
     },
     {
-      "source": "DW",
-      "total": 6,
-      "processed": 6,
+      "source": "Ars Technica",
+      "total": 9,
+      "processed": 9,
+      "rate": 1.0
+    },
+    {
+      "source": "BBC",
+      "total": 9,
+      "processed": 9,
+      "rate": 1.0
+    },
+    {
+      "source": "CNBC",
+      "total": 9,
+      "processed": 9,
+      "rate": 1.0
+    },
+    {
+      "source": "TechCrunch",
+      "total": 9,
+      "processed": 9,
       "rate": 1.0
     },
     {
       "source": "CBS News",
+      "total": 7,
+      "processed": 7,
+      "rate": 1.0
+    },
+    {
+      "source": "CNET",
       "total": 5,
       "processed": 5,
       "rate": 1.0
     },
     {
-      "source": "中新网",
+      "source": "France 24",
       "total": 5,
-      "processed": 1,
-      "rate": 0.2
+      "processed": 5,
+      "rate": 1.0
+    },
+    {
+      "source": "The Next Web",
+      "total": 5,
+      "processed": 5,
+      "rate": 1.0
+    },
+    {
+      "source": "The Verge",
+      "total": 5,
+      "processed": 5,
+      "rate": 1.0
+    },
+    {
+      "source": "DW",
+      "total": 4,
+      "processed": 4,
+      "rate": 1.0
+    },
+    {
+      "source": "Financial Times",
+      "total": 4,
+      "processed": 4,
+      "rate": 1.0
     },
     {
       "source": "Engadget",
-      "total": 4,
-      "processed": 4,
-      "rate": 1.0
-    },
-    {
-      "source": "ZDNet",
-      "total": 4,
-      "processed": 4,
-      "rate": 1.0
-    },
-    {
-      "source": "NPR",
       "total": 3,
       "processed": 3,
       "rate": 1.0
@@ -212,6 +200,18 @@
       "source": "Wired",
       "total": 3,
       "processed": 3,
+      "rate": 1.0
+    },
+    {
+      "source": "NPR",
+      "total": 2,
+      "processed": 2,
+      "rate": 1.0
+    },
+    {
+      "source": "ZDNet",
+      "total": 1,
+      "processed": 1,
       "rate": 1.0
     }
   ],
@@ -245,32 +245,32 @@
       "加载中…"
     ],
     "actually_producing": [
+      "Al Jazeera",
       "Variety",
       "Deadline",
-      "Phys.org",
-      "TechRadar",
-      "Al Jazeera",
-      "MarketWatch",
-      "CNBC",
       "Hollywood Reporter",
-      "BBC",
-      "France 24",
-      "Mashable",
-      "The Next Web",
-      "Ars Technica",
-      "TechCrunch",
+      "TechRadar",
+      "Phys.org",
       "界面新闻",
-      "Financial Times",
-      "The Verge",
+      "MarketWatch",
       "中新网财经",
-      "CNET",
-      "DW",
-      "CBS News",
       "中新网",
+      "Mashable",
+      "Ars Technica",
+      "BBC",
+      "CNBC",
+      "TechCrunch",
+      "CBS News",
+      "CNET",
+      "France 24",
+      "The Next Web",
+      "The Verge",
+      "DW",
+      "Financial Times",
       "Engadget",
-      "ZDNet",
+      "Wired",
       "NPR",
-      "Wired"
+      "ZDNet"
     ],
     "false_claims": []
   }
