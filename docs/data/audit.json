@@ -1,110 +1,122 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-11-01T08:12:11+00:00",
-  "source_updated": "2026-11-01T04:32:12.157661+00:00",
+  "generated_at": "2026-11-01T15:28:50+00:00",
+  "source_updated": "2026-11-01T11:30:11.043916+00:00",
   "summary": {
-    "status": "pass",
-    "checks_passed": 4,
+    "status": "warn",
+    "checks_passed": 3,
     "checks_total": 4
   },
   "checks": [
     {
       "id": "coverage.title",
       "label": "标题中立化覆盖率",
-      "status": "pass",
+      "status": "warn",
       "threshold": ">= 0.90",
-      "observed": 0.9067,
+      "observed": 0.8733,
       "metric": {
-        "processed": 272,
+        "processed": 262,
         "total": 300
       },
-      "detail": "28/300 条标题与英文原文完全相同，未走中立化"
+      "detail": "38/300 条标题与英文原文完全相同，未走中立化"
     },
     {
       "id": "coverage.summary",
       "label": "摘要中立化覆盖率",
       "status": "pass",
       "threshold": ">= 0.90",
-      "observed": 0.9767,
+      "observed": 0.97,
       "metric": {
-        "processed": 293,
+        "processed": 291,
         "total": 300
       },
-      "detail": "7/300 条摘要与英文原文完全相同，未走中立化"
+      "detail": "9/300 条摘要与英文原文完全相同，未走中立化"
     },
     {
       "id": "coverage.by_source",
       "label": "按来源覆盖率",
       "status": "pass",
       "threshold": "0% 源占比 < 0.50",
-      "observed": 0.9067,
+      "observed": 0.8733,
       "metric": {
         "zero_rate_sources": 0,
-        "sources_total": 23
+        "sources_total": 24
       },
-      "detail": "全部 23 个来源均有中立化产出"
+      "detail": "全部 24 个来源均有中立化产出"
     },
     {
       "id": "neutrality",
       "label": "中立度残留",
       "status": "pass",
       "threshold": "<= 0.05",
-      "observed": 0.0074,
+      "observed": 0.0038,
       "metric": {
-        "processed": 272,
-        "hits": 2
+        "processed": 262,
+        "hits": 1
       },
-      "detail": "已加工 272 条中 2 条仍含情绪/反讽残留（0.7%）"
+      "detail": "已加工 262 条中 1 条仍含情绪/反讽残留（0.4%）"
     }
   ],
   "by_source": [
     {
       "source": "Al Jazeera",
-      "total": 34,
-      "processed": 34,
-      "rate": 1.0
-    },
-    {
-      "source": "Engadget",
-      "total": 28,
-      "processed": 28,
-      "rate": 1.0
-    },
-    {
-      "source": "Variety",
-      "total": 26,
-      "processed": 26,
+      "total": 31,
+      "processed": 31,
       "rate": 1.0
     },
     {
       "source": "界面新闻",
-      "total": 26,
-      "processed": 17,
-      "rate": 0.6538
+      "total": 30,
+      "processed": 16,
+      "rate": 0.5333
+    },
+    {
+      "source": "中新网财经",
+      "total": 24,
+      "processed": 15,
+      "rate": 0.625
+    },
+    {
+      "source": "Variety",
+      "total": 22,
+      "processed": 22,
+      "rate": 1.0
+    },
+    {
+      "source": "中新网",
+      "total": 19,
+      "processed": 4,
+      "rate": 0.2105
     },
     {
       "source": "TechRadar",
-      "total": 19,
-      "processed": 19,
+      "total": 17,
+      "processed": 17,
       "rate": 1.0
     },
     {
       "source": "Deadline",
-      "total": 18,
-      "processed": 18,
-      "rate": 1.0
-    },
-    {
-      "source": "MarketWatch",
       "total": 16,
       "processed": 16,
       "rate": 1.0
     },
     {
-      "source": "中新网财经",
-      "total": 16,
-      "processed": 6,
-      "rate": 0.375
+      "source": "Mashable",
+      "total": 15,
+      "processed": 15,
+      "rate": 1.0
+    },
+    {
+      "source": "France 24",
+      "total": 14,
+      "processed": 14,
+      "rate": 1.0
+    },
+    {
+      "source": "BBC",
+      "total": 13,
+      "processed": 13,
+      "rate": 1.0
     },
     {
       "source": "Hollywood Reporter",
@@ -113,87 +125,81 @@
       "rate": 1.0
     },
     {
-      "source": "BBC",
-      "total": 12,
-      "processed": 12,
+      "source": "The Next Web",
+      "total": 13,
+      "processed": 13,
       "rate": 1.0
     },
     {
-      "source": "CBS News",
-      "total": 11,
-      "processed": 11,
-      "rate": 1.0
-    },
-    {
-      "source": "中新网",
-      "total": 11,
-      "processed": 2,
-      "rate": 0.1818
-    },
-    {
-      "source": "Phys.org",
+      "source": "DW",
       "total": 10,
       "processed": 10,
       "rate": 1.0
     },
     {
-      "source": "Mashable",
-      "total": 9,
-      "processed": 9,
-      "rate": 1.0
-    },
-    {
-      "source": "The Next Web",
-      "total": 8,
-      "processed": 8,
-      "rate": 1.0
-    },
-    {
-      "source": "The Verge",
-      "total": 8,
-      "processed": 8,
-      "rate": 1.0
-    },
-    {
-      "source": "DW",
-      "total": 7,
-      "processed": 7,
-      "rate": 1.0
-    },
-    {
-      "source": "France 24",
-      "total": 7,
-      "processed": 7,
-      "rate": 1.0
-    },
-    {
-      "source": "NPR",
-      "total": 6,
-      "processed": 6,
-      "rate": 1.0
-    },
-    {
-      "source": "TechCrunch",
-      "total": 6,
-      "processed": 6,
-      "rate": 1.0
-    },
-    {
-      "source": "CNBC",
-      "total": 4,
-      "processed": 4,
+      "source": "Engadget",
+      "total": 10,
+      "processed": 10,
       "rate": 1.0
     },
     {
       "source": "Financial Times",
+      "total": 10,
+      "processed": 10,
+      "rate": 1.0
+    },
+    {
+      "source": "NPR",
+      "total": 10,
+      "processed": 10,
+      "rate": 1.0
+    },
+    {
+      "source": "CBS News",
+      "total": 8,
+      "processed": 8,
+      "rate": 1.0
+    },
+    {
+      "source": "CNBC",
+      "total": 5,
+      "processed": 5,
+      "rate": 1.0
+    },
+    {
+      "source": "Wired",
+      "total": 5,
+      "processed": 5,
+      "rate": 1.0
+    },
+    {
+      "source": "Phys.org",
       "total": 4,
       "processed": 4,
       "rate": 1.0
     },
     {
-      "source": "CNET",
-      "total": 1,
-      "processed": 1,
+      "source": "TechCrunch",
+      "total": 4,
+      "processed": 4,
+      "rate": 1.0
+    },
+    {
+      "source": "ScienceDaily",
+      "total": 3,
+      "processed": 3,
+      "rate": 1.0
+    },
+    {
+      "source": "MarketWatch",
+      "total": 2,
+      "processed": 2,
+      "rate": 1.0
+    },
+    {
+      "source": "The Verge",
+      "total": 2,
+      "processed": 2,
       "rate": 1.0
     }
   ],
@@ -202,13 +208,6 @@
       "source": "Variety",
       "title": "Maya Jama on That Shocking ‘Celebrity Traitors’ Finale, [SPOILER]’s Betrayal and ‘Heated’ Last Roundtable: ‘My Heart Was Jumping Out of My Chest’",
       "zh_title": "玛雅·贾马（Maya Jama）讲述令人震惊的“名人叛徒”结局， [剧透]的背叛和“热烈”的最后一场圆桌会议： “我的心跳出了我的胸膛”",
-      "rule": "emotion",
-      "matched": "震惊"
-    },
-    {
-      "source": "Al Jazeera",
-      "title": "Brighton shock Man City, closing gap on Premier League leader to two points",
-      "zh_title": "布莱顿震惊曼城，与英超领先者的差距缩小至两分",
       "rule": "emotion",
       "matched": "震惊"
     }
@@ -228,28 +227,29 @@
     ],
     "actually_producing": [
       "Al Jazeera",
-      "Engadget",
-      "Variety",
       "界面新闻",
+      "中新网财经",
+      "Variety",
+      "中新网",
       "TechRadar",
       "Deadline",
-      "MarketWatch",
-      "中新网财经",
-      "Hollywood Reporter",
-      "BBC",
-      "CBS News",
-      "中新网",
-      "Phys.org",
       "Mashable",
-      "The Next Web",
-      "The Verge",
-      "DW",
       "France 24",
-      "NPR",
-      "TechCrunch",
-      "CNBC",
+      "BBC",
+      "Hollywood Reporter",
+      "The Next Web",
+      "DW",
+      "Engadget",
       "Financial Times",
-      "CNET"
+      "NPR",
+      "CBS News",
+      "CNBC",
+      "Wired",
+      "Phys.org",
+      "TechCrunch",
+      "ScienceDaily",
+      "MarketWatch",
+      "The Verge"
     ],
     "false_claims": []
   }
