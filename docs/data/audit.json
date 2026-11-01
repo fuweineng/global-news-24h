@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-11-01T19:54:18+00:00",
-  "source_updated": "2026-11-01T17:18:14.573975+00:00",
+  "generated_at": "2026-11-01T23:55:10+00:00",
+  "source_updated": "2026-11-01T20:08:30.043314+00:00",
   "summary": {
     "status": "warn",
-    "checks_passed": 3,
+    "checks_passed": 2,
     "checks_total": 4
   },
   "checks": [
@@ -13,92 +13,92 @@
       "label": "标题中立化覆盖率",
       "status": "warn",
       "threshold": ">= 0.90",
-      "observed": 0.8533,
+      "observed": 0.8867,
       "metric": {
-        "processed": 256,
+        "processed": 266,
         "total": 300
       },
-      "detail": "44/300 条标题与英文原文完全相同，未走中立化"
+      "detail": "34/300 条标题与英文原文完全相同，未走中立化"
     },
     {
       "id": "coverage.summary",
       "label": "摘要中立化覆盖率",
       "status": "pass",
       "threshold": ">= 0.90",
-      "observed": 0.95,
+      "observed": 0.9433,
       "metric": {
-        "processed": 285,
+        "processed": 283,
         "total": 300
       },
-      "detail": "15/300 条摘要与英文原文完全相同，未走中立化"
+      "detail": "17/300 条摘要与英文原文完全相同，未走中立化"
     },
     {
       "id": "coverage.by_source",
       "label": "按来源覆盖率",
-      "status": "pass",
+      "status": "warn",
       "threshold": "0% 源占比 < 0.50",
-      "observed": 0.8533,
+      "observed": 0.8867,
       "metric": {
-        "zero_rate_sources": 0,
-        "sources_total": 24
+        "zero_rate_sources": 1,
+        "sources_total": 25
       },
-      "detail": "全部 24 个来源均有中立化产出"
+      "detail": "1 个源加工率为 0（共 25 个源）：联合国新闻"
     },
     {
       "id": "neutrality",
       "label": "中立度残留",
       "status": "pass",
       "threshold": "<= 0.05",
-      "observed": 0.0039,
+      "observed": 0.0075,
       "metric": {
-        "processed": 256,
-        "hits": 1
+        "processed": 266,
+        "hits": 2
       },
-      "detail": "已加工 256 条中 1 条仍含情绪/反讽残留（0.4%）"
+      "detail": "已加工 266 条中 2 条仍含情绪/反讽残留（0.8%）"
     }
   ],
   "by_source": [
     {
-      "source": "中新网财经",
-      "total": 29,
-      "processed": 16,
-      "rate": 0.5517
-    },
-    {
-      "source": "界面新闻",
-      "total": 28,
-      "processed": 14,
-      "rate": 0.5
-    },
-    {
       "source": "Al Jazeera",
-      "total": 26,
-      "processed": 26,
+      "total": 27,
+      "processed": 27,
       "rate": 1.0
-    },
-    {
-      "source": "中新网",
-      "total": 23,
-      "processed": 6,
-      "rate": 0.2609
     },
     {
       "source": "France 24",
-      "total": 16,
-      "processed": 16,
-      "rate": 1.0
-    },
-    {
-      "source": "Mashable",
-      "total": 16,
-      "processed": 16,
+      "total": 21,
+      "processed": 21,
       "rate": 1.0
     },
     {
       "source": "TechRadar",
-      "total": 16,
-      "processed": 16,
+      "total": 21,
+      "processed": 21,
       "rate": 1.0
+    },
+    {
+      "source": "Engadget",
+      "total": 20,
+      "processed": 20,
+      "rate": 1.0
+    },
+    {
+      "source": "界面新闻",
+      "total": 20,
+      "processed": 7,
+      "rate": 0.35
+    },
+    {
+      "source": "中新网财经",
+      "total": 17,
+      "processed": 10,
+      "rate": 0.5882
+    },
+    {
+      "source": "中新网",
+      "total": 16,
+      "processed": 3,
+      "rate": 0.1875
     },
     {
       "source": "The Next Web",
@@ -107,31 +107,31 @@
       "rate": 1.0
     },
     {
-      "source": "Financial Times",
+      "source": "Variety",
       "total": 14,
       "processed": 14,
       "rate": 1.0
     },
     {
-      "source": "DW",
-      "total": 12,
-      "processed": 12,
+      "source": "Mashable",
+      "total": 13,
+      "processed": 13,
       "rate": 1.0
     },
     {
-      "source": "Variety",
-      "total": 12,
-      "processed": 12,
+      "source": "NPR",
+      "total": 11,
+      "processed": 11,
       "rate": 1.0
     },
     {
-      "source": "Deadline",
+      "source": "CBS News",
       "total": 10,
       "processed": 10,
       "rate": 1.0
     },
     {
-      "source": "Engadget",
+      "source": "Phys.org",
       "total": 10,
       "processed": 10,
       "rate": 1.0
@@ -143,67 +143,80 @@
       "rate": 1.0
     },
     {
-      "source": "NPR",
+      "source": "BBC",
       "total": 9,
       "processed": 9,
       "rate": 1.0
     },
     {
-      "source": "CBS News",
-      "total": 7,
-      "processed": 7,
+      "source": "CNBC",
+      "total": 9,
+      "processed": 9,
       "rate": 1.0
     },
     {
-      "source": "CNBC",
+      "source": "Financial Times",
+      "total": 9,
+      "processed": 9,
+      "rate": 1.0
+    },
+    {
+      "source": "MarketWatch",
+      "total": 9,
+      "processed": 9,
+      "rate": 1.0
+    },
+    {
+      "source": "DW",
+      "total": 8,
+      "processed": 8,
+      "rate": 1.0
+    },
+    {
+      "source": "Deadline",
+      "total": 8,
+      "processed": 8,
+      "rate": 1.0
+    },
+    {
+      "source": "The Verge",
       "total": 7,
       "processed": 7,
       "rate": 1.0
     },
     {
       "source": "Hollywood Reporter",
-      "total": 7,
-      "processed": 7,
+      "total": 6,
+      "processed": 6,
       "rate": 1.0
     },
     {
       "source": "ScienceDaily",
-      "total": 7,
-      "processed": 7,
-      "rate": 1.0
-    },
-    {
-      "source": "BBC",
-      "total": 6,
-      "processed": 6,
-      "rate": 1.0
-    },
-    {
-      "source": "MarketWatch",
-      "total": 6,
-      "processed": 6,
+      "total": 5,
+      "processed": 5,
       "rate": 1.0
     },
     {
       "source": "TechCrunch",
-      "total": 5,
-      "processed": 5,
-      "rate": 1.0
-    },
-    {
-      "source": "The Verge",
-      "total": 5,
-      "processed": 5,
-      "rate": 1.0
-    },
-    {
-      "source": "Phys.org",
       "total": 4,
       "processed": 4,
       "rate": 1.0
+    },
+    {
+      "source": "联合国新闻",
+      "total": 1,
+      "processed": 0,
+      "rate": 0.0
     }
   ],
   "neutrality_hits": [
+    {
+      "source": "MarketWatch",
+      "title": "My wife cried when I found out she had only $80,000 in her 401(k). I have $2.2 million. Am I wrong to be shocked?",
+      "zh_title": "当我发现她的 401 (k)只有$ 80,000 时，我的妻子哭了。我有$ 220 万。我感到震惊是不是错了",
+      "rule": "emotion",
+      "matched": "震惊"
+    },
     {
       "source": "France 24",
       "title": "Poland rocked by Constitutional showdown",
@@ -226,30 +239,31 @@
       "加载中…"
     ],
     "actually_producing": [
-      "中新网财经",
-      "界面新闻",
       "Al Jazeera",
-      "中新网",
       "France 24",
-      "Mashable",
       "TechRadar",
-      "The Next Web",
-      "Financial Times",
-      "DW",
-      "Variety",
-      "Deadline",
       "Engadget",
-      "Wired",
+      "界面新闻",
+      "中新网财经",
+      "中新网",
+      "The Next Web",
+      "Variety",
+      "Mashable",
       "NPR",
       "CBS News",
+      "Phys.org",
+      "Wired",
+      "BBC",
       "CNBC",
+      "Financial Times",
+      "MarketWatch",
+      "DW",
+      "Deadline",
+      "The Verge",
       "Hollywood Reporter",
       "ScienceDaily",
-      "BBC",
-      "MarketWatch",
       "TechCrunch",
-      "The Verge",
-      "Phys.org"
+      "联合国新闻"
     ],
     "false_claims": []
   }
