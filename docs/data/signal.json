@@ -1,14 +1,14 @@
 {
  "schema_version": "1.0.0",
- "generated_at": "2026-11-05T18:25:37+08:00",
- "as_of": "2026-11-05T18:25:37+08:00",
+ "generated_at": "2026-11-05T18:34:27+08:00",
+ "as_of": "2026-11-05T18:34:27+08:00",
  "counts": {
   "act": 6,
   "watch": 20,
   "read": 25,
-  "sideline": 94
+  "sideline": 95
  },
- "overview": "最急要今日处理嘅系apt嘅远程代码执行漏洞CVE-2026-109518（DSA 6607-1），呢个直接命中你Debian栈嘅核心包，优先级最高。其余要留意嘅系Linux内核漏洞被自动化大规模复现嘅趋势越嚟越明显，加上Ubuntu嘅Twisted、Pillow同Debian libtar补丁唔完整等问题需要排期跟进。风险提示：广州48小时内降温8.3℃、湛江雷州有暴雨橙色预警，若机房或运维涉及呢两个地区，要提防天气影响现场同应急响应。",
+ "overview": "最需要你今日处理嘅系 apt(1) 嘅远程代码执行漏洞（DSA 6607-1），因为佢直接命中你嘅 Debian 核心包，而且已经有安全通告；湛江雷州暴雨橙色预警就要视乎你有冇相关资产或者人员喺当地。\n\n其余值得留意嘅趋势系：Linux 内核漏洞正被大规模自动化挖掘同复现（OpenAI 流程单次验证 948 个、合计 1724 个被复现），Ubuntu 侧 Twisted、Pillow、ADOdb 都有 USN 更新，Debian 侧 libtar 嘅修复唔完整、存在堆越界读。\n\n风险提示：libtar 属修复不完整，唔好当已经修补好；另外广州 48 小时内降温 8.3℃，注意对运维同外勤嘅影响。",
  "sections": [
   {
    "key": "security",
@@ -28,7 +28,7 @@
      "source_name": "Google News · 漏洞",
      "source_id": "gnews-sec",
      "published_at": "2026-11-05T18:14:47+08:00",
-     "age_h": 0.2,
+     "age_h": 0.3,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -86,7 +86,7 @@
      "source_name": "oss-security 邮件列表",
      "source_id": "oss-sec",
      "published_at": "2026-11-05T18:14:47+08:00",
-     "age_h": 0.2,
+     "age_h": 0.3,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -124,7 +124,7 @@
      "source_name": "Google News · 漏洞",
      "source_id": "gnews-sec",
      "published_at": "2026-11-05T18:14:47+08:00",
-     "age_h": 0.2,
+     "age_h": 0.3,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -162,7 +162,7 @@
      "source_name": "Google News · 漏洞",
      "source_id": "gnews-sec",
      "published_at": "2026-11-05T18:14:47+08:00",
-     "age_h": 0.2,
+     "age_h": 0.3,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -200,7 +200,7 @@
      "source_name": "NVD 严重/高危",
      "source_id": "nvd-critical",
      "published_at": "2026-11-04T13:17:30+08:00",
-     "age_h": 29.1,
+     "age_h": 29.3,
      "cvss": 9.8,
      "in_the_wild": false,
      "flags": [
@@ -327,7 +327,7 @@
      "source_name": "Ubuntu 安全公告",
      "source_id": "ubuntu-usn",
      "published_at": "2026-11-05T18:14:47+08:00",
-     "age_h": 0.2,
+     "age_h": 0.3,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -389,7 +389,7 @@
      "source_name": "Ubuntu 安全公告",
      "source_id": "ubuntu-usn",
      "published_at": "2026-11-05T18:14:47+08:00",
-     "age_h": 0.2,
+     "age_h": 0.3,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -436,7 +436,7 @@
      "source_name": "oss-security 邮件列表",
      "source_id": "oss-sec",
      "published_at": "2026-11-05T18:14:47+08:00",
-     "age_h": 0.2,
+     "age_h": 0.3,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -473,7 +473,7 @@
      "source_name": "Ubuntu 安全公告",
      "source_id": "ubuntu-usn",
      "published_at": "2026-11-05T18:14:47+08:00",
-     "age_h": 0.2,
+     "age_h": 0.3,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -510,7 +510,7 @@
      "source_name": "Linux 内核 CVE 公告",
      "source_id": "kernel-cve",
      "published_at": "2026-11-03T19:50:12+08:00",
-     "age_h": 46.6,
+     "age_h": 46.7,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -553,7 +553,7 @@
      "source_name": "Linux 内核 CVE 公告",
      "source_id": "kernel-cve",
      "published_at": "2026-11-03T20:38:07+08:00",
-     "age_h": 45.8,
+     "age_h": 45.9,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -591,7 +591,7 @@
      "source_name": "Linux 内核 CVE 公告",
      "source_id": "kernel-cve",
      "published_at": "2026-11-03T19:50:10+08:00",
-     "age_h": 46.6,
+     "age_h": 46.7,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -636,7 +636,7 @@
      "url": "https://www.nmc.cn/publish/alarm/44088241600000_20261105152041.html",
      "source_name": "中央气象台 · 预警信号",
      "published_at": "2026-11-05T15:18:00+08:00",
-     "age_h": 3.1,
+     "age_h": 3.3,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -668,7 +668,7 @@
      "url": "https://open-meteo.com/",
      "source_name": "Open-Meteo 集合预报（GFS/ECMWF/ICON/JMA/GEM）",
      "published_at": "2026-11-05T17:41:12+08:00",
-     "age_h": 0.7,
+     "age_h": 0.9,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -707,7 +707,7 @@
      "source_name": "Google News · 广东疫情",
      "source_id": "gnews-health-gd",
      "published_at": "2026-11-05T18:14:47+08:00",
-     "age_h": 0.2,
+     "age_h": 0.3,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -746,7 +746,7 @@
      "source_name": "Google News · 广东疫情",
      "source_id": "gnews-health-gd",
      "published_at": "2026-11-05T18:14:47+08:00",
-     "age_h": 0.2,
+     "age_h": 0.3,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -785,7 +785,7 @@
      "source_name": "Google News · WHO 疫情通报",
      "source_id": "gnews-who",
      "published_at": "2026-11-05T18:14:49+08:00",
-     "age_h": 0.2,
+     "age_h": 0.3,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -833,7 +833,7 @@
      "source_name": "Google News · WHO 疫情通报",
      "source_id": "gnews-who",
      "published_at": "2026-11-05T18:14:49+08:00",
-     "age_h": 0.2,
+     "age_h": 0.3,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -871,7 +871,7 @@
      "source_name": "Google News · WHO 疫情通报",
      "source_id": "gnews-who",
      "published_at": "2026-11-05T18:14:49+08:00",
-     "age_h": 0.2,
+     "age_h": 0.3,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -909,7 +909,7 @@
      "source_name": "Google News · WHO 疫情通报",
      "source_id": "gnews-who",
      "published_at": "2026-11-05T18:14:49+08:00",
-     "age_h": 0.2,
+     "age_h": 0.3,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -947,7 +947,7 @@
      "source_name": "Google News · 广东疫情",
      "source_id": "gnews-health-gd",
      "published_at": "2026-11-05T18:14:47+08:00",
-     "age_h": 0.2,
+     "age_h": 0.3,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -985,7 +985,7 @@
      "source_name": "Google News · 广东疫情",
      "source_id": "gnews-health-gd",
      "published_at": "2026-11-05T18:14:47+08:00",
-     "age_h": 0.2,
+     "age_h": 0.3,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -1031,7 +1031,7 @@
      "source_name": "Phoronix（Linux 硬件/内核）",
      "source_id": "phoronix",
      "published_at": "2026-11-05T18:14:49+08:00",
-     "age_h": 0.2,
+     "age_h": 0.3,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -1074,7 +1074,7 @@
      "source_name": "Lobsters",
      "source_id": "lobsters",
      "published_at": "2026-11-05T18:14:49+08:00",
-     "age_h": 0.2,
+     "age_h": 0.3,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -1106,6 +1106,46 @@
      ]
     },
     {
+     "id": "sig-0aa88563920e1cf5",
+     "category": "tech",
+     "kind": "signal",
+     "tier": "read",
+     "score": 19.0,
+     "title": "Sony reports Q2 revenue of ~$21.7B, operating profit of $3.94B, both above est., and 2.6M PS5 sales, as GTA VI sparks a US sales jump, especially of the PS5 Pro (Takashi Mochizuki/Bloomberg)",
+     "summary": "",
+     "url": "https://www.techmeme.com/261105/p9#a261105p9",
+     "source_name": "Techmeme（推特科技圈人工版）",
+     "source_id": "techmeme",
+     "published_at": "2026-11-05T18:34:22+08:00",
+     "age_h": 0.0,
+     "cvss": null,
+     "in_the_wild": false,
+     "flags": [],
+     "why": "圈内在聊嘅大事",
+     "action": "",
+     "region": {
+      "level": "global",
+      "name": "global",
+      "parents": []
+     },
+     "sources": [
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261105/p9#a261105p9",
+       "published_at": "2026-11-05T18:34:22+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261104/p61#a261104p61",
+       "published_at": "2026-11-05T18:15:31+08:00"
+      }
+     ],
+     "source_count": 2,
+     "tags": [
+      "buzz"
+     ]
+    },
+    {
      "id": "sig-7ffeaf50e01a80bb",
      "category": "tech",
      "kind": "signal",
@@ -1117,7 +1157,7 @@
      "source_name": "Techmeme（推特科技圈人工版）",
      "source_id": "techmeme",
      "published_at": "2026-11-05T18:15:31+08:00",
-     "age_h": 0.2,
+     "age_h": 0.3,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -1157,7 +1197,7 @@
      "source_name": "Techmeme（推特科技圈人工版）",
      "source_id": "techmeme",
      "published_at": "2026-11-05T18:15:31+08:00",
-     "age_h": 0.2,
+     "age_h": 0.3,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -1192,7 +1232,7 @@
      "source_name": "Techmeme（推特科技圈人工版）",
      "source_id": "techmeme",
      "published_at": "2026-11-05T18:15:31+08:00",
-     "age_h": 0.2,
+     "age_h": 0.3,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -1216,41 +1256,6 @@
      ]
     },
     {
-     "id": "sig-9b997e4ce96388f2",
-     "category": "tech",
-     "kind": "signal",
-     "tier": "read",
-     "score": 16.0,
-     "title": "Pro-AI PAC Leading the Future ended the midterms with $20M+ in its bank, from ~$100M, after focusing on safe bipartisan candidates; its riskier bets fell flat (Tess Owen/Wired)",
-     "summary": "Tess Owen / Wired : Pro-AI PAC Leading the Future ended the midterms with $20M+ in its bank, from ~$100M, after focusing on safe bipartisan candidates; its riskier bets fell flat Leading the Future, backed by Silicon Valley's biggest billionaires, had a war chest of $100 million and an aggressive st",
-     "url": "https://www.techmeme.com/261105/p6#a261105p6",
-     "source_name": "Techmeme（推特科技圈人工版）",
-     "source_id": "techmeme",
-     "published_at": "2026-11-05T18:15:31+08:00",
-     "age_h": 0.2,
-     "cvss": null,
-     "in_the_wild": false,
-     "flags": [],
-     "why": "圈内在聊嘅大事",
-     "action": "",
-     "region": {
-      "level": "global",
-      "name": "global",
-      "parents": []
-     },
-     "sources": [
-      {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261105/p6#a261105p6",
-       "published_at": "2026-11-05T18:15:31+08:00"
-      }
-     ],
-     "source_count": 1,
-     "tags": [
-      "buzz"
-     ]
-    },
-    {
      "id": "sig-645da223a8415d7d",
      "category": "tech",
      "kind": "signal",
@@ -1262,7 +1267,7 @@
      "source_name": "Lobsters",
      "source_id": "lobsters",
      "published_at": "2026-11-05T18:14:49+08:00",
-     "age_h": 0.2,
+     "age_h": 0.3,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -1299,7 +1304,7 @@
      "source_name": "Lobsters",
      "source_id": "lobsters",
      "published_at": "2026-11-05T18:14:49+08:00",
-     "age_h": 0.2,
+     "age_h": 0.3,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -1340,7 +1345,7 @@
    "source_name": "Google News · WHO 疫情通报",
    "source_id": "gnews-who",
    "published_at": "2026-11-05T18:24:45+08:00",
-   "age_h": 0.0,
+   "age_h": 0.2,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -1436,7 +1441,7 @@
    "source_name": "Phoronix（Linux 硬件/内核）",
    "source_id": "phoronix",
    "published_at": "2026-11-05T18:14:49+08:00",
-   "age_h": 0.2,
+   "age_h": 0.3,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -1476,7 +1481,7 @@
    "source_name": "Lobsters",
    "source_id": "lobsters",
    "published_at": "2026-11-05T18:14:49+08:00",
-   "age_h": 0.2,
+   "age_h": 0.3,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -1511,7 +1516,7 @@
    "source_name": "Lobsters",
    "source_id": "lobsters",
    "published_at": "2026-11-05T18:14:49+08:00",
-   "age_h": 0.2,
+   "age_h": 0.3,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -1546,7 +1551,7 @@
    "source_name": "Lobsters",
    "source_id": "lobsters",
    "published_at": "2026-11-05T18:14:49+08:00",
-   "age_h": 0.2,
+   "age_h": 0.3,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -1581,7 +1586,7 @@
    "source_name": "Lobsters",
    "source_id": "lobsters",
    "published_at": "2026-11-05T18:14:49+08:00",
-   "age_h": 0.2,
+   "age_h": 0.3,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -1616,7 +1621,7 @@
    "source_name": "Phoronix（Linux 硬件/内核）",
    "source_id": "phoronix",
    "published_at": "2026-11-05T18:14:49+08:00",
-   "age_h": 0.2,
+   "age_h": 0.3,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -1651,7 +1656,7 @@
    "source_name": "Phoronix（Linux 硬件/内核）",
    "source_id": "phoronix",
    "published_at": "2026-11-05T18:14:49+08:00",
-   "age_h": 0.2,
+   "age_h": 0.3,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -1686,7 +1691,7 @@
    "source_name": "Phoronix（Linux 硬件/内核）",
    "source_id": "phoronix",
    "published_at": "2026-11-05T18:14:49+08:00",
-   "age_h": 0.2,
+   "age_h": 0.3,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -1721,7 +1726,7 @@
    "source_name": "Phoronix（Linux 硬件/内核）",
    "source_id": "phoronix",
    "published_at": "2026-11-05T18:14:49+08:00",
-   "age_h": 0.2,
+   "age_h": 0.3,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -1756,7 +1761,7 @@
    "source_name": "Google News · 广东疫情",
    "source_id": "gnews-health-gd",
    "published_at": "2026-11-05T18:14:48+08:00",
-   "age_h": 0.2,
+   "age_h": 0.3,
    "cvss": null,
    "in_the_wild": false,
    "flags": [
@@ -1795,7 +1800,7 @@
    "source_name": "Google News · 广东疫情",
    "source_id": "gnews-health-gd",
    "published_at": "2026-11-05T18:14:47+08:00",
-   "age_h": 0.2,
+   "age_h": 0.3,
    "cvss": null,
    "in_the_wild": false,
    "flags": [
@@ -1833,7 +1838,7 @@
    "source_name": "Google News · 广东疫情",
    "source_id": "gnews-health-gd",
    "published_at": "2026-11-05T18:14:47+08:00",
-   "age_h": 0.2,
+   "age_h": 0.3,
    "cvss": null,
    "in_the_wild": false,
    "flags": [
@@ -1871,7 +1876,7 @@
    "source_name": "Google News · 广东疫情",
    "source_id": "gnews-health-gd",
    "published_at": "2026-11-05T18:14:47+08:00",
-   "age_h": 0.2,
+   "age_h": 0.3,
    "cvss": null,
    "in_the_wild": false,
    "flags": [
@@ -1909,7 +1914,7 @@
    "source_name": "Phoronix（Linux 硬件/内核）",
    "source_id": "phoronix",
    "published_at": "2026-11-05T18:14:49+08:00",
-   "age_h": 0.2,
+   "age_h": 0.3,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -1949,7 +1954,7 @@
    "source_name": "Google News · 广东疫情",
    "source_id": "gnews-health-gd",
    "published_at": "2026-11-05T18:14:47+08:00",
-   "age_h": 0.2,
+   "age_h": 0.3,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -1985,7 +1990,7 @@
    "source_name": "Google News · 广东疫情",
    "source_id": "gnews-health-gd",
    "published_at": "2026-11-05T18:14:47+08:00",
-   "age_h": 0.2,
+   "age_h": 0.3,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -2016,12 +2021,12 @@
    "tier": "sideline",
    "score": 15.0,
    "title": "Lemmings CSS Animation",
-   "summary": "HN 184 分 · 39 评论",
+   "summary": "HN 188 分 · 39 评论",
    "url": "https://markblah.github.io/lemmings/",
    "source_name": "Hacker News 头条",
    "source_id": "hn",
    "published_at": "2026-11-05T12:54:10+08:00",
-   "age_h": 5.5,
+   "age_h": 5.7,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -2052,12 +2057,12 @@
    "tier": "sideline",
    "score": 15.0,
    "title": "Starfall – Affordable, routine access to microgravity",
-   "summary": "HN 221 分 · 154 评论",
+   "summary": "HN 222 分 · 156 评论",
    "url": "https://www.spacex.com/starfall",
    "source_name": "Hacker News 头条",
    "source_id": "hn",
    "published_at": "2026-11-05T08:18:18+08:00",
-   "age_h": 10.1,
+   "age_h": 10.3,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -2088,12 +2093,12 @@
    "tier": "sideline",
    "score": 15.0,
    "title": "Images 2.6",
-   "summary": "HN 302 分 · 175 评论",
+   "summary": "HN 303 分 · 176 评论",
    "url": "https://openai.com/index/introducing-images-2-6/",
    "source_name": "Hacker News 头条",
    "source_id": "hn",
    "published_at": "2026-11-05T07:35:44+08:00",
-   "age_h": 10.8,
+   "age_h": 11.0,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -2135,7 +2140,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 1.1
+   "seconds": 1.0
   },
   {
    "id": "ubuntu-usn",
@@ -2144,7 +2149,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 0.7
+   "seconds": 0.9
   },
   {
    "id": "nvd-critical",
@@ -2153,7 +2158,7 @@
    "ok": true,
    "error": null,
    "items": 33,
-   "seconds": 1.2
+   "seconds": 1.5
   },
   {
    "id": "cisa-kev",
@@ -2162,7 +2167,7 @@
    "ok": true,
    "error": null,
    "items": 2,
-   "seconds": 6.4
+   "seconds": 4.3
   },
   {
    "id": "gnews-sec",
@@ -2170,8 +2175,8 @@
    "category": "security",
    "ok": true,
    "error": null,
-   "items": 17,
-   "seconds": 1.2
+   "items": 18,
+   "seconds": 6.5
   },
   {
    "id": "gnews-health-gd",
@@ -2180,7 +2185,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.1
+   "seconds": 1.9
   },
   {
    "id": "gnews-who",
@@ -2189,7 +2194,7 @@
    "ok": true,
    "error": null,
    "items": 24,
-   "seconds": 1.1
+   "seconds": 1.7
   },
   {
    "id": "techmeme",
@@ -2197,8 +2202,8 @@
    "category": "tech",
    "ok": true,
    "error": null,
-   "items": 15,
-   "seconds": 7.5
+   "items": 1,
+   "seconds": 19.0
   },
   {
    "id": "hn",
@@ -2216,7 +2221,7 @@
    "ok": true,
    "error": null,
    "items": 25,
-   "seconds": 1.6
+   "seconds": 0.8
   },
   {
    "id": "phoronix",
@@ -2225,15 +2230,15 @@
    "ok": true,
    "error": null,
    "items": 32,
-   "seconds": 2.7
+   "seconds": 0.7
   }
  ],
  "stats": {
-  "facts_in": 220,
-  "clusters": 143,
-  "items": 145,
+  "facts_in": 222,
+  "clusters": 144,
+  "items": 146,
   "dropped_noise": 0,
-  "ledger_rows": "226→220"
+  "ledger_rows": "241→222"
  },
  "disclaimer": "只做信息整理，不替代官方公告；行动建议需人判断。"
 }
