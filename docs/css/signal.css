@@ -1,0 +1,163 @@
+/* 情报哨兵 — 复用 style.css 的变量，只补本页需要的部分 */
+
+.sg-stats {
+  display: flex;
+  gap: 8px;
+  padding: 10px 12px 4px;
+}
+.sg-stat {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 8px 4px;
+  text-align: center;
+}
+.sg-stat-num { display: block; font-size: 1.15rem; font-weight: 700; line-height: 1.2; }
+.sg-stat-label { font-size: 0.66rem; color: var(--text-secondary); }
+.sg-stat.is-act .sg-stat-num { color: #d92c20; }
+.sg-stat.is-watch .sg-stat-num { color: #c2410c; }
+.sg-stat.is-read .sg-stat-num { color: var(--accent); }
+
+.sg-overview {
+  margin: 8px 12px 0;
+  padding: 12px 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 12px;
+  font-size: 0.86rem;
+  line-height: 1.75;
+  color: var(--text);
+  white-space: pre-wrap;
+}
+
+.sg-nav { height: auto; padding-bottom: 4px; }
+.sg-nav .nav-inner { height: auto; padding: 6px 12px 0; flex-wrap: wrap; gap: 6px; }
+
+.sg-section { padding: 6px 0 0; }
+.sg-section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 12px 14px 4px;
+}
+.sg-section-title { font-size: 0.95rem; font-weight: 700; }
+.sg-section-sub { font-size: 0.7rem; color: var(--text-tertiary); }
+.sg-section-count {
+  margin-left: auto;
+  font-size: 0.68rem;
+  color: var(--text-secondary);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 1px 8px;
+}
+
+.sg-card {
+  display: block;
+  margin: 0 12px 10px;
+  padding: 14px 15px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.sg-card:active { transform: scale(0.99); }
+.sg-card.is-act { border-left: 3px solid #d92c20; }
+.sg-card.is-watch { border-left: 3px solid #f97316; }
+.sg-card.is-read { border-left: 3px solid var(--accent); }
+.sg-card.is-sideline { border-left: 3px solid var(--border); }
+
+.sg-card-top {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+  font-size: 0.66rem;
+  color: var(--text-secondary);
+}
+.sg-tier {
+  font-weight: 700;
+  border-radius: 6px;
+  padding: 1px 6px;
+  font-size: 0.62rem;
+}
+.sg-tier.act { background: #fdecea; color: #b91c1c; }
+.sg-tier.watch { background: #fff4e5; color: #b45309; }
+.sg-tier.read { background: #e8f0fe; color: #1a56db; }
+.sg-tier.sideline { background: #f2f2f7; color: #6b7280; }
+@media (prefers-color-scheme: dark) {
+  .sg-tier.act { background: #4a1714; color: #ff9b93; }
+  .sg-tier.watch { background: #4a2d0b; color: #ffc078; }
+  .sg-tier.read { background: #10284a; color: #8ab4f8; }
+  .sg-tier.sideline { background: #2c2c2e; color: #98989d; }
+  .sg-stat.is-act .sg-stat-num { color: #ff7a70; }
+  .sg-stat.is-watch .sg-stat-num { color: #ffb066; }
+}
+
+.sg-card-title {
+  font-size: 0.94rem;
+  font-weight: 600;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.sg-why {
+  margin-top: 8px;
+  font-size: 0.76rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+.sg-action {
+  margin-top: 6px;
+  font-size: 0.76rem;
+  color: #b45309;
+  line-height: 1.55;
+}
+@media (prefers-color-scheme: dark) { .sg-action { color: #ffb066; } }
+.sg-card-foot {
+  margin-top: 9px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 0.66rem;
+  color: var(--text-tertiary);
+}
+.sg-badge {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0 6px;
+}
+.sg-badge.hot { border-color: #d92c20; color: #d92c20; }
+
+.sg-sources { padding: 10px 14px 0; }
+.sg-sources h3 { font-size: 0.8rem; color: var(--text-secondary); font-weight: 600; margin-bottom: 6px; }
+.sg-src-grid { display: flex; flex-wrap: wrap; gap: 6px; }
+.sg-src {
+  font-size: 0.66rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 2px 8px;
+  color: var(--text-secondary);
+  background: var(--surface);
+}
+.sg-src.bad { border-color: #d92c20; color: #d92c20; }
+.sg-disclaimer {
+  margin-top: 10px;
+  font-size: 0.66rem;
+  color: var(--text-tertiary);
+  line-height: 1.6;
+}
+.sg-empty { padding: 24px 14px; text-align: center; color: var(--text-tertiary); font-size: 0.8rem; }
+
+/* 本页是长阅读页：解除 style.css 的「固定高度 App 外壳 + 内部滚动」，
+   否则手机上会变成卡片列表在一个小框里滚（嵌套滚动，读起来很难受） */
+html, body { height: auto; min-height: 100%; }
+#app { height: auto; min-height: 100vh; }
+.main { overflow: visible; flex: none; }
+.footer { position: static; }

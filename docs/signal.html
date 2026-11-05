@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>情报哨兵 — 不用刷推特，只看要动手的 | 全球24h</title>
+  <meta name="description" content="自动汇总安全漏洞、天气预警、疫情通报、科技圈热点，按「要不要动手」分级，替代刷推特拉取信息">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛰</text></svg>">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛰</text></svg>">
+  <meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1c1c1e" media="(prefers-color-scheme: dark)">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="情报哨兵">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/signal.css">
+</head>
+<body>
+
+<div id="app">
+  <header class="header">
+    <div class="header-inner">
+      <div class="header-left">
+        <span class="header-logo">🛰 情报哨兵</span>
+        <span class="header-subtitle">不用刷推特 · 只看要动手</span>
+      </div>
+      <div class="header-right">
+        <a class="nav-link" href="index.html">全球24h</a>
+        <a class="nav-link" href="nanhai.html">南海政务</a>
+        <span class="update-time" id="last-updated">--:-- 更新</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="sg-stats" id="sg-stats"></div>
+
+  <div class="sg-overview" id="sg-overview" hidden></div>
+
+  <nav class="nav sg-nav">
+    <div class="nav-inner" id="sg-filter">
+      <button class="cat-chip active" data-tier="all" type="button">全部</button>
+      <button class="cat-chip" data-tier="act" type="button">要动手</button>
+      <button class="cat-chip" data-tier="watch" type="button">要留意</button>
+      <button class="cat-chip" data-tier="read" type="button">有意思</button>
+      <button class="cat-chip" data-tier="sideline" type="button">闲读</button>
+    </div>
+  </nav>
+
+  <main class="main" id="sg-main">
+    <div class="loading" id="sg-loading">加载中…</div>
+  </main>
+
+  <section class="sg-sources">
+    <h3>信息源状态</h3>
+    <div id="sg-sources"></div>
+    <p class="sg-disclaimer" id="sg-disclaimer"></p>
+  </section>
+
+  <footer class="footer">
+    <span id="sg-footer">—</span>
+  </footer>
+</div>
+
+<script src="js/signal.js"></script>
+</body>
+</html>
