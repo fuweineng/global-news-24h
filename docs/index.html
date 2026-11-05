@@ -13,6 +13,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="全球24h">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/signal.css">
 </head>
 <body>
 
@@ -33,6 +34,13 @@
       </div>
     </div>
   </header>
+
+  <!-- 情报哨兵提示条：只显示「要动手/要留意」条数，点入 /signal -->
+  <a class="sg-strip" id="sg-strip" href="signal.html" hidden>
+    <span class="sg-strip-icon">🛰</span>
+    <span class="sg-strip-text" id="sg-strip-text"></span>
+    <span class="sg-strip-arrow">›</span>
+  </a>
 
   <!-- NAV / Category -->
   <nav class="nav">
@@ -61,5 +69,21 @@
 </div>
 
 <script src="js/app.v2.js"></script>
+<script>
+(function(){
+  fetch('data/signal.json',{cache:'no-store'}).then(function(r){return r.json()}).then(function(d){
+    var c=d.counts||{}, act=c.act||0, watch=c.watch||0;
+    var box=document.getElementById('sg-strip'); if(!box) return;
+    if(!act && !watch){ return; }
+    var parts=[];
+    if(act) parts.push('要动手 '+act);
+    if(watch) parts.push('要留意 '+watch);
+    parts.push('安全/天气/疫情/科技圈');
+    document.getElementById('sg-strip-text').textContent=parts.join(' · ');
+    box.classList.toggle('has-act', act>0);
+    box.hidden=false;
+  }).catch(function(){});
+})();
+</script>
 </body>
 </html>
