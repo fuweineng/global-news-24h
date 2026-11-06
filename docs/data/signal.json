@@ -1,20 +1,20 @@
 {
  "schema_version": "1.0.0",
- "generated_at": "2026-11-06T17:20:51+08:00",
- "as_of": "2026-11-06T17:20:51+08:00",
+ "generated_at": "2026-11-06T18:20:26+08:00",
+ "as_of": "2026-11-06T18:20:26+08:00",
  "counts": {
   "act": 13,
-  "watch": 23,
-  "read": 55,
-  "sideline": 160
+  "watch": 22,
+  "read": 57,
+  "sideline": 164
  },
- "overview": "①今日最紧要：即刻处理 OpenSSH「sshole」密碼認證繞過（涉及 musl libc）同 Traefik CVE-2026-121966（CVSS 8.7），兩個都命中你嘅 web 核心包，優先升級同換憑據。\n\n②其餘趨勢：Linux 內核同時爆出 948 個自動化復現嘅漏洞同嚴重 TCP RCE（CVE-2026-98432），加上 nginx USN-8955-2、AgentScope CVE-2026-123023、Debian/Ubuntu 中間人 CVE-2026-109518 同 CPython sandbox escape，顯示核心基礎設施同運行時環境正被大規模掃漏洞。\n\n③風險提示：以上全部係未經內部驗證嘅公開情報，補丁前切勿直接喺生產環境測試或套用，以免觸發意外故障。",
+ "overview": "①今日最急：OpenSSH 出現「sshole」密碼認證繞過（核心包、web 棧在命中範圍），以及 Traefik ForwardAuth 子請求問題 CVE-2026-121966（CVSS 8.7），兩者都直接影響入口認證鏈路，建議即刻確認版本同升級到 Traefik 2.11.60 / 3.7.16 以上。\n\n②其餘值得留意：Linux 核心被自動化挖出 948 個可提權漏洞（含嚴重 TCP RCE CVE-2026-98432），顯示供應鏈層面自動化漏洞挖掘正加速；另外 AgentScope bash 工具權限檢查缺陷（CVSS 7.3）、CPython sandbox escape、nginx（USN-8955-2）同 Debian/Ubuntu 鏡像流量篡改 CVE-2026-109518 都命中你的棧。\n\n③風險提示：多個條目涉及提權與沙箱逃逸，一旦暴露面有舊版本未升級，攻擊者可串連成完整 RCE 鏈，切勿只修單一漏洞就算處理完。",
  "sections": [
   {
    "key": "security",
    "name": "🔐 安全漏洞",
    "sub": "内核 / 发行版 / 容器 / 你的栈",
-   "total": 35,
+   "total": 34,
    "items": [
     {
      "id": "sig-64008282a208156e",
@@ -28,7 +28,7 @@
      "source_name": "NVD 严重/高危",
      "source_id": "nvd-critical",
      "published_at": "2026-11-05T14:17:04+08:00",
-     "age_h": 27.1,
+     "age_h": 28.1,
      "cvss": 7.3,
      "in_the_wild": false,
      "flags": [
@@ -142,7 +142,7 @@
      "source_name": "oss-security 邮件列表",
      "source_id": "oss-sec",
      "published_at": "2026-11-06T08:42:09+08:00",
-     "age_h": 8.6,
+     "age_h": 9.6,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -215,7 +215,7 @@
      "source_name": "Google News · 漏洞",
      "source_id": "gnews-sec",
      "published_at": "2026-11-06T16:20:05+08:00",
-     "age_h": 1.0,
+     "age_h": 2.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -288,7 +288,7 @@
      "source_name": "NVD 严重/高危",
      "source_id": "nvd-critical",
      "published_at": "2026-11-04T16:17:50+08:00",
-     "age_h": 49.0,
+     "age_h": 50.0,
      "cvss": 8.7,
      "in_the_wild": false,
      "flags": [
@@ -333,7 +333,7 @@
      "source_name": "NVD 严重/高危",
      "source_id": "nvd-critical",
      "published_at": "2026-11-04T16:17:33+08:00",
-     "age_h": 49.1,
+     "age_h": 50.0,
      "cvss": 7.7,
      "in_the_wild": false,
      "flags": [
@@ -378,7 +378,7 @@
      "source_name": "Google News · 漏洞",
      "source_id": "gnews-sec",
      "published_at": "2026-11-06T10:20:04+08:00",
-     "age_h": 7.0,
+     "age_h": 8.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -446,7 +446,7 @@
      "source_name": "Ubuntu 安全公告",
      "source_id": "ubuntu-usn",
      "published_at": "2026-11-06T08:42:08+08:00",
-     "age_h": 8.6,
+     "age_h": 9.6,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -499,7 +499,7 @@
      "source_name": "oss-security 邮件列表",
      "source_id": "oss-sec",
      "published_at": "2026-11-06T08:42:09+08:00",
-     "age_h": 8.6,
+     "age_h": 9.6,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -542,7 +542,7 @@
      "source_name": "Google News · 漏洞",
      "source_id": "gnews-sec",
      "published_at": "2026-11-06T14:20:03+08:00",
-     "age_h": 3.0,
+     "age_h": 4.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -585,7 +585,7 @@
      "source_name": "Google News · 漏洞",
      "source_id": "gnews-sec",
      "published_at": "2026-11-06T08:42:08+08:00",
-     "age_h": 8.6,
+     "age_h": 9.6,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -616,14 +616,14 @@
      "category": "security",
      "kind": "signal",
      "tier": "read",
-     "score": 203.8,
+     "score": 206.8,
      "title": "CVE-2026-122303 Kyverno from 1.17.0 before 1.19.2 contains an authorization bypass vulnerability that allows namespace tenants to overwrite resources in other namespaces via Na",
      "summary": "Kyverno from 1.17.0 before 1.19.2 contains an authorization bypass vulnerability that allows namespace tenants to overwrite resources in other namespaces via NamespacedMutatingPolicy mutate-existing targetMatchConstraints.expression. Attackers can return a CEL map literal fabricating a target with a",
      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-122303",
      "source_name": "NVD 严重/高危",
      "source_id": "nvd-critical",
      "published_at": "2026-11-05T03:17:22+08:00",
-     "age_h": 38.1,
+     "age_h": 39.0,
      "cvss": 9.9,
      "in_the_wild": false,
      "flags": [
@@ -640,6 +640,11 @@
       {
        "name": "NVD 严重/高危",
        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-106713",
+       "published_at": "2026-11-05T15:17:16+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-106714",
        "published_at": "2026-11-05T15:17:16+08:00"
       },
       {
@@ -928,7 +933,7 @@
        "published_at": "2026-11-04T10:17:26+08:00"
       }
      ],
-     "source_count": 58,
+     "source_count": 59,
      "tags": [
       "cve"
      ]
@@ -945,7 +950,7 @@
      "source_name": "Ubuntu 安全公告",
      "source_id": "ubuntu-usn",
      "published_at": "2026-11-06T08:42:08+08:00",
-     "age_h": 8.6,
+     "age_h": 9.6,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -1014,7 +1019,7 @@
      "url": "https://www.nmc.cn/publish/alarm/44078541600000_20261105222713.html",
      "source_name": "中央气象台 · 预警信号",
      "published_at": "2026-11-05T22:25:00+08:00",
-     "age_h": 18.9,
+     "age_h": 19.9,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -1046,7 +1051,7 @@
      "url": "https://open-meteo.com/",
      "source_name": "Open-Meteo 集合预报（GFS/ECMWF/ICON/JMA/GEM）",
      "published_at": "2026-11-06T15:07:32+08:00",
-     "age_h": 2.2,
+     "age_h": 3.2,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -1076,7 +1081,7 @@
      "url": "https://www.nmc.cn/publish/alarm/44088241600000_20261105152041.html",
      "source_name": "中央气象台 · 预警信号",
      "published_at": "2026-11-05T15:18:00+08:00",
-     "age_h": 26.0,
+     "age_h": 27.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -1117,7 +1122,7 @@
      "source_name": "Google News · WHO 疫情通报",
      "source_id": "gnews-who",
      "published_at": "2026-11-06T08:42:12+08:00",
-     "age_h": 8.6,
+     "age_h": 9.6,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -1220,7 +1225,7 @@
      "source_name": "Google News · 广东疫情",
      "source_id": "gnews-health-gd",
      "published_at": "2026-11-06T12:20:04+08:00",
-     "age_h": 5.0,
+     "age_h": 6.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -1253,45 +1258,6 @@
      ]
     },
     {
-     "id": "sig-e7bc921efc77aef6",
-     "category": "health",
-     "kind": "signal",
-     "tier": "watch",
-     "score": 26.0,
-     "title": "院士专家齐聚广州科普流感：把握黄金48小时 重视疫苗接种 - 手机新浪网",
-     "summary": "院士专家齐聚广州科普流感：把握黄金48小时 重视疫苗接种 手机新浪网",
-     "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQSTFMVFczZDRkR0hPdEUzdW1GeVZMeW5YWTZQZWZGT2wwcVI5NkFUczljV1JMN2NnRTIxYmx2S2pETDNwSi1ZWUNqbHZhNlBWY3N1cEZjTTlBcmxhWWdiQjlkX0VoaHRtaVhGRFJSaDc2VFBPeVYybmlhTkJVSjZMdXZ3?oc=5",
-     "source_name": "Google News · 广东疫情",
-     "source_id": "gnews-health-gd",
-     "published_at": "2026-11-05T18:14:47+08:00",
-     "age_h": 23.1,
-     "cvss": null,
-     "in_the_wild": false,
-     "flags": [
-      "广东",
-      "传染病"
-     ],
-     "why": "广东本地疫情通报，关你出租屋同家人",
-     "action": "睇原文数字；需要时提醒租客/家人",
-     "region": {
-      "level": "global",
-      "name": "global",
-      "parents": []
-     },
-     "sources": [
-      {
-       "name": "Google News · 广东疫情",
-       "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQSTFMVFczZDRkR0hPdEUzdW1GeVZMeW5YWTZQZWZGT2wwcVI5NkFUczljV1JMN2NnRTIxYmx2S2pETDNwSi1ZWUNqbHZhNlBWY3N1cEZjTTlBcmxhWWdiQjlkX0VoaHRtaVhGRFJSaDc2VFBPeVYybmlhTkJVSjZMdXZ3?oc=5",
-       "published_at": "2026-11-05T18:14:47+08:00"
-      }
-     ],
-     "source_count": 1,
-     "tags": [
-      "gd",
-      "gnews"
-     ]
-    },
-    {
      "id": "sig-ac6199f068a13cfe",
      "category": "health",
      "kind": "signal",
@@ -1303,7 +1269,7 @@
      "source_name": "Google News · WHO 疫情通报",
      "source_id": "gnews-who",
      "published_at": "2026-11-06T10:20:09+08:00",
-     "age_h": 7.0,
+     "age_h": 8.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -1356,7 +1322,7 @@
      "source_name": "Google News · WHO 疫情通报",
      "source_id": "gnews-who",
      "published_at": "2026-11-06T16:20:06+08:00",
-     "age_h": 1.0,
+     "age_h": 2.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -1393,6 +1359,45 @@
      ]
     },
     {
+     "id": "sig-e7bc921efc77aef6",
+     "category": "health",
+     "kind": "signal",
+     "tier": "watch",
+     "score": 22.0,
+     "title": "院士专家齐聚广州科普流感：把握黄金48小时 重视疫苗接种 - 手机新浪网",
+     "summary": "院士专家齐聚广州科普流感：把握黄金48小时 重视疫苗接种 手机新浪网",
+     "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQSTFMVFczZDRkR0hPdEUzdW1GeVZMeW5YWTZQZWZGT2wwcVI5NkFUczljV1JMN2NnRTIxYmx2S2pETDNwSi1ZWUNqbHZhNlBWY3N1cEZjTTlBcmxhWWdiQjlkX0VoaHRtaVhGRFJSaDc2VFBPeVYybmlhTkJVSjZMdXZ3?oc=5",
+     "source_name": "Google News · 广东疫情",
+     "source_id": "gnews-health-gd",
+     "published_at": "2026-11-05T18:14:47+08:00",
+     "age_h": 24.1,
+     "cvss": null,
+     "in_the_wild": false,
+     "flags": [
+      "广东",
+      "传染病"
+     ],
+     "why": "广东本地疫情通报，关你出租屋同家人",
+     "action": "睇原文数字；需要时提醒租客/家人",
+     "region": {
+      "level": "global",
+      "name": "global",
+      "parents": []
+     },
+     "sources": [
+      {
+       "name": "Google News · 广东疫情",
+       "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQSTFMVFczZDRkR0hPdEUzdW1GeVZMeW5YWTZQZWZGT2wwcVI5NkFUczljV1JMN2NnRTIxYmx2S2pETDNwSi1ZWUNqbHZhNlBWY3N1cEZjTTlBcmxhWWdiQjlkX0VoaHRtaVhGRFJSaDc2VFBPeVYybmlhTkJVSjZMdXZ3?oc=5",
+       "published_at": "2026-11-05T18:14:47+08:00"
+      }
+     ],
+     "source_count": 1,
+     "tags": [
+      "gd",
+      "gnews"
+     ]
+    },
+    {
      "id": "sig-0c30dcec3277ac1e",
      "category": "health",
      "kind": "signal",
@@ -1404,7 +1409,7 @@
      "source_name": "Google News · WHO 疫情通报",
      "source_id": "gnews-who",
      "published_at": "2026-11-06T17:20:12+08:00",
-     "age_h": 0.0,
+     "age_h": 1.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -1447,7 +1452,7 @@
      "source_name": "Google News · 广东疫情",
      "source_id": "gnews-health-gd",
      "published_at": "2026-11-06T11:20:03+08:00",
-     "age_h": 6.0,
+     "age_h": 7.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -1485,7 +1490,7 @@
      "source_name": "Google News · 广东疫情",
      "source_id": "gnews-health-gd",
      "published_at": "2026-11-06T08:42:10+08:00",
-     "age_h": 8.6,
+     "age_h": 9.6,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -1517,7 +1522,7 @@
    "key": "tech",
    "name": "🧠 科技圈热点",
    "sub": "Techmeme / HN / Lobsters / Phoronix",
-   "total": 29,
+   "total": 31,
    "items": [
     {
      "id": "sig-51c122e2645108d1",
@@ -1531,7 +1536,7 @@
      "source_name": "Techmeme（推特科技圈人工版）",
      "source_id": "techmeme",
      "published_at": "2026-11-06T08:42:27+08:00",
-     "age_h": 8.6,
+     "age_h": 9.6,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -1596,7 +1601,7 @@
      "source_name": "Lobsters",
      "source_id": "lobsters",
      "published_at": "2026-11-06T08:42:10+08:00",
-     "age_h": 8.6,
+     "age_h": 9.6,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -1639,7 +1644,7 @@
      "source_name": "Phoronix（Linux 硬件/内核）",
      "source_id": "phoronix",
      "published_at": "2026-11-06T08:42:10+08:00",
-     "age_h": 8.6,
+     "age_h": 9.6,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -1682,7 +1687,7 @@
      "source_name": "Hacker News 头条",
      "source_id": "hn",
      "published_at": "2026-11-05T22:44:20+08:00",
-     "age_h": 18.6,
+     "age_h": 19.6,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -1709,6 +1714,51 @@
      "discussion": "https://news.ycombinator.com/item?id=50379704"
     },
     {
+     "id": "sig-861d3d20bedaecbe",
+     "category": "tech",
+     "kind": "signal",
+     "tier": "read",
+     "score": 22.0,
+     "title": "Sources: China's top memory maker YMTC plans to source up to 70% of equipment for its fourth chip factory locally, up from just over 50% for its third factory (Reuters)",
+     "summary": "Reuters : Sources: China's top memory maker YMTC plans to source up to 70% of equipment for its fourth chip factory locally, up from just over 50% for its third factory China's largest flash memory chipmaker, Yangtze Memory Technologies Co (YMTC), plans to source as much as 70% of the equipment",
+     "url": "https://www.techmeme.com/261106/p3#a261106p3",
+     "source_name": "Techmeme（推特科技圈人工版）",
+     "source_id": "techmeme",
+     "published_at": "2026-11-06T18:20:05+08:00",
+     "age_h": 0.0,
+     "cvss": null,
+     "in_the_wild": false,
+     "flags": [],
+     "why": "圈内在聊嘅大事",
+     "action": "",
+     "region": {
+      "level": "global",
+      "name": "global",
+      "parents": []
+     },
+     "sources": [
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261106/p3#a261106p3",
+       "published_at": "2026-11-06T18:20:05+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261105/p4#a261105p4",
+       "published_at": "2026-11-05T18:15:31+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261105/p3#a261105p3",
+       "published_at": "2026-11-05T18:15:31+08:00"
+      }
+     ],
+     "source_count": 3,
+     "tags": [
+      "buzz"
+     ]
+    },
+    {
      "id": "sig-e6a8eaa3e28f303c",
      "category": "tech",
      "kind": "signal",
@@ -1720,7 +1770,7 @@
      "source_name": "Techmeme（推特科技圈人工版）",
      "source_id": "techmeme",
      "published_at": "2026-11-06T12:20:11+08:00",
-     "age_h": 5.0,
+     "age_h": 6.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -1754,18 +1804,18 @@
      ]
     },
     {
-     "id": "sig-aeff13e0b389cbfe",
+     "id": "sig-f1a4f180996bd293",
      "category": "tech",
      "kind": "signal",
      "tier": "read",
      "score": 19.0,
-     "title": "Potential Sciences, an AI startup building large-scale chemical data sets, secured backing from the UK's Sovereign AI Fund, as part of an eight-figure raise (Joel Khalili/Wired)",
-     "summary": "Joel Khalili / Wired : Potential Sciences, an AI startup building large-scale chemical data sets, secured backing from the UK's Sovereign AI Fund, as part of an eight-figure raise Potential Sciences, a startup backed by the UK government, is betting that training AI models on computer-generated bioc",
-     "url": "https://www.techmeme.com/261106/p1#a261106p1",
+     "title": "NY-based Kalepa, whose AI platform supports insurance underwriting, pricing, and portfolio management, raised a $75M Series B led by Updata at a $470M valuation (Manya Saini/Reuters)",
+     "summary": "Manya Saini / Reuters : NY-based Kalepa, whose AI platform supports insurance underwriting, pricing, and portfolio management, raised a $75M Series B led by Updata at a $470M valuation Insurance startup Kalepa said on Thursday it had raised $75 million at a $470 million valuation, as investors bet t",
+     "url": "https://www.techmeme.com/261106/p4#a261106p4",
      "source_name": "Techmeme（推特科技圈人工版）",
      "source_id": "techmeme",
-     "published_at": "2026-11-06T13:20:36+08:00",
-     "age_h": 4.0,
+     "published_at": "2026-11-06T18:20:05+08:00",
+     "age_h": 0.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -1779,53 +1829,13 @@
      "sources": [
       {
        "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261106/p1#a261106p1",
-       "published_at": "2026-11-06T13:20:36+08:00"
+       "url": "https://www.techmeme.com/261106/p4#a261106p4",
+       "published_at": "2026-11-06T18:20:05+08:00"
       },
       {
        "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261105/p62#a261105p62",
-       "published_at": "2026-11-06T08:42:27+08:00"
-      }
-     ],
-     "source_count": 2,
-     "tags": [
-      "buzz"
-     ]
-    },
-    {
-     "id": "sig-cc885ad47d9b51be",
-     "category": "tech",
-     "kind": "signal",
-     "tier": "read",
-     "score": 19.0,
-     "title": "Sources: UK neobank Monzo is exploring a new fundraising round valuing it at ~£7.5B after failing to be acquired by Nu Holdings and struggling to sell a stake (Financial Times)",
-     "summary": "Financial Times : Sources: UK neobank Monzo is exploring a new fundraising round valuing it at ~ 7.5B after failing to be acquired by Nu Holdings and struggling to sell a stake Lender had shifted focus to talks with buyout groups after failing to clinch a 10bn takeover by Brazilian fintech Nubank",
-     "url": "https://www.techmeme.com/261105/p68#a261105p68",
-     "source_name": "Techmeme（推特科技圈人工版）",
-     "source_id": "techmeme",
-     "published_at": "2026-11-06T11:20:05+08:00",
-     "age_h": 6.0,
-     "cvss": null,
-     "in_the_wild": false,
-     "flags": [],
-     "why": "圈内在聊嘅大事",
-     "action": "",
-     "region": {
-      "level": "global",
-      "name": "global",
-      "parents": []
-     },
-     "sources": [
-      {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261105/p68#a261105p68",
-       "published_at": "2026-11-06T11:20:05+08:00"
-      },
-      {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261105/p58#a261105p58",
-       "published_at": "2026-11-06T08:42:27+08:00"
+       "url": "https://www.techmeme.com/261104/p63#a261104p63",
+       "published_at": "2026-11-05T18:15:31+08:00"
       }
      ],
      "source_count": 2,
@@ -1845,7 +1855,7 @@
      "source_name": "Lobsters",
      "source_id": "lobsters",
      "published_at": "2026-11-06T08:42:10+08:00",
-     "age_h": 8.6,
+     "age_h": 9.6,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -1882,12 +1892,12 @@
      "tier": "read",
      "score": 15.0,
      "title": "MS Paint Remote Code Execution Vulnerability",
-     "summary": "HN 530 分 · 190 评论",
+     "summary": "HN 550 分 · 199 评论",
      "url": "https://www.cve.org/CVERecord?id=CVE-2026-83844",
      "source_name": "Hacker News 头条",
      "source_id": "hn",
      "published_at": "2026-11-06T04:43:42+08:00",
-     "age_h": 12.6,
+     "age_h": 13.6,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -1925,7 +1935,7 @@
      "source_name": "Lobsters",
      "source_id": "lobsters",
      "published_at": "2026-11-06T08:42:10+08:00",
-     "age_h": 8.6,
+     "age_h": 9.6,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -1955,14 +1965,14 @@
      "category": "tech",
      "kind": "signal",
      "tier": "read",
-     "score": 13.0,
+     "score": 9.0,
      "title": "A history of backdoors (2015)",
      "summary": "Comments",
      "url": "https://blog.cryptographyengineering.com/2015/07/20/a-history-of-backdoors/",
      "source_name": "Lobsters",
      "source_id": "lobsters",
      "published_at": "2026-11-05T18:14:49+08:00",
-     "age_h": 23.1,
+     "age_h": 24.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2003,7 +2013,7 @@
    "source_name": "Hacker News 头条",
    "source_id": "hn",
    "published_at": "2026-11-05T19:40:30+08:00",
-   "age_h": 21.7,
+   "age_h": 22.7,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -2044,7 +2054,7 @@
    "source_name": "Phoronix（Linux 硬件/内核）",
    "source_id": "phoronix",
    "published_at": "2026-11-06T08:42:10+08:00",
-   "age_h": 8.6,
+   "age_h": 9.6,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -2084,7 +2094,7 @@
    "source_name": "Lobsters",
    "source_id": "lobsters",
    "published_at": "2026-11-06T11:20:04+08:00",
-   "age_h": 6.0,
+   "age_h": 7.0,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -2119,7 +2129,7 @@
    "source_name": "Lobsters",
    "source_id": "lobsters",
    "published_at": "2026-11-06T08:42:10+08:00",
-   "age_h": 8.6,
+   "age_h": 9.6,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -2154,7 +2164,7 @@
    "source_name": "Phoronix（Linux 硬件/内核）",
    "source_id": "phoronix",
    "published_at": "2026-11-06T08:42:10+08:00",
-   "age_h": 8.6,
+   "age_h": 9.6,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -2189,7 +2199,7 @@
    "source_name": "Phoronix（Linux 硬件/内核）",
    "source_id": "phoronix",
    "published_at": "2026-11-06T08:42:10+08:00",
-   "age_h": 8.6,
+   "age_h": 9.6,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -2224,7 +2234,7 @@
    "source_name": "Phoronix（Linux 硬件/内核）",
    "source_id": "phoronix",
    "published_at": "2026-11-06T08:42:10+08:00",
-   "age_h": 8.6,
+   "age_h": 9.6,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -2259,7 +2269,7 @@
    "source_name": "Phoronix（Linux 硬件/内核）",
    "source_id": "phoronix",
    "published_at": "2026-11-06T08:42:10+08:00",
-   "age_h": 8.6,
+   "age_h": 9.6,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -2294,7 +2304,7 @@
    "source_name": "Phoronix（Linux 硬件/内核）",
    "source_id": "phoronix",
    "published_at": "2026-11-06T08:42:10+08:00",
-   "age_h": 8.6,
+   "age_h": 9.6,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -2329,7 +2339,7 @@
    "source_name": "Phoronix（Linux 硬件/内核）",
    "source_id": "phoronix",
    "published_at": "2026-11-06T08:42:10+08:00",
-   "age_h": 8.6,
+   "age_h": 9.6,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -2353,181 +2363,6 @@
    ]
   },
   {
-   "id": "sig-262281a10214f9d4",
-   "category": "tech",
-   "kind": "signal",
-   "tier": "sideline",
-   "score": 27.0,
-   "title": "The State of Python Profiling in 2026",
-   "summary": "Comments",
-   "url": "https://p403n1x87.github.io/the-state-of-python-profiling-in-2026.html",
-   "source_name": "Lobsters",
-   "source_id": "lobsters",
-   "published_at": "2026-11-05T18:14:49+08:00",
-   "age_h": 23.1,
-   "cvss": null,
-   "in_the_wild": false,
-   "flags": [],
-   "why": "有趣但无实操价值",
-   "action": "",
-   "region": {
-    "level": "global",
-    "name": "global",
-    "parents": []
-   },
-   "sources": [
-    {
-     "name": "Lobsters",
-     "url": "https://p403n1x87.github.io/the-state-of-python-profiling-in-2026.html",
-     "published_at": "2026-11-05T18:14:49+08:00"
-    }
-   ],
-   "source_count": 1,
-   "tags": [
-    "buzz"
-   ]
-  },
-  {
-   "id": "sig-139176b6fc7658c2",
-   "category": "tech",
-   "kind": "signal",
-   "tier": "sideline",
-   "score": 27.0,
-   "title": "The Ubuntu 26.04 Rust sudo is not compatible with standard sudo",
-   "summary": "Comments",
-   "url": "https://utcc.utoronto.ca/~cks/space/blog/linux/Ubuntu2604RustSudoNotCompatible",
-   "source_name": "Lobsters",
-   "source_id": "lobsters",
-   "published_at": "2026-11-05T18:14:49+08:00",
-   "age_h": 23.1,
-   "cvss": null,
-   "in_the_wild": false,
-   "flags": [],
-   "why": "有趣但无实操价值",
-   "action": "",
-   "region": {
-    "level": "global",
-    "name": "global",
-    "parents": []
-   },
-   "sources": [
-    {
-     "name": "Lobsters",
-     "url": "https://utcc.utoronto.ca/~cks/space/blog/linux/Ubuntu2604RustSudoNotCompatible",
-     "published_at": "2026-11-05T18:14:49+08:00"
-    }
-   ],
-   "source_count": 1,
-   "tags": [
-    "buzz"
-   ]
-  },
-  {
-   "id": "sig-5e666d05733e428c",
-   "category": "tech",
-   "kind": "signal",
-   "tier": "sideline",
-   "score": 27.0,
-   "title": "Python on my wrist",
-   "summary": "Comments",
-   "url": "https://tildeweb.nl/~michiel/python-on-my-wrist.html",
-   "source_name": "Lobsters",
-   "source_id": "lobsters",
-   "published_at": "2026-11-05T18:14:49+08:00",
-   "age_h": 23.1,
-   "cvss": null,
-   "in_the_wild": false,
-   "flags": [],
-   "why": "有趣但无实操价值",
-   "action": "",
-   "region": {
-    "level": "global",
-    "name": "global",
-    "parents": []
-   },
-   "sources": [
-    {
-     "name": "Lobsters",
-     "url": "https://tildeweb.nl/~michiel/python-on-my-wrist.html",
-     "published_at": "2026-11-05T18:14:49+08:00"
-    }
-   ],
-   "source_count": 1,
-   "tags": [
-    "buzz"
-   ]
-  },
-  {
-   "id": "sig-30c92373a9658f59",
-   "category": "tech",
-   "kind": "signal",
-   "tier": "sideline",
-   "score": 27.0,
-   "title": "The Linux Kernel Preparing To Remove The Last Of Its MMX Optimized Code",
-   "summary": "For what will likely be merged to the Linux 7.5 kernel, the mainline kernel is preparing to drop its last optimization its been carrying for far outdated MMX processors. This affects the likes of Intel Pentium MMX and Pentium II processors running modern software with up-to-date kernels when Linux 7",
-   "url": "https://www.phoronix.com/news/Linux-Dropping-Last-MMX-Opt",
-   "source_name": "Phoronix（Linux 硬件/内核）",
-   "source_id": "phoronix",
-   "published_at": "2026-11-05T18:14:49+08:00",
-   "age_h": 23.1,
-   "cvss": null,
-   "in_the_wild": false,
-   "flags": [],
-   "why": "有趣但无实操价值",
-   "action": "",
-   "region": {
-    "level": "global",
-    "name": "global",
-    "parents": []
-   },
-   "sources": [
-    {
-     "name": "Phoronix（Linux 硬件/内核）",
-     "url": "https://www.phoronix.com/news/Linux-Dropping-Last-MMX-Opt",
-     "published_at": "2026-11-05T18:14:49+08:00"
-    }
-   ],
-   "source_count": 1,
-   "tags": [
-    "linux"
-   ]
-  },
-  {
-   "id": "sig-f4f2507a25d1ed61",
-   "category": "tech",
-   "kind": "signal",
-   "tier": "sideline",
-   "score": 27.0,
-   "title": "Intel Brings RPL-M/RPL-P SoundWire To Upstream Linux For Raptor Lake Powered Automobiles",
-   "summary": "Intel today posted a set of patches for bringing SoundWire support in the upstream Intel AVS driver for Raptor Lake. While Intel SoundWire activities are not new, I was curious to see them focusing on Raptor Lake improvements in 2026 for what will then go into a 2027 Linux kernel version...",
-   "url": "https://www.phoronix.com/news/Intel-SoundWire-Raptor-Lake",
-   "source_name": "Phoronix（Linux 硬件/内核）",
-   "source_id": "phoronix",
-   "published_at": "2026-11-05T18:14:49+08:00",
-   "age_h": 23.1,
-   "cvss": null,
-   "in_the_wild": false,
-   "flags": [],
-   "why": "有趣但无实操价值",
-   "action": "",
-   "region": {
-    "level": "global",
-    "name": "global",
-    "parents": []
-   },
-   "sources": [
-    {
-     "name": "Phoronix（Linux 硬件/内核）",
-     "url": "https://www.phoronix.com/news/Intel-SoundWire-Raptor-Lake",
-     "published_at": "2026-11-05T18:14:49+08:00"
-    }
-   ],
-   "source_count": 1,
-   "tags": [
-    "linux"
-   ]
-  },
-  {
    "id": "sig-b97895f06b18391c",
    "category": "health",
    "kind": "signal",
@@ -2539,7 +2374,7 @@
    "source_name": "Google News · 广东疫情",
    "source_id": "gnews-health-gd",
    "published_at": "2026-11-06T08:42:11+08:00",
-   "age_h": 8.6,
+   "age_h": 9.6,
    "cvss": null,
    "in_the_wild": false,
    "flags": [
@@ -2578,7 +2413,7 @@
    "source_name": "Google News · 广东疫情",
    "source_id": "gnews-health-gd",
    "published_at": "2026-11-06T08:42:10+08:00",
-   "age_h": 8.6,
+   "age_h": 9.6,
    "cvss": null,
    "in_the_wild": false,
    "flags": [
@@ -2616,7 +2451,7 @@
    "source_name": "Google News · 广东疫情",
    "source_id": "gnews-health-gd",
    "published_at": "2026-11-06T08:42:10+08:00",
-   "age_h": 8.6,
+   "age_h": 9.6,
    "cvss": null,
    "in_the_wild": false,
    "flags": [
@@ -2654,7 +2489,7 @@
    "source_name": "Google News · 广东疫情",
    "source_id": "gnews-health-gd",
    "published_at": "2026-11-06T08:42:10+08:00",
-   "age_h": 8.6,
+   "age_h": 9.6,
    "cvss": null,
    "in_the_wild": false,
    "flags": [
@@ -2681,18 +2516,193 @@
    ]
   },
   {
+   "id": "sig-262281a10214f9d4",
+   "category": "tech",
+   "kind": "signal",
+   "tier": "sideline",
+   "score": 23.0,
+   "title": "The State of Python Profiling in 2026",
+   "summary": "Comments",
+   "url": "https://p403n1x87.github.io/the-state-of-python-profiling-in-2026.html",
+   "source_name": "Lobsters",
+   "source_id": "lobsters",
+   "published_at": "2026-11-05T18:14:49+08:00",
+   "age_h": 24.1,
+   "cvss": null,
+   "in_the_wild": false,
+   "flags": [],
+   "why": "有趣但无实操价值",
+   "action": "",
+   "region": {
+    "level": "global",
+    "name": "global",
+    "parents": []
+   },
+   "sources": [
+    {
+     "name": "Lobsters",
+     "url": "https://p403n1x87.github.io/the-state-of-python-profiling-in-2026.html",
+     "published_at": "2026-11-05T18:14:49+08:00"
+    }
+   ],
+   "source_count": 1,
+   "tags": [
+    "buzz"
+   ]
+  },
+  {
+   "id": "sig-139176b6fc7658c2",
+   "category": "tech",
+   "kind": "signal",
+   "tier": "sideline",
+   "score": 23.0,
+   "title": "The Ubuntu 26.04 Rust sudo is not compatible with standard sudo",
+   "summary": "Comments",
+   "url": "https://utcc.utoronto.ca/~cks/space/blog/linux/Ubuntu2604RustSudoNotCompatible",
+   "source_name": "Lobsters",
+   "source_id": "lobsters",
+   "published_at": "2026-11-05T18:14:49+08:00",
+   "age_h": 24.1,
+   "cvss": null,
+   "in_the_wild": false,
+   "flags": [],
+   "why": "有趣但无实操价值",
+   "action": "",
+   "region": {
+    "level": "global",
+    "name": "global",
+    "parents": []
+   },
+   "sources": [
+    {
+     "name": "Lobsters",
+     "url": "https://utcc.utoronto.ca/~cks/space/blog/linux/Ubuntu2604RustSudoNotCompatible",
+     "published_at": "2026-11-05T18:14:49+08:00"
+    }
+   ],
+   "source_count": 1,
+   "tags": [
+    "buzz"
+   ]
+  },
+  {
+   "id": "sig-5e666d05733e428c",
+   "category": "tech",
+   "kind": "signal",
+   "tier": "sideline",
+   "score": 23.0,
+   "title": "Python on my wrist",
+   "summary": "Comments",
+   "url": "https://tildeweb.nl/~michiel/python-on-my-wrist.html",
+   "source_name": "Lobsters",
+   "source_id": "lobsters",
+   "published_at": "2026-11-05T18:14:49+08:00",
+   "age_h": 24.1,
+   "cvss": null,
+   "in_the_wild": false,
+   "flags": [],
+   "why": "有趣但无实操价值",
+   "action": "",
+   "region": {
+    "level": "global",
+    "name": "global",
+    "parents": []
+   },
+   "sources": [
+    {
+     "name": "Lobsters",
+     "url": "https://tildeweb.nl/~michiel/python-on-my-wrist.html",
+     "published_at": "2026-11-05T18:14:49+08:00"
+    }
+   ],
+   "source_count": 1,
+   "tags": [
+    "buzz"
+   ]
+  },
+  {
+   "id": "sig-30c92373a9658f59",
+   "category": "tech",
+   "kind": "signal",
+   "tier": "sideline",
+   "score": 23.0,
+   "title": "The Linux Kernel Preparing To Remove The Last Of Its MMX Optimized Code",
+   "summary": "For what will likely be merged to the Linux 7.5 kernel, the mainline kernel is preparing to drop its last optimization its been carrying for far outdated MMX processors. This affects the likes of Intel Pentium MMX and Pentium II processors running modern software with up-to-date kernels when Linux 7",
+   "url": "https://www.phoronix.com/news/Linux-Dropping-Last-MMX-Opt",
+   "source_name": "Phoronix（Linux 硬件/内核）",
+   "source_id": "phoronix",
+   "published_at": "2026-11-05T18:14:49+08:00",
+   "age_h": 24.1,
+   "cvss": null,
+   "in_the_wild": false,
+   "flags": [],
+   "why": "有趣但无实操价值",
+   "action": "",
+   "region": {
+    "level": "global",
+    "name": "global",
+    "parents": []
+   },
+   "sources": [
+    {
+     "name": "Phoronix（Linux 硬件/内核）",
+     "url": "https://www.phoronix.com/news/Linux-Dropping-Last-MMX-Opt",
+     "published_at": "2026-11-05T18:14:49+08:00"
+    }
+   ],
+   "source_count": 1,
+   "tags": [
+    "linux"
+   ]
+  },
+  {
+   "id": "sig-f4f2507a25d1ed61",
+   "category": "tech",
+   "kind": "signal",
+   "tier": "sideline",
+   "score": 23.0,
+   "title": "Intel Brings RPL-M/RPL-P SoundWire To Upstream Linux For Raptor Lake Powered Automobiles",
+   "summary": "Intel today posted a set of patches for bringing SoundWire support in the upstream Intel AVS driver for Raptor Lake. While Intel SoundWire activities are not new, I was curious to see them focusing on Raptor Lake improvements in 2026 for what will then go into a 2027 Linux kernel version...",
+   "url": "https://www.phoronix.com/news/Intel-SoundWire-Raptor-Lake",
+   "source_name": "Phoronix（Linux 硬件/内核）",
+   "source_id": "phoronix",
+   "published_at": "2026-11-05T18:14:49+08:00",
+   "age_h": 24.1,
+   "cvss": null,
+   "in_the_wild": false,
+   "flags": [],
+   "why": "有趣但无实操价值",
+   "action": "",
+   "region": {
+    "level": "global",
+    "name": "global",
+    "parents": []
+   },
+   "sources": [
+    {
+     "name": "Phoronix（Linux 硬件/内核）",
+     "url": "https://www.phoronix.com/news/Intel-SoundWire-Raptor-Lake",
+     "published_at": "2026-11-05T18:14:49+08:00"
+    }
+   ],
+   "source_count": 1,
+   "tags": [
+    "linux"
+   ]
+  },
+  {
    "id": "sig-a87202c12fb7f6ed",
    "category": "health",
    "kind": "signal",
    "tier": "sideline",
-   "score": 26.0,
+   "score": 22.0,
    "title": "华为、广州实验室等在大湾区科学论坛发布AI4S新成果 - 21财经",
    "summary": "华为、广州实验室等在大湾区科学论坛发布AI4S新成果 21财经",
    "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPaExsemlseFlwTHJCY0ZHbENsS1JjOGQ4NVpWM3VpNWFkN29HTlNpNWx2RDNRWF9mYjk5WXc1Y1psOEFLSklRWkJ0LXVZYmVFeTBjbWFNdWpmeDVHd0VkOXAwYlQ4QUhnejdHYkpzTkt2U3hiUllwZkwzT0RyWlQ4YnBvYmdfUV83VHNRaW1YZw?oc=5",
    "source_name": "Google News · 广东疫情",
    "source_id": "gnews-health-gd",
    "published_at": "2026-11-05T18:14:47+08:00",
-   "age_h": 23.1,
+   "age_h": 24.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [
@@ -2727,7 +2737,7 @@
    "ok": true,
    "error": null,
    "items": 11,
-   "seconds": 1.0
+   "seconds": 0.9
   },
   {
    "id": "oss-sec",
@@ -2745,7 +2755,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 0.9
+   "seconds": 0.8
   },
   {
    "id": "nvd-critical",
@@ -2753,8 +2763,8 @@
    "category": "security",
    "ok": true,
    "error": null,
-   "items": 53,
-   "seconds": 2.2
+   "items": 54,
+   "seconds": 1.0
   },
   {
    "id": "cisa-kev",
@@ -2763,7 +2773,7 @@
    "ok": true,
    "error": null,
    "items": 2,
-   "seconds": 2.0
+   "seconds": 2.9
   },
   {
    "id": "gnews-sec",
@@ -2771,8 +2781,8 @@
    "category": "security",
    "ok": true,
    "error": null,
-   "items": 19,
-   "seconds": 5.0
+   "items": 20,
+   "seconds": 4.0
   },
   {
    "id": "gnews-health-gd",
@@ -2780,8 +2790,8 @@
    "category": "health",
    "ok": true,
    "error": null,
-   "items": 6,
-   "seconds": 1.8
+   "items": 4,
+   "seconds": 2.1
   },
   {
    "id": "gnews-who",
@@ -2790,7 +2800,7 @@
    "ok": true,
    "error": null,
    "items": 24,
-   "seconds": 5.8
+   "seconds": 4.2
   },
   {
    "id": "techmeme",
@@ -2798,8 +2808,8 @@
    "category": "tech",
    "ok": true,
    "error": null,
-   "items": 0,
-   "seconds": 28.3
+   "items": 15,
+   "seconds": 1.6
   },
   {
    "id": "hn",
@@ -2807,7 +2817,7 @@
    "category": "tech",
    "ok": true,
    "error": null,
-   "items": 16,
+   "items": 18,
    "seconds": 1.4
   },
   {
@@ -2817,7 +2827,7 @@
    "ok": true,
    "error": null,
    "items": 25,
-   "seconds": 0.8
+   "seconds": 0.7
   },
   {
    "id": "phoronix",
@@ -2826,15 +2836,15 @@
    "ok": true,
    "error": null,
    "items": 32,
-   "seconds": 0.6
+   "seconds": 0.7
   }
  ],
  "stats": {
-  "facts_in": 538,
-  "clusters": 248,
-  "items": 251,
+  "facts_in": 546,
+  "clusters": 253,
+  "items": 256,
   "dropped_noise": 0,
-  "ledger_rows": "557→538"
+  "ledger_rows": "567→546"
  },
  "disclaimer": "只做信息整理，不替代官方公告；行动建议需人判断。"
 }
