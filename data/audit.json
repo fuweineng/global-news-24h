@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-11-07T19:04:22+00:00",
-  "source_updated": "2026-11-07T17:00:03.148467+00:00",
+  "generated_at": "2026-11-07T23:05:39+00:00",
+  "source_updated": "2026-11-07T19:51:15.486976+00:00",
   "summary": {
     "status": "warn",
     "checks_passed": 3,
@@ -13,31 +13,31 @@
       "label": "标题中立化覆盖率",
       "status": "warn",
       "threshold": ">= 0.90",
-      "observed": 0.8133,
+      "observed": 0.86,
       "metric": {
-        "processed": 244,
+        "processed": 258,
         "total": 300
       },
-      "detail": "56/300 条标题与英文原文完全相同，未走中立化"
+      "detail": "42/300 条标题与英文原文完全相同，未走中立化"
     },
     {
       "id": "coverage.summary",
       "label": "摘要中立化覆盖率",
       "status": "pass",
       "threshold": ">= 0.90",
-      "observed": 0.9433,
+      "observed": 0.97,
       "metric": {
-        "processed": 283,
+        "processed": 291,
         "total": 300
       },
-      "detail": "17/300 条摘要与英文原文完全相同，未走中立化"
+      "detail": "9/300 条摘要与英文原文完全相同，未走中立化"
     },
     {
       "id": "coverage.by_source",
       "label": "按来源覆盖率",
       "status": "pass",
       "threshold": "0% 源占比 < 0.50",
-      "observed": 0.8133,
+      "observed": 0.86,
       "metric": {
         "zero_rate_sources": 0,
         "sources_total": 27
@@ -49,61 +49,79 @@
       "label": "中立度残留",
       "status": "pass",
       "threshold": "<= 0.05",
-      "observed": 0.0041,
+      "observed": 0.0078,
       "metric": {
-        "processed": 244,
-        "hits": 1
+        "processed": 258,
+        "hits": 2
       },
-      "detail": "已加工 244 条中 1 条仍含情绪/反讽残留（0.4%）"
+      "detail": "已加工 258 条中 2 条仍含情绪/反讽残留（0.8%）"
     }
   ],
   "by_source": [
     {
-      "source": "界面新闻",
-      "total": 30,
-      "processed": 11,
-      "rate": 0.3667
-    },
-    {
-      "source": "中新网财经",
-      "total": 28,
-      "processed": 6,
-      "rate": 0.2143
-    },
-    {
       "source": "Al Jazeera",
-      "total": 24,
-      "processed": 24,
+      "total": 26,
+      "processed": 26,
       "rate": 1.0
     },
     {
-      "source": "中新网",
-      "total": 22,
-      "processed": 7,
-      "rate": 0.3182
-    },
-    {
-      "source": "TechRadar",
+      "source": "界面新闻",
       "total": 21,
-      "processed": 21,
-      "rate": 1.0
+      "processed": 5,
+      "rate": 0.2381
     },
     {
-      "source": "DW",
-      "total": 18,
-      "processed": 18,
+      "source": "Engadget",
+      "total": 20,
+      "processed": 20,
       "rate": 1.0
     },
     {
       "source": "France 24",
-      "total": 18,
-      "processed": 18,
+      "total": 20,
+      "processed": 20,
+      "rate": 1.0
+    },
+    {
+      "source": "TechRadar",
+      "total": 20,
+      "processed": 20,
+      "rate": 1.0
+    },
+    {
+      "source": "中新网财经",
+      "total": 20,
+      "processed": 4,
+      "rate": 0.2
+    },
+    {
+      "source": "DW",
+      "total": 16,
+      "processed": 16,
       "rate": 1.0
     },
     {
       "source": "Mashable",
+      "total": 16,
+      "processed": 16,
+      "rate": 1.0
+    },
+    {
+      "source": "中新网",
+      "total": 16,
+      "processed": 6,
+      "rate": 0.375
+    },
+    {
+      "source": "MarketWatch",
       "total": 15,
       "processed": 15,
+      "rate": 1.0
+    },
+    {
+      "source": "Phys.org",
+      "total": 13,
+      "processed": 13,
       "rate": 1.0
     },
     {
@@ -119,13 +137,7 @@
       "rate": 1.0
     },
     {
-      "source": "Engadget",
-      "total": 10,
-      "processed": 10,
-      "rate": 1.0
-    },
-    {
-      "source": "Phys.org",
+      "source": "CBS News",
       "total": 10,
       "processed": 10,
       "rate": 1.0
@@ -137,7 +149,7 @@
       "rate": 1.0
     },
     {
-      "source": "MarketWatch",
+      "source": "The Verge",
       "total": 9,
       "processed": 9,
       "rate": 1.0
@@ -155,27 +167,9 @@
       "rate": 1.0
     },
     {
-      "source": "Financial Times",
-      "total": 8,
-      "processed": 8,
-      "rate": 1.0
-    },
-    {
-      "source": "The Verge",
-      "total": 8,
-      "processed": 8,
-      "rate": 1.0
-    },
-    {
-      "source": "CBS News",
+      "source": "NPR",
       "total": 7,
       "processed": 7,
-      "rate": 1.0
-    },
-    {
-      "source": "NPR",
-      "total": 5,
-      "processed": 5,
       "rate": 1.0
     },
     {
@@ -191,19 +185,25 @@
       "rate": 1.0
     },
     {
+      "source": "Financial Times",
+      "total": 3,
+      "processed": 3,
+      "rate": 1.0
+    },
+    {
       "source": "ScienceDaily",
       "total": 3,
       "processed": 3,
       "rate": 1.0
     },
     {
-      "source": "Ars Technica",
-      "total": 2,
-      "processed": 2,
+      "source": "TechCrunch",
+      "total": 3,
+      "processed": 3,
       "rate": 1.0
     },
     {
-      "source": "TechCrunch",
+      "source": "Ars Technica",
       "total": 2,
       "processed": 2,
       "rate": 1.0
@@ -228,6 +228,13 @@
       "zh_title": "为什么关于人类自动化人工智能开发的新报告让研究人员感到震惊",
       "rule": "emotion",
       "matched": "震惊"
+    },
+    {
+      "source": "Variety",
+      "title": "‘Godzilla Minus Zero’ Director Takashi Yamazaki Dreamed of Seeing His Hometown Destroyed by King Ghidorah. He Finally Made It Happen.",
+      "zh_title": "导演 Takashi Yamazaki 梦想看到他的家乡被国王 Ghidorah 摧毁。他终于成功了",
+      "rule": "emotion",
+      "matched": "摧毁"
     }
   ],
   "dead_sources": [
@@ -244,31 +251,31 @@
       "加载中…"
     ],
     "actually_producing": [
-      "界面新闻",
-      "中新网财经",
       "Al Jazeera",
-      "中新网",
-      "TechRadar",
-      "DW",
+      "界面新闻",
+      "Engadget",
       "France 24",
+      "TechRadar",
+      "中新网财经",
+      "DW",
       "Mashable",
+      "中新网",
+      "MarketWatch",
+      "Phys.org",
       "CNBC",
       "Variety",
-      "Engadget",
-      "Phys.org",
+      "CBS News",
       "Wired",
-      "MarketWatch",
+      "The Verge",
       "BBC",
       "Deadline",
-      "Financial Times",
-      "The Verge",
-      "CBS News",
       "NPR",
       "The Next Web",
       "Hollywood Reporter",
+      "Financial Times",
       "ScienceDaily",
-      "Ars Technica",
       "TechCrunch",
+      "Ars Technica",
       "CNET",
       "联合国新闻"
     ],
