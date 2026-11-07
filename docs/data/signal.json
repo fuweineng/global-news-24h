@@ -1,14 +1,14 @@
 {
  "schema_version": "1.0.0",
- "generated_at": "2026-11-07T17:20:39+08:00",
- "as_of": "2026-11-07T17:20:39+08:00",
+ "generated_at": "2026-11-07T18:21:10+08:00",
+ "as_of": "2026-11-07T18:21:10+08:00",
  "counts": {
   "act": 18,
   "watch": 21,
   "read": 85,
-  "sideline": 242
+  "sideline": 246
  },
- "overview": "①今日最紧要：处理 LMDB（LMFDB）个 SSTI 漏洞 CVE-2026-123198，CVSS 9.8、未认证即可利用，且命中你嘅 Python 核心包，建议即刻核实版本并升级到 commit 01829bd 或之后。同日仲有 Black GitHub Action（CVE-2026-114134，8.7）同 PyMoDAQ 反序列化（CVE-2026-120859，7.8）都命中你 py 核心栈，今日一并排查版本。\n\n②趋势上，留意到 AI 驱动漏洞挖掘明显升温——OpenAI 一连公布 GPT-6 Cyber 模型同 948 个 Linux 内核提权漏洞，加上 USN-9003-1 内核（NVIDIA）安全更新，kernel 侧短期会有补丁潮。另外 AgentScope bash 工具权限检查缺陷（7.3）同 OpenSSH+musl 认证绕过反映 AI agent 工具链及基础认证组件正成为新攻击面。\n\n③风险提示：以上多为套件公告，实际影响视乎你是否真的运行相关版本，先做资产盘点再打补丁，避免因版本不匹配而误升级核心依赖引入回归。",
+ "overview": "① 今日最急：LMFDB 嘅 CVE-2026-123198（SSTI、未认证、CVSS 9.8），如你哋有跑 LMFDB 或維護 Python render 流程，即刻確認版本係咪 commit 01829bd 或之後；同日仲有 Black GitHub Action 嘅 CVE-2026-114134，若 CI 有用 use_pyproject: true 都要一齊查。\n\n② 趨勢方面，呢批情報集中喺 Python 生態核心包（Black、PyMoDAQ、CPython sandbox escape、AgentScope bash 工具權限漏洞），多數係反序列化或權限檢查缺陷，建議一次過盤點依賴版本；另外 kernel 類大量條目（USN-9003-1、OpenAI 報嘅 948 個 Linux 內核提權漏洞）顯示 AI 挖漏洞已經喺真實 kernel 上規模化出成果。\n\n③ 風險提示：CPython sandbox escape 同 AI 大規模挖掘 kernel 提權漏洞呢兩件事疊加，代表「沙箱/提權」呢層防線越來越薄，唔好假設隔離環境等於安全。",
  "sections": [
   {
    "key": "security",
@@ -21,14 +21,14 @@
      "category": "security",
      "kind": "signal",
      "tier": "act",
-     "score": 433.6,
+     "score": 442.6,
      "title": "CVE-2026-123198 LMFDB before commit 01829bd contains a server-side template injection vulnerability in the render_knowl function that allows unauthenticated attackers to inject",
      "summary": "LMFDB before commit 01829bd contains a server-side template injection vulnerability in the render_knowl function that allows unauthenticated attackers to inject Jinja expressions via request parameters. Attackers can supply crafted query-string values or 'content' data to /knowledge/render/ to reach",
      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123198",
      "source_name": "NVD 严重/高危",
      "source_id": "nvd-critical",
      "published_at": "2026-11-05T19:17:18+08:00",
-     "age_h": 46.1,
+     "age_h": 47.1,
      "cvss": 9.8,
      "in_the_wild": false,
      "flags": [
@@ -48,6 +48,21 @@
        "name": "oss-security 邮件列表",
        "url": "https://seclists.org/oss-sec/2026/q4/542",
        "published_at": "2026-11-07T01:20:03+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123326",
+       "published_at": "2026-11-06T11:17:12+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123327",
+       "published_at": "2026-11-06T11:17:12+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123323",
+       "published_at": "2026-11-06T11:17:11+08:00"
       },
       {
        "name": "NVD 严重/高危",
@@ -695,7 +710,7 @@
        "published_at": "2026-11-03T19:50:10+08:00"
       }
      ],
-     "source_count": 130,
+     "source_count": 133,
      "tags": [
       "cve",
       "kernel",
@@ -707,14 +722,14 @@
      "category": "security",
      "kind": "signal",
      "tier": "act",
-     "score": 389.1,
+     "score": 383.1,
      "title": "CVE-2026-114134 Black is the uncompromising Python code formatter. Prior to 26.10.1, the Black GitHub Action with use_pyproject: true accepts tool.black.required-version from p",
      "summary": "Black is the uncompromising Python code formatter. Prior to 26.10.1, the Black GitHub Action with use_pyproject: true accepts tool.black.required-version from pyproject.toml without validating that it is a released Black version specifier. An attacker who can submit a pull request can change that fi",
      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-114134",
      "source_name": "NVD 严重/高危",
      "source_id": "nvd-critical",
      "published_at": "2026-11-05T21:18:36+08:00",
-     "age_h": 44.0,
+     "age_h": 45.0,
      "cvss": 8.7,
      "in_the_wild": false,
      "flags": [
@@ -1167,11 +1182,6 @@
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-33965",
-       "published_at": "2026-11-05T03:17:26+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-122322",
        "published_at": "2026-11-05T03:17:25+08:00"
       },
@@ -1228,11 +1238,6 @@
       {
        "name": "NVD 严重/高危",
        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-121945",
-       "published_at": "2026-11-04T13:17:29+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-121946",
        "published_at": "2026-11-04T13:17:29+08:00"
       },
       {
@@ -1311,7 +1316,7 @@
        "published_at": "2026-11-04T10:17:24+08:00"
       }
      ],
-     "source_count": 116,
+     "source_count": 114,
      "tags": [
       "cve"
      ]
@@ -1328,7 +1333,7 @@
      "source_name": "NVD 严重/高危",
      "source_id": "nvd-critical",
      "published_at": "2026-11-05T14:17:04+08:00",
-     "age_h": 51.1,
+     "age_h": 52.1,
      "cvss": 7.3,
      "in_the_wild": false,
      "flags": [
@@ -1432,7 +1437,7 @@
      "source_name": "oss-security 邮件列表",
      "source_id": "oss-sec",
      "published_at": "2026-11-06T08:42:09+08:00",
-     "age_h": 32.6,
+     "age_h": 33.6,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -1555,7 +1560,7 @@
      "source_name": "NVD 严重/高危",
      "source_id": "nvd-critical",
      "published_at": "2026-11-05T18:17:05+08:00",
-     "age_h": 47.1,
+     "age_h": 48.1,
      "cvss": 7.8,
      "in_the_wild": false,
      "flags": [
@@ -1594,7 +1599,7 @@
      "source_name": "Google News · 漏洞",
      "source_id": "gnews-sec",
      "published_at": "2026-11-07T00:20:06+08:00",
-     "age_h": 17.0,
+     "age_h": 18.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -1657,7 +1662,7 @@
      "source_name": "Google News · 漏洞",
      "source_id": "gnews-sec",
      "published_at": "2026-11-07T08:20:05+08:00",
-     "age_h": 9.0,
+     "age_h": 10.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -1720,7 +1725,7 @@
      "source_name": "Google News · 漏洞",
      "source_id": "gnews-sec",
      "published_at": "2026-11-07T07:20:03+08:00",
-     "age_h": 10.0,
+     "age_h": 11.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -1778,7 +1783,7 @@
      "source_name": "Ubuntu 安全公告",
      "source_id": "ubuntu-usn",
      "published_at": "2026-11-07T00:20:07+08:00",
-     "age_h": 17.0,
+     "age_h": 18.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -1821,7 +1826,7 @@
      "source_name": "oss-security 邮件列表",
      "source_id": "oss-sec",
      "published_at": "2026-11-07T00:20:06+08:00",
-     "age_h": 17.0,
+     "age_h": 18.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -1864,7 +1869,7 @@
      "source_name": "oss-security 邮件列表",
      "source_id": "oss-sec",
      "published_at": "2026-11-07T06:20:03+08:00",
-     "age_h": 11.0,
+     "age_h": 12.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -1902,7 +1907,7 @@
      "source_name": "Google News · 漏洞",
      "source_id": "gnews-sec",
      "published_at": "2026-11-06T16:20:05+08:00",
-     "age_h": 25.0,
+     "age_h": 26.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -1957,7 +1962,7 @@
      "url": "https://www.nmc.cn/publish/alarm/44190041600000_20261106184908.html",
      "source_name": "中央气象台 · 预警信号",
      "published_at": "2026-11-06T18:47:00+08:00",
-     "age_h": 22.6,
+     "age_h": 23.6,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -1989,7 +1994,7 @@
      "url": "https://www.nmc.cn/publish/alarm/44011341600000_20261106184542.html",
      "source_name": "中央气象台 · 预警信号",
      "published_at": "2026-11-06T18:43:00+08:00",
-     "age_h": 22.6,
+     "age_h": 23.6,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2021,7 +2026,7 @@
      "url": "https://www.nmc.cn/publish/alarm/44190041600000_20261106191356.html",
      "source_name": "中央气象台 · 预警信号",
      "published_at": "2026-11-06T19:10:00+08:00",
-     "age_h": 22.2,
+     "age_h": 23.2,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2053,7 +2058,7 @@
      "url": "https://open-meteo.com/",
      "source_name": "Open-Meteo 集合预报（GFS/ECMWF/ICON/JMA/GEM）",
      "published_at": "2026-11-07T13:37:38+08:00",
-     "age_h": 3.7,
+     "age_h": 4.7,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -2092,7 +2097,7 @@
      "source_name": "Google News · WHO 疫情通报",
      "source_id": "gnews-who",
      "published_at": "2026-11-07T17:20:05+08:00",
-     "age_h": 0.0,
+     "age_h": 1.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2240,7 +2245,7 @@
      "source_name": "Google News · WHO 疫情通报",
      "source_id": "gnews-who",
      "published_at": "2026-11-07T17:20:05+08:00",
-     "age_h": 0.0,
+     "age_h": 1.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2313,7 +2318,7 @@
      "source_name": "Google News · 广东疫情",
      "source_id": "gnews-health-gd",
      "published_at": "2026-11-07T14:20:07+08:00",
-     "age_h": 3.0,
+     "age_h": 4.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2351,7 +2356,7 @@
      "source_name": "Google News · WHO 疫情通报",
      "source_id": "gnews-who",
      "published_at": "2026-11-07T17:20:07+08:00",
-     "age_h": 0.0,
+     "age_h": 1.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2404,7 +2409,7 @@
      "source_name": "Google News · 广东疫情",
      "source_id": "gnews-health-gd",
      "published_at": "2026-11-06T12:20:04+08:00",
-     "age_h": 29.0,
+     "age_h": 30.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2448,7 +2453,7 @@
      "source_name": "Google News · 广东疫情",
      "source_id": "gnews-health-gd",
      "published_at": "2026-11-05T18:14:47+08:00",
-     "age_h": 47.1,
+     "age_h": 48.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2487,7 +2492,7 @@
      "source_name": "Google News · WHO 疫情通报",
      "source_id": "gnews-who",
      "published_at": "2026-11-07T09:20:08+08:00",
-     "age_h": 8.0,
+     "age_h": 9.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2530,7 +2535,7 @@
      "source_name": "Google News · 广东疫情",
      "source_id": "gnews-health-gd",
      "published_at": "2026-11-07T14:20:06+08:00",
-     "age_h": 3.0,
+     "age_h": 4.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2576,7 +2581,7 @@
      "source_name": "Techmeme（推特科技圈人工版）",
      "source_id": "techmeme",
      "published_at": "2026-11-06T08:42:27+08:00",
-     "age_h": 32.6,
+     "age_h": 33.6,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -2641,7 +2646,7 @@
      "source_name": "Techmeme（推特科技圈人工版）",
      "source_id": "techmeme",
      "published_at": "2026-11-07T12:20:06+08:00",
-     "age_h": 5.0,
+     "age_h": 6.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -2701,7 +2706,7 @@
      "source_name": "Techmeme（推特科技圈人工版）",
      "source_id": "techmeme",
      "published_at": "2026-11-07T01:20:08+08:00",
-     "age_h": 16.0,
+     "age_h": 17.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -2736,7 +2741,7 @@
      "source_name": "Phoronix（Linux 硬件/内核）",
      "source_id": "phoronix",
      "published_at": "2026-11-07T00:20:09+08:00",
-     "age_h": 17.0,
+     "age_h": 18.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2779,7 +2784,7 @@
      "source_name": "Phoronix（Linux 硬件/内核）",
      "source_id": "phoronix",
      "published_at": "2026-11-07T00:20:09+08:00",
-     "age_h": 17.0,
+     "age_h": 18.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2822,7 +2827,7 @@
      "source_name": "Techmeme（推特科技圈人工版）",
      "source_id": "techmeme",
      "published_at": "2026-11-07T05:20:02+08:00",
-     "age_h": 12.0,
+     "age_h": 13.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -2872,7 +2877,7 @@
      "source_name": "Hacker News 头条",
      "source_id": "hn",
      "published_at": "2026-11-05T22:44:20+08:00",
-     "age_h": 42.6,
+     "age_h": 43.6,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2910,7 +2915,7 @@
      "source_name": "Lobsters",
      "source_id": "lobsters",
      "published_at": "2026-11-07T00:20:10+08:00",
-     "age_h": 17.0,
+     "age_h": 18.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2952,7 +2957,7 @@
      "source_name": "Lobsters",
      "source_id": "lobsters",
      "published_at": "2026-11-07T00:20:10+08:00",
-     "age_h": 17.0,
+     "age_h": 18.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2989,7 +2994,7 @@
      "source_name": "Hacker News 头条",
      "source_id": "hn",
      "published_at": "2026-11-06T04:43:42+08:00",
-     "age_h": 36.6,
+     "age_h": 37.6,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3027,7 +3032,7 @@
      "source_name": "Lobsters",
      "source_id": "lobsters",
      "published_at": "2026-11-05T18:14:49+08:00",
-     "age_h": 47.1,
+     "age_h": 48.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3068,7 +3073,7 @@
    "source_name": "Phoronix（Linux 硬件/内核）",
    "source_id": "phoronix",
    "published_at": "2026-11-07T00:20:09+08:00",
-   "age_h": 17.0,
+   "age_h": 18.0,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -3109,7 +3114,7 @@
    "source_name": "Phoronix（Linux 硬件/内核）",
    "source_id": "phoronix",
    "published_at": "2026-11-07T00:20:09+08:00",
-   "age_h": 17.0,
+   "age_h": 18.0,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -3149,7 +3154,7 @@
    "source_name": "Phoronix（Linux 硬件/内核）",
    "source_id": "phoronix",
    "published_at": "2026-11-07T00:20:09+08:00",
-   "age_h": 17.0,
+   "age_h": 18.0,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -3189,7 +3194,7 @@
    "source_name": "Hacker News 头条",
    "source_id": "hn",
    "published_at": "2026-11-05T19:40:30+08:00",
-   "age_h": 45.7,
+   "age_h": 46.7,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -3230,7 +3235,7 @@
    "source_name": "Lobsters",
    "source_id": "lobsters",
    "published_at": "2026-11-07T00:20:10+08:00",
-   "age_h": 17.0,
+   "age_h": 18.0,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -3265,7 +3270,7 @@
    "source_name": "Lobsters",
    "source_id": "lobsters",
    "published_at": "2026-11-07T00:20:10+08:00",
-   "age_h": 17.0,
+   "age_h": 18.0,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -3300,7 +3305,7 @@
    "source_name": "Lobsters",
    "source_id": "lobsters",
    "published_at": "2026-11-07T00:20:10+08:00",
-   "age_h": 17.0,
+   "age_h": 18.0,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -3335,7 +3340,7 @@
    "source_name": "Phoronix（Linux 硬件/内核）",
    "source_id": "phoronix",
    "published_at": "2026-11-07T00:20:09+08:00",
-   "age_h": 17.0,
+   "age_h": 18.0,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -3370,7 +3375,7 @@
    "source_name": "Phoronix（Linux 硬件/内核）",
    "source_id": "phoronix",
    "published_at": "2026-11-07T00:20:09+08:00",
-   "age_h": 17.0,
+   "age_h": 18.0,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -3405,7 +3410,7 @@
    "source_name": "Phoronix（Linux 硬件/内核）",
    "source_id": "phoronix",
    "published_at": "2026-11-07T00:20:09+08:00",
-   "age_h": 17.0,
+   "age_h": 18.0,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -3440,7 +3445,7 @@
    "source_name": "Phoronix（Linux 硬件/内核）",
    "source_id": "phoronix",
    "published_at": "2026-11-07T00:20:09+08:00",
-   "age_h": 17.0,
+   "age_h": 18.0,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -3475,7 +3480,7 @@
    "source_name": "Phoronix（Linux 硬件/内核）",
    "source_id": "phoronix",
    "published_at": "2026-11-07T00:20:09+08:00",
-   "age_h": 17.0,
+   "age_h": 18.0,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -3510,7 +3515,7 @@
    "source_name": "Phoronix（Linux 硬件/内核）",
    "source_id": "phoronix",
    "published_at": "2026-11-07T00:20:09+08:00",
-   "age_h": 17.0,
+   "age_h": 18.0,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -3545,7 +3550,7 @@
    "source_name": "Phoronix（Linux 硬件/内核）",
    "source_id": "phoronix",
    "published_at": "2026-11-07T00:20:09+08:00",
-   "age_h": 17.0,
+   "age_h": 18.0,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -3580,7 +3585,7 @@
    "source_name": "Phoronix（Linux 硬件/内核）",
    "source_id": "phoronix",
    "published_at": "2026-11-07T00:20:09+08:00",
-   "age_h": 17.0,
+   "age_h": 18.0,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -3615,7 +3620,7 @@
    "source_name": "Lobsters",
    "source_id": "lobsters",
    "published_at": "2026-11-05T18:14:49+08:00",
-   "age_h": 47.1,
+   "age_h": 48.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -3650,7 +3655,7 @@
    "source_name": "Lobsters",
    "source_id": "lobsters",
    "published_at": "2026-11-05T18:14:49+08:00",
-   "age_h": 47.1,
+   "age_h": 48.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -3685,7 +3690,7 @@
    "source_name": "Phoronix（Linux 硬件/内核）",
    "source_id": "phoronix",
    "published_at": "2026-11-05T18:14:49+08:00",
-   "age_h": 47.1,
+   "age_h": 48.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -3720,7 +3725,7 @@
    "source_name": "Phoronix（Linux 硬件/内核）",
    "source_id": "phoronix",
    "published_at": "2026-11-05T18:14:49+08:00",
-   "age_h": 47.1,
+   "age_h": 48.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -3755,7 +3760,7 @@
    "source_name": "Google News · 广东疫情",
    "source_id": "gnews-health-gd",
    "published_at": "2026-11-06T08:42:11+08:00",
-   "age_h": 32.6,
+   "age_h": 33.6,
    "cvss": null,
    "in_the_wild": false,
    "flags": [
@@ -3791,7 +3796,7 @@
    "ok": true,
    "error": null,
    "items": 11,
-   "seconds": 1.7
+   "seconds": 1.5
   },
   {
    "id": "oss-sec",
@@ -3800,7 +3805,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 1.0
+   "seconds": 1.2
   },
   {
    "id": "ubuntu-usn",
@@ -3809,7 +3814,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.3
+   "seconds": 1.4
   },
   {
    "id": "nvd-critical",
@@ -3817,8 +3822,8 @@
    "category": "security",
    "ok": true,
    "error": null,
-   "items": 23,
-   "seconds": 1.6
+   "items": 24,
+   "seconds": 1.4
   },
   {
    "id": "cisa-kev",
@@ -3827,7 +3832,7 @@
    "ok": true,
    "error": null,
    "items": 2,
-   "seconds": 2.3
+   "seconds": 2.8
   },
   {
    "id": "gnews-sec",
@@ -3835,8 +3840,8 @@
    "category": "security",
    "ok": true,
    "error": null,
-   "items": 12,
-   "seconds": 3.0
+   "items": 11,
+   "seconds": 3.3
   },
   {
    "id": "gnews-health-gd",
@@ -3844,8 +3849,8 @@
    "category": "health",
    "ok": true,
    "error": null,
-   "items": 4,
-   "seconds": 3.0
+   "items": 5,
+   "seconds": 4.5
   },
   {
    "id": "gnews-who",
@@ -3854,7 +3859,7 @@
    "ok": true,
    "error": null,
    "items": 24,
-   "seconds": 3.2
+   "seconds": 3.1
   },
   {
    "id": "techmeme",
@@ -3862,8 +3867,8 @@
    "category": "tech",
    "ok": true,
    "error": null,
-   "items": 15,
-   "seconds": 2.5
+   "items": 1,
+   "seconds": 36.8
   },
   {
    "id": "hn",
@@ -3871,8 +3876,8 @@
    "category": "tech",
    "ok": true,
    "error": null,
-   "items": 14,
-   "seconds": 1.6
+   "items": 15,
+   "seconds": 1.7
   },
   {
    "id": "lobsters",
@@ -3881,7 +3886,7 @@
    "ok": true,
    "error": null,
    "items": 25,
-   "seconds": 0.8
+   "seconds": 1.2
   },
   {
    "id": "phoronix",
@@ -3890,15 +3895,15 @@
    "ok": true,
    "error": null,
    "items": 32,
-   "seconds": 2.0
+   "seconds": 4.4
   }
  ],
  "stats": {
-  "facts_in": 985,
-  "clusters": 362,
-  "items": 366,
+  "facts_in": 995,
+  "clusters": 366,
+  "items": 370,
   "dropped_noise": 0,
-  "ledger_rows": "1006→985"
+  "ledger_rows": "1014→995"
  },
  "disclaimer": "只做信息整理，不替代官方公告；行动建议需人判断。"
 }
