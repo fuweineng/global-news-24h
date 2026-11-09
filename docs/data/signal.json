@@ -1,20 +1,20 @@
 {
  "schema_version": "1.0.0",
- "generated_at": "2026-11-09T19:24:31+08:00",
- "as_of": "2026-11-09T19:24:31+08:00",
+ "generated_at": "2026-11-09T20:24:22+08:00",
+ "as_of": "2026-11-09T20:24:22+08:00",
  "counts": {
-  "act": 29,
+  "act": 30,
   "watch": 35,
-  "read": 175,
-  "sideline": 706
+  "read": 179,
+  "sideline": 714
  },
- "overview": "①今日优先处理：两个 CVSS 9.8 未认证 RCE 类漏洞——Chartbrew（CVE-2026-54349，SQL dashboard 变量注入，升级至 5.2.1+）同 LMFDB（CVE-2026-123198，render_knowl 模板注入），如果栈内有部署即刻升级或限制暴露；其次系 JetBrains Datalore SSH 私钥泄漏（CVE-2026-123836，8.8）同 h5io 恶意 HDF5 文件代码执行（升级 0.2.6+）。\n\n②趋势留意：Linux 内核系热点——DSA-6616-1 安全更新，加上 OpenAI 模型批量揪出 948 个提权漏洞，kernel 修补窗口会持续；Python 生态（AgentScope bash 权限检查、Airflow shell 注入）集中出注入类问题；另有 OpenSSH + musl 密码认证绕过，涉及认证链要验证自身组合是否受影响。\n\n③风险提示：呢批漏洞多为未认证利用或私钥级泄漏，暴露面服务升级前先确认版本边界，并警惕借虚假招聘同名题材针对内部 AI 工具的社会工程攻击。",
+ "overview": "**今日必处理：** 优先修补 CVE-2026-54349（Chartbrew SQL 注入，CVSS 9.8）同 CVE-2026-123198（LMFDB SSTI，未认证即可利用、CVSS 9.8），两个都命中你核心包且属最高危级别。\n\n**其余趋势：** 今轮漏洞集中在 Python 生态同核心包（h5io 代码注入、AgentScope 权限检查缺陷、Airflow 命令注入），另有 Datalore SSH 私钥泄露显示 Git 备份配置系新攻击面；内核层面 Debian 发布 DSA-6616-1 更新，且有报道指 AI 工具被发现 948 个 Linux 内核提权漏洞，提权类风险在升温。\n\n**风险提示：** 打补丁前先确认受影响版本范围，因为多条漏洞可被未认证攻击者直接利用（如 h5io 恶意 HDF5 档案），升级期间同前后都要防供应链式输入。",
  "sections": [
   {
    "key": "security",
    "name": "🔐 安全漏洞",
    "sub": "内核 / 发行版 / 容器 / 你的栈",
-   "total": 45,
+   "total": 46,
    "items": [
     {
      "id": "sig-efb049f8e5835877",
@@ -28,7 +28,7 @@
      "source_name": "NVD 严重/高危",
      "source_id": "nvd-critical",
      "published_at": "2026-11-06T21:17:08+08:00",
-     "age_h": 70.1,
+     "age_h": 71.1,
      "cvss": 9.8,
      "in_the_wild": false,
      "flags": [
@@ -809,7 +809,7 @@
      "source_name": "NVD 严重/高危",
      "source_id": "nvd-critical",
      "published_at": "2026-11-05T19:17:18+08:00",
-     "age_h": 96.1,
+     "age_h": 97.1,
      "cvss": 9.8,
      "in_the_wild": false,
      "flags": [
@@ -1459,7 +1459,7 @@
      "source_name": "NVD 严重/高危",
      "source_id": "nvd-critical",
      "published_at": "2026-11-05T14:17:04+08:00",
-     "age_h": 101.1,
+     "age_h": 102.1,
      "cvss": 7.3,
      "in_the_wild": false,
      "flags": [
@@ -1738,7 +1738,7 @@
      "source_name": "NVD 严重/高危",
      "source_id": "nvd-critical",
      "published_at": "2026-11-05T19:17:25+08:00",
-     "age_h": 96.1,
+     "age_h": 97.1,
      "cvss": 7.7,
      "in_the_wild": false,
      "flags": [
@@ -2002,7 +2002,7 @@
      "source_name": "Debian 安全公告 DSA",
      "source_id": "debian-dsa",
      "published_at": "2026-11-08T00:00:00+08:00",
-     "age_h": 43.4,
+     "age_h": 44.4,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2166,7 +2166,7 @@
      "source_name": "oss-security 邮件列表",
      "source_id": "oss-sec",
      "published_at": "2026-11-09T16:20:04+08:00",
-     "age_h": 3.1,
+     "age_h": 4.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2305,7 +2305,7 @@
      "source_name": "oss-security 邮件列表",
      "source_id": "oss-sec",
      "published_at": "2026-11-06T08:42:09+08:00",
-     "age_h": 82.7,
+     "age_h": 83.7,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2438,7 +2438,7 @@
      "source_name": "FreeBuf",
      "source_id": "freebuf",
      "published_at": "2026-11-09T00:20:13+08:00",
-     "age_h": 19.1,
+     "age_h": 20.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2552,7 +2552,7 @@
      "source_name": "CISA 安全公告",
      "source_id": "cisa-advisories",
      "published_at": "2026-11-09T00:20:10+08:00",
-     "age_h": 19.1,
+     "age_h": 20.1,
      "cvss": null,
      "in_the_wild": true,
      "flags": [
@@ -2633,7 +2633,7 @@
      "source_name": "阿里云先知社区",
      "source_id": "xz-aliyun",
      "published_at": "2026-11-09T14:01:05+08:00",
-     "age_h": 5.4,
+     "age_h": 6.4,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2692,7 +2692,7 @@
      "source_name": "Ubuntu 安全公告",
      "source_id": "ubuntu-usn",
      "published_at": "2026-11-09T00:20:02+08:00",
-     "age_h": 19.1,
+     "age_h": 20.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2735,7 +2735,7 @@
      "source_name": "Google News · 漏洞",
      "source_id": "gnews-sec",
      "published_at": "2026-11-09T00:20:02+08:00",
-     "age_h": 19.1,
+     "age_h": 20.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2790,7 +2790,7 @@
      "url": "https://open-meteo.com/",
      "source_name": "Open-Meteo 集合预报（GFS/ECMWF/ICON/JMA/GEM）",
      "published_at": "2026-11-08T21:07:36+08:00",
-     "age_h": 22.3,
+     "age_h": 23.3,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -2820,7 +2820,7 @@
      "url": "https://www.nmc.cn/publish/alarm/44190041600000_20261109003604.html",
      "source_name": "中央气象台 · 预警信号",
      "published_at": "2026-11-09T00:35:00+08:00",
-     "age_h": 18.8,
+     "age_h": 19.8,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2852,7 +2852,7 @@
      "url": "http://www.weather.gov.hk/textonly/warning/warnc.htm",
      "source_name": "香港天文台天气警告",
      "source_id": "hko-warning",
-     "published_at": "2026-11-09T19:20:25+08:00",
+     "published_at": "2026-11-09T20:20:34+08:00",
      "age_h": 0.1,
      "cvss": null,
      "in_the_wild": false,
@@ -2868,7 +2868,7 @@
       {
        "name": "香港天文台天气警告",
        "url": "http://www.weather.gov.hk/textonly/warning/warnc.htm",
-       "published_at": "2026-11-09T19:20:25+08:00"
+       "published_at": "2026-11-09T20:20:34+08:00"
       }
      ],
      "source_count": 1,
@@ -2883,12 +2883,12 @@
      "kind": "signal",
      "tier": "watch",
      "score": 13.0,
-     "title": "香港天文台於2026年11月09日19時02分發出之天氣報告",
-     "summary": "下 午 7 時 天 文 台 錄 得： 氣 溫 ： 22 度 相 對 濕 度 ： 百 分 之 48 預 料 本 港 吹 偏 北 強 風 。 市 民 應 提 防 海 面 大 浪 可 能 帶 來 的 危 險 。 請注意： 強烈季候風信號現正生效。 火災危險警告為紅色，表示火災危險性極高。 本 港 其 他 地 區 的 氣 溫 ： 天 文 台 22 度 ， 京 士 柏 21 度 ， 黃 竹 坑 22 度 ， 打 鼓 嶺 21 度 ， 流 浮 山 21 度 ， 大 埔 21 度 ， 沙 田 21 度 ， 屯 門 22 度 ， 將 軍 澳 21 度 ， 西 貢 21 度 ， 長 洲 21 度 ， 赤 鱲 角",
+     "title": "香港天文台於2026年11月09日20時02分發出之天氣報告",
+     "summary": "下 午 8 時 天 文 台 錄 得： 氣 溫 ： 21 度 相 對 濕 度 ： 百 分 之 48 預 料 本 港 吹 偏 北 強 風 。 市 民 應 提 防 海 面 大 浪 可 能 帶 來 的 危 險 。 請注意： 強烈季候風信號現正生效。 火災危險警告為紅色，表示火災危險性極高。 本 港 其 他 地 區 的 氣 溫 ： 天 文 台 21 度 ， 京 士 柏 20 度 ， 黃 竹 坑 22 度 ， 打 鼓 嶺 20 度 ， 流 浮 山 21 度 ， 大 埔 21 度 ， 沙 田 21 度 ， 屯 門 21 度 ， 將 軍 澳 20 度 ， 西 貢 21 度 ， 長 洲 21 度 ， 赤 鱲 角",
      "url": "https://www.weather.gov.hk/tc/wxinfo/currwx/current.htm",
      "source_name": "香港天文台实时天气",
      "source_id": "hko-current",
-     "published_at": "2026-11-09T19:20:25+08:00",
+     "published_at": "2026-11-09T20:20:35+08:00",
      "age_h": 0.1,
      "cvss": null,
      "in_the_wild": false,
@@ -2904,7 +2904,7 @@
       {
        "name": "香港天文台实时天气",
        "url": "https://www.weather.gov.hk/tc/wxinfo/currwx/current.htm",
-       "published_at": "2026-11-09T19:20:25+08:00"
+       "published_at": "2026-11-09T20:20:35+08:00"
       }
      ],
      "source_count": 1,
@@ -2932,7 +2932,7 @@
      "source_name": "Google News · WHO 疫情通报",
      "source_id": "gnews-who",
      "published_at": "2026-11-09T16:20:05+08:00",
-     "age_h": 3.1,
+     "age_h": 4.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3085,7 +3085,7 @@
      "source_name": "Google News · WHO 疫情通报",
      "source_id": "gnews-who",
      "published_at": "2026-11-09T06:20:02+08:00",
-     "age_h": 13.1,
+     "age_h": 14.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3207,18 +3207,18 @@
      ]
     },
     {
-     "id": "sig-828713e6e4e0dfb8",
+     "id": "sig-374032af6ae1176c",
      "category": "health",
      "kind": "signal",
      "tier": "read",
      "score": 43.5,
-     "title": "'Sharp rise' in cyclosporiasis cases in UK linked to Mexico travel. Here's what to know - ABC News - Breaking News, Latest News and Videos",
-     "summary": "'Sharp rise' in cyclosporiasis cases in UK linked to Mexico travel. Here's what to know ABC News - Breaking News, Latest News and Videos",
-     "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNM3BjODZZSDd0eHFXOVNIaGZpazY2OFZPWjJRUGpudU9hLXV5TExZUWhsS0xLeWFteG5ERlBSanh0TmJNTGRUVjR5cDllN1NWeUJsZUNJX1RkWkVuTGZRZW9jZ2Y1Q1lkSXB4LXdnTm1RZzJBQVNQdU0xWHY5YnFZQmx6bk5IRUVuLTg5LVdySWpKc1VrTDB1UkE4V0lmTlR6ZEVF0gGoAUFVX3lxTE1mcXJiOEhyZzVjUk9DeW80XzZ3VXdxUW9uekRkekZGbkJuMVFVSDQxUUkwUlpRUHdsMVRqVDkwODB3WFJFVnZJbkNaWWNoc3doTFU3dWUySml5cVZ1OUNoaERvcTRKd29mdEJINFZfWHlMQTdMWUJwajA5dWlLWkpYU1lWSEt6Q29US2RieHlPM1Zjb1RMbWh6M3pMejd1eEpWekVRZ3R3dw?oc=5",
+     "title": "RFK Jr. says cyclosporiasis outbreak is 'under control' amid at least 1,600 cases in 5 states - ABC News - Breaking News, Latest News and Videos",
+     "summary": "RFK Jr. says cyclosporiasis outbreak is 'under control' amid at least 1,600 cases in 5 states ABC News - Breaking News, Latest News and Videos",
+     "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNQVpoN0llaXNHWHZ6OWk0endMWXVfNGRJdXBXSlN6MG9ubDFNQjNFM3ppUG41Y1c2X1ViNVdpSG80WEp1akI5QTI3N0FpNlBSZ0p6Mk5rcjhGQWJ5S09ib1A4ZHZaMTFObHpRY2lrQzhBcFVDeWhmVlhubUtoZkZjb21iUkVpODdxdjZ1VUhsUkFhd21GbnRfdG5xUm9NUVBIaUHSAacBQVVfeXFMTzRGX3dQUGxMZWNwOTd2UF8xWW5SeWQ4R0VVZTl5Tld1YUFTYjNvYm5RckdLbTI3VDJ2ZVdkTUl6Zk9WbE0yRXJNRTAwZW9NaVcxOUFSZWVQMmtyZlh3WWhrdFNjcjhBamtpODZkdEptUDJaaEFLaHcyQXVyWElfR2k0cXVQa3FXVzRwa293VlFQRXJ3N29NVll5SS1SZGlfd1E1S1p0ZG8?oc=5",
      "source_name": "Google News · WHO 疫情通报",
      "source_id": "gnews-who",
-     "published_at": "2026-11-09T14:20:05+08:00",
-     "age_h": 5.1,
+     "published_at": "2026-11-09T20:20:10+08:00",
+     "age_h": 0.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3232,6 +3232,11 @@
       "parents": []
      },
      "sources": [
+      {
+       "name": "Google News · WHO 疫情通报",
+       "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNQVpoN0llaXNHWHZ6OWk0endMWXVfNGRJdXBXSlN6MG9ubDFNQjNFM3ppUG41Y1c2X1ViNVdpSG80WEp1akI5QTI3N0FpNlBSZ0p6Mk5rcjhGQWJ5S09ib1A4ZHZaMTFObHpRY2lrQzhBcFVDeWhmVlhubUtoZkZjb21iUkVpODdxdjZ1VUhsUkFhd21GbnRfdG5xUm9NUVBIaUHSAacBQVVfeXFMTzRGX3dQUGxMZWNwOTd2UF8xWW5SeWQ4R0VVZTl5Tld1YUFTYjNvYm5RckdLbTI3VDJ2ZVdkTUl6Zk9WbE0yRXJNRTAwZW9NaVcxOUFSZWVQMmtyZlh3WWhrdFNjcjhBamtpODZkdEptUDJaaEFLaHcyQXVyWElfR2k0cXVQa3FXVzRwa293VlFQRXJ3N29NVll5SS1SZGlfd1E1S1p0ZG8?oc=5",
+       "published_at": "2026-11-09T20:20:10+08:00"
+      },
       {
        "name": "Google News · WHO 疫情通报",
        "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNM3BjODZZSDd0eHFXOVNIaGZpazY2OFZPWjJRUGpudU9hLXV5TExZUWhsS0xLeWFteG5ERlBSanh0TmJNTGRUVjR5cDllN1NWeUJsZUNJX1RkWkVuTGZRZW9jZ2Y1Q1lkSXB4LXdnTm1RZzJBQVNQdU0xWHY5YnFZQmx6bk5IRUVuLTg5LVdySWpKc1VrTDB1UkE4V0lmTlR6ZEVF0gGoAUFVX3lxTE1mcXJiOEhyZzVjUk9DeW80XzZ3VXdxUW9uekRkekZGbkJuMVFVSDQxUUkwUlpRUHdsMVRqVDkwODB3WFJFVnZJbkNaWWNoc3doTFU3dWUySml5cVZ1OUNoaERvcTRKd29mdEJINFZfWHlMQTdMWUJwajA5dWlLWkpYU1lWSEt6Q29US2RieHlPM1Zjb1RMbWh6M3pMejd1eEpWekVRZ3R3dw?oc=5",
@@ -3256,11 +3261,6 @@
        "name": "Google News · WHO 疫情通报",
        "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQMk0wTjU5Q0dyT01nZjJQRmwyM2duellWaEN3T21XZEVqTTFiS1NEcGI1VU5kcU13eFk1RE81Sk9zQzJVbkdETTZzSnRiUlBuZTA2U2EtVEpIRmRUSEdpTURfaTJKR1c5dnlKV1F5Z3dTU051VGdGSi1tUnF2LXhIS3k5Mm5FQ1ZzcGtpZ3JBYXUtbE9HQVZzRF9EQTdLLU9qdHN6YnpEbXRWd9IBrwFBVV95cUxPTDFBd1dMazFiUGptc190MXpwanUwcVpjSkswdTJoMVdBcldya0ktbUM0OFpXeEpTRWV0Zlcxcl9QWlEyNWZNdUwtcXJOWDF4OWJqRzFWVGNsMEhHUnAyY1p6NWhvQjB1SGM3Zkpocnp5bGdrNUNfUW1SZ0NKVDZZQk54Q3NMU0o5T3ZFRmlDRVZzdnJMa2JMQWZjeG1WNHJQb2FqaDZmNldUSlktT1hZ?oc=5",
        "published_at": "2026-11-09T00:20:04+08:00"
-      },
-      {
-       "name": "Google News · WHO 疫情通报",
-       "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNQVpoN0llaXNHWHZ6OWk0endMWXVfNGRJdXBXSlN6MG9ubDFNQjNFM3ppUG41Y1c2X1ViNVdpSG80WEp1akI5QTI3N0FpNlBSZ0p6Mk5rcjhGQWJ5S09ib1A4ZHZaMTFObHpRY2lrQzhBcFVDeWhmVlhubUtoZkZjb21iUkVpODdxdjZ1VUhsUkFhd21GbnRfdG5xUm9NUVBIaUHSAacBQVVfeXFMTzRGX3dQUGxMZWNwOTd2UF8xWW5SeWQ4R0VVZTl5Tld1YUFTYjNvYm5RckdLbTI3VDJ2ZVdkTUl6Zk9WbE0yRXJNRTAwZW9NaVcxOUFSZWVQMmtyZlh3WWhrdFNjcjhBamtpODZkdEptUDJaaEFLaHcyQXVyWElfR2k0cXVQa3FXVzRwa293VlFQRXJ3N29NVll5SS1SZGlfd1E1S1p0ZG8?oc=5",
-       "published_at": "2026-11-08T11:20:06+08:00"
       },
       {
        "name": "Google News · WHO 疫情通报",
@@ -3301,7 +3301,7 @@
      "source_name": "Google News · 广东疫情",
      "source_id": "gnews-health-gd",
      "published_at": "2026-11-09T17:20:04+08:00",
-     "age_h": 2.1,
+     "age_h": 3.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3340,7 +3340,7 @@
      "source_name": "Google News · 广东疫情",
      "source_id": "gnews-health-gd",
      "published_at": "2026-11-09T00:20:05+08:00",
-     "age_h": 19.1,
+     "age_h": 20.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3378,7 +3378,7 @@
      "source_name": "Google News · 广东疫情",
      "source_id": "gnews-health-gd",
      "published_at": "2026-11-09T00:20:03+08:00",
-     "age_h": 19.1,
+     "age_h": 20.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3417,7 +3417,7 @@
      "source_name": "Google News · WHO 疫情通报",
      "source_id": "gnews-who",
      "published_at": "2026-11-09T00:20:04+08:00",
-     "age_h": 19.1,
+     "age_h": 20.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3465,7 +3465,7 @@
      "source_name": "Google News · 广东疫情",
      "source_id": "gnews-health-gd",
      "published_at": "2026-11-06T12:20:04+08:00",
-     "age_h": 79.1,
+     "age_h": 80.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3509,7 +3509,7 @@
      "source_name": "WHO 新闻稿",
      "source_id": "who-news",
      "published_at": "2026-11-09T00:20:24+08:00",
-     "age_h": 19.1,
+     "age_h": 20.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3551,7 +3551,7 @@
      "source_name": "WHO 新闻稿",
      "source_id": "who-news",
      "published_at": "2026-11-09T00:20:24+08:00",
-     "age_h": 19.1,
+     "age_h": 20.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3588,7 +3588,7 @@
      "source_name": "WHO 新闻稿",
      "source_id": "who-news",
      "published_at": "2026-11-09T00:20:24+08:00",
-     "age_h": 19.1,
+     "age_h": 20.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3625,7 +3625,7 @@
      "source_name": "WHO 新闻稿",
      "source_id": "who-news",
      "published_at": "2026-11-09T00:20:24+08:00",
-     "age_h": 19.1,
+     "age_h": 20.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3656,7 +3656,7 @@
    "key": "tech",
    "name": "🧠 科技圈热点",
    "sub": "Techmeme / HN / Lobsters / Phoronix",
-   "total": 134,
+   "total": 138,
    "items": [
     {
      "id": "sig-94bf6fd5c2b90de6",
@@ -3670,7 +3670,7 @@
      "source_name": "LWN 头条",
      "source_id": "lwn-headlines",
      "published_at": "2026-11-09T00:20:20+08:00",
-     "age_h": 19.1,
+     "age_h": 20.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3707,7 +3707,7 @@
      "source_name": "Cloudflare 博客",
      "source_id": "cloudflare-blog",
      "published_at": "2026-11-09T00:20:18+08:00",
-     "age_h": 19.1,
+     "age_h": 20.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3745,7 +3745,7 @@
      "source_name": "Cloudflare 博客",
      "source_id": "cloudflare-blog",
      "published_at": "2026-11-09T00:20:18+08:00",
-     "age_h": 19.1,
+     "age_h": 20.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3783,7 +3783,7 @@
      "source_name": "PostgreSQL 新闻",
      "source_id": "postgres-news",
      "published_at": "2026-11-07T19:13:59+08:00",
-     "age_h": 48.2,
+     "age_h": 49.2,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3810,17 +3810,123 @@
      ]
     },
     {
-     "id": "sig-00195d8591fcd990",
+     "id": "sig-1c974012c5b97b11",
      "category": "tech",
      "kind": "signal",
      "tier": "read",
-     "score": 37.0,
-     "title": "Sources: the EU sues IBM, French IT group Atos, and Italian contractor Leonardo over delays in developing its smart border system, which caused travel chaos (Laura Dubois/Financial Times)",
-     "summary": "Laura Dubois / Financial Times : Sources: the EU sues IBM, French IT group Atos, and Italian contractor Leonardo over delays in developing its smart border system, which caused travel chaos Lawsuit filed in Estonia relates to repeated delays in developing Entry/Exit System The EU has sued IBM and tw",
-     "url": "https://www.techmeme.com/261109/p8#a261109p8",
+     "score": 58.0,
+     "title": "A profile of Alice Huang, a suspected Chinese spy who founded Megaspeed in 2023 and spent years in Jensen Huang's orbit; Megaspeed's Nvidia imports top $4.6B (Mark Anderson/Bloomberg)",
+     "summary": "Mark Anderson / Bloomberg : A profile of Alice Huang, a suspected Chinese spy who founded Megaspeed in 2023 and spent years in Jensen Huang's orbit; Megaspeed's Nvidia imports top $4.6B At the heart of the biggest controversy to confront Nvidia Corp. in its three-decade history is a former televisio",
+     "url": "https://www.techmeme.com/261109/p18#a261109p18",
      "source_name": "Techmeme（推特科技圈人工版）",
      "source_id": "techmeme",
-     "published_at": "2026-11-09T18:20:30+08:00",
+     "published_at": "2026-11-09T20:20:31+08:00",
+     "age_h": 0.1,
+     "cvss": null,
+     "in_the_wild": false,
+     "flags": [],
+     "why": "圈内在聊嘅大事",
+     "action": "",
+     "region": {
+      "level": "global",
+      "name": "global",
+      "parents": []
+     },
+     "sources": [
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261109/p18#a261109p18",
+       "published_at": "2026-11-09T20:20:31+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261109/p13#a261109p13",
+       "published_at": "2026-11-09T19:20:14+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261109/p12#a261109p12",
+       "published_at": "2026-11-09T19:20:14+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261109/p7#a261109p7",
+       "published_at": "2026-11-09T18:20:30+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261109/p1#a261109p1",
+       "published_at": "2026-11-09T14:20:11+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261108/p23#a261108p23",
+       "published_at": "2026-11-09T14:20:11+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261108/p19#a261108p19",
+       "published_at": "2026-11-09T10:20:05+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261108/p17#a261108p17",
+       "published_at": "2026-11-09T08:20:06+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261108/p14#a261108p14",
+       "published_at": "2026-11-09T05:20:02+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261108/p13#a261108p13",
+       "published_at": "2026-11-09T05:20:02+08:00"
+      },
+      {
+       "name": "Ars Technica",
+       "url": "https://arstechnica.com/tech-policy/2026/11/nvidia-ceo-jensen-huang-summoned-by-congress-over-chinese-espionage-concerns/",
+       "published_at": "2026-11-07T19:14:01+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261106/p29#a261106p29",
+       "published_at": "2026-11-07T12:20:06+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261106/p24#a261106p24",
+       "published_at": "2026-11-07T06:20:04+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261106/p15#a261106p15",
+       "published_at": "2026-11-07T00:21:04+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261105/p54#a261105p54",
+       "published_at": "2026-11-06T10:20:06+08:00"
+      }
+     ],
+     "source_count": 15,
+     "tags": [
+      "buzz",
+      "news"
+     ]
+    },
+    {
+     "id": "sig-64db9d3777f74200",
+     "category": "tech",
+     "kind": "signal",
+     "tier": "read",
+     "score": 40.0,
+     "title": "Nvidia drops ~5% pre-market after its board opens a probe into Jensen Huang; Nvidia previously dismissed the interactions as \"nothing unusual or unexpected\" (Demetri Sevastopulo/Financial Times)",
+     "summary": "Demetri Sevastopulo / Financial Times : Nvidia drops ~5% pre-market after its board opens a probe into Jensen Huang; Nvidia previously dismissed the interactions as nothing unusual or unexpected Board of chipmaker opens investigation after chief executive Jensen Huang admits to affair",
+     "url": "https://www.techmeme.com/261109/p11#a261109p11",
+     "source_name": "Techmeme（推特科技圈人工版）",
+     "source_id": "techmeme",
+     "published_at": "2026-11-09T19:20:14+08:00",
      "age_h": 1.1,
      "cvss": null,
      "in_the_wild": false,
@@ -3835,22 +3941,27 @@
      "sources": [
       {
        "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261109/p8#a261109p8",
+       "url": "https://www.techmeme.com/261109/p11#a261109p11",
+       "published_at": "2026-11-09T19:20:14+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261109/p10#a261109p10",
        "published_at": "2026-11-09T18:20:30+08:00"
       },
       {
        "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261108/p18#a261108p18",
-       "published_at": "2026-11-09T09:20:21+08:00"
+       "url": "https://www.techmeme.com/261109/p8#a261109p8",
+       "published_at": "2026-11-09T18:20:30+08:00"
+      },
+      {
+       "name": "Hacker News 头条",
+       "url": "https://nvidianews.nvidia.com/news/statement-from-nvidia-board-of-directors",
+       "published_at": "2026-11-09T04:26:43+08:00"
       },
       {
        "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261107/p16#a261107p16",
-       "published_at": "2026-11-09T00:20:08+08:00"
-      },
-      {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261108/p8#a261108p8",
+       "url": "https://www.techmeme.com/261108/p4#a261108p4",
        "published_at": "2026-11-09T00:20:08+08:00"
       },
       {
@@ -3860,13 +3971,13 @@
       },
       {
        "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261107/p7#a261107p7",
-       "published_at": "2026-11-08T00:20:24+08:00"
+       "url": "https://www.techmeme.com/261106/p13#a261106p13",
+       "published_at": "2026-11-07T01:20:08+08:00"
       },
       {
        "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261106/p21#a261106p21",
-       "published_at": "2026-11-07T05:20:02+08:00"
+       "url": "https://www.techmeme.com/261106/p7#a261106p7",
+       "published_at": "2026-11-07T00:21:04+08:00"
       },
       {
        "name": "Techmeme（推特科技圈人工版）",
@@ -3874,7 +3985,7 @@
        "published_at": "2026-11-05T18:15:31+08:00"
       }
      ],
-     "source_count": 8,
+     "source_count": 9,
      "tags": [
       "buzz"
      ]
@@ -3891,7 +4002,7 @@
      "source_name": "Proxmox 官方论坛",
      "source_id": "proxmox-forum",
      "published_at": "2026-11-09T00:20:14+08:00",
-     "age_h": 19.1,
+     "age_h": 20.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -3927,7 +4038,7 @@
      "source_name": "Proxmox 官方论坛",
      "source_id": "proxmox-forum",
      "published_at": "2026-11-09T19:20:17+08:00",
-     "age_h": 0.1,
+     "age_h": 1.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -3963,7 +4074,7 @@
      "source_name": "Proxmox 官方论坛",
      "source_id": "proxmox-forum",
      "published_at": "2026-11-09T17:20:15+08:00",
-     "age_h": 2.1,
+     "age_h": 3.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -3999,7 +4110,7 @@
      "source_name": "Techmeme（推特科技圈人工版）",
      "source_id": "techmeme",
      "published_at": "2026-11-09T00:20:08+08:00",
-     "age_h": 19.1,
+     "age_h": 20.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -4053,18 +4164,18 @@
      ]
     },
     {
-     "id": "sig-400466106f2d812e",
+     "id": "sig-3e6fc1ed32263974",
      "category": "tech",
      "kind": "signal",
      "tier": "read",
      "score": 32.0,
-     "title": "PBS HTTP request timeout issue",
-     "summary": "Hello, Recently, I started getting the following error when checking backups locally using proxmox-backup-client : Error: http request timed out Bash: root@pbs:~# proxmox-backup-client snapshot list --repository &#039;root@pam!token@127.0.0.1:datastore1&#039; -ns my-ns1 | grep vm | wc -l Error: http",
-     "url": "https://forum.proxmox.com/threads/pbs-http-request-timeout-issue.186820/",
+     "title": "Proxmox random reboots on HP Elitedesk 800g4 - fixed with proxmox install on top of Debian 12 - now issues with hardware transcoding in plex",
+     "summary": "I&#039;ve been dealing with an issue with the HP Elitedesk systems for a few weeks now. I ordered 2 identical (but from different sellers) HP elitedesk 800G4&#039;s from ebay. The first on I received, i was able to load Proxmox from the official bare metal installer and everything has worked fine. N",
+     "url": "https://forum.proxmox.com/threads/proxmox-random-reboots-on-hp-elitedesk-800g4-fixed-with-proxmox-install-on-top-of-debian-12-now-issues-with-hardware-transcoding-in-plex.132187/",
      "source_name": "Proxmox 官方论坛",
      "source_id": "proxmox-forum",
-     "published_at": "2026-11-09T17:20:15+08:00",
-     "age_h": 2.1,
+     "published_at": "2026-11-09T20:20:21+08:00",
+     "age_h": 0.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -4078,8 +4189,8 @@
      "sources": [
       {
        "name": "Proxmox 官方论坛",
-       "url": "https://forum.proxmox.com/threads/pbs-http-request-timeout-issue.186820/",
-       "published_at": "2026-11-09T17:20:15+08:00"
+       "url": "https://forum.proxmox.com/threads/proxmox-random-reboots-on-hp-elitedesk-800g4-fixed-with-proxmox-install-on-top-of-debian-12-now-issues-with-hardware-transcoding-in-plex.132187/",
+       "published_at": "2026-11-09T20:20:21+08:00"
       }
      ],
      "source_count": 1,
@@ -4100,7 +4211,7 @@
      "source_name": "Caddy 社区",
      "source_id": "caddy-community",
      "published_at": "2026-11-09T00:20:16+08:00",
-     "age_h": 19.1,
+     "age_h": 20.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -4130,184 +4241,11 @@
       "caddy",
       "stack"
      ]
-    },
-    {
-     "id": "sig-51c122e2645108d1",
-     "category": "tech",
-     "kind": "signal",
-     "tier": "read",
-     "score": 31.0,
-     "title": "Cloudflare reports Q3 revenue up 39% YoY to $782.5M, above $737.2M est., a $34.1M net loss, and lifts its FY 2026 guidance; NET jumps 14%+ after hours (Elias Schisgall/Wall Street Journal)",
-     "summary": "Elias Schisgall / Wall Street Journal : Cloudflare reports Q3 revenue up 39% YoY to $782.5M, above $737.2M est., a $34.1M net loss, and lifts its FY 2026 guidance; NET jumps 14%+ after hours The connectivity cloud company upped its projections for revenue this year to around $2.96 billion Cloudflare",
-     "url": "https://www.techmeme.com/261105/p57#a261105p57",
-     "source_name": "Techmeme（推特科技圈人工版）",
-     "source_id": "techmeme",
-     "published_at": "2026-11-06T08:42:27+08:00",
-     "age_h": 82.7,
-     "cvss": null,
-     "in_the_wild": false,
-     "flags": [],
-     "why": "圈内在聊嘅大事",
-     "action": "",
-     "region": {
-      "level": "global",
-      "name": "global",
-      "parents": []
-     },
-     "sources": [
-      {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261108/p15#a261108p15",
-       "published_at": "2026-11-09T06:20:02+08:00"
-      },
-      {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261108/p11#a261108p11",
-       "published_at": "2026-11-09T03:20:04+08:00"
-      },
-      {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261105/p64#a261105p64",
-       "published_at": "2026-11-06T10:20:06+08:00"
-      },
-      {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261105/p57#a261105p57",
-       "published_at": "2026-11-06T08:42:27+08:00"
-      }
-     ],
-     "source_count": 4,
-     "tags": [
-      "buzz"
-     ]
     }
    ]
   }
  ],
  "sideline": [
-  {
-   "id": "sig-19361844fc329f21",
-   "category": "tech",
-   "kind": "signal",
-   "tier": "sideline",
-   "score": 80.0,
-   "title": "See the agents, set the terms: new visibility and control for personal agents",
-   "summary": "Personal AI agents have changed how users interact with the web, blurring the lines between automated and human traffic. Learn how Cloudflare gives site owners visibility and control to manage personal agent access.",
-   "url": "https://blog.cloudflare.com/personal-agents-visibility-control/",
-   "source_name": "Cloudflare 博客",
-   "source_id": "cloudflare-blog",
-   "published_at": "2026-11-09T00:20:18+08:00",
-   "age_h": 19.1,
-   "cvss": null,
-   "in_the_wild": false,
-   "flags": [],
-   "why": "有趣但无实操价值",
-   "action": "",
-   "region": {
-    "level": "global",
-    "name": "global",
-    "parents": []
-   },
-   "sources": [
-    {
-     "name": "Techmeme（推特科技圈人工版）",
-     "url": "https://www.techmeme.com/261109/p13#a261109p13",
-     "published_at": "2026-11-09T19:20:14+08:00"
-    },
-    {
-     "name": "Techmeme（推特科技圈人工版）",
-     "url": "https://www.techmeme.com/261109/p11#a261109p11",
-     "published_at": "2026-11-09T19:20:14+08:00"
-    },
-    {
-     "name": "Techmeme（推特科技圈人工版）",
-     "url": "https://www.techmeme.com/261109/p1#a261109p1",
-     "published_at": "2026-11-09T14:20:11+08:00"
-    },
-    {
-     "name": "Techmeme（推特科技圈人工版）",
-     "url": "https://www.techmeme.com/261108/p23#a261108p23",
-     "published_at": "2026-11-09T14:20:11+08:00"
-    },
-    {
-     "name": "Techmeme（推特科技圈人工版）",
-     "url": "https://www.techmeme.com/261108/p19#a261108p19",
-     "published_at": "2026-11-09T10:20:05+08:00"
-    },
-    {
-     "name": "Techmeme（推特科技圈人工版）",
-     "url": "https://www.techmeme.com/261108/p17#a261108p17",
-     "published_at": "2026-11-09T08:20:06+08:00"
-    },
-    {
-     "name": "Techmeme（推特科技圈人工版）",
-     "url": "https://www.techmeme.com/261108/p14#a261108p14",
-     "published_at": "2026-11-09T05:20:02+08:00"
-    },
-    {
-     "name": "Techmeme（推特科技圈人工版）",
-     "url": "https://www.techmeme.com/261108/p13#a261108p13",
-     "published_at": "2026-11-09T05:20:02+08:00"
-    },
-    {
-     "name": "Hacker News 头条",
-     "url": "https://nvidianews.nvidia.com/news/statement-from-nvidia-board-of-directors",
-     "published_at": "2026-11-09T04:26:43+08:00"
-    },
-    {
-     "name": "Cloudflare 博客",
-     "url": "https://blog.cloudflare.com/personal-agents-visibility-control/",
-     "published_at": "2026-11-09T00:20:18+08:00"
-    },
-    {
-     "name": "Techmeme（推特科技圈人工版）",
-     "url": "https://www.techmeme.com/261107/p12#a261107p12",
-     "published_at": "2026-11-08T01:20:23+08:00"
-    },
-    {
-     "name": "Techmeme（推特科技圈人工版）",
-     "url": "https://www.techmeme.com/261107/p9#a261107p9",
-     "published_at": "2026-11-08T00:20:24+08:00"
-    },
-    {
-     "name": "Ars Technica",
-     "url": "https://arstechnica.com/tech-policy/2026/11/nvidia-ceo-jensen-huang-summoned-by-congress-over-chinese-espionage-concerns/",
-     "published_at": "2026-11-07T19:14:01+08:00"
-    },
-    {
-     "name": "Techmeme（推特科技圈人工版）",
-     "url": "https://www.techmeme.com/261106/p29#a261106p29",
-     "published_at": "2026-11-07T12:20:06+08:00"
-    },
-    {
-     "name": "Techmeme（推特科技圈人工版）",
-     "url": "https://www.techmeme.com/261106/p24#a261106p24",
-     "published_at": "2026-11-07T06:20:04+08:00"
-    },
-    {
-     "name": "Techmeme（推特科技圈人工版）",
-     "url": "https://www.techmeme.com/261106/p12#a261106p12",
-     "published_at": "2026-11-07T01:20:08+08:00"
-    },
-    {
-     "name": "Techmeme（推特科技圈人工版）",
-     "url": "https://www.techmeme.com/261105/p68#a261105p68",
-     "published_at": "2026-11-06T11:20:05+08:00"
-    },
-    {
-     "name": "Techmeme（推特科技圈人工版）",
-     "url": "https://www.techmeme.com/261105/p58#a261105p58",
-     "published_at": "2026-11-06T08:42:27+08:00"
-    }
-   ],
-   "source_count": 18,
-   "tags": [
-    "buzz",
-    "cf",
-    "news",
-    "stack"
-   ]
-  },
   {
    "id": "sig-2a8274057452e499",
    "category": "tech",
@@ -4320,7 +4258,7 @@
    "source_name": "selfh.st 自托管周报",
    "source_id": "selfh-st",
    "published_at": "2026-11-09T00:21:39+08:00",
-   "age_h": 19.0,
+   "age_h": 20.0,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4415,7 +4353,7 @@
    "source_name": "LWN 头条",
    "source_id": "lwn-headlines",
    "published_at": "2026-11-09T00:20:20+08:00",
-   "age_h": 19.1,
+   "age_h": 20.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4460,7 +4398,7 @@
    "source_name": "Caddy 社区",
    "source_id": "caddy-community",
    "published_at": "2026-11-09T00:20:16+08:00",
-   "age_h": 19.1,
+   "age_h": 20.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4501,7 +4439,7 @@
    "source_name": "Phoronix（Linux 硬件/内核）",
    "source_id": "phoronix",
    "published_at": "2026-11-09T00:20:07+08:00",
-   "age_h": 19.1,
+   "age_h": 20.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4546,7 +4484,7 @@
    "source_name": "Google News · 广东疫情",
    "source_id": "gnews-health-gd",
    "published_at": "2026-11-09T09:20:03+08:00",
-   "age_h": 10.1,
+   "age_h": 11.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [
@@ -4594,7 +4532,7 @@
    "source_name": "PostgreSQL 新闻",
    "source_id": "postgres-news",
    "published_at": "2026-11-09T00:20:17+08:00",
-   "age_h": 19.1,
+   "age_h": 20.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4636,7 +4574,7 @@
    "source_name": "LWN 头条",
    "source_id": "lwn-headlines",
    "published_at": "2026-11-09T00:20:20+08:00",
-   "age_h": 19.1,
+   "age_h": 20.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4677,7 +4615,7 @@
    "source_name": "PostgreSQL 新闻",
    "source_id": "postgres-news",
    "published_at": "2026-11-09T00:20:17+08:00",
-   "age_h": 19.1,
+   "age_h": 20.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4713,7 +4651,7 @@
    "source_name": "Caddy 社区",
    "source_id": "caddy-community",
    "published_at": "2026-11-09T00:20:16+08:00",
-   "age_h": 19.1,
+   "age_h": 20.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4749,7 +4687,7 @@
    "source_name": "Caddy 社区",
    "source_id": "caddy-community",
    "published_at": "2026-11-09T00:20:16+08:00",
-   "age_h": 19.1,
+   "age_h": 20.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4785,7 +4723,7 @@
    "source_name": "Caddy 社区",
    "source_id": "caddy-community",
    "published_at": "2026-11-09T00:20:16+08:00",
-   "age_h": 19.1,
+   "age_h": 20.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4810,6 +4748,46 @@
    ]
   },
   {
+   "id": "sig-baf5045a80a65e51",
+   "category": "tech",
+   "kind": "signal",
+   "tier": "sideline",
+   "score": 30.0,
+   "title": "Linux Seeing Driver Work For MSI Mystic Light On Latest Ryzen Motherboards",
+   "summary": "MSI's latest Ryzen motherboards with AMD 800 series chipsets feature a new capability marked as Mystic Light for RGB lighting controls of the motherboard as well as compatible graphics cards and cases. MSI Mystic Light control software is only offered for Microsoft Windows but thanks to an open-sour",
+   "url": "https://www.phoronix.com/news/MSI-Mystic-Light-Linux",
+   "source_name": "Phoronix（Linux 硬件/内核）",
+   "source_id": "phoronix",
+   "published_at": "2026-11-09T20:20:09+08:00",
+   "age_h": 0.1,
+   "cvss": null,
+   "in_the_wild": false,
+   "flags": [],
+   "why": "有趣但无实操价值",
+   "action": "",
+   "region": {
+    "level": "global",
+    "name": "global",
+    "parents": []
+   },
+   "sources": [
+    {
+     "name": "Phoronix（Linux 硬件/内核）",
+     "url": "https://www.phoronix.com/news/MSI-Mystic-Light-Linux",
+     "published_at": "2026-11-09T20:20:09+08:00"
+    },
+    {
+     "name": "Phoronix（Linux 硬件/内核）",
+     "url": "https://www.phoronix.com/news/AMDGPU-HDMI-2.2-FRL-Fixes",
+     "published_at": "2026-11-07T00:20:09+08:00"
+    }
+   ],
+   "source_count": 2,
+   "tags": [
+    "linux"
+   ]
+  },
+  {
    "id": "sig-53ce0490ddeb5cb1",
    "category": "tech",
    "kind": "signal",
@@ -4821,7 +4799,7 @@
    "source_name": "Phoronix（Linux 硬件/内核）",
    "source_id": "phoronix",
    "published_at": "2026-11-09T00:20:07+08:00",
-   "age_h": 19.1,
+   "age_h": 20.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4850,6 +4828,42 @@
    ]
   },
   {
+   "id": "sig-8ceada5f95028093",
+   "category": "tech",
+   "kind": "signal",
+   "tier": "sideline",
+   "score": 29.0,
+   "title": "ChatGPT Desktop forwards your SSH agent to remote machines",
+   "summary": "HN 54 分 · 11 评论",
+   "url": "https://news.ycombinator.com/item?id=50422628",
+   "source_name": "Hacker News 头条",
+   "source_id": "hn",
+   "published_at": "2026-11-09T16:17:49+08:00",
+   "age_h": 4.1,
+   "cvss": null,
+   "in_the_wild": false,
+   "flags": [],
+   "why": "有趣但无实操价值",
+   "action": "",
+   "region": {
+    "level": "global",
+    "name": "global",
+    "parents": []
+   },
+   "sources": [
+    {
+     "name": "Hacker News 头条",
+     "url": "https://news.ycombinator.com/item?id=50422628",
+     "published_at": "2026-11-09T16:17:49+08:00"
+    }
+   ],
+   "source_count": 1,
+   "tags": [
+    "buzz"
+   ],
+   "discussion": "https://news.ycombinator.com/item?id=50422628"
+  },
+  {
    "id": "sig-b0b86f68fe531733",
    "category": "tech",
    "kind": "signal",
@@ -4861,7 +4875,7 @@
    "source_name": "PostgreSQL 新闻",
    "source_id": "postgres-news",
    "published_at": "2026-11-09T12:20:16+08:00",
-   "age_h": 7.1,
+   "age_h": 8.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4886,6 +4900,42 @@
    ]
   },
   {
+   "id": "sig-19361844fc329f21",
+   "category": "tech",
+   "kind": "signal",
+   "tier": "sideline",
+   "score": 29.0,
+   "title": "See the agents, set the terms: new visibility and control for personal agents",
+   "summary": "Personal AI agents have changed how users interact with the web, blurring the lines between automated and human traffic. Learn how Cloudflare gives site owners visibility and control to manage personal agent access.",
+   "url": "https://blog.cloudflare.com/personal-agents-visibility-control/",
+   "source_name": "Cloudflare 博客",
+   "source_id": "cloudflare-blog",
+   "published_at": "2026-11-09T00:20:18+08:00",
+   "age_h": 20.1,
+   "cvss": null,
+   "in_the_wild": false,
+   "flags": [],
+   "why": "有趣但无实操价值",
+   "action": "",
+   "region": {
+    "level": "global",
+    "name": "global",
+    "parents": []
+   },
+   "sources": [
+    {
+     "name": "Cloudflare 博客",
+     "url": "https://blog.cloudflare.com/personal-agents-visibility-control/",
+     "published_at": "2026-11-09T00:20:18+08:00"
+    }
+   ],
+   "source_count": 1,
+   "tags": [
+    "cf",
+    "stack"
+   ]
+  },
+  {
    "id": "sig-1c645bca188b35a5",
    "category": "tech",
    "kind": "signal",
@@ -4897,7 +4947,7 @@
    "source_name": "Cloudflare 博客",
    "source_id": "cloudflare-blog",
    "published_at": "2026-11-09T00:20:18+08:00",
-   "age_h": 19.1,
+   "age_h": 20.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4933,7 +4983,7 @@
    "source_name": "Cloudflare 博客",
    "source_id": "cloudflare-blog",
    "published_at": "2026-11-09T00:20:18+08:00",
-   "age_h": 19.1,
+   "age_h": 20.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4969,7 +5019,7 @@
    "source_name": "Cloudflare 博客",
    "source_id": "cloudflare-blog",
    "published_at": "2026-11-09T00:20:18+08:00",
-   "age_h": 19.1,
+   "age_h": 20.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -5005,7 +5055,7 @@
    "source_name": "Cloudflare 博客",
    "source_id": "cloudflare-blog",
    "published_at": "2026-11-09T00:20:18+08:00",
-   "age_h": 19.1,
+   "age_h": 20.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -5028,78 +5078,6 @@
     "cf",
     "stack"
    ]
-  },
-  {
-   "id": "sig-5d93986f3f764f68",
-   "category": "tech",
-   "kind": "signal",
-   "tier": "sideline",
-   "score": 29.0,
-   "title": "Bringing post-quantum cryptography to geographically fenced key management",
-   "summary": "Cloudflare's new post-quantum GeoKey Manager protects geographically fenced decryption keys from harvest now, decrypt later attacks. Learn how we redesigned our cryptography stack to support strict data sovereignty in a post-quantum world.",
-   "url": "https://blog.cloudflare.com/post-quantum-geo-key-manager/",
-   "source_name": "Cloudflare 博客",
-   "source_id": "cloudflare-blog",
-   "published_at": "2026-11-09T00:20:18+08:00",
-   "age_h": 19.1,
-   "cvss": null,
-   "in_the_wild": false,
-   "flags": [],
-   "why": "有趣但无实操价值",
-   "action": "",
-   "region": {
-    "level": "global",
-    "name": "global",
-    "parents": []
-   },
-   "sources": [
-    {
-     "name": "Cloudflare 博客",
-     "url": "https://blog.cloudflare.com/post-quantum-geo-key-manager/",
-     "published_at": "2026-11-09T00:20:18+08:00"
-    }
-   ],
-   "source_count": 1,
-   "tags": [
-    "cf",
-    "stack"
-   ]
-  },
-  {
-   "id": "sig-8021cc12e6d8c82e",
-   "category": "tech",
-   "kind": "signal",
-   "tier": "sideline",
-   "score": 29.0,
-   "title": "Localizing compliance at scale: achieving South Korea’s ISMS certification",
-   "summary": "Cloudflare has achieved South Korea's ISMS certification following an audit across 80 controls. Learn how we localized user consent flows, adapted social sign-up paths at the edge, and validated our global security program.",
-   "url": "https://blog.cloudflare.com/k-isms/",
-   "source_name": "Cloudflare 博客",
-   "source_id": "cloudflare-blog",
-   "published_at": "2026-11-09T00:20:18+08:00",
-   "age_h": 19.1,
-   "cvss": null,
-   "in_the_wild": false,
-   "flags": [],
-   "why": "有趣但无实操价值",
-   "action": "",
-   "region": {
-    "level": "global",
-    "name": "global",
-    "parents": []
-   },
-   "sources": [
-    {
-     "name": "Cloudflare 博客",
-     "url": "https://blog.cloudflare.com/k-isms/",
-     "published_at": "2026-11-09T00:20:18+08:00"
-    }
-   ],
-   "source_count": 1,
-   "tags": [
-    "cf",
-    "stack"
-   ]
   }
  ],
  "sources": [
@@ -5110,7 +5088,7 @@
    "ok": true,
    "error": null,
    "items": 17,
-   "seconds": 1.4
+   "seconds": 1.7
   },
   {
    "id": "oss-sec",
@@ -5119,7 +5097,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 1.0
+   "seconds": 1.1
   },
   {
    "id": "ubuntu-usn",
@@ -5128,7 +5106,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.1
+   "seconds": 1.4
   },
   {
    "id": "nvd-critical",
@@ -5137,7 +5115,7 @@
    "ok": true,
    "error": null,
    "items": 35,
-   "seconds": 1.3
+   "seconds": 5.3
   },
   {
    "id": "cisa-kev",
@@ -5146,7 +5124,7 @@
    "ok": true,
    "error": null,
    "items": 1,
-   "seconds": 2.2
+   "seconds": 2.7
   },
   {
    "id": "gnews-sec",
@@ -5155,7 +5133,7 @@
    "ok": true,
    "error": null,
    "items": 11,
-   "seconds": 2.0
+   "seconds": 1.6
   },
   {
    "id": "gnews-health-gd",
@@ -5164,7 +5142,7 @@
    "ok": true,
    "error": null,
    "items": 11,
-   "seconds": 1.7
+   "seconds": 7.1
   },
   {
    "id": "gnews-who",
@@ -5173,7 +5151,7 @@
    "ok": true,
    "error": null,
    "items": 24,
-   "seconds": 2.4
+   "seconds": 4.4
   },
   {
    "id": "techmeme",
@@ -5181,8 +5159,8 @@
    "category": "tech",
    "ok": true,
    "error": null,
-   "items": 12,
-   "seconds": 9.8
+   "items": 9,
+   "seconds": 25.0
   },
   {
    "id": "hn",
@@ -5190,8 +5168,8 @@
    "category": "tech",
    "ok": true,
    "error": null,
-   "items": 19,
-   "seconds": 2.1
+   "items": 20,
+   "seconds": 2.3
   },
   {
    "id": "lobsters",
@@ -5209,7 +5187,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 0.7
+   "seconds": 0.9
   },
   {
    "id": "debian-dsa",
@@ -5218,7 +5196,7 @@
    "ok": true,
    "error": null,
    "items": 30,
-   "seconds": 0.8
+   "seconds": 1.3
   },
   {
    "id": "arch-advisory",
@@ -5227,7 +5205,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 7.4
+   "seconds": 2.1
   },
   {
    "id": "gentoo-glsa",
@@ -5236,16 +5214,16 @@
    "ok": true,
    "error": null,
    "items": 20,
-   "seconds": 2.9
+   "seconds": 1.0
   },
   {
    "id": "ghsa-critical",
    "name": "GitHub Advisory（critical）",
    "category": "security",
-   "ok": false,
-   "error": "RuntimeError: HTTPError: HTTP Error 403: rate limit exceeded",
-   "items": 0,
-   "seconds": 11.2
+   "ok": true,
+   "error": null,
+   "items": 9,
+   "seconds": 3.4
   },
   {
    "id": "rustsec",
@@ -5254,7 +5232,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 12.1
+   "seconds": 2.3
   },
   {
    "id": "cisa-advisories",
@@ -5263,7 +5241,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 3.2
+   "seconds": 3.6
   },
   {
    "id": "sans-isc",
@@ -5272,7 +5250,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 0.7
+   "seconds": 1.9
   },
   {
    "id": "seclists-fulldisc",
@@ -5281,7 +5259,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 1.0
+   "seconds": 1.2
   },
   {
    "id": "talos",
@@ -5290,7 +5268,7 @@
    "ok": true,
    "error": null,
    "items": 5,
-   "seconds": 1.9
+   "seconds": 4.2
   },
   {
    "id": "unit42",
@@ -5299,7 +5277,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.6
+   "seconds": 1.5
   },
   {
    "id": "securelist",
@@ -5308,7 +5286,7 @@
    "ok": true,
    "error": null,
    "items": 8,
-   "seconds": 6.1
+   "seconds": 29.4
   },
   {
    "id": "mssecblog",
@@ -5317,7 +5295,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 3.1
+   "seconds": 4.3
   },
   {
    "id": "msrc",
@@ -5326,7 +5304,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 5.5
+   "seconds": 5.7
   },
   {
    "id": "schneier",
@@ -5335,7 +5313,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.2
+   "seconds": 1.0
   },
   {
    "id": "mozilla-sec",
@@ -5344,7 +5322,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.1
+   "seconds": 1.9
   },
   {
    "id": "anquanke",
@@ -5353,7 +5331,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 0.7
+   "seconds": 0.9
   },
   {
    "id": "xz-aliyun",
@@ -5362,7 +5340,7 @@
    "ok": true,
    "error": null,
    "items": 20,
-   "seconds": 0.4
+   "seconds": 0.5
   },
   {
    "id": "freebuf",
@@ -5371,7 +5349,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 0.4
+   "seconds": 0.6
   },
   {
    "id": "proxmox-forum",
@@ -5380,7 +5358,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 0.9
+   "seconds": 2.9
   },
   {
    "id": "caddy-community",
@@ -5389,7 +5367,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 2.5
+   "seconds": 4.6
   },
   {
    "id": "caddy-releases",
@@ -5398,7 +5376,7 @@
    "ok": true,
    "error": null,
    "items": 9,
-   "seconds": 2.6
+   "seconds": 3.8
   },
   {
    "id": "redis-releases",
@@ -5407,7 +5385,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 2.5
+   "seconds": 1.5
   },
   {
    "id": "grafana-rel",
@@ -5416,7 +5394,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 2.8
+   "seconds": 1.5
   },
   {
    "id": "grafana-blog",
@@ -5425,7 +5403,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.7
+   "seconds": 2.0
   },
   {
    "id": "postgres-news",
@@ -5440,10 +5418,10 @@
    "id": "docker-blog",
    "name": "Docker 博客",
    "category": "tech",
-   "ok": true,
-   "error": null,
-   "items": 10,
-   "seconds": 4.2
+   "ok": false,
+   "error": "RuntimeError: URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1029)>",
+   "items": 0,
+   "seconds": 10.4
   },
   {
    "id": "cloudflare-blog",
@@ -5452,7 +5430,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 0.8
+   "seconds": 1.7
   },
   {
    "id": "mihomo-rel",
@@ -5461,7 +5439,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.6
+   "seconds": 2.2
   },
   {
    "id": "immich-rel",
@@ -5470,25 +5448,25 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 2.8
+   "seconds": 3.3
   },
   {
    "id": "selfh-st",
    "name": "selfh.st 自托管周报",
    "category": "tech",
    "ok": false,
-   "error": "RuntimeError: TimeoutError: The read operation timed out",
+   "error": "RuntimeError: URLError: <urlopen error _ssl.c:1012: The handshake operation timed out>",
    "items": 0,
-   "seconds": 112.2
+   "seconds": 88.7
   },
   {
    "id": "jeffgeerling",
    "name": "Jeff Geerling（homelab/PVE）",
    "category": "tech",
-   "ok": false,
-   "error": "RuntimeError: IncompleteRead: IncompleteRead(0 bytes read)",
-   "items": 0,
-   "seconds": 79.9
+   "ok": true,
+   "error": null,
+   "items": 15,
+   "seconds": 4.3
   },
   {
    "id": "linux-kernel-releases",
@@ -5497,7 +5475,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 0.6
+   "seconds": 1.1
   },
   {
    "id": "lwn-headlines",
@@ -5506,7 +5484,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 1.0
+   "seconds": 1.2
   },
   {
    "id": "servethehome",
@@ -5515,7 +5493,7 @@
    "ok": true,
    "error": null,
    "items": 6,
-   "seconds": 0.8
+   "seconds": 1.8
   },
   {
    "id": "ars-technica",
@@ -5524,7 +5502,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 0.4
+   "seconds": 0.3
   },
   {
    "id": "simonwillison",
@@ -5533,7 +5511,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 2.9
+   "seconds": 33.6
   },
   {
    "id": "go-blog",
@@ -5542,7 +5520,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 2.0
+   "seconds": 8.6
   },
   {
    "id": "rust-blog",
@@ -5551,7 +5529,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.0
+   "seconds": 1.2
   },
   {
    "id": "github-blog",
@@ -5560,7 +5538,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.4
+   "seconds": 1.9
   },
   {
    "id": "solidot",
@@ -5569,7 +5547,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 0.4
+   "seconds": 0.3
   },
   {
    "id": "infoq-cn",
@@ -5578,7 +5556,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 0.3
+   "seconds": 0.2
   },
   {
    "id": "sspai",
@@ -5594,9 +5572,9 @@
    "name": "阮一峰博客",
    "category": "tech",
    "ok": false,
-   "error": "RuntimeError: IncompleteRead: IncompleteRead(6292 bytes read)",
+   "error": "RuntimeError: IncompleteRead: IncompleteRead(0 bytes read)",
    "items": 0,
-   "seconds": 80.3
+   "seconds": 72.3
   },
   {
    "id": "hko-warning",
@@ -5614,7 +5592,7 @@
    "ok": true,
    "error": null,
    "items": 1,
-   "seconds": 0.1
+   "seconds": 1.6
   },
   {
    "id": "who-news",
@@ -5623,15 +5601,15 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 2.1
+   "seconds": 2.8
   }
  ],
  "stats": {
-  "facts_in": 2215,
-  "clusters": 1037,
-  "items": 945,
+  "facts_in": 2232,
+  "clusters": 1051,
+  "items": 958,
   "dropped_noise": 6,
-  "ledger_rows": "2331→2228"
+  "ledger_rows": "2348→2245"
  },
  "disclaimer": "只做信息整理，不替代官方公告；行动建议需人判断。"
 }
