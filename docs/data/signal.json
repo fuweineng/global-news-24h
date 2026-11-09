@@ -1,14 +1,14 @@
 {
  "schema_version": "1.0.0",
- "generated_at": "2026-11-09T22:24:32+08:00",
- "as_of": "2026-11-09T22:24:32+08:00",
+ "generated_at": "2026-11-09T23:25:30+08:00",
+ "as_of": "2026-11-09T23:25:30+08:00",
  "counts": {
   "act": 30,
-  "watch": 35,
-  "read": 177,
-  "sideline": 729
+  "watch": 36,
+  "read": 182,
+  "sideline": 727
  },
- "overview": "①今日必處理：Chartbrew（CVE-2026-54349，CVSS 9.8，SQL注入）與 LMFDB（CVE-2026-123198，SSTI）兩個 9.8 級漏洞需即刻確認是否命中你嘅部署並升級（分別升 5.2.1+ 及 commit 01829bd+）；JetBrains Datalore SSH私鑰洩露（8.8）同樣要排查協作者權限。\n\n②其餘趨勢：py 生態 HDF5 反序列化（h5io 7.8）與 AgentScope 權限檢查繞過（7.3）顯示 AI/數據處理鏈嘅代碼執行類漏洞密集；OpenSSH+musl 認證繞過及 DSA-6616 內核更新提示系統層亦需補丁；OpenAI 模型批量發現 948 個內核提權漏洞，AI 輔助漏洞挖掘會令內核漏洞曝出速度加快。\n\n③風險提示：AI 框架（AgentScope、Airflow 示例 DAG）被證實可成攻擊面，凡引用示例代碼或內置工具嘅生產環境要主動審計，唔好假設官方代碼默認安全。",
+ "overview": "1) 今日最紧要：优先处理 CVE-2026-54349（Chartbrew，CVSS 9.8，命中你 data 栈）同 CVE-2026-123198（LMFDB SSTI，CVSS 9.8，命中 py 栈），两个都系未认证可利用、直接命中核心包，即刻查版本并升级（Chartbrew ≥5.2.1、LMFDB ≥commit 01829bd）。\n2) 其余值得留意：JetBrains Datalore SSH 私钥泄漏（8.8）涉及协作场景要尽快排查；h5io（7.8）、SuiteCRM（7.7）、AgentScope（7.3）、Airflow shell 注入都属于 py/web 栈的中高危，可安排本周内逐个确认；Debian linux 内核安全更新（DSA-6616-1）应纳入例行补丁流程，另留意 OpenSSH+musl 认证绕过同内核提权漏洞批量报告这两条趋势。\n3) 风险提示：以上 CVSS 9.8 级漏洞均为未认证远程利用，公网暴露面今晚前未打补丁就可能被人扫到，升级前先评估回滚方案。",
  "sections": [
   {
    "key": "security",
@@ -28,7 +28,7 @@
      "source_name": "NVD 严重/高危",
      "source_id": "nvd-critical",
      "published_at": "2026-11-06T21:17:08+08:00",
-     "age_h": 73.1,
+     "age_h": 74.1,
      "cvss": 9.8,
      "in_the_wild": false,
      "flags": [
@@ -814,7 +814,7 @@
      "source_name": "NVD 严重/高危",
      "source_id": "nvd-critical",
      "published_at": "2026-11-05T19:17:18+08:00",
-     "age_h": 99.1,
+     "age_h": 100.1,
      "cvss": 9.8,
      "in_the_wild": false,
      "flags": [
@@ -1203,7 +1203,7 @@
      "source_name": "NVD 严重/高危",
      "source_id": "nvd-critical",
      "published_at": "2026-11-06T17:17:21+08:00",
-     "age_h": 77.1,
+     "age_h": 78.1,
      "cvss": 8.8,
      "in_the_wild": false,
      "flags": [
@@ -1587,7 +1587,7 @@
      "source_name": "NVD 严重/高危",
      "source_id": "nvd-critical",
      "published_at": "2026-11-05T17:18:00+08:00",
-     "age_h": 101.1,
+     "age_h": 102.1,
      "cvss": 7.8,
      "in_the_wild": false,
      "flags": [
@@ -1858,7 +1858,7 @@
      "source_name": "Debian 安全公告 DSA",
      "source_id": "debian-dsa",
      "published_at": "2026-11-08T00:00:00+08:00",
-     "age_h": 46.4,
+     "age_h": 47.4,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2022,7 +2022,7 @@
      "source_name": "oss-security 邮件列表",
      "source_id": "oss-sec",
      "published_at": "2026-11-09T16:20:04+08:00",
-     "age_h": 6.1,
+     "age_h": 7.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2161,7 +2161,7 @@
      "source_name": "oss-security 邮件列表",
      "source_id": "oss-sec",
      "published_at": "2026-11-06T08:42:09+08:00",
-     "age_h": 85.7,
+     "age_h": 86.7,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2294,7 +2294,7 @@
      "source_name": "FreeBuf",
      "source_id": "freebuf",
      "published_at": "2026-11-09T00:20:13+08:00",
-     "age_h": 22.1,
+     "age_h": 23.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2408,7 +2408,7 @@
      "source_name": "CISA 安全公告",
      "source_id": "cisa-advisories",
      "published_at": "2026-11-09T00:20:10+08:00",
-     "age_h": 22.1,
+     "age_h": 23.1,
      "cvss": null,
      "in_the_wild": true,
      "flags": [
@@ -2489,7 +2489,7 @@
      "source_name": "阿里云先知社区",
      "source_id": "xz-aliyun",
      "published_at": "2026-11-09T14:01:05+08:00",
-     "age_h": 8.4,
+     "age_h": 9.4,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2548,7 +2548,7 @@
      "source_name": "Ubuntu 安全公告",
      "source_id": "ubuntu-usn",
      "published_at": "2026-11-09T00:20:02+08:00",
-     "age_h": 22.1,
+     "age_h": 23.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2591,7 +2591,7 @@
      "source_name": "Google News · 漏洞",
      "source_id": "gnews-sec",
      "published_at": "2026-11-09T00:20:02+08:00",
-     "age_h": 22.1,
+     "age_h": 23.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2646,7 +2646,7 @@
      "url": "https://www.nmc.cn/publish/alarm/44190041600000_20261109003604.html",
      "source_name": "中央气象台 · 预警信号",
      "published_at": "2026-11-09T00:35:00+08:00",
-     "age_h": 21.8,
+     "age_h": 22.8,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2678,7 +2678,7 @@
      "url": "https://open-meteo.com/",
      "source_name": "Open-Meteo 集合预报（GFS/ECMWF/ICON/JMA/GEM）",
      "published_at": "2026-11-08T21:07:36+08:00",
-     "age_h": 25.3,
+     "age_h": 26.3,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -2708,7 +2708,7 @@
      "url": "http://www.weather.gov.hk/textonly/warning/warnc.htm",
      "source_name": "香港天文台天气警告",
      "source_id": "hko-warning",
-     "published_at": "2026-11-09T22:20:30+08:00",
+     "published_at": "2026-11-09T23:20:46+08:00",
      "age_h": 0.1,
      "cvss": null,
      "in_the_wild": false,
@@ -2724,7 +2724,7 @@
       {
        "name": "香港天文台天气警告",
        "url": "http://www.weather.gov.hk/textonly/warning/warnc.htm",
-       "published_at": "2026-11-09T22:20:30+08:00"
+       "published_at": "2026-11-09T23:20:46+08:00"
       }
      ],
      "source_count": 1,
@@ -2739,12 +2739,12 @@
      "kind": "signal",
      "tier": "watch",
      "score": 13.0,
-     "title": "香港天文台於2026年11月09日22時02分發出之天氣報告",
-     "summary": "下 午 10 時 天 文 台 錄 得： 氣 溫 ： 21 度 相 對 濕 度 ： 百 分 之 44 預 料 本 港 吹 偏 北 強 風 。 市 民 應 提 防 海 面 大 浪 可 能 帶 來 的 危 險 。 請注意： 強烈季候風信號現正生效。 火災危險警告為紅色，表示火災危險性極高。 本 港 其 他 地 區 的 氣 溫 ： 天 文 台 21 度 ， 京 士 柏 20 度 ， 黃 竹 坑 21 度 ， 打 鼓 嶺 19 度 ， 流 浮 山 19 度 ， 大 埔 20 度 ， 沙 田 20 度 ， 屯 門 21 度 ， 將 軍 澳 19 度 ， 西 貢 20 度 ， 長 洲 20 度 ， 赤 鱲 ",
+     "title": "香港天文台於2026年11月09日23時02分發出之天氣報告",
+     "summary": "下 午 11 時 天 文 台 錄 得： 氣 溫 ： 20 度 相 對 濕 度 ： 百 分 之 44 預 料 本 港 吹 偏 北 強 風 。 市 民 應 提 防 海 面 大 浪 可 能 帶 來 的 危 險 。 請注意： 強烈季候風信號現正生效。 火災危險警告為紅色，表示火災危險性極高。 本 港 其 他 地 區 的 氣 溫 ： 天 文 台 20 度 ， 京 士 柏 19 度 ， 黃 竹 坑 21 度 ， 打 鼓 嶺 18 度 ， 流 浮 山 19 度 ， 大 埔 19 度 ， 沙 田 19 度 ， 屯 門 20 度 ， 將 軍 澳 19 度 ， 西 貢 19 度 ， 長 洲 19 度 ， 赤 鱲 ",
      "url": "https://www.weather.gov.hk/tc/wxinfo/currwx/current.htm",
      "source_name": "香港天文台实时天气",
      "source_id": "hko-current",
-     "published_at": "2026-11-09T22:20:30+08:00",
+     "published_at": "2026-11-09T23:20:47+08:00",
      "age_h": 0.1,
      "cvss": null,
      "in_the_wild": false,
@@ -2760,7 +2760,7 @@
       {
        "name": "香港天文台实时天气",
        "url": "https://www.weather.gov.hk/tc/wxinfo/currwx/current.htm",
-       "published_at": "2026-11-09T22:20:30+08:00"
+       "published_at": "2026-11-09T23:20:47+08:00"
       }
      ],
      "source_count": 1,
@@ -2774,21 +2774,21 @@
    "key": "health",
    "name": "🦠 疫情与公共卫生",
    "sub": "广东本地优先，其次 WHO",
-   "total": 57,
+   "total": 58,
    "items": [
     {
      "id": "sig-4ff369d0e835d3b5",
      "category": "health",
      "kind": "signal",
      "tier": "read",
-     "score": 85.5,
+     "score": 82.5,
      "title": "From guidance to action: Indonesia strengthens hospital preparedness and response to AMR outbreaks - World Health Organization (WHO)",
      "summary": "From guidance to action: Indonesia strengthens hospital preparedness and response to AMR outbreaks World Health Organization (WHO)",
      "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxNOTBnbFd6eU5lMVBRazlUS1hRbUNmMXNFSFlwY3hMeE5UTXQxa2VsWDZhOEVkQmlZSkF4bEJVM0V6UUxRcVRTSXVUaHZtNXVxeHpkZzNKbUo0bVg3ZElFQXR6aS1mM210ODNUYmRkcGZJTEN1YmgtQ3IxTXZtaHEtY2VkVEE0YUF5M1kxSGJhNmIwQUs4b3ZYY2hXN0JPMERqM0h0SFN6eTlLTUxVejJtNDZOTmVWVWkwVjRqdERBNTZhTEItbmgzVXhNM2pzTzFXTnJvUTRHWUFaR0txUk9UZ2JqYWFxdw?oc=5",
      "source_name": "Google News · WHO 疫情通报",
      "source_id": "gnews-who",
      "published_at": "2026-11-09T16:20:05+08:00",
-     "age_h": 6.1,
+     "age_h": 7.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2830,11 +2830,6 @@
       {
        "name": "Google News · WHO 疫情通报",
        "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE1nOElSYXJVMnc0ZWMyVWFWX1pkWGNZcGM2bC1vVGgyOTN4NHR5NEdsNW9yVmtPcTN4S19sUUF4SFZmdnVCcW9vSE8tcFZObS1RYjFvVi0yd3E3VnV1WndueG9kVjJKR1ktN2ppbzFvdlNtQWpwenhtQlZn?oc=5",
-       "published_at": "2026-11-09T00:20:03+08:00"
-      },
-      {
-       "name": "Google News · WHO 疫情通报",
-       "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE5lN1QxTk02RzdObUw5dHZoZ0plaVY0Yi1sRU93MGl1d1E5MWh5TENmVzlGbVVLRHR2MU5OVjktajRaelkxOXFKMEFpSGNvN3ZIcGlUSTI0eFdpc0dWdENIcjd5MlFJNGV6WWY3aDdVN1NYZlRIOEE4ODJn?oc=5",
        "published_at": "2026-11-09T00:20:03+08:00"
       },
       {
@@ -2923,25 +2918,25 @@
        "published_at": "2026-11-05T18:14:48+08:00"
       }
      ],
-     "source_count": 24,
+     "source_count": 23,
      "tags": [
       "gnews",
       "who"
      ]
     },
     {
-     "id": "sig-131541b4db6a39ac",
+     "id": "sig-d616f81397cfa6b6",
      "category": "health",
      "kind": "signal",
      "tier": "read",
-     "score": 73.5,
-     "title": "Angola vaccinates over 1 million people as it bolsters cholera outbreak control efforts - WHO | Regional Office for Africa",
-     "summary": "Angola vaccinates over 1 million people as it bolsters cholera outbreak control efforts WHO | Regional Office for Africa",
-     "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxNNlJwdnBUY2xqU2Q1Rm84ZDVuNGJsR3A2T0xvZmN5eV81X1lyRHZvNGJaYzhySFAtV0swVWw3QW4xeERxc1hKWW5tUTFWWFdNQVhWZkJ6eFdiQ2xnTEV5ZHpEQlpTeVVmRnZheWNUZUx6X0pXQzAwNkZhcVNnNU9uc3IycXBoaWhpV0VKSW9tTlhERkVtajRxcW8yU3VwSUtvYUxVU2p1TmFCUUdaTS0tUzJVMGU2U2hQS0VFbkxmU29FMmdwbm16bEMyZw?oc=5",
+     "score": 64.5,
+     "title": "Zambia cholera outbreak situation reports - WHO | Regional Office for Africa",
+     "summary": "Zambia cholera outbreak situation reports WHO | Regional Office for Africa",
+     "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE9rRW0tU29rZDM5NFF5eWxMaGhmZ3BuX1VVYTA4T01WT2ExNkNhZk82MTRjVGNjd2tqWVVtcTJ1WlpEeFliOHNwbWhMTzE1VjJmNlFDT0VpYWlPOHBMd3pkRzRrcWt1Y1BFLTY4TEhhQ083dnlyeGc?oc=5",
      "source_name": "Google News · WHO 疫情通报",
      "source_id": "gnews-who",
-     "published_at": "2026-11-09T06:20:02+08:00",
-     "age_h": 16.1,
+     "published_at": "2026-11-09T23:20:05+08:00",
+     "age_h": 0.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2955,6 +2950,11 @@
       "parents": []
      },
      "sources": [
+      {
+       "name": "Google News · WHO 疫情通报",
+       "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE9rRW0tU29rZDM5NFF5eWxMaGhmZ3BuX1VVYTA4T01WT2ExNkNhZk82MTRjVGNjd2tqWVVtcTJ1WlpEeFliOHNwbWhMTzE1VjJmNlFDT0VpYWlPOHBMd3pkRzRrcWt1Y1BFLTY4TEhhQ083dnlyeGc?oc=5",
+       "published_at": "2026-11-09T23:20:05+08:00"
+      },
       {
        "name": "Google News · WHO 疫情通报",
        "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxNNlJwdnBUY2xqU2Q1Rm84ZDVuNGJsR3A2T0xvZmN5eV81X1lyRHZvNGJaYzhySFAtV0swVWw3QW4xeERxc1hKWW5tUTFWWFdNQVhWZkJ6eFdiQ2xnTEV5ZHpEQlpTeVVmRnZheWNUZUx6X0pXQzAwNkZhcVNnNU9uc3IycXBoaWhpV0VKSW9tTlhERkVtajRxcW8yU3VwSUtvYUxVU2p1TmFCUUdaTS0tUzJVMGU2U2hQS0VFbkxmU29FMmdwbm16bEMyZw?oc=5",
@@ -2982,11 +2982,6 @@
       },
       {
        "name": "Google News · WHO 疫情通报",
-       "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPcjBQT2FNRThzdDkzRl9Kb3BPaGhWTHd0VWstUWs5cnFFYWNOSGRrSEJZSkU5X3l4WnY0OHFmYkZWSFYxdERSZmh6OWdiTUVIa0RSV3dTZExNclF6LUl1ZDRvRDJHa053aVhDRVA0RmFjd3VSdzdDNXhYdkJhSXpTV0hTSjJzQUdpdVZfQTNUNlRiX1Z1Ql9CbW1SdmtmU3lybzVyRTh5azdhOEJObzZxNU9lME1ZQlNldG9oZA?oc=5",
-       "published_at": "2026-11-09T00:20:03+08:00"
-      },
-      {
-       "name": "Google News · WHO 疫情通报",
        "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTFBiSmZvR1dIOHV2UDFueHNxd0V0aGZKZG1KR1B0YXJzMkR1NWxtTHFGTnlOY3psekVmcDMzX2l0SHJwSWFZZDZCbzZpNUh2Q3U1b2R2ZF9BTzVfZmRPRnZ1VEpTNWlRaFpBY3c?oc=5",
        "published_at": "2026-11-09T00:20:03+08:00"
       },
@@ -3002,23 +2997,8 @@
       },
       {
        "name": "Google News · WHO 疫情通报",
-       "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOcmJ4TEM5eE1XY3h2N2RzUDNMUF9SYnJfT1Z6QnhwOUxHNFZKMVcteGd6M0hTYnhyN3NxQ1dMNFRhM09GUWVYblRjSnpOMTBCaWZYRmppZ2ZYVFhSdkRKYTZDNk13Ym0zbUpCeDB5ZUNPLXFRY1hGa3J3Um9mR0djby1taWFRTEI3b1ZjTDBMcVZNVmZVbmhCNGU0NUpxQ0xDLS1iNVR0Tno2RDNEcDh0TEhuRzBudw?oc=5",
-       "published_at": "2026-11-09T00:20:03+08:00"
-      },
-      {
-       "name": "Google News · WHO 疫情通报",
        "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE5lS1dPM1ZrczV5WGJqWEdjcGtjZDVGdVlmVnU4UDRQb0NQMURiYm5EN2hsQmx1QktwUGpCVVE5QVN2XzFIZ18xM0hyR3dOUUJIVEZoTnZUM2dVQU1nQnVNc3E1VjEyUQ?oc=5",
        "published_at": "2026-11-09T00:20:03+08:00"
-      },
-      {
-       "name": "Google News · WHO 疫情通报",
-       "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE02ampXVmd0Ry1mWmU3V0dmcXBGZVVXZEh6ZC1OVU04eGFBYm9nbnZ3Um8wWXIxZmc2TV85OGVud0trcFpSUHBPZGE1OS16cjA?oc=5",
-       "published_at": "2026-11-09T00:20:03+08:00"
-      },
-      {
-       "name": "Google News · WHO 疫情通报",
-       "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE9rRW0tU29rZDM5NFF5eWxMaGhmZ3BuX1VVYTA4T01WT2ExNkNhZk82MTRjVGNjd2tqWVVtcTJ1WlpEeFliOHNwbWhMTzE1VjJmNlFDT0VpYWlPOHBMd3pkRzRrcWt1Y1BFLTY4TEhhQ083dnlyeGc?oc=5",
-       "published_at": "2026-11-08T07:20:04+08:00"
       },
       {
        "name": "Google News · WHO 疫情通报",
@@ -3056,7 +3036,7 @@
        "published_at": "2026-11-07T00:20:08+08:00"
       }
      ],
-     "source_count": 20,
+     "source_count": 17,
      "tags": [
       "gnews",
       "who"
@@ -3074,7 +3054,7 @@
      "source_name": "Google News · WHO 疫情通报",
      "source_id": "gnews-who",
      "published_at": "2026-11-09T22:20:05+08:00",
-     "age_h": 0.1,
+     "age_h": 1.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3151,6 +3131,69 @@
      ]
     },
     {
+     "id": "sig-a036c1974703cc18",
+     "category": "health",
+     "kind": "signal",
+     "tier": "read",
+     "score": 31.5,
+     "title": "Ebola outbreak in DR Congo becomes largest in country’s history – WHO - Premium Times Nigeria",
+     "summary": "Ebola outbreak in DR Congo becomes largest in country’s history – WHO Premium Times Nigeria",
+     "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxNdkJaU2FqYnBvZkhsWHliSHRGd2drckFHc1l0NzBZbkhqWmdNVHZ3M2h5d0JtdzNWY2JsbGlqTUl0eS1yQ0hJekFlb2t3eGNLZ2lkdjgzczF5UFZud3FLeDFxZjlfNkRYUVA1cDVWLXRmbGVzRG1uYjZ5QURaWlY4UXBmNlNOdTF4OVJOYVlpY1hpYkdBVW9KdTM2UG5mUV90c25rQ0gzQmFPcG9EYVdjWHhyRG94X1VhZXRzTTNLZURiUQ?oc=5",
+     "source_name": "Google News · WHO 疫情通报",
+     "source_id": "gnews-who",
+     "published_at": "2026-11-09T23:20:06+08:00",
+     "age_h": 0.1,
+     "cvss": null,
+     "in_the_wild": false,
+     "flags": [
+      "传染病"
+     ],
+     "why": "疫情相关通报",
+     "action": "",
+     "region": {
+      "level": "global",
+      "name": "global",
+      "parents": []
+     },
+     "sources": [
+      {
+       "name": "Google News · WHO 疫情通报",
+       "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxNdkJaU2FqYnBvZkhsWHliSHRGd2drckFHc1l0NzBZbkhqWmdNVHZ3M2h5d0JtdzNWY2JsbGlqTUl0eS1yQ0hJekFlb2t3eGNLZ2lkdjgzczF5UFZud3FLeDFxZjlfNkRYUVA1cDVWLXRmbGVzRG1uYjZ5QURaWlY4UXBmNlNOdTF4OVJOYVlpY1hpYkdBVW9KdTM2UG5mUV90c25rQ0gzQmFPcG9EYVdjWHhyRG94X1VhZXRzTTNLZURiUQ?oc=5",
+       "published_at": "2026-11-09T23:20:06+08:00"
+      },
+      {
+       "name": "Google News · WHO 疫情通报",
+       "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPcjBQT2FNRThzdDkzRl9Kb3BPaGhWTHd0VWstUWs5cnFFYWNOSGRrSEJZSkU5X3l4WnY0OHFmYkZWSFYxdERSZmh6OWdiTUVIa0RSV3dTZExNclF6LUl1ZDRvRDJHa053aVhDRVA0RmFjd3VSdzdDNXhYdkJhSXpTV0hTSjJzQUdpdVZfQTNUNlRiX1Z1Ql9CbW1SdmtmU3lybzVyRTh5azdhOEJObzZxNU9lME1ZQlNldG9oZA?oc=5",
+       "published_at": "2026-11-09T00:20:03+08:00"
+      },
+      {
+       "name": "Google News · WHO 疫情通报",
+       "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE5lN1QxTk02RzdObUw5dHZoZ0plaVY0Yi1sRU93MGl1d1E5MWh5TENmVzlGbVVLRHR2MU5OVjktajRaelkxOXFKMEFpSGNvN3ZIcGlUSTI0eFdpc0dWdENIcjd5MlFJNGV6WWY3aDdVN1NYZlRIOEE4ODJn?oc=5",
+       "published_at": "2026-11-09T00:20:03+08:00"
+      },
+      {
+       "name": "Google News · WHO 疫情通报",
+       "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOcmJ4TEM5eE1XY3h2N2RzUDNMUF9SYnJfT1Z6QnhwOUxHNFZKMVcteGd6M0hTYnhyN3NxQ1dMNFRhM09GUWVYblRjSnpOMTBCaWZYRmppZ2ZYVFhSdkRKYTZDNk13Ym0zbUpCeDB5ZUNPLXFRY1hGa3J3Um9mR0djby1taWFRTEI3b1ZjTDBMcVZNVmZVbmhCNGU0NUpxQ0xDLS1iNVR0Tno2RDNEcDh0TEhuRzBudw?oc=5",
+       "published_at": "2026-11-09T00:20:03+08:00"
+      },
+      {
+       "name": "Google News · WHO 疫情通报",
+       "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE02ampXVmd0Ry1mWmU3V0dmcXBGZVVXZEh6ZC1OVU04eGFBYm9nbnZ3Um8wWXIxZmc2TV85OGVud0trcFpSUHBPZGE1OS16cjA?oc=5",
+       "published_at": "2026-11-09T00:20:03+08:00"
+      },
+      {
+       "name": "Google News · WHO 疫情通报",
+       "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxOWHVkcDdlcjVfdy1XZlpOakNlMUYtUXdPTlFDd0k3R1BkakU2VzZINHNuQ1hjR1d1SmhHc3I1eG1hRThhbHFQVUVDUXFNc3F6bGdtQU9ORVFPMDhpaUxnbHRhQzFpWm83NXhwZE1aWExLb0l3eUY0MWxkcGJ5ZTA4TWJzSERacU5zMGZHWGx1c3dIcGJ2ZVFMaHFJeWU3TVdKQlBobmxhN1hWOGtFYVJ3ekhycjZqUnpza0xxbzdoczhNUTRmcFdIUjVFcWFhX1FfOUZhUEN3eTc3UQ?oc=5",
+       "published_at": "2026-11-07T03:20:06+08:00"
+      }
+     ],
+     "source_count": 6,
+     "tags": [
+      "gnews",
+      "who"
+     ]
+    },
+    {
      "id": "sig-4c69d1ac75c19315",
      "category": "health",
      "kind": "signal",
@@ -3162,7 +3205,7 @@
      "source_name": "Google News · 广东疫情",
      "source_id": "gnews-health-gd",
      "published_at": "2026-11-09T17:20:04+08:00",
-     "age_h": 5.1,
+     "age_h": 6.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3201,7 +3244,7 @@
      "source_name": "Google News · 广东疫情",
      "source_id": "gnews-health-gd",
      "published_at": "2026-11-09T00:20:05+08:00",
-     "age_h": 22.1,
+     "age_h": 23.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3239,7 +3282,7 @@
      "source_name": "Google News · 广东疫情",
      "source_id": "gnews-health-gd",
      "published_at": "2026-11-09T00:20:03+08:00",
-     "age_h": 22.1,
+     "age_h": 23.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3267,54 +3310,6 @@
      ]
     },
     {
-     "id": "sig-83ba25101aaba486",
-     "category": "health",
-     "kind": "signal",
-     "tier": "read",
-     "score": 22.5,
-     "title": "Ebola Outbreak: Current Situation - Centers for Disease Control and Prevention | CDC (.gov)",
-     "summary": "Ebola Outbreak: Current Situation Centers for Disease Control and Prevention | CDC (.gov)",
-     "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1Xb2M3MTlzZjZoNFc5QlFXTkhpcDIxTFBQc050QnBtQkQwczJnM2daRUZGQzFfcl80RmZGYy1qLXRXeUF0Y1hmejlfemVQVk5uNldZclZscUpiQ1hSX1FsdXB1MG4?oc=5",
-     "source_name": "Google News · WHO 疫情通报",
-     "source_id": "gnews-who",
-     "published_at": "2026-11-09T00:20:04+08:00",
-     "age_h": 22.1,
-     "cvss": null,
-     "in_the_wild": false,
-     "flags": [
-      "传染病"
-     ],
-     "why": "疫情相关通报",
-     "action": "",
-     "region": {
-      "level": "global",
-      "name": "global",
-      "parents": []
-     },
-     "sources": [
-      {
-       "name": "Google News · WHO 疫情通报",
-       "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1Xb2M3MTlzZjZoNFc5QlFXTkhpcDIxTFBQc050QnBtQkQwczJnM2daRUZGQzFfcl80RmZGYy1qLXRXeUF0Y1hmejlfemVQVk5uNldZclZscUpiQ1hSX1FsdXB1MG4?oc=5",
-       "published_at": "2026-11-09T00:20:04+08:00"
-      },
-      {
-       "name": "Google News · WHO 疫情通报",
-       "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9kU2puTzAxZ3ktbE1vNzU0RU9xZTlMYzIyb3JRaENuSnJJdnllQUJDeWs3TElwZmJmYU84dkFsc1ZKaEw0N2dTUHFVSlktVE91ejM0TG10YkRVellCcXo2X3VR?oc=5",
-       "published_at": "2026-11-09T00:20:04+08:00"
-      },
-      {
-       "name": "Google News · WHO 疫情通报",
-       "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxQZ1FvLVdrTThISzNGUVIwemktUS1VbV9lelBtaEZ6WnlQVnh5cmxNcFhqMlFkRHN6MTNfNFFxMFFCbmhjSzh3bW9CLXhlZjJBRG9VWVFJVmxVbHl6SXo2UFoycmQ0NUxBMHU0eHdjR3dyeDNkN3JlakJHWVBXNjJaTUhxekdIRFplSE9NbUw3eEd6cC1kaXBEYzN6ZzRMSlF3REh2Y182NHQzcGdYUnp4eGZIU0w3THpUMzV6ZXhlSmd0Z0d2R1hCMkhvQl95OFk?oc=5",
-       "published_at": "2026-11-05T18:14:49+08:00"
-      }
-     ],
-     "source_count": 3,
-     "tags": [
-      "gnews",
-      "who"
-     ]
-    },
-    {
      "id": "sig-5ad35242f6f3610e",
      "category": "health",
      "kind": "signal",
@@ -3326,7 +3321,7 @@
      "source_name": "Google News · 广东疫情",
      "source_id": "gnews-health-gd",
      "published_at": "2026-11-06T12:20:04+08:00",
-     "age_h": 82.1,
+     "age_h": 83.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3370,7 +3365,7 @@
      "source_name": "WHO 新闻稿",
      "source_id": "who-news",
      "published_at": "2026-11-09T00:20:24+08:00",
-     "age_h": 22.1,
+     "age_h": 23.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3412,7 +3407,7 @@
      "source_name": "WHO 新闻稿",
      "source_id": "who-news",
      "published_at": "2026-11-09T00:20:24+08:00",
-     "age_h": 22.1,
+     "age_h": 23.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3449,7 +3444,7 @@
      "source_name": "WHO 新闻稿",
      "source_id": "who-news",
      "published_at": "2026-11-09T00:20:24+08:00",
-     "age_h": 22.1,
+     "age_h": 23.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3486,7 +3481,7 @@
      "source_name": "WHO 新闻稿",
      "source_id": "who-news",
      "published_at": "2026-11-09T00:20:24+08:00",
-     "age_h": 22.1,
+     "age_h": 23.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3517,7 +3512,7 @@
    "key": "tech",
    "name": "🧠 科技圈热点",
    "sub": "Techmeme / HN / Lobsters / Phoronix",
-   "total": 138,
+   "total": 143,
    "items": [
     {
      "id": "sig-94bf6fd5c2b90de6",
@@ -3531,7 +3526,7 @@
      "source_name": "LWN 头条",
      "source_id": "lwn-headlines",
      "published_at": "2026-11-09T00:20:20+08:00",
-     "age_h": 22.1,
+     "age_h": 23.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3568,7 +3563,7 @@
      "source_name": "Cloudflare 博客",
      "source_id": "cloudflare-blog",
      "published_at": "2026-11-09T00:20:18+08:00",
-     "age_h": 22.1,
+     "age_h": 23.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3606,7 +3601,7 @@
      "source_name": "Cloudflare 博客",
      "source_id": "cloudflare-blog",
      "published_at": "2026-11-09T00:20:18+08:00",
-     "age_h": 22.1,
+     "age_h": 23.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3644,7 +3639,7 @@
      "source_name": "PostgreSQL 新闻",
      "source_id": "postgres-news",
      "published_at": "2026-11-07T19:13:59+08:00",
-     "age_h": 51.2,
+     "age_h": 52.2,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3682,7 +3677,7 @@
      "source_name": "Techmeme（推特科技圈人工版）",
      "source_id": "techmeme",
      "published_at": "2026-11-09T22:20:29+08:00",
-     "age_h": 0.1,
+     "age_h": 1.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -3792,7 +3787,7 @@
      "source_name": "Techmeme（推特科技圈人工版）",
      "source_id": "techmeme",
      "published_at": "2026-11-09T20:20:31+08:00",
-     "age_h": 2.1,
+     "age_h": 3.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -3883,7 +3878,7 @@
      "source_name": "Proxmox 官方论坛",
      "source_id": "proxmox-forum",
      "published_at": "2026-11-09T17:20:15+08:00",
-     "age_h": 5.1,
+     "age_h": 6.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -3950,7 +3945,7 @@
      "source_name": "Proxmox 官方论坛",
      "source_id": "proxmox-forum",
      "published_at": "2026-11-09T00:20:14+08:00",
-     "age_h": 22.1,
+     "age_h": 23.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -3975,6 +3970,47 @@
      ]
     },
     {
+     "id": "sig-062fc1f97939a649",
+     "category": "tech",
+     "kind": "signal",
+     "tier": "read",
+     "score": 35.0,
+     "title": "Data on ZFS dataset mysteriously gone",
+     "summary": "Hi! I am running an unprivileged LXC for Paperless-ngx, which uses ZFS storage on Proxmox ( tank/paperless dataset). Everything was working well for over a year, and yesterday I decided to change Bind mount config into lxc.mount.entry since that allows to make snapshots. So effectively I changed the",
+     "url": "https://forum.proxmox.com/threads/data-on-zfs-dataset-mysteriously-gone.187492/",
+     "source_name": "Proxmox 官方论坛",
+     "source_id": "proxmox-forum",
+     "published_at": "2026-11-09T23:20:14+08:00",
+     "age_h": 0.1,
+     "cvss": null,
+     "in_the_wild": false,
+     "flags": [],
+     "why": "圈内在聊嘅大事",
+     "action": "",
+     "region": {
+      "level": "global",
+      "name": "global",
+      "parents": []
+     },
+     "sources": [
+      {
+       "name": "Proxmox 官方论坛",
+       "url": "https://forum.proxmox.com/threads/data-on-zfs-dataset-mysteriously-gone.187492/",
+       "published_at": "2026-11-09T23:20:14+08:00"
+      },
+      {
+       "name": "Proxmox 官方论坛",
+       "url": "https://forum.proxmox.com/threads/data-on-zfs-dataset-mysteriously-gone.187490/",
+       "published_at": "2026-11-09T22:20:16+08:00"
+      }
+     ],
+     "source_count": 2,
+     "tags": [
+      "pve",
+      "stack"
+     ]
+    },
+    {
      "id": "sig-a7525adc5f46b09f",
      "category": "tech",
      "kind": "signal",
@@ -3986,7 +4022,7 @@
      "source_name": "Proxmox 官方论坛",
      "source_id": "proxmox-forum",
      "published_at": "2026-11-09T19:20:17+08:00",
-     "age_h": 3.1,
+     "age_h": 4.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -4022,7 +4058,7 @@
      "source_name": "Techmeme（推特科技圈人工版）",
      "source_id": "techmeme",
      "published_at": "2026-11-09T19:20:14+08:00",
-     "age_h": 3.1,
+     "age_h": 4.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -4076,42 +4112,6 @@
      ]
     },
     {
-     "id": "sig-6f3045b5999146b8",
-     "category": "tech",
-     "kind": "signal",
-     "tier": "read",
-     "score": 34.0,
-     "title": "Kernel oops in sunrpc xs_read_stream_request — NFSv4.2 client wedges, host reboot required (7.0.14-12-pve)",
-     "summary": "Hello all, I&#039;m hitting a recurring NFSv4.2 client-side failure on a PVE host. Three incidents over roughly three weeks. The most recent one produced a kernel oops with a corrupted return address on the kernel stack, inside the sunrpc receive path. After the oops the mount is dead, every process",
-     "url": "https://forum.proxmox.com/threads/kernel-oops-in-sunrpc-xs_read_stream_request-%E2%80%94-nfsv4-2-client-wedges-host-reboot-required-7-0-14-12-pve.185948/",
-     "source_name": "Proxmox 官方论坛",
-     "source_id": "proxmox-forum",
-     "published_at": "2026-11-09T17:20:15+08:00",
-     "age_h": 5.1,
-     "cvss": null,
-     "in_the_wild": false,
-     "flags": [],
-     "why": "圈内在聊嘅大事",
-     "action": "",
-     "region": {
-      "level": "global",
-      "name": "global",
-      "parents": []
-     },
-     "sources": [
-      {
-       "name": "Proxmox 官方论坛",
-       "url": "https://forum.proxmox.com/threads/kernel-oops-in-sunrpc-xs_read_stream_request-%E2%80%94-nfsv4-2-client-wedges-host-reboot-required-7-0-14-12-pve.185948/",
-       "published_at": "2026-11-09T17:20:15+08:00"
-      }
-     ],
-     "source_count": 1,
-     "tags": [
-      "pve",
-      "stack"
-     ]
-    },
-    {
      "id": "sig-ff01485bfaac2238",
      "category": "tech",
      "kind": "signal",
@@ -4123,7 +4123,7 @@
      "source_name": "Techmeme（推特科技圈人工版）",
      "source_id": "techmeme",
      "published_at": "2026-11-09T00:20:08+08:00",
-     "age_h": 22.1,
+     "age_h": 23.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -4192,7 +4192,7 @@
    "source_name": "selfh.st 自托管周报",
    "source_id": "selfh-st",
    "published_at": "2026-11-09T00:21:39+08:00",
-   "age_h": 22.0,
+   "age_h": 23.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4287,7 +4287,7 @@
    "source_name": "LWN 头条",
    "source_id": "lwn-headlines",
    "published_at": "2026-11-09T00:20:20+08:00",
-   "age_h": 22.1,
+   "age_h": 23.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4337,7 +4337,7 @@
    "source_name": "Caddy 社区",
    "source_id": "caddy-community",
    "published_at": "2026-11-09T00:20:16+08:00",
-   "age_h": 22.1,
+   "age_h": 23.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4378,7 +4378,7 @@
    "source_name": "Phoronix（Linux 硬件/内核）",
    "source_id": "phoronix",
    "published_at": "2026-11-09T00:20:07+08:00",
-   "age_h": 22.1,
+   "age_h": 23.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4423,7 +4423,7 @@
    "source_name": "Google News · 广东疫情",
    "source_id": "gnews-health-gd",
    "published_at": "2026-11-09T09:20:03+08:00",
-   "age_h": 13.1,
+   "age_h": 14.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [
@@ -4471,7 +4471,7 @@
    "source_name": "PostgreSQL 新闻",
    "source_id": "postgres-news",
    "published_at": "2026-11-09T00:20:17+08:00",
-   "age_h": 22.1,
+   "age_h": 23.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4513,7 +4513,7 @@
    "source_name": "LWN 头条",
    "source_id": "lwn-headlines",
    "published_at": "2026-11-09T00:20:20+08:00",
-   "age_h": 22.1,
+   "age_h": 23.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4554,7 +4554,7 @@
    "source_name": "PostgreSQL 新闻",
    "source_id": "postgres-news",
    "published_at": "2026-11-09T00:20:17+08:00",
-   "age_h": 22.1,
+   "age_h": 23.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4590,7 +4590,7 @@
    "source_name": "Caddy 社区",
    "source_id": "caddy-community",
    "published_at": "2026-11-09T00:20:16+08:00",
-   "age_h": 22.1,
+   "age_h": 23.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4626,7 +4626,7 @@
    "source_name": "Caddy 社区",
    "source_id": "caddy-community",
    "published_at": "2026-11-09T00:20:16+08:00",
-   "age_h": 22.1,
+   "age_h": 23.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4662,7 +4662,7 @@
    "source_name": "Caddy 社区",
    "source_id": "caddy-community",
    "published_at": "2026-11-09T00:20:16+08:00",
-   "age_h": 22.1,
+   "age_h": 23.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4698,7 +4698,7 @@
    "source_name": "Phoronix（Linux 硬件/内核）",
    "source_id": "phoronix",
    "published_at": "2026-11-09T21:20:09+08:00",
-   "age_h": 1.1,
+   "age_h": 2.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4738,7 +4738,7 @@
    "source_name": "Phoronix（Linux 硬件/内核）",
    "source_id": "phoronix",
    "published_at": "2026-11-09T20:20:09+08:00",
-   "age_h": 2.1,
+   "age_h": 3.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4778,7 +4778,7 @@
    "source_name": "Phoronix（Linux 硬件/内核）",
    "source_id": "phoronix",
    "published_at": "2026-11-09T00:20:07+08:00",
-   "age_h": 22.1,
+   "age_h": 23.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4818,7 +4818,7 @@
    "source_name": "Cloudflare 博客",
    "source_id": "cloudflare-blog",
    "published_at": "2026-11-09T21:20:19+08:00",
-   "age_h": 1.1,
+   "age_h": 2.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4849,12 +4849,12 @@
    "tier": "sideline",
    "score": 29.0,
    "title": "ChatGPT Desktop forwards your SSH agent to remote machines",
-   "summary": "HN 89 分 · 23 评论",
+   "summary": "HN 113 分 · 36 评论",
    "url": "https://news.ycombinator.com/item?id=50422628",
    "source_name": "Hacker News 头条",
    "source_id": "hn",
    "published_at": "2026-11-09T16:17:49+08:00",
-   "age_h": 6.1,
+   "age_h": 7.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4890,7 +4890,7 @@
    "source_name": "PostgreSQL 新闻",
    "source_id": "postgres-news",
    "published_at": "2026-11-09T12:20:16+08:00",
-   "age_h": 10.1,
+   "age_h": 11.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4926,7 +4926,7 @@
    "source_name": "Cloudflare 博客",
    "source_id": "cloudflare-blog",
    "published_at": "2026-11-09T00:20:18+08:00",
-   "age_h": 22.1,
+   "age_h": 23.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4962,7 +4962,7 @@
    "source_name": "Cloudflare 博客",
    "source_id": "cloudflare-blog",
    "published_at": "2026-11-09T00:20:18+08:00",
-   "age_h": 22.1,
+   "age_h": 23.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4998,7 +4998,7 @@
    "source_name": "Cloudflare 博客",
    "source_id": "cloudflare-blog",
    "published_at": "2026-11-09T00:20:18+08:00",
-   "age_h": 22.1,
+   "age_h": 23.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -5031,7 +5031,7 @@
    "ok": true,
    "error": null,
    "items": 17,
-   "seconds": 1.1
+   "seconds": 1.2
   },
   {
    "id": "oss-sec",
@@ -5040,7 +5040,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 1.3
+   "seconds": 2.5
   },
   {
    "id": "ubuntu-usn",
@@ -5049,7 +5049,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.4
+   "seconds": 1.7
   },
   {
    "id": "nvd-critical",
@@ -5058,7 +5058,7 @@
    "ok": true,
    "error": null,
    "items": 16,
-   "seconds": 3.3
+   "seconds": 1.6
   },
   {
    "id": "cisa-kev",
@@ -5075,7 +5075,7 @@
    "category": "security",
    "ok": true,
    "error": null,
-   "items": 11,
+   "items": 10,
    "seconds": 1.8
   },
   {
@@ -5084,8 +5084,8 @@
    "category": "health",
    "ok": true,
    "error": null,
-   "items": 11,
-   "seconds": 1.4
+   "items": 12,
+   "seconds": 1.9
   },
   {
    "id": "gnews-who",
@@ -5094,16 +5094,16 @@
    "ok": true,
    "error": null,
    "items": 24,
-   "seconds": 1.7
+   "seconds": 1.8
   },
   {
    "id": "techmeme",
    "name": "Techmeme（推特科技圈人工版）",
    "category": "tech",
-   "ok": true,
-   "error": null,
-   "items": 12,
-   "seconds": 25.5
+   "ok": false,
+   "error": "RuntimeError: TimeoutError: The read operation timed out",
+   "items": 0,
+   "seconds": 70.3
   },
   {
    "id": "hn",
@@ -5112,7 +5112,7 @@
    "ok": true,
    "error": null,
    "items": 22,
-   "seconds": 1.5
+   "seconds": 2.2
   },
   {
    "id": "lobsters",
@@ -5121,7 +5121,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 2.8
+   "seconds": 0.9
   },
   {
    "id": "phoronix",
@@ -5130,7 +5130,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 2.2
+   "seconds": 0.7
   },
   {
    "id": "debian-dsa",
@@ -5139,7 +5139,7 @@
    "ok": true,
    "error": null,
    "items": 30,
-   "seconds": 1.3
+   "seconds": 1.0
   },
   {
    "id": "arch-advisory",
@@ -5148,7 +5148,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 1.6
+   "seconds": 2.0
   },
   {
    "id": "gentoo-glsa",
@@ -5157,7 +5157,7 @@
    "ok": true,
    "error": null,
    "items": 20,
-   "seconds": 0.8
+   "seconds": 2.7
   },
   {
    "id": "ghsa-critical",
@@ -5166,7 +5166,7 @@
    "ok": true,
    "error": null,
    "items": 9,
-   "seconds": 1.6
+   "seconds": 1.7
   },
   {
    "id": "rustsec",
@@ -5184,7 +5184,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 4.6
+   "seconds": 3.7
   },
   {
    "id": "sans-isc",
@@ -5193,7 +5193,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.0
+   "seconds": 2.5
   },
   {
    "id": "seclists-fulldisc",
@@ -5202,7 +5202,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 1.2
+   "seconds": 1.0
   },
   {
    "id": "talos",
@@ -5211,7 +5211,7 @@
    "ok": true,
    "error": null,
    "items": 5,
-   "seconds": 11.1
+   "seconds": 8.5
   },
   {
    "id": "unit42",
@@ -5220,7 +5220,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 2.8
+   "seconds": 1.9
   },
   {
    "id": "securelist",
@@ -5229,7 +5229,7 @@
    "ok": true,
    "error": null,
    "items": 8,
-   "seconds": 10.7
+   "seconds": 3.2
   },
   {
    "id": "mssecblog",
@@ -5238,7 +5238,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 6.2
+   "seconds": 5.0
   },
   {
    "id": "msrc",
@@ -5247,7 +5247,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 6.1
+   "seconds": 5.6
   },
   {
    "id": "schneier",
@@ -5256,7 +5256,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 0.8
+   "seconds": 0.7
   },
   {
    "id": "mozilla-sec",
@@ -5265,7 +5265,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 2.2
+   "seconds": 1.7
   },
   {
    "id": "anquanke",
@@ -5292,7 +5292,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 0.4
+   "seconds": 0.5
   },
   {
    "id": "proxmox-forum",
@@ -5301,7 +5301,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 1.0
+   "seconds": 0.8
   },
   {
    "id": "caddy-community",
@@ -5310,7 +5310,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 3.1
+   "seconds": 3.9
   },
   {
    "id": "caddy-releases",
@@ -5319,7 +5319,7 @@
    "ok": true,
    "error": null,
    "items": 9,
-   "seconds": 1.9
+   "seconds": 2.2
   },
   {
    "id": "redis-releases",
@@ -5328,7 +5328,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.5
+   "seconds": 1.3
   },
   {
    "id": "grafana-rel",
@@ -5337,7 +5337,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.7
+   "seconds": 1.4
   },
   {
    "id": "grafana-blog",
@@ -5346,7 +5346,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 2.6
+   "seconds": 2.0
   },
   {
    "id": "postgres-news",
@@ -5355,7 +5355,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 0.9
+   "seconds": 1.0
   },
   {
    "id": "docker-blog",
@@ -5364,7 +5364,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 7.1
+   "seconds": 7.0
   },
   {
    "id": "cloudflare-blog",
@@ -5382,7 +5382,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.8
+   "seconds": 1.6
   },
   {
    "id": "immich-rel",
@@ -5391,25 +5391,25 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.7
+   "seconds": 1.8
   },
   {
    "id": "selfh-st",
    "name": "selfh.st 自托管周报",
    "category": "tech",
-   "ok": true,
-   "error": null,
-   "items": 15,
-   "seconds": 81.0
+   "ok": false,
+   "error": "RuntimeError: URLError: <urlopen error _ssl.c:1012: The handshake operation timed out>",
+   "items": 0,
+   "seconds": 88.2
   },
   {
    "id": "jeffgeerling",
    "name": "Jeff Geerling（homelab/PVE）",
    "category": "tech",
    "ok": false,
-   "error": "RuntimeError: IncompleteRead: IncompleteRead(0 bytes read)",
+   "error": "RuntimeError: RemoteDisconnected: Remote end closed connection without response",
    "items": 0,
-   "seconds": 86.1
+   "seconds": 73.6
   },
   {
    "id": "linux-kernel-releases",
@@ -5427,7 +5427,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 1.2
+   "seconds": 1.1
   },
   {
    "id": "servethehome",
@@ -5436,7 +5436,7 @@
    "ok": true,
    "error": null,
    "items": 6,
-   "seconds": 3.1
+   "seconds": 1.2
   },
   {
    "id": "ars-technica",
@@ -5445,16 +5445,16 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 0.3
+   "seconds": 0.6
   },
   {
    "id": "simonwillison",
    "name": "Simon Willison",
    "category": "tech",
-   "ok": true,
-   "error": null,
-   "items": 2,
-   "seconds": 38.8
+   "ok": false,
+   "error": "RuntimeError: TimeoutError: The read operation timed out",
+   "items": 0,
+   "seconds": 163.5
   },
   {
    "id": "go-blog",
@@ -5472,7 +5472,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.1
+   "seconds": 1.3
   },
   {
    "id": "github-blog",
@@ -5481,7 +5481,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 2.7
+   "seconds": 1.9
   },
   {
    "id": "solidot",
@@ -5508,7 +5508,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 0.1
+   "seconds": 0.2
   },
   {
    "id": "ruanyifeng",
@@ -5517,7 +5517,7 @@
    "ok": false,
    "error": "RuntimeError: URLError: <urlopen error _ssl.c:1012: The handshake operation timed out>",
    "items": 0,
-   "seconds": 88.7
+   "seconds": 80.1
   },
   {
    "id": "hko-warning",
@@ -5526,7 +5526,7 @@
    "ok": true,
    "error": null,
    "items": 2,
-   "seconds": 0.1
+   "seconds": 1.2
   },
   {
    "id": "hko-current",
@@ -5535,7 +5535,7 @@
    "ok": true,
    "error": null,
    "items": 1,
-   "seconds": 0.1
+   "seconds": 1.0
   },
   {
    "id": "who-news",
@@ -5544,15 +5544,15 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 6.6
+   "seconds": 7.2
   }
  ],
  "stats": {
-  "facts_in": 2280,
-  "clusters": 1064,
-  "items": 971,
+  "facts_in": 2293,
+  "clusters": 1073,
+  "items": 975,
   "dropped_noise": 6,
-  "ledger_rows": "2388→2293"
+  "ledger_rows": "2407→2306"
  },
  "disclaimer": "只做信息整理，不替代官方公告；行动建议需人判断。"
 }
