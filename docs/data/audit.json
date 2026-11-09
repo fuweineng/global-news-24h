@@ -1,161 +1,143 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-11-09T00:06:50+00:00",
-  "source_updated": "2026-11-08T20:08:34.564619+00:00",
+  "generated_at": "2026-11-09T07:14:35+00:00",
+  "source_updated": "2026-11-09T04:46:55.069823+00:00",
   "summary": {
-    "status": "warn",
-    "checks_passed": 3,
+    "status": "pass",
+    "checks_passed": 4,
     "checks_total": 4
   },
   "checks": [
     {
       "id": "coverage.title",
       "label": "标题中立化覆盖率",
-      "status": "warn",
+      "status": "pass",
       "threshold": ">= 0.90",
-      "observed": 0.8733,
+      "observed": 0.91,
       "metric": {
-        "processed": 262,
+        "processed": 273,
         "total": 300
       },
-      "detail": "38/300 条标题与英文原文完全相同，未走中立化"
+      "detail": "27/300 条标题与英文原文完全相同，未走中立化"
     },
     {
       "id": "coverage.summary",
       "label": "摘要中立化覆盖率",
       "status": "pass",
       "threshold": ">= 0.90",
-      "observed": 0.97,
+      "observed": 0.98,
       "metric": {
-        "processed": 291,
+        "processed": 294,
         "total": 300
       },
-      "detail": "9/300 条摘要与英文原文完全相同，未走中立化"
+      "detail": "6/300 条摘要与英文原文完全相同，未走中立化"
     },
     {
       "id": "coverage.by_source",
       "label": "按来源覆盖率",
       "status": "pass",
       "threshold": "0% 源占比 < 0.50",
-      "observed": 0.8733,
+      "observed": 0.91,
       "metric": {
         "zero_rate_sources": 0,
-        "sources_total": 25
+        "sources_total": 23
       },
-      "detail": "全部 25 个来源均有中立化产出"
+      "detail": "全部 23 个来源均有中立化产出"
     },
     {
       "id": "neutrality",
       "label": "中立度残留",
       "status": "pass",
       "threshold": "<= 0.05",
-      "observed": 0.0038,
+      "observed": 0.0,
       "metric": {
-        "processed": 262,
-        "hits": 1
+        "processed": 273,
+        "hits": 0
       },
-      "detail": "已加工 262 条中 1 条仍含情绪/反讽残留（0.4%）"
+      "detail": "已加工 273 条中 0 条仍含情绪/反讽残留（0.0%）"
     }
   ],
   "by_source": [
     {
       "source": "Al Jazeera",
+      "total": 38,
+      "processed": 38,
+      "rate": 1.0
+    },
+    {
+      "source": "Engadget",
       "total": 30,
       "processed": 30,
       "rate": 1.0
     },
     {
-      "source": "France 24",
+      "source": "Variety",
+      "total": 29,
+      "processed": 29,
+      "rate": 1.0
+    },
+    {
+      "source": "Deadline",
       "total": 21,
       "processed": 21,
       "rate": 1.0
     },
     {
-      "source": "Engadget",
-      "total": 20,
-      "processed": 20,
+      "source": "TechRadar",
+      "total": 21,
+      "processed": 21,
       "rate": 1.0
-    },
-    {
-      "source": "中新网财经",
-      "total": 20,
-      "processed": 4,
-      "rate": 0.2
     },
     {
       "source": "界面新闻",
       "total": 20,
-      "processed": 8,
-      "rate": 0.4
+      "processed": 7,
+      "rate": 0.35
     },
     {
-      "source": "TechRadar",
-      "total": 18,
-      "processed": 18,
+      "source": "中新网",
+      "total": 16,
+      "processed": 7,
+      "rate": 0.4375
+    },
+    {
+      "source": "MarketWatch",
+      "total": 12,
+      "processed": 12,
       "rate": 1.0
     },
     {
       "source": "CBS News",
-      "total": 15,
-      "processed": 15,
-      "rate": 1.0
-    },
-    {
-      "source": "Variety",
-      "total": 15,
-      "processed": 15,
+      "total": 11,
+      "processed": 11,
       "rate": 1.0
     },
     {
       "source": "DW",
-      "total": 14,
-      "processed": 14,
-      "rate": 1.0
-    },
-    {
-      "source": "中新网",
-      "total": 14,
-      "processed": 4,
-      "rate": 0.2857
-    },
-    {
-      "source": "Deadline",
       "total": 11,
       "processed": 11,
       "rate": 1.0
     },
     {
-      "source": "Hollywood Reporter",
+      "source": "France 24",
       "total": 11,
       "processed": 11,
-      "rate": 1.0
-    },
-    {
-      "source": "MarketWatch",
-      "total": 10,
-      "processed": 10,
       "rate": 1.0
     },
     {
       "source": "Mashable",
-      "total": 10,
-      "processed": 10,
+      "total": 11,
+      "processed": 11,
       "rate": 1.0
     },
     {
-      "source": "NPR",
-      "total": 10,
-      "processed": 10,
-      "rate": 1.0
+      "source": "中新网财经",
+      "total": 11,
+      "processed": 6,
+      "rate": 0.5455
     },
     {
-      "source": "CNBC",
-      "total": 9,
-      "processed": 9,
-      "rate": 1.0
-    },
-    {
-      "source": "Financial Times",
+      "source": "Hollywood Reporter",
       "total": 9,
       "processed": 9,
       "rate": 1.0
@@ -167,15 +149,15 @@
       "rate": 1.0
     },
     {
-      "source": "The Next Web",
+      "source": "TechCrunch",
       "total": 8,
       "processed": 8,
       "rate": 1.0
     },
     {
-      "source": "Wired",
-      "total": 8,
-      "processed": 8,
+      "source": "The Verge",
+      "total": 7,
+      "processed": 7,
       "rate": 1.0
     },
     {
@@ -185,39 +167,37 @@
       "rate": 1.0
     },
     {
-      "source": "TechCrunch",
+      "source": "Financial Times",
+      "total": 6,
+      "processed": 6,
+      "rate": 1.0
+    },
+    {
+      "source": "CNBC",
       "total": 5,
       "processed": 5,
       "rate": 1.0
     },
     {
-      "source": "The Verge",
+      "source": "NPR",
       "total": 5,
       "processed": 5,
       "rate": 1.0
     },
     {
       "source": "ScienceDaily",
-      "total": 2,
-      "processed": 2,
+      "total": 3,
+      "processed": 3,
       "rate": 1.0
     },
     {
-      "source": "Ars Technica",
+      "source": "CNET",
       "total": 1,
       "processed": 1,
       "rate": 1.0
     }
   ],
-  "neutrality_hits": [
-    {
-      "source": "France 24",
-      "title": "Poland in shock after 6 killed in Krakow far-right shooting",
-      "zh_title": "波兰在克拉科夫极右翼枪击事件中丧生 6 人后感到震惊",
-      "rule": "emotion",
-      "matched": "震惊"
-    }
-  ],
+  "neutrality_hits": [],
   "dead_sources": [
     "Reuters",
     "AP News",
@@ -233,30 +213,28 @@
     ],
     "actually_producing": [
       "Al Jazeera",
-      "France 24",
       "Engadget",
-      "中新网财经",
-      "界面新闻",
-      "TechRadar",
-      "CBS News",
       "Variety",
-      "DW",
-      "中新网",
       "Deadline",
-      "Hollywood Reporter",
+      "TechRadar",
+      "界面新闻",
+      "中新网",
       "MarketWatch",
+      "CBS News",
+      "DW",
+      "France 24",
       "Mashable",
-      "NPR",
-      "CNBC",
-      "Financial Times",
+      "中新网财经",
+      "Hollywood Reporter",
       "Phys.org",
-      "The Next Web",
-      "Wired",
-      "BBC",
       "TechCrunch",
       "The Verge",
+      "BBC",
+      "Financial Times",
+      "CNBC",
+      "NPR",
       "ScienceDaily",
-      "Ars Technica"
+      "CNET"
     ],
     "false_claims": []
   }
