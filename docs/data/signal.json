@@ -1,14 +1,14 @@
 {
  "schema_version": "1.0.0",
- "generated_at": "2026-11-09T08:23:06+08:00",
- "as_of": "2026-11-09T08:23:06+08:00",
+ "generated_at": "2026-11-09T09:23:08+08:00",
+ "as_of": "2026-11-09T09:23:08+08:00",
  "counts": {
   "act": 28,
-  "watch": 28,
-  "read": 155,
-  "sideline": 648
+  "watch": 29,
+  "read": 154,
+  "sideline": 647
  },
- "overview": "①今日最急：Babelfish for PostgreSQL（CVE-2026-119923，CVSS 9.8，TDS prelogin 堆溢出，影响多个版本段）同 Chartbrew（CVE-2026-54349，CVSS 9.8，SQL dashboard 注入）都直接命你 data 栈，先确认有冇用、即刻计划升级。\n\n②趋势：Python 生态连续中招——Treeio 反序列化 RCE、h5io crafted HDF5 代码执行、Black GitHub Action 版本篡改，显示依赖链/文件解析面系主要攻击面；另外 OpenSSH + musl 密码认证绕过同 DSA-6616-1 内核更新值得排进本周补丁窗口。\n\n③风险提示：内核提权类漏洞（DSA-6616-1、OpenAI 报告嘅 948 个提权发现）一旦有公开 PoC 就会被大规模利用，唔好等例行补丁，先隔离高价值主机。",
+ "overview": "① 今日最緊要處理：Babelfish for PostgreSQL（CVE-2026-119923，CVSS 9.8，TDS prelogin 堆緩衝區溢出）同 Chartbrew（CVE-2026-54349，CVSS 9.8，SQL dashboard 變量注入）兩單命中你 data 栈核心包，先確認有無用受影響版本並即刻升級；另外 Datalore SSH 私鑰洩漏（CVSS 8.8）如果有用都要查協作者權限。\n\n② 其餘趨勢：Python 生態連環出事——Treeio 反序列化 RCE、h5io 惡意 HDF5 檔代碼注入、Black GitHub Action 版本篡改、AgentScope 權限檢查缺陷，全部命中 py 栈，建議一次過排查依賴；另外 kernel/debian 有 DSA-6616-1 安全更新，加上「sshole」OpenSSH+musl 密碼認證繞過，Linux 層面都要跟。\n\n③ 風險提示：多條高危漏洞直接命中核心包，未核實受影響版本之前唔好當「未中招」，尤其反序列化同代碼注入類可由惡意輸入檔觸發，避免載入唔可信嘅資料檔。",
  "sections": [
   {
    "key": "security",
@@ -28,7 +28,7 @@
      "source_name": "NVD 严重/高危",
      "source_id": "nvd-critical",
      "published_at": "2026-11-06T19:17:39+08:00",
-     "age_h": 61.1,
+     "age_h": 62.1,
      "cvss": 9.8,
      "in_the_wild": false,
      "flags": [
@@ -969,7 +969,7 @@
      "source_name": "NVD 严重/高危",
      "source_id": "nvd-critical",
      "published_at": "2026-11-06T17:17:21+08:00",
-     "age_h": 63.1,
+     "age_h": 64.1,
      "cvss": 8.8,
      "in_the_wild": false,
      "flags": [
@@ -1433,7 +1433,7 @@
      "source_name": "NVD 严重/高危",
      "source_id": "nvd-critical",
      "published_at": "2026-11-07T15:17:16+08:00",
-     "age_h": 41.1,
+     "age_h": 42.1,
      "cvss": 7.2,
      "in_the_wild": false,
      "flags": [
@@ -1827,7 +1827,7 @@
      "source_name": "NVD 严重/高危",
      "source_id": "nvd-critical",
      "published_at": "2026-11-05T14:17:04+08:00",
-     "age_h": 90.1,
+     "age_h": 91.1,
      "cvss": 7.3,
      "in_the_wild": false,
      "flags": [
@@ -2136,7 +2136,7 @@
      "source_name": "Debian 安全公告 DSA",
      "source_id": "debian-dsa",
      "published_at": "2026-11-08T00:00:00+08:00",
-     "age_h": 32.4,
+     "age_h": 33.4,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2293,14 +2293,14 @@
      "category": "security",
      "kind": "signal",
      "tier": "act",
-     "score": 84.5,
+     "score": 80.5,
      "title": "\"sshole\": password authentication bypass: OpenSSH + musl libc",
      "summary": "Posted by Jan Schaumann on Nov 05 OpenSSH just published OpenSSH 10.6p2 with a critical fix for a password authentication bypass on systems that use musl libc and have PAM disabled. Alpine Linux has been called out as one such affected system: https://www.openssh.org/releasenotes.html#10.6p2 The vul",
      "url": "https://seclists.org/oss-sec/2026/q4/522",
      "source_name": "oss-security 邮件列表",
      "source_id": "oss-sec",
      "published_at": "2026-11-06T08:42:09+08:00",
-     "age_h": 71.7,
+     "age_h": 72.7,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2433,7 +2433,7 @@
      "source_name": "FreeBuf",
      "source_id": "freebuf",
      "published_at": "2026-11-09T00:20:13+08:00",
-     "age_h": 8.0,
+     "age_h": 9.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2547,7 +2547,7 @@
      "source_name": "CISA 安全公告",
      "source_id": "cisa-advisories",
      "published_at": "2026-11-09T00:20:10+08:00",
-     "age_h": 8.0,
+     "age_h": 9.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2621,7 +2621,7 @@
      "source_name": "SANS ISC 日记",
      "source_id": "sans-isc",
      "published_at": "2026-11-09T00:20:08+08:00",
-     "age_h": 8.0,
+     "age_h": 9.0,
      "cvss": null,
      "in_the_wild": true,
      "flags": [
@@ -2677,7 +2677,7 @@
      "source_name": "Ubuntu 安全公告",
      "source_id": "ubuntu-usn",
      "published_at": "2026-11-09T00:20:02+08:00",
-     "age_h": 8.0,
+     "age_h": 9.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2720,7 +2720,7 @@
      "source_name": "Google News · 漏洞",
      "source_id": "gnews-sec",
      "published_at": "2026-11-09T00:20:02+08:00",
-     "age_h": 8.0,
+     "age_h": 9.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2768,7 +2768,7 @@
      "source_name": "Google News · 漏洞",
      "source_id": "gnews-sec",
      "published_at": "2026-11-08T00:20:03+08:00",
-     "age_h": 32.0,
+     "age_h": 33.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2828,7 +2828,7 @@
      "url": "https://open-meteo.com/",
      "source_name": "Open-Meteo 集合预报（GFS/ECMWF/ICON/JMA/GEM）",
      "published_at": "2026-11-08T21:07:36+08:00",
-     "age_h": 11.3,
+     "age_h": 12.3,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -2858,7 +2858,7 @@
      "url": "https://www.nmc.cn/publish/alarm/44190041600000_20261109003604.html",
      "source_name": "中央气象台 · 预警信号",
      "published_at": "2026-11-09T00:35:00+08:00",
-     "age_h": 7.8,
+     "age_h": 8.8,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2890,7 +2890,7 @@
      "url": "http://www.weather.gov.hk/textonly/warning/warnc.htm",
      "source_name": "香港天文台天气警告",
      "source_id": "hko-warning",
-     "published_at": "2026-11-09T08:20:20+08:00",
+     "published_at": "2026-11-09T09:20:21+08:00",
      "age_h": 0.0,
      "cvss": null,
      "in_the_wild": false,
@@ -2906,7 +2906,7 @@
       {
        "name": "香港天文台天气警告",
        "url": "http://www.weather.gov.hk/textonly/warning/warnc.htm",
-       "published_at": "2026-11-09T08:20:20+08:00"
+       "published_at": "2026-11-09T09:20:21+08:00"
       }
      ],
      "source_count": 1,
@@ -2921,12 +2921,12 @@
      "kind": "signal",
      "tier": "watch",
      "score": 13.0,
-     "title": "香港天文台於2026年11月09日08時02分發出之天氣報告",
-     "summary": "上 午 8 時 天 文 台 錄 得： 氣 溫 ： 23 度 相 對 濕 度 ： 百 分 之 59 過 去 一 小 時 ， 京 士 柏 錄 得 的 平 均 紫 外 線 指 數 ： 0.3 紫 外 線 強 度 ： 低 預 料 本 港 吹 偏 北 強 風 。 市 民 應 提 防 海 面 大 浪 可 能 帶 來 的 危 險 。 請注意： 強烈季候風信號現正生效。 火災危險警告為紅色，表示火災危險性極高。 本 港 其 他 地 區 的 氣 溫 ： 天 文 台 23 度 ， 京 士 柏 23 度 ， 黃 竹 坑 24 度 ， 打 鼓 嶺 22 度 ， 流 浮 山 22 度 ， 大 埔 23 度 ， 沙 田 ",
+     "title": "香港天文台於2026年11月09日09時02分發出之天氣報告",
+     "summary": "上 午 9 時 天 文 台 錄 得： 氣 溫 ： 24 度 相 對 濕 度 ： 百 分 之 55 過 去 一 小 時 ， 京 士 柏 錄 得 的 平 均 紫 外 線 指 數 ： 1 紫 外 線 強 度 ： 低 預 料 本 港 吹 偏 北 強 風 。 市 民 應 提 防 海 面 大 浪 可 能 帶 來 的 危 險 。 請注意： 強烈季候風信號現正生效。 火災危險警告為紅色，表示火災危險性極高。 本 港 其 他 地 區 的 氣 溫 ： 天 文 台 24 度 ， 京 士 柏 23 度 ， 黃 竹 坑 25 度 ， 打 鼓 嶺 23 度 ， 流 浮 山 23 度 ， 大 埔 24 度 ， 沙 田 24",
      "url": "https://www.weather.gov.hk/tc/wxinfo/currwx/current.htm",
      "source_name": "香港天文台实时天气",
      "source_id": "hko-current",
-     "published_at": "2026-11-09T08:20:20+08:00",
+     "published_at": "2026-11-09T09:20:21+08:00",
      "age_h": 0.0,
      "cvss": null,
      "in_the_wild": false,
@@ -2942,7 +2942,7 @@
       {
        "name": "香港天文台实时天气",
        "url": "https://www.weather.gov.hk/tc/wxinfo/currwx/current.htm",
-       "published_at": "2026-11-09T08:20:20+08:00"
+       "published_at": "2026-11-09T09:20:21+08:00"
       }
      ],
      "source_count": 1,
@@ -2956,7 +2956,7 @@
    "key": "health",
    "name": "🦠 疫情与公共卫生",
    "sub": "广东本地优先，其次 WHO",
-   "total": 53,
+   "total": 54,
    "items": [
     {
      "id": "sig-5a0c4364f9dc09a5",
@@ -2970,7 +2970,7 @@
      "source_name": "Google News · WHO 疫情通报",
      "source_id": "gnews-who",
      "published_at": "2026-11-09T01:20:05+08:00",
-     "age_h": 7.0,
+     "age_h": 8.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3108,7 +3108,7 @@
      "source_name": "Google News · WHO 疫情通报",
      "source_id": "gnews-who",
      "published_at": "2026-11-09T06:20:02+08:00",
-     "age_h": 2.0,
+     "age_h": 3.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3241,7 +3241,7 @@
      "source_name": "Google News · WHO 疫情通报",
      "source_id": "gnews-who",
      "published_at": "2026-11-09T08:20:03+08:00",
-     "age_h": 0.0,
+     "age_h": 1.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3319,7 +3319,7 @@
      "source_name": "WHO 新闻稿",
      "source_id": "who-news",
      "published_at": "2026-11-09T00:20:24+08:00",
-     "age_h": 8.0,
+     "age_h": 9.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3376,7 +3376,7 @@
      "source_name": "Google News · 广东疫情",
      "source_id": "gnews-health-gd",
      "published_at": "2026-11-09T00:20:05+08:00",
-     "age_h": 8.0,
+     "age_h": 9.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3414,7 +3414,7 @@
      "source_name": "Google News · 广东疫情",
      "source_id": "gnews-health-gd",
      "published_at": "2026-11-09T00:20:03+08:00",
-     "age_h": 8.0,
+     "age_h": 9.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3453,7 +3453,7 @@
      "source_name": "Google News · 广东疫情",
      "source_id": "gnews-health-gd",
      "published_at": "2026-11-06T12:20:04+08:00",
-     "age_h": 68.0,
+     "age_h": 69.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3497,7 +3497,7 @@
      "source_name": "Google News · WHO 疫情通报",
      "source_id": "gnews-who",
      "published_at": "2026-11-09T00:20:04+08:00",
-     "age_h": 8.0,
+     "age_h": 9.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3545,7 +3545,7 @@
      "source_name": "Google News · 广东疫情",
      "source_id": "gnews-health-gd",
      "published_at": "2026-11-09T00:20:03+08:00",
-     "age_h": 8.0,
+     "age_h": 9.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3588,7 +3588,7 @@
      "source_name": "WHO 新闻稿",
      "source_id": "who-news",
      "published_at": "2026-11-09T00:20:24+08:00",
-     "age_h": 8.0,
+     "age_h": 9.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3625,7 +3625,7 @@
      "source_name": "WHO 新闻稿",
      "source_id": "who-news",
      "published_at": "2026-11-09T00:20:24+08:00",
-     "age_h": 8.0,
+     "age_h": 9.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3662,7 +3662,7 @@
      "source_name": "WHO 新闻稿",
      "source_id": "who-news",
      "published_at": "2026-11-09T00:20:24+08:00",
-     "age_h": 8.0,
+     "age_h": 9.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3693,7 +3693,7 @@
    "key": "tech",
    "name": "🧠 科技圈热点",
    "sub": "Techmeme / HN / Lobsters / Phoronix",
-   "total": 116,
+   "total": 115,
    "items": [
     {
      "id": "sig-94bf6fd5c2b90de6",
@@ -3707,7 +3707,7 @@
      "source_name": "LWN 头条",
      "source_id": "lwn-headlines",
      "published_at": "2026-11-09T00:20:20+08:00",
-     "age_h": 8.0,
+     "age_h": 9.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3744,7 +3744,7 @@
      "source_name": "Cloudflare 博客",
      "source_id": "cloudflare-blog",
      "published_at": "2026-11-09T00:20:18+08:00",
-     "age_h": 8.0,
+     "age_h": 9.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3782,7 +3782,7 @@
      "source_name": "Cloudflare 博客",
      "source_id": "cloudflare-blog",
      "published_at": "2026-11-09T00:20:18+08:00",
-     "age_h": 8.0,
+     "age_h": 9.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3820,7 +3820,7 @@
      "source_name": "PostgreSQL 新闻",
      "source_id": "postgres-news",
      "published_at": "2026-11-07T19:13:59+08:00",
-     "age_h": 37.2,
+     "age_h": 38.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3858,7 +3858,7 @@
      "source_name": "Techmeme（推特科技圈人工版）",
      "source_id": "techmeme",
      "published_at": "2026-11-09T08:20:06+08:00",
-     "age_h": 0.0,
+     "age_h": 1.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -3922,18 +3922,54 @@
      ]
     },
     {
+     "id": "sig-9622e88f90bd51c2",
+     "category": "tech",
+     "kind": "signal",
+     "tier": "read",
+     "score": 36.0,
+     "title": "Proxmox host crashing — best way to investigate?",
+     "summary": "Hi - my Proxmox installation was running OK. A while back I did some updates which included a kernel update, the system updated to proxmox-kernel-6.8 version 6.8.12-13. A while after (around 2-3 days) I noticed that the system (an Intel NUC) was down — power light on but system unreachable. The syst",
+     "url": "https://forum.proxmox.com/threads/proxmox-host-crashing-%E2%80%94-best-way-to-investigate.172689/",
+     "source_name": "Proxmox 官方论坛",
+     "source_id": "proxmox-forum",
+     "published_at": "2026-11-09T00:20:14+08:00",
+     "age_h": 9.0,
+     "cvss": null,
+     "in_the_wild": false,
+     "flags": [],
+     "why": "圈内在聊嘅大事",
+     "action": "",
+     "region": {
+      "level": "global",
+      "name": "global",
+      "parents": []
+     },
+     "sources": [
+      {
+       "name": "Proxmox 官方论坛",
+       "url": "https://forum.proxmox.com/threads/proxmox-host-crashing-%E2%80%94-best-way-to-investigate.172689/",
+       "published_at": "2026-11-09T00:20:14+08:00"
+      }
+     ],
+     "source_count": 1,
+     "tags": [
+      "pve",
+      "stack"
+     ]
+    },
+    {
      "id": "sig-51c122e2645108d1",
      "category": "tech",
      "kind": "signal",
      "tier": "read",
-     "score": 38.0,
+     "score": 34.0,
      "title": "Cloudflare reports Q3 revenue up 39% YoY to $782.5M, above $737.2M est., a $34.1M net loss, and lifts its FY 2026 guidance; NET jumps 14%+ after hours (Elias Schisgall/Wall Street Journal)",
      "summary": "Elias Schisgall / Wall Street Journal : Cloudflare reports Q3 revenue up 39% YoY to $782.5M, above $737.2M est., a $34.1M net loss, and lifts its FY 2026 guidance; NET jumps 14%+ after hours The connectivity cloud company upped its projections for revenue this year to around $2.96 billion Cloudflare",
      "url": "https://www.techmeme.com/261105/p57#a261105p57",
      "source_name": "Techmeme（推特科技圈人工版）",
      "source_id": "techmeme",
      "published_at": "2026-11-06T08:42:27+08:00",
-     "age_h": 71.7,
+     "age_h": 72.7,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -3977,42 +4013,6 @@
      ]
     },
     {
-     "id": "sig-9622e88f90bd51c2",
-     "category": "tech",
-     "kind": "signal",
-     "tier": "read",
-     "score": 36.0,
-     "title": "Proxmox host crashing — best way to investigate?",
-     "summary": "Hi - my Proxmox installation was running OK. A while back I did some updates which included a kernel update, the system updated to proxmox-kernel-6.8 version 6.8.12-13. A while after (around 2-3 days) I noticed that the system (an Intel NUC) was down — power light on but system unreachable. The syst",
-     "url": "https://forum.proxmox.com/threads/proxmox-host-crashing-%E2%80%94-best-way-to-investigate.172689/",
-     "source_name": "Proxmox 官方论坛",
-     "source_id": "proxmox-forum",
-     "published_at": "2026-11-09T00:20:14+08:00",
-     "age_h": 8.0,
-     "cvss": null,
-     "in_the_wild": false,
-     "flags": [],
-     "why": "圈内在聊嘅大事",
-     "action": "",
-     "region": {
-      "level": "global",
-      "name": "global",
-      "parents": []
-     },
-     "sources": [
-      {
-       "name": "Proxmox 官方论坛",
-       "url": "https://forum.proxmox.com/threads/proxmox-host-crashing-%E2%80%94-best-way-to-investigate.172689/",
-       "published_at": "2026-11-09T00:20:14+08:00"
-      }
-     ],
-     "source_count": 1,
-     "tags": [
-      "pve",
-      "stack"
-     ]
-    },
-    {
      "id": "sig-ff01485bfaac2238",
      "category": "tech",
      "kind": "signal",
@@ -4024,7 +4024,7 @@
      "source_name": "Techmeme（推特科技圈人工版）",
      "source_id": "techmeme",
      "published_at": "2026-11-09T00:20:08+08:00",
-     "age_h": 8.0,
+     "age_h": 9.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -4089,7 +4089,7 @@
      "source_name": "Caddy 社区",
      "source_id": "caddy-community",
      "published_at": "2026-11-09T00:20:16+08:00",
-     "age_h": 8.0,
+     "age_h": 9.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -4132,7 +4132,7 @@
      "source_name": "Proxmox 官方论坛",
      "source_id": "proxmox-forum",
      "published_at": "2026-11-09T00:20:14+08:00",
-     "age_h": 8.0,
+     "age_h": 9.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -4168,7 +4168,7 @@
      "source_name": "Proxmox 官方论坛",
      "source_id": "proxmox-forum",
      "published_at": "2026-11-09T00:20:14+08:00",
-     "age_h": 8.0,
+     "age_h": 9.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -4204,7 +4204,7 @@
      "source_name": "Proxmox 官方论坛",
      "source_id": "proxmox-forum",
      "published_at": "2026-11-09T00:20:14+08:00",
-     "age_h": 8.0,
+     "age_h": 9.0,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -4244,7 +4244,7 @@
    "source_name": "selfh.st 自托管周报",
    "source_id": "selfh-st",
    "published_at": "2026-11-09T00:21:39+08:00",
-   "age_h": 8.0,
+   "age_h": 9.0,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4339,7 +4339,7 @@
    "source_name": "LWN 头条",
    "source_id": "lwn-headlines",
    "published_at": "2026-11-09T00:20:20+08:00",
-   "age_h": 8.0,
+   "age_h": 9.0,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4373,56 +4373,6 @@
    ]
   },
   {
-   "id": "sig-105ba3422987691b",
-   "category": "tech",
-   "kind": "signal",
-   "tier": "sideline",
-   "score": 36.0,
-   "title": "AMD PerfOpt Performance Boosting Code Tweaked For Linux 7.4-rc2",
-   "summary": "Of the many exciting changes in Linux 7.4, one of the exciting out-of-the-box performance improvements is the new \"PerfOpt\" functionality for AMD SoCs with integrated Radeon graphics. AMD PerfOpt can deliver some nice iGPU performance improvements especially for AI/LLM workloads. With today's Linux ",
-   "url": "https://www.phoronix.com/news/AMD-PerfOpt-Tweaks-Linux-7.4",
-   "source_name": "Phoronix（Linux 硬件/内核）",
-   "source_id": "phoronix",
-   "published_at": "2026-11-09T00:20:07+08:00",
-   "age_h": 8.0,
-   "cvss": null,
-   "in_the_wild": false,
-   "flags": [],
-   "why": "有趣但无实操价值",
-   "action": "",
-   "region": {
-    "level": "global",
-    "name": "global",
-    "parents": []
-   },
-   "sources": [
-    {
-     "name": "Phoronix（Linux 硬件/内核）",
-     "url": "https://www.phoronix.com/news/AMD-PerfOpt-Tweaks-Linux-7.4",
-     "published_at": "2026-11-09T00:20:07+08:00"
-    },
-    {
-     "name": "Phoronix（Linux 硬件/内核）",
-     "url": "https://www.phoronix.com/news/Linux-7.4-rc2-FAT32",
-     "published_at": "2026-11-08T00:20:08+08:00"
-    },
-    {
-     "name": "Phoronix（Linux 硬件/内核）",
-     "url": "https://www.phoronix.com/review/linux-74-threadripper",
-     "published_at": "2026-11-07T00:20:09+08:00"
-    },
-    {
-     "name": "Phoronix（Linux 硬件/内核）",
-     "url": "https://www.phoronix.com/news/Linux-7.4-rc2-Sound",
-     "published_at": "2026-11-07T00:20:09+08:00"
-    }
-   ],
-   "source_count": 4,
-   "tags": [
-    "linux"
-   ]
-  },
-  {
    "id": "sig-2cbccf42f9458f18",
    "category": "tech",
    "kind": "signal",
@@ -4434,7 +4384,7 @@
    "source_name": "Caddy 社区",
    "source_id": "caddy-community",
    "published_at": "2026-11-09T00:20:16+08:00",
-   "age_h": 8.0,
+   "age_h": 9.0,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4464,6 +4414,99 @@
    ]
   },
   {
+   "id": "sig-105ba3422987691b",
+   "category": "tech",
+   "kind": "signal",
+   "tier": "sideline",
+   "score": 33.0,
+   "title": "AMD PerfOpt Performance Boosting Code Tweaked For Linux 7.4-rc2",
+   "summary": "Of the many exciting changes in Linux 7.4, one of the exciting out-of-the-box performance improvements is the new \"PerfOpt\" functionality for AMD SoCs with integrated Radeon graphics. AMD PerfOpt can deliver some nice iGPU performance improvements especially for AI/LLM workloads. With today's Linux ",
+   "url": "https://www.phoronix.com/news/AMD-PerfOpt-Tweaks-Linux-7.4",
+   "source_name": "Phoronix（Linux 硬件/内核）",
+   "source_id": "phoronix",
+   "published_at": "2026-11-09T00:20:07+08:00",
+   "age_h": 9.0,
+   "cvss": null,
+   "in_the_wild": false,
+   "flags": [],
+   "why": "有趣但无实操价值",
+   "action": "",
+   "region": {
+    "level": "global",
+    "name": "global",
+    "parents": []
+   },
+   "sources": [
+    {
+     "name": "Phoronix（Linux 硬件/内核）",
+     "url": "https://www.phoronix.com/news/AMD-PerfOpt-Tweaks-Linux-7.4",
+     "published_at": "2026-11-09T00:20:07+08:00"
+    },
+    {
+     "name": "Phoronix（Linux 硬件/内核）",
+     "url": "https://www.phoronix.com/review/linux-74-threadripper",
+     "published_at": "2026-11-07T00:20:09+08:00"
+    },
+    {
+     "name": "Phoronix（Linux 硬件/内核）",
+     "url": "https://www.phoronix.com/news/Linux-7.4-rc2-Sound",
+     "published_at": "2026-11-07T00:20:09+08:00"
+    }
+   ],
+   "source_count": 3,
+   "tags": [
+    "linux"
+   ]
+  },
+  {
+   "id": "sig-6be3b4e4c114df21",
+   "category": "health",
+   "kind": "signal",
+   "tier": "sideline",
+   "score": 32.0,
+   "title": "院士前瞻“十五五”卫生健康科创布局，2026中国卫生健康科技发展大会在广州开幕 - 21财经",
+   "summary": "院士前瞻“十五五”卫生健康科创布局，2026中国卫生健康科技发展大会在广州开幕 21财经",
+   "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPNHhydFh5NVl3MkZCREh1eTBHY29YUk56Ni1KbGhPanEybFhuWnpkSHFYUzJqWXdwUlRfdEpiRzlYNE91TTRTcFlqbW84dGdBUGVCMWVkc1hNdTUza3M0am5ldGhHdTBnRWJSNVhLYkFybjlMdF80QkVrSHJkWGpsT0dYbFd5blZHS3JXZjRaZw?oc=5",
+   "source_name": "Google News · 广东疫情",
+   "source_id": "gnews-health-gd",
+   "published_at": "2026-11-09T09:20:03+08:00",
+   "age_h": 0.0,
+   "cvss": null,
+   "in_the_wild": false,
+   "flags": [
+    "广东"
+   ],
+   "why": "养生/生活类，不是通报",
+   "action": "",
+   "region": {
+    "level": "global",
+    "name": "global",
+    "parents": []
+   },
+   "sources": [
+    {
+     "name": "Google News · 广东疫情",
+     "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPNHhydFh5NVl3MkZCREh1eTBHY29YUk56Ni1KbGhPanEybFhuWnpkSHFYUzJqWXdwUlRfdEpiRzlYNE91TTRTcFlqbW84dGdBUGVCMWVkc1hNdTUza3M0am5ldGhHdTBnRWJSNVhLYkFybjlMdF80QkVrSHJkWGpsT0dYbFd5blZHS3JXZjRaZw?oc=5",
+     "published_at": "2026-11-09T09:20:03+08:00"
+    },
+    {
+     "name": "Google News · 广东疫情",
+     "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1nRTRwMTRwVW1zVHBGa0xoTDVHb2lLNktONVdGZmg1LVJIYUZXc1RVQ2ROVC02cUEtUDlzMVlSaTVraWRib2thSVJfM05YR2ZsekFRd3BzdlpwVy1ZS1VTTHZVMFliQ0FLUUE?oc=5",
+     "published_at": "2026-11-09T03:20:04+08:00"
+    },
+    {
+     "name": "Google News · 广东疫情",
+     "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxORE1ZQVFTaVdPdXZoMjZqWHJjVFZKRVhVT3BhTjVybnpwSWFXM1JmaUYzdThYM3ZGOU96UmpYVFhhTFo3V1RfZ2c5c01iMFVTZDdOZTZ4S3VGb2FYdEtTUEVVbWdKMDcyUk8xbTJaOWVqMURudXFxN3EwckFsclVLTUYtWXZSYVhr?oc=5",
+     "published_at": "2026-11-08T00:20:05+08:00"
+    }
+   ],
+   "source_count": 3,
+   "tags": [
+    "gd",
+    "gnews"
+   ]
+  },
+  {
    "id": "sig-486510a7b133779e",
    "category": "tech",
    "kind": "signal",
@@ -4475,7 +4518,7 @@
    "source_name": "PostgreSQL 新闻",
    "source_id": "postgres-news",
    "published_at": "2026-11-09T00:20:17+08:00",
-   "age_h": 8.0,
+   "age_h": 9.0,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4517,7 +4560,7 @@
    "source_name": "LWN 头条",
    "source_id": "lwn-headlines",
    "published_at": "2026-11-09T00:20:20+08:00",
-   "age_h": 8.0,
+   "age_h": 9.0,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4558,7 +4601,7 @@
    "source_name": "PostgreSQL 新闻",
    "source_id": "postgres-news",
    "published_at": "2026-11-09T00:20:17+08:00",
-   "age_h": 8.0,
+   "age_h": 9.0,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4594,7 +4637,7 @@
    "source_name": "Caddy 社区",
    "source_id": "caddy-community",
    "published_at": "2026-11-09T00:20:16+08:00",
-   "age_h": 8.0,
+   "age_h": 9.0,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4630,7 +4673,7 @@
    "source_name": "Caddy 社区",
    "source_id": "caddy-community",
    "published_at": "2026-11-09T00:20:16+08:00",
-   "age_h": 8.0,
+   "age_h": 9.0,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4666,7 +4709,7 @@
    "source_name": "Caddy 社区",
    "source_id": "caddy-community",
    "published_at": "2026-11-09T00:20:16+08:00",
-   "age_h": 8.0,
+   "age_h": 9.0,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4702,7 +4745,7 @@
    "source_name": "Phoronix（Linux 硬件/内核）",
    "source_id": "phoronix",
    "published_at": "2026-11-09T00:20:07+08:00",
-   "age_h": 8.0,
+   "age_h": 9.0,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4742,7 +4785,7 @@
    "source_name": "Cloudflare 博客",
    "source_id": "cloudflare-blog",
    "published_at": "2026-11-09T00:20:18+08:00",
-   "age_h": 8.0,
+   "age_h": 9.0,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4778,7 +4821,7 @@
    "source_name": "Cloudflare 博客",
    "source_id": "cloudflare-blog",
    "published_at": "2026-11-09T00:20:18+08:00",
-   "age_h": 8.0,
+   "age_h": 9.0,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4814,7 +4857,7 @@
    "source_name": "Cloudflare 博客",
    "source_id": "cloudflare-blog",
    "published_at": "2026-11-09T00:20:18+08:00",
-   "age_h": 8.0,
+   "age_h": 9.0,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4850,7 +4893,7 @@
    "source_name": "Cloudflare 博客",
    "source_id": "cloudflare-blog",
    "published_at": "2026-11-09T00:20:18+08:00",
-   "age_h": 8.0,
+   "age_h": 9.0,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4886,7 +4929,7 @@
    "source_name": "Cloudflare 博客",
    "source_id": "cloudflare-blog",
    "published_at": "2026-11-09T00:20:18+08:00",
-   "age_h": 8.0,
+   "age_h": 9.0,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4922,7 +4965,7 @@
    "source_name": "Cloudflare 博客",
    "source_id": "cloudflare-blog",
    "published_at": "2026-11-09T00:20:18+08:00",
-   "age_h": 8.0,
+   "age_h": 9.0,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4958,7 +5001,7 @@
    "source_name": "Cloudflare 博客",
    "source_id": "cloudflare-blog",
    "published_at": "2026-11-09T00:20:18+08:00",
-   "age_h": 8.0,
+   "age_h": 9.0,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4994,7 +5037,7 @@
    "source_name": "PostgreSQL 新闻",
    "source_id": "postgres-news",
    "published_at": "2026-11-09T00:20:17+08:00",
-   "age_h": 8.0,
+   "age_h": 9.0,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -5009,42 +5052,6 @@
     {
      "name": "PostgreSQL 新闻",
      "url": "https://www.postgresql.org/about/news/mydbr-77-brings-web-reporting-to-postgresql-3424/",
-     "published_at": "2026-11-09T00:20:17+08:00"
-    }
-   ],
-   "source_count": 1,
-   "tags": [
-    "pg",
-    "stack"
-   ]
-  },
-  {
-   "id": "sig-ab69daf517d39ea8",
-   "category": "tech",
-   "kind": "signal",
-   "tier": "sideline",
-   "score": 29.0,
-   "title": "ReinDB: read-only performance monitoring for PostgreSQL, first database free",
-   "summary": "Bandlei has released ReinDB, read-only performance monitoring for PostgreSQL, self-managed or on Amazon RDS and Aurora. ReinDB learns what normal looks like for each database and statement, hour by hour, using pg_stat_statements, and flags what drifts from it, ranked by the extra database time each ",
-   "url": "https://www.postgresql.org/about/news/reindb-read-only-performance-monitoring-for-postgresql-first-database-free-3432/",
-   "source_name": "PostgreSQL 新闻",
-   "source_id": "postgres-news",
-   "published_at": "2026-11-09T00:20:17+08:00",
-   "age_h": 8.0,
-   "cvss": null,
-   "in_the_wild": false,
-   "flags": [],
-   "why": "有趣但无实操价值",
-   "action": "",
-   "region": {
-    "level": "global",
-    "name": "global",
-    "parents": []
-   },
-   "sources": [
-    {
-     "name": "PostgreSQL 新闻",
-     "url": "https://www.postgresql.org/about/news/reindb-read-only-performance-monitoring-for-postgresql-first-database-free-3432/",
      "published_at": "2026-11-09T00:20:17+08:00"
     }
    ],
@@ -5072,7 +5079,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 1.0
+   "seconds": 1.1
   },
   {
    "id": "ubuntu-usn",
@@ -5081,7 +5088,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.2
+   "seconds": 1.1
   },
   {
    "id": "nvd-critical",
@@ -5090,7 +5097,7 @@
    "ok": true,
    "error": null,
    "items": 8,
-   "seconds": 1.2
+   "seconds": 1.3
   },
   {
    "id": "cisa-kev",
@@ -5107,8 +5114,8 @@
    "category": "security",
    "ok": true,
    "error": null,
-   "items": 9,
-   "seconds": 1.4
+   "items": 8,
+   "seconds": 1.9
   },
   {
    "id": "gnews-health-gd",
@@ -5116,8 +5123,8 @@
    "category": "health",
    "ok": true,
    "error": null,
-   "items": 8,
-   "seconds": 2.1
+   "items": 10,
+   "seconds": 1.4
   },
   {
    "id": "gnews-who",
@@ -5126,7 +5133,7 @@
    "ok": true,
    "error": null,
    "items": 24,
-   "seconds": 1.5
+   "seconds": 1.7
   },
   {
    "id": "techmeme",
@@ -5134,8 +5141,8 @@
    "category": "tech",
    "ok": true,
    "error": null,
-   "items": 12,
-   "seconds": 3.7
+   "items": 2,
+   "seconds": 18.0
   },
   {
    "id": "hn",
@@ -5143,8 +5150,8 @@
    "category": "tech",
    "ok": true,
    "error": null,
-   "items": 24,
-   "seconds": 2.3
+   "items": 23,
+   "seconds": 1.3
   },
   {
    "id": "lobsters",
@@ -5153,7 +5160,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 0.9
+   "seconds": 1.1
   },
   {
    "id": "phoronix",
@@ -5171,7 +5178,7 @@
    "ok": true,
    "error": null,
    "items": 30,
-   "seconds": 0.9
+   "seconds": 1.0
   },
   {
    "id": "arch-advisory",
@@ -5180,7 +5187,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 1.2
+   "seconds": 1.3
   },
   {
    "id": "gentoo-glsa",
@@ -5189,7 +5196,7 @@
    "ok": true,
    "error": null,
    "items": 20,
-   "seconds": 0.9
+   "seconds": 1.9
   },
   {
    "id": "ghsa-critical",
@@ -5198,7 +5205,7 @@
    "ok": false,
    "error": "RuntimeError: HTTPError: HTTP Error 403: rate limit exceeded",
    "items": 0,
-   "seconds": 10.1
+   "seconds": 11.3
   },
   {
    "id": "rustsec",
@@ -5207,7 +5214,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 0.8
+   "seconds": 1.8
   },
   {
    "id": "cisa-advisories",
@@ -5216,7 +5223,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 3.5
+   "seconds": 2.9
   },
   {
    "id": "sans-isc",
@@ -5225,7 +5232,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 0.7
+   "seconds": 0.8
   },
   {
    "id": "seclists-fulldisc",
@@ -5243,7 +5250,7 @@
    "ok": true,
    "error": null,
    "items": 5,
-   "seconds": 2.0
+   "seconds": 3.1
   },
   {
    "id": "unit42",
@@ -5252,7 +5259,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.6
+   "seconds": 1.8
   },
   {
    "id": "securelist",
@@ -5261,7 +5268,7 @@
    "ok": true,
    "error": null,
    "items": 8,
-   "seconds": 2.6
+   "seconds": 2.7
   },
   {
    "id": "mssecblog",
@@ -5270,7 +5277,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 5.5
+   "seconds": 2.6
   },
   {
    "id": "msrc",
@@ -5279,7 +5286,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 5.9
+   "seconds": 6.0
   },
   {
    "id": "schneier",
@@ -5288,7 +5295,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 0.9
+   "seconds": 0.8
   },
   {
    "id": "mozilla-sec",
@@ -5297,7 +5304,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 0.9
+   "seconds": 1.4
   },
   {
    "id": "anquanke",
@@ -5306,7 +5313,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 0.5
+   "seconds": 0.6
   },
   {
    "id": "xz-aliyun",
@@ -5342,7 +5349,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 2.6
+   "seconds": 2.2
   },
   {
    "id": "caddy-releases",
@@ -5351,7 +5358,7 @@
    "ok": true,
    "error": null,
    "items": 9,
-   "seconds": 3.3
+   "seconds": 2.6
   },
   {
    "id": "redis-releases",
@@ -5360,7 +5367,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.6
+   "seconds": 1.5
   },
   {
    "id": "grafana-rel",
@@ -5369,7 +5376,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.7
+   "seconds": 1.5
   },
   {
    "id": "grafana-blog",
@@ -5378,7 +5385,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.8
+   "seconds": 1.9
   },
   {
    "id": "postgres-news",
@@ -5387,7 +5394,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 0.9
+   "seconds": 1.0
   },
   {
    "id": "docker-blog",
@@ -5396,7 +5403,7 @@
    "ok": false,
    "error": "RuntimeError: URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1029)>",
    "items": 0,
-   "seconds": 9.8
+   "seconds": 9.7
   },
   {
    "id": "cloudflare-blog",
@@ -5405,7 +5412,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 0.8
+   "seconds": 0.7
   },
   {
    "id": "mihomo-rel",
@@ -5414,7 +5421,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.6
+   "seconds": 1.8
   },
   {
    "id": "immich-rel",
@@ -5423,7 +5430,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.7
+   "seconds": 1.5
   },
   {
    "id": "selfh-st",
@@ -5432,7 +5439,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 6.9
+   "seconds": 6.6
   },
   {
    "id": "jeffgeerling",
@@ -5441,7 +5448,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 33.0
+   "seconds": 2.7
   },
   {
    "id": "linux-kernel-releases",
@@ -5450,7 +5457,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 0.5
+   "seconds": 0.6
   },
   {
    "id": "lwn-headlines",
@@ -5459,7 +5466,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 0.9
+   "seconds": 1.1
   },
   {
    "id": "servethehome",
@@ -5483,19 +5490,19 @@
    "id": "simonwillison",
    "name": "Simon Willison",
    "category": "tech",
-   "ok": false,
-   "error": "RuntimeError: feed 解析失败: <unknown>:2:97: unclosed token",
-   "items": 0,
-   "seconds": 17.2
+   "ok": true,
+   "error": null,
+   "items": 15,
+   "seconds": 4.3
   },
   {
    "id": "go-blog",
    "name": "Go 官方博客",
    "category": "tech",
    "ok": false,
-   "error": "RuntimeError: TimeoutError: The read operation timed out",
+   "error": "RuntimeError: URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1029)>",
    "items": 0,
-   "seconds": 50.1
+   "seconds": 44.6
   },
   {
    "id": "rust-blog",
@@ -5504,7 +5511,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.3
+   "seconds": 0.9
   },
   {
    "id": "github-blog",
@@ -5513,7 +5520,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.4
+   "seconds": 1.3
   },
   {
    "id": "solidot",
@@ -5549,7 +5556,7 @@
    "ok": true,
    "error": null,
    "items": 3,
-   "seconds": 5.2
+   "seconds": 5.9
   },
   {
    "id": "hko-warning",
@@ -5576,15 +5583,15 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 1.9
+   "seconds": 4.2
   }
  ],
  "stats": {
-  "facts_in": 2016,
-  "clusters": 936,
-  "items": 859,
+  "facts_in": 2021,
+  "clusters": 935,
+  "items": 858,
   "dropped_noise": 5,
-  "ledger_rows": "2126→2029"
+  "ledger_rows": "2133→2034"
  },
  "disclaimer": "只做信息整理，不替代官方公告；行动建议需人判断。"
 }
