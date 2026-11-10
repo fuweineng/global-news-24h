@@ -1,34 +1,34 @@
 {
  "schema_version": "1.0.0",
- "generated_at": "2026-11-10T07:23:05+08:00",
- "as_of": "2026-11-10T07:23:05+08:00",
+ "generated_at": "2026-11-10T08:24:04+08:00",
+ "as_of": "2026-11-10T08:24:04+08:00",
  "counts": {
-  "act": 32,
-  "watch": 35,
-  "read": 203,
-  "sideline": 762
+  "act": 33,
+  "watch": 34,
+  "read": 205,
+  "sideline": 765
  },
- "overview": "① 今日最紧要：先处理 CVE-2026-119923（Babelfish for PostgreSQL TDS prelogin 堆溢出，CVSS 9.8，命中你 data 栈核心包），确认受影响版本并安排升级；DSA-6616-1 内核安全更新同日发布，如你环境有 Debian 主机亦应一齐打。\n\n② 趋势上，Python 生态反序列化/代码注入漏洞密集出现（h5io、PyMoDAQ、Treeio 均命中你 py 栈），AgentScope 同 Apache Airflow 亦有命令注入与权限问题，另有 OpenSSH + musl 密码认证绕过及内核提权漏洞批量披露值得关注。\n\n③ 风险提示：反序列化类漏洞多可由恶意文件触发任意代码执行，对来自外部的 HDF5、模型或数据文件来源要做校验，升级前切勿放松。",
+ "overview": "今日最优先处理：Babelfish for PostgreSQL TDS prelogin 解析器 heap buffer overflow（CVSS 9.8，命中 data 栈核心包），如果环境有用 Babelfish 1.0–5.4，即刻查版本同升级；另外 Black GitHub Action（CVE-2026-114134，8.7）同 h5io（7.8）都是 py 栈 CI / 数据读取链路的代码执行风险，建议今日一并排查版本。趋势方面，24 小时内 py 生态反序列化 / 代码注入类漏洞高度集中（Treeio、h5io、PyMoDAQ、AgentScope、Airflow 共五条），显示 Python 反序列化输入信任问题仍是主要攻击面，加上 Debian 内核安全更新同 OpenSSH + musl 认证绕过，基础组件亦要留意。风险提示：以上 CVSS 分数及影响范围来自情报摘要，动手升级前先对照官方通告核实你实际部署的版本是否在受影响范围。",
  "sections": [
   {
    "key": "security",
    "name": "🔐 安全漏洞",
    "sub": "内核 / 发行版 / 容器 / 你的栈",
-   "total": 49,
+   "total": 50,
    "items": [
     {
      "id": "sig-15963adf60186c0b",
      "category": "security",
      "kind": "signal",
      "tier": "act",
-     "score": 589.8,
+     "score": 604.8,
      "title": "CVE-2026-124318 Treeio through 2.0 contains an insecure deserialization vulnerability in UpdateRecord.get_format_strings and ModuleSetting.loads that allows staff users to exec",
      "summary": "Treeio through 2.0 contains an insecure deserialization vulnerability in UpdateRecord.get_format_strings and ModuleSetting.loads that allows staff users to execute code via unverified pickle data. Attackers can store a crafted base64 pickle payload in an UpdateRecord format_strings field through the",
      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124318",
      "source_name": "NVD 严重/高危",
      "source_id": "nvd-critical",
      "published_at": "2026-11-07T15:17:16+08:00",
-     "age_h": 64.1,
+     "age_h": 65.1,
      "cvss": 7.2,
      "in_the_wild": false,
      "flags": [
@@ -546,6 +546,16 @@
       },
       {
        "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-93998",
+       "published_at": "2026-11-05T18:17:11+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-96453",
+       "published_at": "2026-11-05T18:17:11+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-77439",
        "published_at": "2026-11-05T18:17:10+08:00"
       },
@@ -891,6 +901,16 @@
       },
       {
        "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-100109",
+       "published_at": "2026-11-05T08:17:01+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123025",
+       "published_at": "2026-11-05T07:17:25+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
        "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-15702",
        "published_at": "2026-11-05T06:17:06+08:00"
       },
@@ -946,6 +966,11 @@
       },
       {
        "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-121147",
+       "published_at": "2026-11-04T13:17:27+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-121145",
        "published_at": "2026-11-04T13:17:26+08:00"
       },
@@ -965,7 +990,7 @@
        "published_at": "2026-11-04T10:17:24+08:00"
       }
      ],
-     "source_count": 184,
+     "source_count": 189,
      "tags": [
       "cve",
       "oss"
@@ -983,7 +1008,7 @@
      "source_name": "NVD 严重/高危",
      "source_id": "nvd-critical",
      "published_at": "2026-11-06T19:17:39+08:00",
-     "age_h": 84.1,
+     "age_h": 85.1,
      "cvss": 9.8,
      "in_the_wild": false,
      "flags": [
@@ -1602,14 +1627,14 @@
      "category": "security",
      "kind": "signal",
      "tier": "act",
-     "score": 304.1,
+     "score": 277.1,
      "title": "CVE-2026-123023 A flaw has been found in agentscope-ai AgentScope up to 2.0.8. This affects the function check_permissions of the file src/agentscope/tool/_builtin/_bash.py of",
      "summary": "A flaw has been found in agentscope-ai AgentScope up to 2.0.8. This affects the function check_permissions of the file src/agentscope/tool/_builtin/_bash.py of the component Bash Tool. This manipulation causes incorrect authorization. Remote exploitation of the attack is possible. The exploit has be",
      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123023",
      "source_name": "NVD 严重/高危",
      "source_id": "nvd-critical",
      "published_at": "2026-11-05T14:17:04+08:00",
-     "age_h": 113.1,
+     "age_h": 114.1,
      "cvss": 7.3,
      "in_the_wild": false,
      "flags": [
@@ -1625,6 +1650,16 @@
       "parents": []
      },
      "sources": [
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124577",
+       "published_at": "2026-11-09T08:17:02+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124579",
+       "published_at": "2026-11-09T08:17:02+08:00"
+      },
       {
        "name": "NVD 严重/高危",
        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124576",
@@ -1832,11 +1867,6 @@
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-83495",
-       "published_at": "2026-11-07T07:17:04+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-107931",
        "published_at": "2026-11-06T23:17:20+08:00"
       },
@@ -1952,11 +1982,6 @@
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-83494",
-       "published_at": "2026-11-06T07:17:57+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-119432",
        "published_at": "2026-11-06T05:18:20+08:00"
       },
@@ -1974,26 +1999,6 @@
        "name": "NVD 严重/高危",
        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-111489",
        "published_at": "2026-11-05T22:17:43+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-93998",
-       "published_at": "2026-11-05T18:17:11+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-96453",
-       "published_at": "2026-11-05T18:17:11+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123151",
-       "published_at": "2026-11-05T17:18:03+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-103112",
-       "published_at": "2026-11-05T17:17:32+08:00"
       },
       {
        "name": "NVD 严重/高危",
@@ -2022,16 +2027,6 @@
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-117691",
-       "published_at": "2026-11-05T14:17:01+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-107912",
-       "published_at": "2026-11-05T14:16:59+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123019",
        "published_at": "2026-11-05T12:17:50+08:00"
       },
@@ -2039,16 +2034,6 @@
        "name": "NVD 严重/高危",
        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123018",
        "published_at": "2026-11-05T12:17:49+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-100109",
-       "published_at": "2026-11-05T08:17:01+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123025",
-       "published_at": "2026-11-05T07:17:25+08:00"
       },
       {
        "name": "NVD 严重/高危",
@@ -2069,14 +2054,9 @@
        "name": "NVD 严重/高危",
        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-66736",
        "published_at": "2026-11-04T15:17:47+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-121147",
-       "published_at": "2026-11-04T13:17:27+08:00"
       }
      ],
-     "source_count": 90,
+     "source_count": 81,
      "tags": [
       "cve"
      ]
@@ -2093,7 +2073,7 @@
      "source_name": "NVD 严重/高危",
      "source_id": "nvd-critical",
      "published_at": "2026-11-05T17:18:00+08:00",
-     "age_h": 110.1,
+     "age_h": 111.1,
      "cvss": 7.8,
      "in_the_wild": false,
      "flags": [
@@ -2346,14 +2326,14 @@
      "category": "security",
      "kind": "signal",
      "tier": "act",
-     "score": 105.0,
+     "score": 111.0,
      "title": "DSA-6616-1 linux - security update",
      "summary": "Several vulnerabilities have been discovered in the Linux kernel that may lead to a privilege escalation, denial of service or information leaks. https://security-tracker.debian.org/tracker/DSA-6616-1",
      "url": "https://lists.debian.org/debian-security-announce/2026/msg00536.html",
      "source_name": "Debian 安全公告 DSA",
      "source_id": "debian-dsa",
      "published_at": "2026-11-08T00:00:00+08:00",
-     "age_h": 55.4,
+     "age_h": 56.4,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2368,6 +2348,11 @@
       "parents": []
      },
      "sources": [
+      {
+       "name": "Debian 安全公告 DSA",
+       "url": "https://lists.debian.org/debian-security-announce/2026/msg00537.html",
+       "published_at": "2026-11-09T00:00:00+08:00"
+      },
       {
        "name": "Debian 安全公告 DSA",
        "url": "https://lists.debian.org/debian-security-announce/2026/msg00536.html",
@@ -2410,11 +2395,6 @@
       },
       {
        "name": "Debian 安全公告 DSA",
-       "url": "https://lists.debian.org/debian-security-announce/2026/msg00527.html",
-       "published_at": "2026-11-04T00:00:00+08:00"
-      },
-      {
-       "name": "Debian 安全公告 DSA",
        "url": "https://lists.debian.org/debian-security-announce/2026/msg00525.html",
        "published_at": "2026-11-03T00:00:00+08:00"
       },
@@ -2441,6 +2421,11 @@
       {
        "name": "Debian 安全公告 DSA",
        "url": "https://lists.debian.org/debian-security-announce/2026/msg00520.html",
+       "published_at": "2026-11-01T00:00:00+08:00"
+      },
+      {
+       "name": "Debian 安全公告 DSA",
+       "url": "https://lists.debian.org/debian-security-announce/2026/msg00519.html",
        "published_at": "2026-11-01T00:00:00+08:00"
       },
       {
@@ -2485,6 +2470,11 @@
       },
       {
        "name": "Debian 安全公告 DSA",
+       "url": "https://lists.debian.org/debian-security-announce/2026/msg00508.html",
+       "published_at": "2026-10-27T00:00:00+08:00"
+      },
+      {
+       "name": "Debian 安全公告 DSA",
        "url": "https://lists.debian.org/debian-security-announce/2026/msg00507.html",
        "published_at": "2026-10-27T00:00:00+08:00"
       },
@@ -2499,7 +2489,7 @@
        "published_at": "2026-10-27T00:00:00+08:00"
       }
      ],
-     "source_count": 26,
+     "source_count": 28,
      "tags": [
       "debian",
       "stack"
@@ -2517,7 +2507,7 @@
      "source_name": "oss-security 邮件列表",
      "source_id": "oss-sec",
      "published_at": "2026-11-06T08:42:09+08:00",
-     "age_h": 94.7,
+     "age_h": 95.7,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2665,7 +2655,7 @@
      "source_name": "FreeBuf",
      "source_id": "freebuf",
      "published_at": "2026-11-09T00:20:13+08:00",
-     "age_h": 31.0,
+     "age_h": 32.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2779,7 +2769,7 @@
      "source_name": "oss-security 邮件列表",
      "source_id": "oss-sec",
      "published_at": "2026-11-10T00:20:04+08:00",
-     "age_h": 7.0,
+     "age_h": 8.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2858,7 +2848,7 @@
      "source_name": "CISA 安全公告",
      "source_id": "cisa-advisories",
      "published_at": "2026-11-10T00:20:10+08:00",
-     "age_h": 7.0,
+     "age_h": 8.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2926,7 +2916,7 @@
      "source_name": "SANS ISC 日记",
      "source_id": "sans-isc",
      "published_at": "2026-11-10T00:20:08+08:00",
-     "age_h": 7.0,
+     "age_h": 8.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2985,7 +2975,7 @@
      "source_name": "RustSec advisory 提交",
      "source_id": "rustsec",
      "published_at": "2026-11-10T00:05:53+08:00",
-     "age_h": 7.3,
+     "age_h": 8.3,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3038,7 +3028,7 @@
      "source_name": "oss-security 邮件列表",
      "source_id": "oss-sec",
      "published_at": "2026-11-10T03:20:03+08:00",
-     "age_h": 4.0,
+     "age_h": 5.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3079,21 +3069,21 @@
    "total": 4,
    "items": [
     {
-     "id": "wx-cold-20261108-20261110-gz",
+     "id": "wx-cold-20261116-20261118-gz",
      "category": "weather",
      "kind": "weather.cold",
      "tier": "act",
-     "score": 14.0,
-     "title": "11月8日至10日 广州最低温两日累计下降 9.2℃",
+     "score": 18.0,
+     "title": "11月16日至18日 广州最低温两日累计下降 6.0℃",
      "summary": "",
      "url": "https://open-meteo.com/",
      "source_name": "Open-Meteo 集合预报（GFS/ECMWF/ICON/JMA/GEM）",
-     "published_at": "2026-11-08T21:07:36+08:00",
-     "age_h": 34.3,
+     "published_at": "2026-11-10T08:07:39+08:00",
+     "age_h": 0.3,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
-     "why": "48h 降温 9.2℃ · 广州",
+     "why": "48h 降温 6.0℃ · 广州",
      "action": "提前提醒保暖同用电高峰",
      "region": {
       "level": "city",
@@ -3119,7 +3109,7 @@
      "url": "https://www.nmc.cn/publish/alarm/44190041600000_20261109003604.html",
      "source_name": "中央气象台 · 预警信号",
      "published_at": "2026-11-09T00:35:00+08:00",
-     "age_h": 30.8,
+     "age_h": 31.8,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3151,8 +3141,8 @@
      "url": "http://www.weather.gov.hk/textonly/warning/warnc.htm",
      "source_name": "香港天文台天气警告",
      "source_id": "hko-warning",
-     "published_at": "2026-11-10T07:20:16+08:00",
-     "age_h": 0.0,
+     "published_at": "2026-11-10T08:20:18+08:00",
+     "age_h": 0.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -3167,7 +3157,7 @@
       {
        "name": "香港天文台天气警告",
        "url": "http://www.weather.gov.hk/textonly/warning/warnc.htm",
-       "published_at": "2026-11-10T07:20:16+08:00"
+       "published_at": "2026-11-10T08:20:18+08:00"
       }
      ],
      "source_count": 1,
@@ -3182,13 +3172,13 @@
      "kind": "signal",
      "tier": "watch",
      "score": 13.0,
-     "title": "香港天文台於2026年11月10日07時02分發出之天氣報告",
-     "summary": "上 午 7 時 天 文 台 錄 得： 氣 溫 ： 18 度 相 對 濕 度 ： 百 分 之 43 預 料 本 港 吹 偏 北 強 風 。 市 民 應 提 防 海 面 大 浪 可 能 帶 來 的 危 險 。 請注意： 強烈季候風信號現正生效。 火災危險警告為紅色，表示火災危險性極高。 本 港 其 他 地 區 的 氣 溫 ： 天 文 台 18 度 ， 京 士 柏 17 度 ， 黃 竹 坑 18 度 ， 打 鼓 嶺 15 度 ， 流 浮 山 16 度 ， 大 埔 17 度 ， 沙 田 17 度 ， 屯 門 17 度 ， 將 軍 澳 16 度 ， 西 貢 16 度 ， 長 洲 17 度 ， 赤 鱲 角",
+     "title": "香港天文台於2026年11月10日08時02分發出之天氣報告",
+     "summary": "上 午 8 時 天 文 台 錄 得： 氣 溫 ： 18 度 相 對 濕 度 ： 百 分 之 43 過 去 一 小 時 ， 京 士 柏 錄 得 的 平 均 紫 外 線 指 數 ： 0.1 紫 外 線 強 度 ： 低 預 料 本 港 吹 偏 北 強 風 。 市 民 應 提 防 海 面 大 浪 可 能 帶 來 的 危 險 。 請注意： 強烈季候風信號現正生效。 火災危險警告為紅色，表示火災危險性極高。 本 港 其 他 地 區 的 氣 溫 ： 天 文 台 18 度 ， 京 士 柏 17 度 ， 黃 竹 坑 19 度 ， 打 鼓 嶺 15 度 ， 流 浮 山 16 度 ， 大 埔 17 度 ， 沙 田 ",
      "url": "https://www.weather.gov.hk/tc/wxinfo/currwx/current.htm",
      "source_name": "香港天文台实时天气",
      "source_id": "hko-current",
-     "published_at": "2026-11-10T07:20:14+08:00",
-     "age_h": 0.0,
+     "published_at": "2026-11-10T08:20:18+08:00",
+     "age_h": 0.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -3203,7 +3193,7 @@
       {
        "name": "香港天文台实时天气",
        "url": "https://www.weather.gov.hk/tc/wxinfo/currwx/current.htm",
-       "published_at": "2026-11-10T07:20:14+08:00"
+       "published_at": "2026-11-10T08:20:18+08:00"
       }
      ],
      "source_count": 1,
@@ -3231,7 +3221,7 @@
      "source_name": "Google News · WHO 疫情通报",
      "source_id": "gnews-who",
      "published_at": "2026-11-10T03:20:04+08:00",
-     "age_h": 4.0,
+     "age_h": 5.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3384,7 +3374,7 @@
      "source_name": "Google News · WHO 疫情通报",
      "source_id": "gnews-who",
      "published_at": "2026-11-10T04:20:06+08:00",
-     "age_h": 3.0,
+     "age_h": 4.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3472,7 +3462,7 @@
      "source_name": "WHO 新闻稿",
      "source_id": "who-news",
      "published_at": "2026-11-10T00:20:32+08:00",
-     "age_h": 7.0,
+     "age_h": 8.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3529,7 +3519,7 @@
      "source_name": "Google News · 广东疫情",
      "source_id": "gnews-health-gd",
      "published_at": "2026-11-10T00:20:05+08:00",
-     "age_h": 7.0,
+     "age_h": 8.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3567,7 +3557,7 @@
      "source_name": "Google News · 广东疫情",
      "source_id": "gnews-health-gd",
      "published_at": "2026-11-10T00:20:05+08:00",
-     "age_h": 7.0,
+     "age_h": 8.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3606,7 +3596,7 @@
      "source_name": "Google News · 广东疫情",
      "source_id": "gnews-health-gd",
      "published_at": "2026-11-10T00:20:05+08:00",
-     "age_h": 7.0,
+     "age_h": 8.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3645,7 +3635,7 @@
      "source_name": "Google News · WHO 疫情通报",
      "source_id": "gnews-who",
      "published_at": "2026-11-10T00:20:06+08:00",
-     "age_h": 7.0,
+     "age_h": 8.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3693,7 +3683,7 @@
      "source_name": "Google News · 广东疫情",
      "source_id": "gnews-health-gd",
      "published_at": "2026-11-06T12:20:04+08:00",
-     "age_h": 91.0,
+     "age_h": 92.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3737,7 +3727,7 @@
      "source_name": "Google News · WHO 疫情通报",
      "source_id": "gnews-who",
      "published_at": "2026-11-10T02:20:06+08:00",
-     "age_h": 5.0,
+     "age_h": 6.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3780,7 +3770,7 @@
      "source_name": "WHO 新闻稿",
      "source_id": "who-news",
      "published_at": "2026-11-10T00:20:32+08:00",
-     "age_h": 7.0,
+     "age_h": 8.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3817,7 +3807,7 @@
      "source_name": "WHO 新闻稿",
      "source_id": "who-news",
      "published_at": "2026-11-10T00:20:32+08:00",
-     "age_h": 7.0,
+     "age_h": 8.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3854,7 +3844,7 @@
      "source_name": "WHO 新闻稿",
      "source_id": "who-news",
      "published_at": "2026-11-10T00:20:32+08:00",
-     "age_h": 7.0,
+     "age_h": 8.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3885,7 +3875,7 @@
    "key": "tech",
    "name": "🧠 科技圈热点",
    "sub": "Techmeme / HN / Lobsters / Phoronix",
-   "total": 156,
+   "total": 157,
    "items": [
     {
      "id": "sig-94bf6fd5c2b90de6",
@@ -3899,7 +3889,7 @@
      "source_name": "LWN 头条",
      "source_id": "lwn-headlines",
      "published_at": "2026-11-10T00:20:20+08:00",
-     "age_h": 7.0,
+     "age_h": 8.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3936,7 +3926,7 @@
      "source_name": "Cloudflare 博客",
      "source_id": "cloudflare-blog",
      "published_at": "2026-11-10T00:20:18+08:00",
-     "age_h": 7.0,
+     "age_h": 8.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3974,7 +3964,7 @@
      "source_name": "Ars Technica",
      "source_id": "ars-technica",
      "published_at": "2026-11-10T04:20:16+08:00",
-     "age_h": 3.0,
+     "age_h": 4.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -4011,7 +4001,7 @@
      "source_name": "Cloudflare 博客",
      "source_id": "cloudflare-blog",
      "published_at": "2026-11-09T00:20:18+08:00",
-     "age_h": 31.0,
+     "age_h": 32.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -4049,7 +4039,7 @@
      "source_name": "PostgreSQL 新闻",
      "source_id": "postgres-news",
      "published_at": "2026-11-07T19:13:59+08:00",
-     "age_h": 60.2,
+     "age_h": 61.2,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -4080,14 +4070,14 @@
      "category": "tech",
      "kind": "signal",
      "tier": "read",
-     "score": 79.0,
+     "score": 73.0,
      "title": "Trump says the FBI is \"looking into\" Jensen Huang's affair, and the Nvidia CEO told him he \"had absolutely no idea that the person in question was a spy\" (Associated Press)",
      "summary": "Associated Press : Trump says the FBI is looking into Jensen Huang's affair, and the Nvidia CEO told him he had absolutely no idea that the person in question was a spy President Donald Trump said Monday that Nvidia CEO Jensen Huang should not worry about the FBI looking",
      "url": "https://www.techmeme.com/261109/p44#a261109p44",
      "source_name": "Techmeme（推特科技圈人工版）",
      "source_id": "techmeme",
      "published_at": "2026-11-10T07:20:02+08:00",
-     "age_h": 0.0,
+     "age_h": 1.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -4165,11 +4155,6 @@
        "published_at": "2026-11-09T10:20:05+08:00"
       },
       {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261108/p17#a261108p17",
-       "published_at": "2026-11-09T08:20:06+08:00"
-      },
-      {
        "name": "Hacker News 头条",
        "url": "https://www.axios.com/2026/11/08/nvidia-ceo-jensen-huang-affair-email-to-company",
        "published_at": "2026-11-09T06:20:09+08:00"
@@ -4196,11 +4181,6 @@
       },
       {
        "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261106/p29#a261106p29",
-       "published_at": "2026-11-07T12:20:06+08:00"
-      },
-      {
-       "name": "Techmeme（推特科技圈人工版）",
        "url": "https://www.techmeme.com/261106/p24#a261106p24",
        "published_at": "2026-11-07T06:20:04+08:00"
       },
@@ -4210,100 +4190,10 @@
        "published_at": "2026-11-06T10:20:06+08:00"
       }
      ],
-     "source_count": 22,
+     "source_count": 20,
      "tags": [
       "buzz",
       "news"
-     ]
-    },
-    {
-     "id": "sig-51c122e2645108d1",
-     "category": "tech",
-     "kind": "signal",
-     "tier": "read",
-     "score": 55.0,
-     "title": "Cloudflare reports Q3 revenue up 39% YoY to $782.5M, above $737.2M est., a $34.1M net loss, and lifts its FY 2026 guidance; NET jumps 14%+ after hours (Elias Schisgall/Wall Street Journal)",
-     "summary": "Elias Schisgall / Wall Street Journal : Cloudflare reports Q3 revenue up 39% YoY to $782.5M, above $737.2M est., a $34.1M net loss, and lifts its FY 2026 guidance; NET jumps 14%+ after hours The connectivity cloud company upped its projections for revenue this year to around $2.96 billion Cloudflare",
-     "url": "https://www.techmeme.com/261105/p57#a261105p57",
-     "source_name": "Techmeme（推特科技圈人工版）",
-     "source_id": "techmeme",
-     "published_at": "2026-11-06T08:42:27+08:00",
-     "age_h": 94.7,
-     "cvss": null,
-     "in_the_wild": false,
-     "flags": [],
-     "why": "圈内在聊嘅大事",
-     "action": "",
-     "region": {
-      "level": "global",
-      "name": "global",
-      "parents": []
-     },
-     "sources": [
-      {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261109/p37#a261109p37",
-       "published_at": "2026-11-10T03:20:04+08:00"
-      },
-      {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261109/p20#a261109p20",
-       "published_at": "2026-11-10T00:20:27+08:00"
-      },
-      {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261108/p15#a261108p15",
-       "published_at": "2026-11-09T06:20:02+08:00"
-      },
-      {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261108/p11#a261108p11",
-       "published_at": "2026-11-09T03:20:04+08:00"
-      },
-      {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261107/p15#a261107p15",
-       "published_at": "2026-11-09T00:20:08+08:00"
-      },
-      {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261108/p2#a261108p2",
-       "published_at": "2026-11-09T00:20:08+08:00"
-      },
-      {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261107/p10#a261107p10",
-       "published_at": "2026-11-08T00:20:24+08:00"
-      },
-      {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261106/p4#a261106p4",
-       "published_at": "2026-11-07T00:21:04+08:00"
-      },
-      {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261105/p64#a261105p64",
-       "published_at": "2026-11-06T10:20:06+08:00"
-      },
-      {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261105/p60#a261105p60",
-       "published_at": "2026-11-06T08:42:27+08:00"
-      },
-      {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261105/p57#a261105p57",
-       "published_at": "2026-11-06T08:42:27+08:00"
-      },
-      {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261105/p8#a261105p8",
-       "published_at": "2026-11-05T18:15:31+08:00"
-      }
-     ],
-     "source_count": 12,
-     "tags": [
-      "buzz"
      ]
     },
     {
@@ -4318,7 +4208,7 @@
      "source_name": "Proxmox 官方论坛",
      "source_id": "proxmox-forum",
      "published_at": "2026-11-09T17:20:15+08:00",
-     "age_h": 14.0,
+     "age_h": 15.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -4390,7 +4280,7 @@
      "source_name": "Techmeme（推特科技圈人工版）",
      "source_id": "techmeme",
      "published_at": "2026-11-10T00:20:27+08:00",
-     "age_h": 7.0,
+     "age_h": 8.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -4469,18 +4359,18 @@
      ]
     },
     {
-     "id": "sig-daee7aa0a076c602",
+     "id": "sig-dba922f51b1bfdb2",
      "category": "tech",
      "kind": "signal",
      "tier": "read",
-     "score": 37.0,
-     "title": "An interview with ex-Shein Executive Chair Donald Tang who insists it was his decision to step down ahead of the troubled IPO, Shein's valuation rout, and more (Patrick Jenkins/Financial Times)",
-     "summary": "Patrick Jenkins / Financial Times : An interview with ex-Shein Executive Chair Donald Tang who insists it was his decision to step down ahead of the troubled IPO, Shein's valuation rout, and more Former chair of fast-fashion retailer on the tough decision to step back weeks before its disappointing ",
-     "url": "https://www.techmeme.com/261109/p30#a261109p30",
+     "score": 43.0,
+     "title": "Mavria, which aims to build modular data centers that can be shipped by trucks, raised $130M across pre-seed and seed rounds at a $1B valuation led by Paradigm (Jennifer Hiller/Wall Street Journal)",
+     "summary": "Jennifer Hiller / Wall Street Journal : Mavria, which aims to build modular data centers that can be shipped by trucks, raised $130M across pre-seed and seed rounds at a $1B valuation led by Paradigm Mavria has raised money at a $1 billion valuation to build modular data centers that can be shipped ",
+     "url": "https://www.techmeme.com/261109/p37#a261109p37",
      "source_name": "Techmeme（推特科技圈人工版）",
      "source_id": "techmeme",
-     "published_at": "2026-11-10T00:20:27+08:00",
-     "age_h": 7.0,
+     "published_at": "2026-11-10T03:20:04+08:00",
+     "age_h": 5.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -4494,48 +4384,170 @@
      "sources": [
       {
        "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261109/p30#a261109p30",
+       "url": "https://www.techmeme.com/261109/p37#a261109p37",
+       "published_at": "2026-11-10T03:20:04+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261109/p20#a261109p20",
        "published_at": "2026-11-10T00:20:27+08:00"
       },
       {
        "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261109/p10#a261109p10",
-       "published_at": "2026-11-09T18:20:30+08:00"
+       "url": "https://www.techmeme.com/261108/p15#a261108p15",
+       "published_at": "2026-11-09T06:20:02+08:00"
       },
       {
        "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261108/p10#a261108p10",
-       "published_at": "2026-11-09T02:20:07+08:00"
+       "url": "https://www.techmeme.com/261108/p11#a261108p11",
+       "published_at": "2026-11-09T03:20:04+08:00"
       },
       {
        "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261108/p4#a261108p4",
+       "url": "https://www.techmeme.com/261107/p15#a261107p15",
        "published_at": "2026-11-09T00:20:08+08:00"
       },
       {
        "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261107/p4#a261107p4",
+       "url": "https://www.techmeme.com/261108/p2#a261108p2",
+       "published_at": "2026-11-09T00:20:08+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261107/p10#a261107p10",
        "published_at": "2026-11-08T00:20:24+08:00"
       },
       {
        "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261106/p21#a261106p21",
-       "published_at": "2026-11-07T05:20:02+08:00"
-      },
-      {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261106/p7#a261106p7",
+       "url": "https://www.techmeme.com/261106/p4#a261106p4",
        "published_at": "2026-11-07T00:21:04+08:00"
       },
       {
        "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261106/p15#a261106p15",
-       "published_at": "2026-11-07T00:21:04+08:00"
+       "url": "https://www.techmeme.com/261105/p60#a261105p60",
+       "published_at": "2026-11-06T08:42:27+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261105/p8#a261105p8",
+       "published_at": "2026-11-05T18:15:31+08:00"
       }
      ],
-     "source_count": 8,
+     "source_count": 10,
      "tags": [
       "buzz"
+     ]
+    },
+    {
+     "id": "sig-51c122e2645108d1",
+     "category": "tech",
+     "kind": "signal",
+     "tier": "read",
+     "score": 37.0,
+     "title": "Cloudflare reports Q3 revenue up 39% YoY to $782.5M, above $737.2M est., a $34.1M net loss, and lifts its FY 2026 guidance; NET jumps 14%+ after hours (Elias Schisgall/Wall Street Journal)",
+     "summary": "Elias Schisgall / Wall Street Journal : Cloudflare reports Q3 revenue up 39% YoY to $782.5M, above $737.2M est., a $34.1M net loss, and lifts its FY 2026 guidance; NET jumps 14%+ after hours The connectivity cloud company upped its projections for revenue this year to around $2.96 billion Cloudflare",
+     "url": "https://www.techmeme.com/261105/p57#a261105p57",
+     "source_name": "Techmeme（推特科技圈人工版）",
+     "source_id": "techmeme",
+     "published_at": "2026-11-06T08:42:27+08:00",
+     "age_h": 95.7,
+     "cvss": null,
+     "in_the_wild": false,
+     "flags": [],
+     "why": "圈内在聊嘅大事",
+     "action": "",
+     "region": {
+      "level": "global",
+      "name": "global",
+      "parents": []
+     },
+     "sources": [
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261109/p47#a261109p47",
+       "published_at": "2026-11-10T08:20:10+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261109/p22#a261109p22",
+       "published_at": "2026-11-10T00:20:27+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261105/p64#a261105p64",
+       "published_at": "2026-11-06T10:20:06+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261105/p57#a261105p57",
+       "published_at": "2026-11-06T08:42:27+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261105/p56#a261105p56",
+       "published_at": "2026-11-06T08:42:27+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261105/p9#a261105p9",
+       "published_at": "2026-11-05T18:34:22+08:00"
+      }
+     ],
+     "source_count": 6,
+     "tags": [
+      "buzz"
+     ]
+    },
+    {
+     "id": "sig-6fb7adc42cc8216c",
+     "category": "tech",
+     "kind": "signal",
+     "tier": "read",
+     "score": 35.0,
+     "title": "Backup of Windows and Linux PCs.",
+     "summary": "In addition to VMs, can I make backups of Windows 10/11 and Xubuntu/Debian PCs? If yes, in what way? Having around 10 VMs and 5 PCs, what configuration should I have?",
+     "url": "https://forum.proxmox.com/threads/backup-of-windows-and-linux-pcs.147088/",
+     "source_name": "Proxmox 官方论坛",
+     "source_id": "proxmox-forum",
+     "published_at": "2026-11-09T08:20:09+08:00",
+     "age_h": 24.1,
+     "cvss": null,
+     "in_the_wild": false,
+     "flags": [],
+     "why": "圈内在聊嘅大事",
+     "action": "",
+     "region": {
+      "level": "global",
+      "name": "global",
+      "parents": []
+     },
+     "sources": [
+      {
+       "name": "Proxmox 官方论坛",
+       "url": "https://forum.proxmox.com/threads/is-pbs-plus-a-good-solution-for-host-backup-physical-linux-and-windows-machines.187500/",
+       "published_at": "2026-11-10T08:20:12+08:00"
+      },
+      {
+       "name": "Proxmox 官方论坛",
+       "url": "https://forum.proxmox.com/threads/windows-linux-desktop-gui-and-cli-client-tools-for-pbs.187476/",
+       "published_at": "2026-11-09T08:20:09+08:00"
+      },
+      {
+       "name": "Proxmox 官方论坛",
+       "url": "https://forum.proxmox.com/threads/backup-of-windows-and-linux-pcs.147088/",
+       "published_at": "2026-11-09T08:20:09+08:00"
+      },
+      {
+       "name": "Hacker News 头条",
+       "url": "https://github.com/anomalyco/rune",
+       "published_at": "2026-11-07T00:31:32+08:00"
+      }
+     ],
+     "source_count": 4,
+     "tags": [
+      "buzz",
+      "pve",
+      "stack"
      ]
     },
     {
@@ -4550,7 +4562,7 @@
      "source_name": "Proxmox 官方论坛",
      "source_id": "proxmox-forum",
      "published_at": "2026-11-10T00:20:13+08:00",
-     "age_h": 7.0,
+     "age_h": 8.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -4578,42 +4590,6 @@
       "pve",
       "stack"
      ]
-    },
-    {
-     "id": "sig-a7525adc5f46b09f",
-     "category": "tech",
-     "kind": "signal",
-     "tier": "read",
-     "score": 34.0,
-     "title": "[ANNOUNCE] Gorgona Notification Bridge for Proxmox VE",
-     "summary": "Tired of siloed notifications in Proxmox VE? I built a lightweight bridge that forwards native Proxmox (8.2+) webhook alerts directly into the Gorgona P2P mesh, giving you decentralized, real-time visibility across your infrastructure. Why try it: Clean delivery of multi-line backup logs (no broken ",
-     "url": "https://forum.proxmox.com/threads/announce-gorgona-notification-bridge-for-proxmox-ve.183282/",
-     "source_name": "Proxmox 官方论坛",
-     "source_id": "proxmox-forum",
-     "published_at": "2026-11-09T19:20:17+08:00",
-     "age_h": 12.0,
-     "cvss": null,
-     "in_the_wild": false,
-     "flags": [],
-     "why": "圈内在聊嘅大事",
-     "action": "",
-     "region": {
-      "level": "global",
-      "name": "global",
-      "parents": []
-     },
-     "sources": [
-      {
-       "name": "Proxmox 官方论坛",
-       "url": "https://forum.proxmox.com/threads/announce-gorgona-notification-bridge-for-proxmox-ve.183282/",
-       "published_at": "2026-11-09T19:20:17+08:00"
-      }
-     ],
-     "source_count": 1,
-     "tags": [
-      "pve",
-      "stack"
-     ]
     }
    ]
   }
@@ -4631,7 +4607,7 @@
    "source_name": "Google News · WHO 疫情通报",
    "source_id": "gnews-who",
    "published_at": "2026-11-10T06:20:04+08:00",
-   "age_h": 1.0,
+   "age_h": 2.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4782,7 +4758,7 @@
    "source_name": "selfh.st 自托管周报",
    "source_id": "selfh-st",
    "published_at": "2026-11-10T01:20:29+08:00",
-   "age_h": 6.0,
+   "age_h": 7.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4877,7 +4853,7 @@
    "source_name": "LWN 头条",
    "source_id": "lwn-headlines",
    "published_at": "2026-11-10T00:20:20+08:00",
-   "age_h": 7.0,
+   "age_h": 8.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4927,7 +4903,7 @@
    "source_name": "Phoronix（Linux 硬件/内核）",
    "source_id": "phoronix",
    "published_at": "2026-11-10T00:20:06+08:00",
-   "age_h": 7.0,
+   "age_h": 8.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4977,7 +4953,7 @@
    "source_name": "Caddy 社区",
    "source_id": "caddy-community",
    "published_at": "2026-11-10T00:20:15+08:00",
-   "age_h": 7.0,
+   "age_h": 8.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -5018,7 +4994,7 @@
    "source_name": "Phoronix（Linux 硬件/内核）",
    "source_id": "phoronix",
    "published_at": "2026-11-10T04:20:05+08:00",
-   "age_h": 3.0,
+   "age_h": 4.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -5063,7 +5039,7 @@
    "source_name": "PostgreSQL 新闻",
    "source_id": "postgres-news",
    "published_at": "2026-11-10T00:20:17+08:00",
-   "age_h": 7.0,
+   "age_h": 8.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -5105,7 +5081,7 @@
    "source_name": "Google News · 广东疫情",
    "source_id": "gnews-health-gd",
    "published_at": "2026-11-10T00:20:05+08:00",
-   "age_h": 7.0,
+   "age_h": 8.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [
@@ -5153,7 +5129,7 @@
    "source_name": "LWN 头条",
    "source_id": "lwn-headlines",
    "published_at": "2026-11-10T00:20:20+08:00",
-   "age_h": 7.0,
+   "age_h": 8.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -5194,7 +5170,7 @@
    "source_name": "PostgreSQL 新闻",
    "source_id": "postgres-news",
    "published_at": "2026-11-10T00:20:17+08:00",
-   "age_h": 7.0,
+   "age_h": 8.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -5230,7 +5206,7 @@
    "source_name": "Caddy 社区",
    "source_id": "caddy-community",
    "published_at": "2026-11-10T00:20:15+08:00",
-   "age_h": 7.0,
+   "age_h": 8.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -5266,7 +5242,7 @@
    "source_name": "Caddy 社区",
    "source_id": "caddy-community",
    "published_at": "2026-11-10T00:20:15+08:00",
-   "age_h": 7.0,
+   "age_h": 8.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -5302,7 +5278,7 @@
    "source_name": "Caddy 社区",
    "source_id": "caddy-community",
    "published_at": "2026-11-10T00:20:15+08:00",
-   "age_h": 7.0,
+   "age_h": 8.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -5338,7 +5314,7 @@
    "source_name": "Phoronix（Linux 硬件/内核）",
    "source_id": "phoronix",
    "published_at": "2026-11-10T00:20:06+08:00",
-   "age_h": 7.0,
+   "age_h": 8.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -5378,7 +5354,7 @@
    "source_name": "Cloudflare 博客",
    "source_id": "cloudflare-blog",
    "published_at": "2026-11-10T01:20:18+08:00",
-   "age_h": 6.0,
+   "age_h": 7.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -5414,7 +5390,7 @@
    "source_name": "Cloudflare 博客",
    "source_id": "cloudflare-blog",
    "published_at": "2026-11-10T01:20:18+08:00",
-   "age_h": 6.0,
+   "age_h": 7.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -5450,7 +5426,7 @@
    "source_name": "Cloudflare 博客",
    "source_id": "cloudflare-blog",
    "published_at": "2026-11-10T00:20:18+08:00",
-   "age_h": 7.0,
+   "age_h": 8.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -5486,7 +5462,7 @@
    "source_name": "Cloudflare 博客",
    "source_id": "cloudflare-blog",
    "published_at": "2026-11-10T00:20:18+08:00",
-   "age_h": 7.0,
+   "age_h": 8.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -5522,7 +5498,7 @@
    "source_name": "Cloudflare 博客",
    "source_id": "cloudflare-blog",
    "published_at": "2026-11-10T00:20:18+08:00",
-   "age_h": 7.0,
+   "age_h": 8.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -5558,7 +5534,7 @@
    "source_name": "Cloudflare 博客",
    "source_id": "cloudflare-blog",
    "published_at": "2026-11-10T00:20:18+08:00",
-   "age_h": 7.0,
+   "age_h": 8.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -5591,7 +5567,7 @@
    "ok": true,
    "error": null,
    "items": 17,
-   "seconds": 1.7
+   "seconds": 2.3
   },
   {
    "id": "oss-sec",
@@ -5600,7 +5576,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 1.0
+   "seconds": 1.1
   },
   {
    "id": "ubuntu-usn",
@@ -5609,7 +5585,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 0.9
+   "seconds": 1.1
   },
   {
    "id": "nvd-critical",
@@ -5617,8 +5593,8 @@
    "category": "security",
    "ok": true,
    "error": null,
-   "items": 28,
-   "seconds": 1.1
+   "items": 29,
+   "seconds": 2.5
   },
   {
    "id": "cisa-kev",
@@ -5627,7 +5603,7 @@
    "ok": true,
    "error": null,
    "items": 4,
-   "seconds": 2.5
+   "seconds": 2.1
   },
   {
    "id": "gnews-sec",
@@ -5635,8 +5611,8 @@
    "category": "security",
    "ok": true,
    "error": null,
-   "items": 8,
-   "seconds": 1.8
+   "items": 9,
+   "seconds": 1.5
   },
   {
    "id": "gnews-health-gd",
@@ -5645,7 +5621,7 @@
    "ok": true,
    "error": null,
    "items": 12,
-   "seconds": 1.0
+   "seconds": 1.1
   },
   {
    "id": "gnews-who",
@@ -5663,7 +5639,7 @@
    "ok": true,
    "error": null,
    "items": 12,
-   "seconds": 0.7
+   "seconds": 6.0
   },
   {
    "id": "hn",
@@ -5671,8 +5647,8 @@
    "category": "tech",
    "ok": true,
    "error": null,
-   "items": 22,
-   "seconds": 1.7
+   "items": 19,
+   "seconds": 1.4
   },
   {
    "id": "lobsters",
@@ -5681,7 +5657,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 0.9
+   "seconds": 0.8
   },
   {
    "id": "phoronix",
@@ -5690,7 +5666,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 0.7
+   "seconds": 0.6
   },
   {
    "id": "debian-dsa",
@@ -5699,7 +5675,7 @@
    "ok": true,
    "error": null,
    "items": 30,
-   "seconds": 1.2
+   "seconds": 0.9
   },
   {
    "id": "arch-advisory",
@@ -5708,7 +5684,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 1.3
+   "seconds": 1.5
   },
   {
    "id": "gentoo-glsa",
@@ -5717,7 +5693,7 @@
    "ok": true,
    "error": null,
    "items": 20,
-   "seconds": 2.6
+   "seconds": 2.3
   },
   {
    "id": "ghsa-critical",
@@ -5726,7 +5702,7 @@
    "ok": true,
    "error": null,
    "items": 3,
-   "seconds": 1.5
+   "seconds": 1.4
   },
   {
    "id": "rustsec",
@@ -5744,7 +5720,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 3.8
+   "seconds": 3.1
   },
   {
    "id": "sans-isc",
@@ -5753,7 +5729,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 0.8
+   "seconds": 0.7
   },
   {
    "id": "seclists-fulldisc",
@@ -5771,7 +5747,7 @@
    "ok": true,
    "error": null,
    "items": 5,
-   "seconds": 1.7
+   "seconds": 2.7
   },
   {
    "id": "unit42",
@@ -5789,7 +5765,7 @@
    "ok": true,
    "error": null,
    "items": 8,
-   "seconds": 2.5
+   "seconds": 2.2
   },
   {
    "id": "mssecblog",
@@ -5798,7 +5774,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 3.8
+   "seconds": 4.8
   },
   {
    "id": "msrc",
@@ -5807,7 +5783,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 6.2
+   "seconds": 6.1
   },
   {
    "id": "schneier",
@@ -5816,7 +5792,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 0.9
+   "seconds": 0.8
   },
   {
    "id": "mozilla-sec",
@@ -5825,7 +5801,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.3
+   "seconds": 0.9
   },
   {
    "id": "anquanke",
@@ -5834,7 +5810,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 0.7
+   "seconds": 0.6
   },
   {
    "id": "xz-aliyun",
@@ -5843,7 +5819,7 @@
    "ok": true,
    "error": null,
    "items": 20,
-   "seconds": 0.4
+   "seconds": 0.3
   },
   {
    "id": "freebuf",
@@ -5852,7 +5828,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 0.4
+   "seconds": 0.3
   },
   {
    "id": "proxmox-forum",
@@ -5861,7 +5837,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 1.0
+   "seconds": 2.0
   },
   {
    "id": "caddy-community",
@@ -5870,7 +5846,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 2.3
+   "seconds": 2.5
   },
   {
    "id": "caddy-releases",
@@ -5879,7 +5855,7 @@
    "ok": true,
    "error": null,
    "items": 9,
-   "seconds": 2.8
+   "seconds": 2.7
   },
   {
    "id": "redis-releases",
@@ -5888,7 +5864,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.5
+   "seconds": 1.4
   },
   {
    "id": "grafana-rel",
@@ -5897,7 +5873,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.5
+   "seconds": 2.0
   },
   {
    "id": "grafana-blog",
@@ -5906,7 +5882,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.8
+   "seconds": 2.2
   },
   {
    "id": "postgres-news",
@@ -5915,16 +5891,16 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.1
+   "seconds": 0.9
   },
   {
    "id": "docker-blog",
    "name": "Docker 博客",
    "category": "tech",
-   "ok": false,
-   "error": "RuntimeError: URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1029)>",
-   "items": 0,
-   "seconds": 11.2
+   "ok": true,
+   "error": null,
+   "items": 10,
+   "seconds": 3.4
   },
   {
    "id": "cloudflare-blog",
@@ -5933,7 +5909,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 1.3
+   "seconds": 1.2
   },
   {
    "id": "mihomo-rel",
@@ -5942,7 +5918,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.8
+   "seconds": 1.7
   },
   {
    "id": "immich-rel",
@@ -5951,7 +5927,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.6
+   "seconds": 1.8
   },
   {
    "id": "selfh-st",
@@ -5960,7 +5936,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 1.7
+   "seconds": 36.7
   },
   {
    "id": "jeffgeerling",
@@ -5969,7 +5945,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 1.3
+   "seconds": 59.4
   },
   {
    "id": "linux-kernel-releases",
@@ -5978,7 +5954,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 0.5
+   "seconds": 0.7
   },
   {
    "id": "lwn-headlines",
@@ -5987,7 +5963,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 2.3
+   "seconds": 1.0
   },
   {
    "id": "servethehome",
@@ -6005,7 +5981,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 0.4
+   "seconds": 0.6
   },
   {
    "id": "simonwillison",
@@ -6014,7 +5990,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 0.9
+   "seconds": 5.9
   },
   {
    "id": "go-blog",
@@ -6023,7 +5999,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 8.4
+   "seconds": 1.8
   },
   {
    "id": "rust-blog",
@@ -6041,7 +6017,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.3
+   "seconds": 1.7
   },
   {
    "id": "solidot",
@@ -6050,7 +6026,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 0.3
+   "seconds": 0.5
   },
   {
    "id": "infoq-cn",
@@ -6077,7 +6053,7 @@
    "ok": true,
    "error": null,
    "items": 3,
-   "seconds": 1.1
+   "seconds": 3.6
   },
   {
    "id": "hko-warning",
@@ -6086,7 +6062,7 @@
    "ok": true,
    "error": null,
    "items": 2,
-   "seconds": 1.9
+   "seconds": 0.1
   },
   {
    "id": "hko-current",
@@ -6104,15 +6080,15 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 1.6
+   "seconds": 3.2
   }
  ],
  "stats": {
-  "facts_in": 2441,
-  "clusters": 1138,
-  "items": 1032,
+  "facts_in": 2457,
+  "clusters": 1148,
+  "items": 1037,
   "dropped_noise": 6,
-  "ledger_rows": "2571→2466"
+  "ledger_rows": "2585→2482"
  },
  "disclaimer": "只做信息整理，不替代官方公告；行动建议需人判断。"
 }
