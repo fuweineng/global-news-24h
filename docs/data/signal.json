@@ -1,14 +1,14 @@
 {
  "schema_version": "1.0.0",
- "generated_at": "2026-11-10T15:24:35+08:00",
- "as_of": "2026-11-10T15:24:35+08:00",
+ "generated_at": "2026-11-10T16:25:38+08:00",
+ "as_of": "2026-11-10T16:25:38+08:00",
  "counts": {
-  "act": 37,
+  "act": 36,
   "watch": 34,
-  "read": 215,
-  "sideline": 790
+  "read": 219,
+  "sideline": 797
  },
- "overview": "① 今日最优先处理：CVE-2026-119923（Babelfish for PostgreSQL prelogin 堆溢出，CVSS 9.8，直接命中你 data 栈核心包），先确认版本是否在受影响范围并安排升级；其次 CVE-2026-123870（otterdog webhook eval 注入，CVSS 9.5）。\n\n② 趋势：过去 24 小时 Python 生态反序列化/代码注入问题集中爆发（treeio、h5io、PyMoDAQ 三个 7.2–7.8 级漏洞），另加 hashlib FIPS 回归影响 Python 3.1x，py 栈值得整体排查一遍反序列化入口；kernel/debian 有官方安全更新（DSA-6616-1）。\n\n③ 风险提示：CVSS 只反映理论严重度，未确认你实际使用的版本和暴露面之前，先做资产核对再排优先级，避免误升级引入回归。",
+ "overview": "1. 今日最緊要處理：CVE-2026-119923（Babelfish for PostgreSQL prelogin 堆溢出，CVSS 9.8，直接命中你嘅 data 栈）同 CVE-2026-123870（otterdog webhook 用 eval() 處理 JSON，CVSS 9.5，命中 py 栈），兩個都係核心包、可遠程代碼執行級別，今日要確認版本同安排修補。\n\n2. 其餘趨勢：Python 生態同反序列化/代碼執行類漏洞明顯密集（hashlib FIPS 回歸、h5io、PyMoDAQ、Airflow），另外 kernel 層都有動作（DSA-6616-1 更新、OpenAI 模型批量發現 948 個 Linux 提權漏洞），建議一次過排查 py 依賴同安排 kernel 更新窗口。\n\n3. 風險提示：多個漏洞觸發條件只係「讀取/處理攻擊者控制的輸入」（如 HDF5 檔案、webhook JSON），唔好假設內網或內部工具就唔會中招，修補優先級應按可達性而唔係暴露面判斷。",
  "sections": [
   {
    "key": "security",
@@ -28,7 +28,7 @@
      "source_name": "NVD 严重/高危",
      "source_id": "nvd-critical",
      "published_at": "2026-11-06T19:17:39+08:00",
-     "age_h": 92.1,
+     "age_h": 93.1,
      "cvss": 9.8,
      "in_the_wild": false,
      "flags": [
@@ -648,18 +648,398 @@
      ]
     },
     {
+     "id": "sig-952bf72f5845a606",
+     "category": "security",
+     "kind": "signal",
+     "tier": "act",
+     "score": 245.0,
+     "title": "CVE-2026-119170 There was a regression in how FIPS algorithms were enforced for the hashlib module. Only users that are using OpenSSL in FIPS mode are affected. Only Python 3.1",
+     "summary": "There was a regression in how FIPS algorithms were enforced for the hashlib module. Only users that are using OpenSSL in FIPS mode are affected. Only Python 3.14.10 is affected, all other Python versions are unaffected.",
+     "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-119170",
+     "source_name": "NVD 严重/高危",
+     "source_id": "nvd-critical",
+     "published_at": "2026-11-06T15:17:12+08:00",
+     "age_h": 97.1,
+     "cvss": 8.2,
+     "in_the_wild": false,
+     "flags": [
+      "cvss8.2",
+      "stack:web,py",
+      "core"
+     ],
+     "why": "命中你嘅栈：web、py；核心包；CVSS 8.2",
+     "action": "先查受影响版本，再决定即刻打补丁",
+     "region": {
+      "level": "global",
+      "name": "global",
+      "parents": []
+     },
+     "sources": [
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-118196",
+       "published_at": "2026-11-09T11:17:21+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-120761",
+       "published_at": "2026-11-09T11:17:21+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-120832",
+       "published_at": "2026-11-09T11:17:21+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-121760",
+       "published_at": "2026-11-09T10:17:07+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124585",
+       "published_at": "2026-11-09T09:16:59+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-94249",
+       "published_at": "2026-11-09T09:16:59+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124581",
+       "published_at": "2026-11-09T09:16:58+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124579",
+       "published_at": "2026-11-09T08:17:02+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124580",
+       "published_at": "2026-11-09T08:17:02+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124573",
+       "published_at": "2026-11-09T07:17:31+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124561",
+       "published_at": "2026-11-09T04:17:06+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124563",
+       "published_at": "2026-11-09T04:17:06+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124560",
+       "published_at": "2026-11-09T03:16:38+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124554",
+       "published_at": "2026-11-09T02:16:59+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-119506",
+       "published_at": "2026-11-09T01:17:01+08:00"
+      },
+      {
+       "name": "oss-security 邮件列表",
+       "url": "https://seclists.org/oss-sec/2026/q4/565",
+       "published_at": "2026-11-09T00:20:02+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-15266",
+       "published_at": "2026-11-08T18:17:02+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-109900",
+       "published_at": "2026-11-08T16:16:36+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124480",
+       "published_at": "2026-11-08T14:18:17+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124477",
+       "published_at": "2026-11-08T14:18:16+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124463",
+       "published_at": "2026-11-08T14:18:14+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124457",
+       "published_at": "2026-11-08T14:18:13+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124331",
+       "published_at": "2026-11-08T14:18:07+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-110963",
+       "published_at": "2026-11-08T06:17:04+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123531",
+       "published_at": "2026-11-08T02:16:43+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123522",
+       "published_at": "2026-11-08T02:16:41+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124060",
+       "published_at": "2026-11-07T21:17:00+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124059",
+       "published_at": "2026-11-07T19:17:28+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123991",
+       "published_at": "2026-11-07T17:16:34+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124318",
+       "published_at": "2026-11-07T15:17:16+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-99276",
+       "published_at": "2026-11-07T14:17:02+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123966",
+       "published_at": "2026-11-07T14:17:01+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123961",
+       "published_at": "2026-11-07T11:17:01+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123960",
+       "published_at": "2026-11-07T10:17:12+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-121762",
+       "published_at": "2026-11-07T10:17:11+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123957",
+       "published_at": "2026-11-07T09:17:14+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123881",
+       "published_at": "2026-11-07T08:16:26+08:00"
+      },
+      {
+       "name": "oss-security 邮件列表",
+       "url": "https://seclists.org/oss-sec/2026/q4/548",
+       "published_at": "2026-11-07T01:20:03+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123791",
+       "published_at": "2026-11-06T22:17:50+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-107155",
+       "published_at": "2026-11-06T19:17:06+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123675",
+       "published_at": "2026-11-06T16:17:54+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123784",
+       "published_at": "2026-11-06T15:17:21+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123620",
+       "published_at": "2026-11-06T15:17:19+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-119170",
+       "published_at": "2026-11-06T15:17:12+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-106019",
+       "published_at": "2026-11-06T15:17:05+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-85108",
+       "published_at": "2026-11-06T12:17:23+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-85111",
+       "published_at": "2026-11-06T12:17:23+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-120844",
+       "published_at": "2026-11-06T08:17:19+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-111490",
+       "published_at": "2026-11-05T22:17:43+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123200",
+       "published_at": "2026-11-05T19:17:18+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-71901",
+       "published_at": "2026-11-05T15:17:22+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123032",
+       "published_at": "2026-11-05T15:17:20+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-106716",
+       "published_at": "2026-11-05T15:17:17+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-106713",
+       "published_at": "2026-11-05T15:17:16+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123023",
+       "published_at": "2026-11-05T14:17:04+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123024",
+       "published_at": "2026-11-05T14:17:04+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123028",
+       "published_at": "2026-11-05T14:17:04+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123018",
+       "published_at": "2026-11-05T12:17:49+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-118869",
+       "published_at": "2026-11-05T09:17:05+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-100109",
+       "published_at": "2026-11-05T08:17:01+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123025",
+       "published_at": "2026-11-05T07:17:25+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123010",
+       "published_at": "2026-11-05T05:18:36+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-122146",
+       "published_at": "2026-11-05T01:17:22+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-109849",
+       "published_at": "2026-11-05T01:17:21+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-65555",
+       "published_at": "2026-11-04T13:17:30+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-121940",
+       "published_at": "2026-11-04T13:17:28+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-121147",
+       "published_at": "2026-11-04T13:17:27+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-119481",
+       "published_at": "2026-11-04T13:17:26+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-121145",
+       "published_at": "2026-11-04T13:17:26+08:00"
+      }
+     ],
+     "source_count": 69,
+     "tags": [
+      "cve",
+      "oss"
+     ]
+    },
+    {
      "id": "sig-c58c78bad06e0334",
      "category": "security",
      "kind": "signal",
      "tier": "act",
-     "score": 267.9,
+     "score": 243.9,
      "title": "CVE-2026-123870 The otterdog webapp evaluates a format-string built from the incoming GitHub webhook JSON body using Python's eval(). When the GITHUB_WEBHOOK_SECRET configurati",
      "summary": "The otterdog webapp evaluates a format-string built from the incoming GitHub webhook JSON body using Python's eval(). When the GITHUB_WEBHOOK_SECRET configuration value is unset or empty (the code default is None), the HMAC signature check is skipped entirely, allowing an unauthenticated network cli",
      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123870",
      "source_name": "NVD 严重/高危",
      "source_id": "nvd-critical",
      "published_at": "2026-11-09T09:16:58+08:00",
-     "age_h": 30.1,
+     "age_h": 31.1,
      "cvss": 9.5,
      "in_the_wild": false,
      "flags": [
@@ -692,11 +1072,6 @@
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124573",
-       "published_at": "2026-11-09T07:17:31+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123751",
        "published_at": "2026-11-09T07:17:30+08:00"
       },
@@ -723,11 +1098,6 @@
       {
        "name": "NVD 严重/高危",
        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-106015",
-       "published_at": "2026-11-08T06:17:04+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-110963",
        "published_at": "2026-11-08T06:17:04+08:00"
       },
       {
@@ -887,11 +1257,6 @@
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123620",
-       "published_at": "2026-11-06T15:17:19+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-114630",
        "published_at": "2026-11-06T12:17:16+08:00"
       },
@@ -957,23 +1322,8 @@
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-106716",
-       "published_at": "2026-11-05T15:17:17+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-107912",
        "published_at": "2026-11-05T14:16:59+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-100109",
-       "published_at": "2026-11-05T08:17:01+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123025",
-       "published_at": "2026-11-05T07:17:25+08:00"
       },
       {
        "name": "NVD 严重/高危",
@@ -992,11 +1342,6 @@
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123010",
-       "published_at": "2026-11-05T05:18:36+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123012",
        "published_at": "2026-11-05T05:18:36+08:00"
       },
@@ -1004,11 +1349,6 @@
        "name": "NVD 严重/高危",
        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-33965",
        "published_at": "2026-11-05T03:17:26+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-109849",
-       "published_at": "2026-11-05T01:17:21+08:00"
       },
       {
        "name": "NVD 严重/高危",
@@ -1051,32 +1391,32 @@
        "published_at": "2026-11-04T10:17:24+08:00"
       }
      ],
-     "source_count": 75,
+     "source_count": 67,
      "tags": [
       "cve"
      ]
     },
     {
-     "id": "sig-15963adf60186c0b",
+     "id": "sig-cb095b54254a80ca",
      "category": "security",
      "kind": "signal",
      "tier": "act",
-     "score": 240.8,
-     "title": "CVE-2026-124318 Treeio through 2.0 contains an insecure deserialization vulnerability in UpdateRecord.get_format_strings and ModuleSetting.loads that allows staff users to exec",
-     "summary": "Treeio through 2.0 contains an insecure deserialization vulnerability in UpdateRecord.get_format_strings and ModuleSetting.loads that allows staff users to execute code via unverified pickle data. Attackers can store a crafted base64 pickle payload in an UpdateRecord format_strings field through the",
-     "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124318",
+     "score": 193.9,
+     "title": "CVE-2026-69137 SuiteCRM is an open-source, enterprise-ready Customer Relationship Management (CRM) software application. Prior to 7.15.2 and 8.10.2, the CalendarAccount testCo",
+     "summary": "SuiteCRM is an open-source, enterprise-ready Customer Relationship Management (CRM) software application. Prior to 7.15.2 and 8.10.2, the CalendarAccount testConnection action passes an authenticated caller's server_url directly to curl without host, address, or scheme validation. The affected flow ",
+     "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-69137",
      "source_name": "NVD 严重/高危",
      "source_id": "nvd-critical",
-     "published_at": "2026-11-07T15:17:16+08:00",
-     "age_h": 72.1,
-     "cvss": 7.2,
+     "published_at": "2026-11-05T19:17:25+08:00",
+     "age_h": 117.1,
+     "cvss": 7.7,
      "in_the_wild": false,
      "flags": [
-      "cvss7.2",
-      "stack:py",
+      "cvss7.7",
+      "stack:web",
       "core"
      ],
-     "why": "命中你嘅栈：py；核心包；CVSS 7.2",
+     "why": "命中你嘅栈：web；核心包；CVSS 7.7",
      "action": "先查受影响版本，再决定即刻打补丁",
      "region": {
       "level": "global",
@@ -1086,705 +1426,271 @@
      "sources": [
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123465",
-       "published_at": "2026-11-09T10:17:08+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-113362",
+       "published_at": "2026-11-09T04:17:06+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-121760",
-       "published_at": "2026-11-09T10:17:07+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-105467",
+       "published_at": "2026-11-08T17:16:35+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-94249",
-       "published_at": "2026-11-09T09:16:59+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-17158",
+       "published_at": "2026-11-07T05:18:28+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124581",
-       "published_at": "2026-11-09T09:16:58+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-119506",
-       "published_at": "2026-11-09T01:17:01+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-17466",
-       "published_at": "2026-11-08T18:17:03+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-18093",
-       "published_at": "2026-11-08T18:17:03+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-114464",
-       "published_at": "2026-11-08T17:16:36+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-114189",
-       "published_at": "2026-11-08T16:16:37+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-109899",
-       "published_at": "2026-11-08T16:16:36+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-109900",
-       "published_at": "2026-11-08T16:16:36+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124480",
-       "published_at": "2026-11-08T14:18:17+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124475",
-       "published_at": "2026-11-08T14:18:16+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124477",
-       "published_at": "2026-11-08T14:18:16+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124471",
-       "published_at": "2026-11-08T14:18:15+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124472",
-       "published_at": "2026-11-08T14:18:15+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124463",
-       "published_at": "2026-11-08T14:18:14+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124457",
-       "published_at": "2026-11-08T14:18:13+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124461",
-       "published_at": "2026-11-08T14:18:13+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124453",
-       "published_at": "2026-11-08T14:18:12+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124436",
-       "published_at": "2026-11-08T14:18:10+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124438",
-       "published_at": "2026-11-08T14:18:10+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124441",
-       "published_at": "2026-11-08T14:18:10+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124429",
-       "published_at": "2026-11-08T14:18:08+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123543",
-       "published_at": "2026-11-08T02:16:45+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123531",
-       "published_at": "2026-11-08T02:16:43+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123520",
-       "published_at": "2026-11-08T02:16:41+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123522",
-       "published_at": "2026-11-08T02:16:41+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124318",
-       "published_at": "2026-11-07T15:17:16+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-121762",
-       "published_at": "2026-11-07T10:17:11+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-66669",
-       "published_at": "2026-11-07T09:17:16+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-17129",
-       "published_at": "2026-11-07T05:18:26+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-17112",
-       "published_at": "2026-11-07T05:18:25+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-17066",
-       "published_at": "2026-11-07T05:18:23+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-16854",
-       "published_at": "2026-11-07T05:18:22+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-16880",
-       "published_at": "2026-11-07T05:18:22+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-16884",
-       "published_at": "2026-11-07T05:18:22+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-16912",
-       "published_at": "2026-11-07T05:18:22+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-16717",
-       "published_at": "2026-11-07T05:18:21+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-16718",
-       "published_at": "2026-11-07T05:18:21+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-16712",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-16716",
        "published_at": "2026-11-07T05:18:20+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-16715",
-       "published_at": "2026-11-07T05:18:20+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-62344",
+       "published_at": "2026-11-06T18:18:16+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-71397",
-       "published_at": "2026-11-06T21:17:10+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-62856",
+       "published_at": "2026-11-06T17:18:34+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-90975",
-       "published_at": "2026-11-06T19:17:59+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-104657",
+       "published_at": "2026-11-06T17:17:11+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-122113",
-       "published_at": "2026-11-06T19:17:43+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-103985",
+       "published_at": "2026-11-06T17:17:10+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-89017",
-       "published_at": "2026-11-06T18:18:22+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-80301",
+       "published_at": "2026-11-06T16:18:58+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-64894",
-       "published_at": "2026-11-06T15:17:22+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123792",
+       "published_at": "2026-11-06T16:17:55+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123784",
-       "published_at": "2026-11-06T15:17:21+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-92695",
+       "published_at": "2026-11-05T23:17:02+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-106019",
-       "published_at": "2026-11-06T15:17:05+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-92697",
+       "published_at": "2026-11-05T23:17:02+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-106022",
-       "published_at": "2026-11-06T15:17:05+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-92698",
+       "published_at": "2026-11-05T23:17:02+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-119499",
-       "published_at": "2026-11-06T08:17:19+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-93424",
+       "published_at": "2026-11-05T23:17:02+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-119516",
-       "published_at": "2026-11-06T08:17:19+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-92693",
+       "published_at": "2026-11-05T23:17:01+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-120844",
-       "published_at": "2026-11-06T08:17:19+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-111768",
+       "published_at": "2026-11-05T22:17:45+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123200",
-       "published_at": "2026-11-05T19:17:18+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-111770",
+       "published_at": "2026-11-05T22:17:45+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123196",
-       "published_at": "2026-11-05T19:17:17+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-111493",
+       "published_at": "2026-11-05T22:17:44+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-71901",
-       "published_at": "2026-11-05T15:17:22+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-111494",
+       "published_at": "2026-11-05T22:17:44+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-119744",
-       "published_at": "2026-11-05T15:17:20+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-106713",
-       "published_at": "2026-11-05T15:17:16+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-118869",
-       "published_at": "2026-11-05T09:17:05+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-122320",
-       "published_at": "2026-11-05T03:17:24+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-122313",
-       "published_at": "2026-11-05T03:17:23+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-122302",
-       "published_at": "2026-11-05T03:17:22+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-122306",
-       "published_at": "2026-11-05T03:17:22+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-57853",
-       "published_at": "2026-11-04T18:17:44+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-65555",
-       "published_at": "2026-11-04T13:17:30+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-121945",
-       "published_at": "2026-11-04T13:17:29+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-121940",
-       "published_at": "2026-11-04T13:17:28+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-121941",
-       "published_at": "2026-11-04T13:17:28+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-119481",
-       "published_at": "2026-11-04T13:17:26+08:00"
-      }
-     ],
-     "source_count": 69,
-     "tags": [
-      "cve"
-     ]
-    },
-    {
-     "id": "sig-952bf72f5845a606",
-     "category": "security",
-     "kind": "signal",
-     "tier": "act",
-     "score": 230.0,
-     "title": "CVE-2026-119170 There was a regression in how FIPS algorithms were enforced for the hashlib module. Only users that are using OpenSSL in FIPS mode are affected. Only Python 3.1",
-     "summary": "There was a regression in how FIPS algorithms were enforced for the hashlib module. Only users that are using OpenSSL in FIPS mode are affected. Only Python 3.14.10 is affected, all other Python versions are unaffected.",
-     "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-119170",
-     "source_name": "NVD 严重/高危",
-     "source_id": "nvd-critical",
-     "published_at": "2026-11-06T15:17:12+08:00",
-     "age_h": 96.1,
-     "cvss": 8.2,
-     "in_the_wild": false,
-     "flags": [
-      "cvss8.2",
-      "stack:web,py",
-      "core"
-     ],
-     "why": "命中你嘅栈：web、py；核心包；CVSS 8.2",
-     "action": "先查受影响版本，再决定即刻打补丁",
-     "region": {
-      "level": "global",
-      "name": "global",
-      "parents": []
-     },
-     "sources": [
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124586",
-       "published_at": "2026-11-09T10:17:08+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124585",
-       "published_at": "2026-11-09T09:16:59+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124577",
-       "published_at": "2026-11-09T08:17:02+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124579",
-       "published_at": "2026-11-09T08:17:02+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124580",
-       "published_at": "2026-11-09T08:17:02+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124576",
-       "published_at": "2026-11-09T07:17:32+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124561",
-       "published_at": "2026-11-09T04:17:06+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124562",
-       "published_at": "2026-11-09T04:17:06+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124563",
-       "published_at": "2026-11-09T04:17:06+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124560",
-       "published_at": "2026-11-09T03:16:38+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124557",
-       "published_at": "2026-11-09T03:16:37+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124558",
-       "published_at": "2026-11-09T03:16:37+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124509",
-       "published_at": "2026-11-09T02:16:59+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124501",
-       "published_at": "2026-11-09T00:18:01+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124331",
-       "published_at": "2026-11-08T14:18:07+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124328",
-       "published_at": "2026-11-08T11:16:34+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124060",
-       "published_at": "2026-11-07T21:17:00+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-99283",
-       "published_at": "2026-11-07T21:17:00+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-99284",
-       "published_at": "2026-11-07T21:17:00+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124058",
-       "published_at": "2026-11-07T19:17:28+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124059",
-       "published_at": "2026-11-07T19:17:28+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124057",
-       "published_at": "2026-11-07T18:17:21+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123990",
-       "published_at": "2026-11-07T17:16:34+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123991",
-       "published_at": "2026-11-07T17:16:34+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-99277",
-       "published_at": "2026-11-07T14:17:03+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-99278",
-       "published_at": "2026-11-07T14:17:03+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-99279",
-       "published_at": "2026-11-07T14:17:03+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-99281",
-       "published_at": "2026-11-07T14:17:03+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-99273",
-       "published_at": "2026-11-07T14:17:02+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-99274",
-       "published_at": "2026-11-07T14:17:02+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-99275",
-       "published_at": "2026-11-07T14:17:02+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-99276",
-       "published_at": "2026-11-07T14:17:02+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123966",
-       "published_at": "2026-11-07T14:17:01+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123963",
-       "published_at": "2026-11-07T13:16:38+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123961",
-       "published_at": "2026-11-07T11:17:01+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123959",
-       "published_at": "2026-11-07T10:17:12+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123960",
-       "published_at": "2026-11-07T10:17:12+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123958",
-       "published_at": "2026-11-07T09:17:15+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123957",
-       "published_at": "2026-11-07T09:17:14+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123881",
-       "published_at": "2026-11-07T08:16:26+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123791",
-       "published_at": "2026-11-06T22:17:50+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123993",
-       "published_at": "2026-11-06T19:17:44+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-107155",
-       "published_at": "2026-11-06T19:17:06+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-100081",
-       "published_at": "2026-11-06T19:17:03+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123675",
-       "published_at": "2026-11-06T16:17:54+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-119170",
-       "published_at": "2026-11-06T15:17:12+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-121820",
-       "published_at": "2026-11-06T08:17:20+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-83494",
-       "published_at": "2026-11-06T07:17:57+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-119432",
-       "published_at": "2026-11-06T05:18:20+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-111490",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-111492",
        "published_at": "2026-11-05T22:17:43+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-103112",
-       "published_at": "2026-11-05T17:17:32+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-46350",
+       "published_at": "2026-11-05T21:18:50+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123032",
-       "published_at": "2026-11-05T15:17:20+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-114604",
+       "published_at": "2026-11-05T21:18:37+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123022",
-       "published_at": "2026-11-05T14:17:04+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-77604",
+       "published_at": "2026-11-05T20:18:00+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123023",
-       "published_at": "2026-11-05T14:17:04+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-44875",
+       "published_at": "2026-11-05T20:17:58+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123024",
-       "published_at": "2026-11-05T14:17:04+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-104136",
+       "published_at": "2026-11-05T20:17:39+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123028",
-       "published_at": "2026-11-05T14:17:04+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-104137",
+       "published_at": "2026-11-05T20:17:39+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-117691",
-       "published_at": "2026-11-05T14:17:01+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-97377",
+       "published_at": "2026-11-05T19:17:29+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123019",
-       "published_at": "2026-11-05T12:17:50+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-71550",
+       "published_at": "2026-11-05T19:17:26+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123018",
-       "published_at": "2026-11-05T12:17:49+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-69137",
+       "published_at": "2026-11-05T19:17:25+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-122146",
-       "published_at": "2026-11-05T01:17:22+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-69141",
+       "published_at": "2026-11-05T19:17:25+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-121926",
-       "published_at": "2026-11-04T17:17:35+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-69142",
+       "published_at": "2026-11-05T19:17:25+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-121147",
-       "published_at": "2026-11-04T13:17:27+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-69134",
+       "published_at": "2026-11-05T19:17:24+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-121145",
-       "published_at": "2026-11-04T13:17:26+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-69135",
+       "published_at": "2026-11-05T19:17:24+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-111036",
-       "published_at": "2026-11-04T10:17:24+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-63213",
+       "published_at": "2026-11-05T19:17:23+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-63215",
+       "published_at": "2026-11-05T19:17:23+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-61649",
+       "published_at": "2026-11-05T19:17:22+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-61650",
+       "published_at": "2026-11-05T19:17:22+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-61651",
+       "published_at": "2026-11-05T19:17:22+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-100363",
+       "published_at": "2026-11-05T19:16:58+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-100364",
+       "published_at": "2026-11-05T19:16:58+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-100361",
+       "published_at": "2026-11-05T19:16:57+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-100358",
+       "published_at": "2026-11-05T19:16:55+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-68524",
+       "published_at": "2026-11-05T15:17:22+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-104720",
+       "published_at": "2026-11-05T14:16:59+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-109408",
+       "published_at": "2026-11-05T08:17:03+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-69044",
+       "published_at": "2026-11-05T03:17:32+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-69050",
+       "published_at": "2026-11-05T03:17:32+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-48179",
+       "published_at": "2026-11-05T03:17:28+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-33972",
+       "published_at": "2026-11-05T03:17:26+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-113780",
+       "published_at": "2026-11-04T19:17:18+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-92704",
+       "published_at": "2026-11-04T16:17:55+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-109518",
+       "published_at": "2026-11-04T16:17:33+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-94459",
+       "published_at": "2026-11-04T10:17:26+08:00"
       }
      ],
-     "source_count": 64,
+     "source_count": 53,
      "tags": [
       "cve"
      ]
@@ -1801,7 +1707,7 @@
      "source_name": "Debian 安全公告 DSA",
      "source_id": "debian-dsa",
      "published_at": "2026-11-08T00:00:00+08:00",
-     "age_h": 63.4,
+     "age_h": 64.4,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -1975,7 +1881,7 @@
      "source_name": "oss-security 邮件列表",
      "source_id": "oss-sec",
      "published_at": "2026-11-06T08:42:09+08:00",
-     "age_h": 102.7,
+     "age_h": 103.7,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2123,7 +2029,7 @@
      "source_name": "FreeBuf",
      "source_id": "freebuf",
      "published_at": "2026-11-09T00:20:13+08:00",
-     "age_h": 39.1,
+     "age_h": 40.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2237,7 +2143,7 @@
      "source_name": "oss-security 邮件列表",
      "source_id": "oss-sec",
      "published_at": "2026-11-10T00:20:04+08:00",
-     "age_h": 15.1,
+     "age_h": 16.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2326,7 +2232,7 @@
      "source_name": "CISA 安全公告",
      "source_id": "cisa-advisories",
      "published_at": "2026-11-10T00:20:10+08:00",
-     "age_h": 15.1,
+     "age_h": 16.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2394,7 +2300,7 @@
      "source_name": "SANS ISC 日记",
      "source_id": "sans-isc",
      "published_at": "2026-11-10T00:20:08+08:00",
-     "age_h": 15.1,
+     "age_h": 16.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2453,7 +2359,7 @@
      "source_name": "RustSec advisory 提交",
      "source_id": "rustsec",
      "published_at": "2026-11-10T00:05:53+08:00",
-     "age_h": 15.3,
+     "age_h": 16.3,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2506,7 +2412,7 @@
      "source_name": "oss-security 邮件列表",
      "source_id": "oss-sec",
      "published_at": "2026-11-10T03:20:03+08:00",
-     "age_h": 12.1,
+     "age_h": 13.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2557,7 +2463,7 @@
      "url": "https://www.nmc.cn/publish/alarm/44011141600000_20261110105753.html",
      "source_name": "中央气象台 · 预警信号",
      "published_at": "2026-11-10T10:55:00+08:00",
-     "age_h": 4.5,
+     "age_h": 5.5,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2589,7 +2495,7 @@
      "url": "https://open-meteo.com/",
      "source_name": "Open-Meteo 集合预报（GFS/ECMWF/ICON/JMA/GEM）",
      "published_at": "2026-11-10T14:07:12+08:00",
-     "age_h": 1.3,
+     "age_h": 2.3,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -2619,7 +2525,7 @@
      "url": "https://www.nmc.cn/publish/alarm/44190041600000_20261109003604.html",
      "source_name": "中央气象台 · 预警信号",
      "published_at": "2026-11-09T00:35:00+08:00",
-     "age_h": 38.8,
+     "age_h": 39.8,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2652,7 +2558,7 @@
      "source_name": "香港天文台天气警告",
      "source_id": "hko-warning",
      "published_at": "2026-11-10T12:20:20+08:00",
-     "age_h": 3.1,
+     "age_h": 4.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -2682,12 +2588,12 @@
      "kind": "signal",
      "tier": "watch",
      "score": 13.0,
-     "title": "香港天文台於2026年11月10日15時02分發出之天氣報告",
-     "summary": "下 午 3 時 天 文 台 錄 得： 氣 溫 ： 22 度 相 對 濕 度 ： 百 分 之 47 過 去 一 小 時 ， 京 士 柏 錄 得 的 平 均 紫 外 線 指 數 ： 4 紫 外 線 強 度 ： 中 等 請注意： 火災危險警告為紅色，表示火災危險性極高。 本 港 其 他 地 區 的 氣 溫 ： 天 文 台 22 度 ， 京 士 柏 22 度 ， 黃 竹 坑 25 度 ， 打 鼓 嶺 22 度 ， 流 浮 山 23 度 ， 大 埔 23 度 ， 沙 田 22 度 ， 屯 門 24 度 ， 將 軍 澳 23 度 ， 西 貢 21 度 ， 長 洲 24 度 ， 赤 鱲 角 23 度 ， 青",
+     "title": "香港天文台於2026年11月10日16時02分發出之天氣報告",
+     "summary": "下 午 4 時 天 文 台 錄 得： 氣 溫 ： 22 度 相 對 濕 度 ： 百 分 之 45 過 去 一 小 時 ， 京 士 柏 錄 得 的 平 均 紫 外 線 指 數 ： 2 紫 外 線 強 度 ： 低 請注意： 火災危險警告為紅色，表示火災危險性極高。 本 港 其 他 地 區 的 氣 溫 ： 天 文 台 22 度 ， 京 士 柏 22 度 ， 黃 竹 坑 26 度 ， 打 鼓 嶺 22 度 ， 流 浮 山 22 度 ， 大 埔 22 度 ， 沙 田 22 度 ， 屯 門 23 度 ， 將 軍 澳 20 度 ， 西 貢 21 度 ， 長 洲 24 度 ， 赤 鱲 角 22 度 ， 青 衣",
      "url": "https://www.weather.gov.hk/tc/wxinfo/currwx/current.htm",
      "source_name": "香港天文台实时天气",
      "source_id": "hko-current",
-     "published_at": "2026-11-10T15:20:21+08:00",
+     "published_at": "2026-11-10T16:20:32+08:00",
      "age_h": 0.1,
      "cvss": null,
      "in_the_wild": false,
@@ -2703,7 +2609,7 @@
       {
        "name": "香港天文台实时天气",
        "url": "https://www.weather.gov.hk/tc/wxinfo/currwx/current.htm",
-       "published_at": "2026-11-10T15:20:21+08:00"
+       "published_at": "2026-11-10T16:20:32+08:00"
       }
      ],
      "source_count": 1,
@@ -2720,18 +2626,18 @@
    "total": 60,
    "items": [
     {
-     "id": "sig-887f3bdd10b2b1cf",
+     "id": "sig-9bf245bfadfd4e2a",
      "category": "health",
      "kind": "signal",
      "tier": "read",
-     "score": 46.5,
-     "title": "3 dead in suspected hantavirus outbreak aboard a cruise ship: What to know - ABC News - Breaking News, Latest News and Videos",
-     "summary": "3 dead in suspected hantavirus outbreak aboard a cruise ship: What to know ABC News - Breaking News, Latest News and Videos",
-     "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPaVFxQTZQbEFJdm9jTU5qVFFlbUh1Z2tCRDhCZHBlY3NneVhwN0VEV1lJOUlZVjVoNUxfMGVsbmVpcGkwVTF6TWVRWTlhb0xSamJaZU5QMFJoZ0lNME1BT0FoRlJCSmNnWW81cXN0QVBqb2RhSWhJTDRmYWE4eW4tcUdMVlFjcTBVVTVCMGFKOF9RMjhUX2ZJTFRnTzVyLW0zbk930gGoAUFVX3lxTE50VnEwRi1SSDJvaTZ0Z2VjVjZaNWlrZGlZa3BneElvZjJzcUZoRWlIZ0hXTzV4QW1TY21oVVRuMVRGZHB5X09fU3NFVWhtVVpNN3Q2aWR3UkpUM3lOamItODI2R2VWdnhjRnhQNC1ub1hqQzhmUUVRVG5idWt1Q0VIcVQ2NzRVWUF4N1NWclk4ZVZqSEF4RHBFYUpzNnl5SHZMbDhYdHlRMw?oc=5",
+     "score": 100.5,
+     "title": "New positive case of Ebola virus disease confirmed in Liberia | OMS | Bureau régional pour l'Afrique - WHO | Regional Office for Africa",
+     "summary": "New positive case of Ebola virus disease confirmed in Liberia | OMS | Bureau régional pour l'Afrique WHO | Regional Office for Africa",
+     "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE8wdVFDMkdzUThmSWNRYVhDSENxVnpWUXpmdUxMaHF1ODdPVU42V0xyaEF4Vm83cU5pMVpZM2xsNVFGWXlFYW9Bd3V5SlNMU3p0UFNIRkFnUDVTVUJsOTNsMWhuYkI?oc=5",
      "source_name": "Google News · WHO 疫情通报",
      "source_id": "gnews-who",
-     "published_at": "2026-11-10T04:20:06+08:00",
-     "age_h": 11.1,
+     "published_at": "2026-11-10T16:20:05+08:00",
+     "age_h": 0.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2747,61 +2653,151 @@
      "sources": [
       {
        "name": "Google News · WHO 疫情通报",
-       "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPaVFxQTZQbEFJdm9jTU5qVFFlbUh1Z2tCRDhCZHBlY3NneVhwN0VEV1lJOUlZVjVoNUxfMGVsbmVpcGkwVTF6TWVRWTlhb0xSamJaZU5QMFJoZ0lNME1BT0FoRlJCSmNnWW81cXN0QVBqb2RhSWhJTDRmYWE4eW4tcUdMVlFjcTBVVTVCMGFKOF9RMjhUX2ZJTFRnTzVyLW0zbk930gGoAUFVX3lxTE50VnEwRi1SSDJvaTZ0Z2VjVjZaNWlrZGlZa3BneElvZjJzcUZoRWlIZ0hXTzV4QW1TY21oVVRuMVRGZHB5X09fU3NFVWhtVVpNN3Q2aWR3UkpUM3lOamItODI2R2VWdnhjRnhQNC1ub1hqQzhmUUVRVG5idWt1Q0VIcVQ2NzRVWUF4N1NWclk4ZVZqSEF4RHBFYUpzNnl5SHZMbDhYdHlRMw?oc=5",
-       "published_at": "2026-11-10T04:20:06+08:00"
+       "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE8wdVFDMkdzUThmSWNRYVhDSENxVnpWUXpmdUxMaHF1ODdPVU42V0xyaEF4Vm83cU5pMVpZM2xsNVFGWXlFYW9Bd3V5SlNMU3p0UFNIRkFnUDVTVUJsOTNsMWhuYkI?oc=5",
+       "published_at": "2026-11-10T16:20:05+08:00"
       },
       {
        "name": "Google News · WHO 疫情通报",
-       "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNWWZnWjVwU3ZKQ19SWkFOWTVrb2FIMUhadkN5bHBIc0JxUWV1c09mTDBiVElxRFE1WEhITHRVZWNqZlFxM2Rxb2FoWGFZeTk2Q0lKT1Q2dDYxdkREVGR3Tmk3d3Vzd0lWWER0M2FSSGxDVWNmRW41WHdEajBycklPSjhRMUl5dEhEc0tTc1RTTVVtdy1lODhMdEgyZm12SXJoeFNBYXI1RF9xX3hPQnZfWtIBtgFBVV95cUxQWWpCTk1xMHhwU2JrQVVmNGlod1R6cmVIdTd0ZzlMVUIyT2hGUmE4RXF1UllUS1FfQ0RxYlppUEk0MTVidmdQQ2J2LVZJMG9mUTJ2YlR5dEM0Z0xiQkxYTTdSVGE4Q2R6VjZ3dDQzSFBQT0RMblBfZVd0bXhkNVlzWG41LS1fdWRPY290STN3MWpDNzhWa3NpcUVSMGNfeWVXRGpNNElyTC1tZTJnX0c5Q3hhUGdYdw?oc=5",
-       "published_at": "2026-11-10T00:20:06+08:00"
+       "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTFB5OXhCSkZVYTFRc0JZUi04M0JCYTRreVJIRUxOLVliSFBsTTVRWkttYW5JX2FxdkpwQTJmUmliZFZHRFFMV3dsSkFrWTU4U3RaWmhhWXhOZlV4ZzRMWll5SGNuV0NtOTZ2?oc=5",
+       "published_at": "2026-11-10T16:20:05+08:00"
       },
       {
        "name": "Google News · WHO 疫情通报",
-       "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPWDZHUXdQQl9hOUN1N0hOb2c1NFVNaXdaNzlGUFlaMmZDR3poLUIzajllQkwyTDJIbmVjNmVxTzFKd2xwRjJnWEstbUdmVHI5dkdwMjc2aTNJaW1FODNfQlZnRTZDZ0hyLUZIbEt5b2N6NWxsRFNXWmpuenBTaGZqM1RHYm8wLUpReER4ei1EOFdHRkxfaWYwdEV1RzDSAaIBQVVfeXFMTzZOYWhBZjdzcVBVY19QbnhkblNhczd5aHJzeFMxMEJjV0V2NmRCR2pEd3VhcGFYRTFQbjlCU3RlNEhEcmExLTZ6SU1WdW10NW4xSWNBUmpUUUlrakpKcmlUQnBiQ3EtZHE4dnNqaDNBWnBIZUMyTEJuOEk1c29VREpfaWJ2VDliM01qbjZub2RLZnkybmRiMXYyOFA0aDNQc3lB?oc=5",
-       "published_at": "2026-11-10T00:20:06+08:00"
+       "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFB2S2k1RGU5UGJHZVlEc1U5NE1XVGYxbjRFWFhwSFhfMkdab29JbXRjMU1kbEJ1R0dhTmFPOWNCeFFFdjZjVDNEMkltYl9YZVdLalpHTjFzX3k?oc=5",
+       "published_at": "2026-11-10T11:20:06+08:00"
       },
       {
        "name": "Google News · WHO 疫情通报",
-       "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNQVpoN0llaXNHWHZ6OWk0endMWXVfNGRJdXBXSlN6MG9ubDFNQjNFM3ppUG41Y1c2X1ViNVdpSG80WEp1akI5QTI3N0FpNlBSZ0p6Mk5rcjhGQWJ5S09ib1A4ZHZaMTFObHpRY2lrQzhBcFVDeWhmVlhubUtoZkZjb21iUkVpODdxdjZ1VUhsUkFhd21GbnRfdG5xUm9NUVBIaUHSAacBQVVfeXFMTzRGX3dQUGxMZWNwOTd2UF8xWW5SeWQ4R0VVZTl5Tld1YUFTYjNvYm5RckdLbTI3VDJ2ZVdkTUl6Zk9WbE0yRXJNRTAwZW9NaVcxOUFSZWVQMmtyZlh3WWhrdFNjcjhBamtpODZkdEptUDJaaEFLaHcyQXVyWElfR2k0cXVQa3FXVzRwa293VlFQRXJ3N29NVll5SS1SZGlfd1E1S1p0ZG8?oc=5",
-       "published_at": "2026-11-09T20:20:10+08:00"
+       "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNUkkyWUZpS0hoZndqTTNxTVBhY2I3ek45dExXdUw2alJkZFNTSmJDdHU2eHZfZzJiY1lyM1ZCa252c2NnMG9oTHpCNlBYOXJzWWhxN3pOYkstRUR6VFQwZTJXYkZCWGIxX0xyZWZVTnRTNEJXalNIYXJ6N2tTVmtkOTlUZXRSWXgxN3lvMTRpVTlXaDFDNHBFUQ?oc=5",
+       "published_at": "2026-11-10T10:20:06+08:00"
       },
       {
        "name": "Google News · WHO 疫情通报",
-       "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNM3BjODZZSDd0eHFXOVNIaGZpazY2OFZPWjJRUGpudU9hLXV5TExZUWhsS0xLeWFteG5ERlBSanh0TmJNTGRUVjR5cDllN1NWeUJsZUNJX1RkWkVuTGZRZW9jZ2Y1Q1lkSXB4LXdnTm1RZzJBQVNQdU0xWHY5YnFZQmx6bk5IRUVuLTg5LVdySWpKc1VrTDB1UkE4V0lmTlR6ZEVF0gGoAUFVX3lxTE1mcXJiOEhyZzVjUk9DeW80XzZ3VXdxUW9uekRkekZGbkJuMVFVSDQxUUkwUlpRUHdsMVRqVDkwODB3WFJFVnZJbkNaWWNoc3doTFU3dWUySml5cVZ1OUNoaERvcTRKd29mdEJINFZfWHlMQTdMWUJwajA5dWlLWkpYU1lWSEt6Q29US2RieHlPM1Zjb1RMbWh6M3pMejd1eEpWekVRZ3R3dw?oc=5",
-       "published_at": "2026-11-09T14:20:05+08:00"
+       "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE1vY1Q0bWtFWEFIZEpNTDFSNUYyY0s3X3NBU0FKcmh2MHNzQjVsS0pXWlpncUg0c1UwcTBFVlM1MzA5S21xSTRWRVlrdm03eFBtcTFfYzZJcGRvc1lxay1ibFlwN1BLNTZaVEZMUw?oc=5",
+       "published_at": "2026-11-10T10:20:06+08:00"
       },
       {
        "name": "Google News · WHO 疫情通报",
-       "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNZG56YlN0MDdsU2pKSThXS1dhalk2SjlGX2RzdGpjck0zcG84OU5LOEZXX1IwVzBmVkxhRThyOXFZZUJ2dW9LOGxPQmZHXzNlQTZORERGX0RRZTVMTXlrT3RWQkxTU2phZm44N0drMHctakk5UEJyTy1qNG5SRmpTOFpOMHlKeUdTSkRacmVrMUdTdkXSAZgBQVVfeXFMUHRRNF9FcG13Sjkya2RFNDJaMVg3VUNOWjM0ZlVFcTlQWERiTHZuTjFsMHgzY0xuOW9EQjlPVE9IYWdpQmJ3eEJDdEFwNE5kWTFjSVFCVHUtaWtYTERKM1hGN1ZBV1pwV1ZsX1JEZzZ6NmpyT05LdHZIcnI2WHE4WGlnT3pZZGZYOVJFajlxVGJCMEZTVlhqV0I?oc=5",
-       "published_at": "2026-11-09T11:20:05+08:00"
+       "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPVEdZSmx1Um9QaVk2cjFaajhtRF9zdUV3VnQwNUJiZmx1cU9BRnlyOTBDdUdHUkRVUTdqaDNTYS11QTVkZmo0STVlNy11c182N1FZVGpLSGpSVE4zcEhkdFd5bGhuRVVjTlI4TXpNNlFURThoYkdqQnQ1bF9KcVluVTRpMnNadWRVUVFhakJTRXNQNTdNUkR5Z25uY042cE02S3hRckpyWGo4NUxlQ3NENUlTQWlvaVdXbTFjNGFoQ0d2c2JLQlpJ?oc=5",
+       "published_at": "2026-11-10T09:20:05+08:00"
       },
       {
        "name": "Google News · WHO 疫情通报",
-       "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQcm9OZXoxbTF4eVZzc1Z3cWdJaDJoTHhjVG9CWVJ3VkFFV1ZtNWtNTnlzUFRMeGdxc0xWZFAtV3NfWm5USmo0QnFTYy1TaG5vNTF0ckVOSkZrMWl4V1BQd25RLXZaNnFiZ2IyMjczZUNTVFlhdVotaWJvY1VhX1R4WnhfZG4xem0tN1Z6Y25GendFOE5uYWpDSGxwVHpvQXdmbkhYX2J3?oc=5",
-       "published_at": "2026-11-09T08:20:03+08:00"
+       "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE1yWWRfLTRDTVdqZkJyamROQXMtLUpIYzMxVjRHNFY3dTAzbF95N3VTVkY3SXc0RkQwazZia0xPd3J3b2FsTVpNUWRsVGdvZ196ODVFTmJnODNyZVc1ZjI4azRNSkZuZEpRYWNjSGVPWTBUbzl5Ympj?oc=5",
+       "published_at": "2026-11-10T06:20:04+08:00"
       },
       {
        "name": "Google News · WHO 疫情通报",
-       "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQMk0wTjU5Q0dyT01nZjJQRmwyM2duellWaEN3T21XZEVqTTFiS1NEcGI1VU5kcU13eFk1RE81Sk9zQzJVbkdETTZzSnRiUlBuZTA2U2EtVEpIRmRUSEdpTURfaTJKR1c5dnlKV1F5Z3dTU051VGdGSi1tUnF2LXhIS3k5Mm5FQ1ZzcGtpZ3JBYXUtbE9HQVZzRF9EQTdLLU9qdHN6YnpEbXRWd9IBrwFBVV95cUxPTDFBd1dMazFiUGptc190MXpwanUwcVpjSkswdTJoMVdBcldya0ktbUM0OFpXeEpTRWV0Zlcxcl9QWlEyNWZNdUwtcXJOWDF4OWJqRzFWVGNsMEhHUnAyY1p6NWhvQjB1SGM3Zkpocnp5bGdrNUNfUW1SZ0NKVDZZQk54Q3NMU0o5T3ZFRmlDRVZzdnJMa2JMQWZjeG1WNHJQb2FqaDZmNldUSlktT1hZ?oc=5",
-       "published_at": "2026-11-09T00:20:04+08:00"
+       "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE84VUVqdW5QeFhJbThLZmJneVFqa0o1S0lmOFZrY09sYVhPLWdDVUZibWZDMUJNNnBtMzg3ODEyTUdJVzMyWjRrZ0ZyTU1ZVHBjRDYzWEdMVDJfR21VYkFRRTJMMmNGZnM?oc=5",
+       "published_at": "2026-11-10T04:20:05+08:00"
       },
       {
        "name": "Google News · WHO 疫情通报",
-       "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNMndFcnFqeFdqTUE0Y0ZmNFdhQ1ViX2dXWWJtbjQyelNpYUZ3TjlLMnRjamxHSmFvRTZzc3VHTFltckRKVkdFQzJLenB5UDhFUVd6dmhnLTZlbE92UzkzcVMwMWRXbkF6WDJlcEFDa3ZSZFkwLXRPYVVrVjlQUk1XakpXSl9Wd0tsa3ZHOUJzQUJHUWFkUjJ1cXZKelVxNGxKMlFDUmlR0gGrAUFVX3lxTE53WjhWUE9JcEJQYjFsVDU5amhWbWs5cldIbllpbTVrd0NvamFpVy1WTUFhMVdfSkFxdzhKeWhHY0ZlWUdYQ0JPV2E3am5QR0ZORjRISUI4S2ZVVy1IMTNyRUk4OC1taTlwbGk4N0VfempYekNwWmNnSUpBcmNUNnlZaEFiSVBhTWZkY1ZwOG5tN1ZmRml5cWhOLUEwVURETzZuQVN2bGp4VS1rSQ?oc=5",
-       "published_at": "2026-11-08T11:20:06+08:00"
+       "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNU09Scmd2ZlB6UVNwWFpOck1MOWMzSUV1WFBtRng1LXNIZ1ltaGpjcF9tUWh6MjlTb1dEODVZNzlEbk1wWW9uSURLZWw2UFE3TEtRaTh2cF9taXNzeE1wS1ZBVmlCN0xLWEdIdms1VmUxTWhsaVFsWHJseERjdmtnRWNKRHZOZXF0c3p4SURwQW1PMUFYZlp6d0tIWFV2YWE0NXg1N1VUN2d1cnpfY3hJd2RVdW8?oc=5",
+       "published_at": "2026-11-10T03:20:04+08:00"
       },
       {
        "name": "Google News · WHO 疫情通报",
-       "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOUDd6TTN2ZEdHQ3JZYWdkYldYWTNrcGM3ZXZieG5DNmQ5Y1JPa3hlX0kyU2ZLSnFEY3kwUDdrRENtTDRBazBkdHQtaXBsVFVlYXJCTDJCVnl6Nkw4ZHNJdU9SdXlOMm84LXNTcDh5Z0p4ZUhZdFBhV2d4SkVpaWxaejlZWktJQjJJUVF2NlFTWDZ1T2tLS3JDS9IBngFBVV95cUxOSkw1Q0RKcTR0ektvbnVWUW0ySVo4X2FJZzlQOE93XzQtOU1IY3dONTVHbWRlTnlmVy1OSThBVWhOWnFpQzlwcE9jcWlIQmkyRE9BazdFLXNvcVk2MFdUNzYwM1hpa2dWSWlDbm9QNFZKa1R5UVJvSG1WX0VLUVBPNHk0dDZLZXR1VHNQRFpndExNMHlPT01QbzFoNjczZw?oc=5",
-       "published_at": "2026-11-06T10:20:09+08:00"
+       "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxOOWxZVmdRUzNaX0g4NTJMck5Xa3o3Zk1WeEYwclIxUTk2aDdGRl9idlFGVkZJdDBUVVgwTXFWWDFFM3pUOURKd1pRUE1SZXgyQkNZWWdqWm1fV1ROU3NjZHRGT1dOTldPSDNNOFZScDhyMG9CbzZ2dWNwS29EQy1NX2tMYTFfcTZPZERLdHRYUWNGYW92RjNQSVA3RjJNOFhpMU14aWtwZE41UFRXZjV0NDgzMENYaFdaSFVFUG5uR1NxY1JvMDFz?oc=5",
+       "published_at": "2026-11-10T02:20:04+08:00"
       },
       {
        "name": "Google News · WHO 疫情通报",
-       "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNbjhrSXk5N050MzMwOFlsa053OUpaOGNtYnEtLXBjRDJ0eG1aZ01EeG9kYWFaMVBpVGpxYUxORkV6SDNkM1B2UFZBcGNWaEFvNG83NUdqYm92MlNRLS1zRlA2V0Z1eV9iNUlLQjlNSGRqbkY4ZmxobzdWbldNcXBudC1NczY0RkJDeHBlU0F4aThoZUZmUDc2SHBNT05DVGctT0FGREtLY29GZUYzY0HSAbMBQVVfeXFMTXFnUksta0FSUTNuYXVCVzRvS2V3S3VnbkdhY0N1dmhfX20yUlpZMmltVEYwcGZIanl2alVrLWpIQi1uUl9rbHllN2hHTUE0Q2h3OHR3Nkc0Tk5BRDB3Tnoza3V2bnlVUnJNVEhmTVRPbFhTOGtSMDFqaUhBMlNzaXU4eEtHZkhMNnh1UmtfN0VmS1RWT3dycmgwR1FxbmhCU3NWR2FyalhORnRDekUtUjU0TnM?oc=5",
-       "published_at": "2026-11-05T18:14:49+08:00"
+       "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE5ZcFY3TDFGUXZKNHY1R0tJQ1VJTVl4d0VKUTlSTjRnSERpY1B1Y0FtNWR6Ym1iTGtjOFUzT1djTmRmRjlGOWVOU1U2RGdGLWtTQ25aMTBia3JJRVJwelZuOTkzNXk1TU5laFZXaVhQWQ?oc=5",
+       "published_at": "2026-11-10T01:20:08+08:00"
+      },
+      {
+       "name": "Google News · WHO 疫情通报",
+       "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQb1dmYzItbDFNb3RZbHZVQVZuMkhJVjZXR0UtYlloSDZVZWZRUVptbklvdVp5Z3EzcTFqR2x5R3RSRmhHSU0ydkoxOEQyTnFqR1o1M1FwRGtYZkVsalMxd2NZUWhUNnU1ek9Ja2ZKU1Y3Q1J0TVV4T09ldTlNNEFFeG0tcXJRc1lZS21iNUxZR2VUelJrWVBJaThRaGlqS0xJMFR3QjFJNXlRVDkzRE1nTzV4RHRDMVVLRGxyaW9B?oc=5",
+       "published_at": "2026-11-10T00:20:05+08:00"
+      },
+      {
+       "name": "Google News · WHO 疫情通报",
+       "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPcjBQT2FNRThzdDkzRl9Kb3BPaGhWTHd0VWstUWs5cnFFYWNOSGRrSEJZSkU5X3l4WnY0OHFmYkZWSFYxdERSZmh6OWdiTUVIa0RSV3dTZExNclF6LUl1ZDRvRDJHa053aVhDRVA0RmFjd3VSdzdDNXhYdkJhSXpTV0hTSjJzQUdpdVZfQTNUNlRiX1Z1Ql9CbW1SdmtmU3lybzVyRTh5azdhOEJObzZxNU9lME1ZQlNldG9oZA?oc=5",
+       "published_at": "2026-11-10T00:20:05+08:00"
+      },
+      {
+       "name": "Google News · WHO 疫情通报",
+       "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTFBiSmZvR1dIOHV2UDFueHNxd0V0aGZKZG1KR1B0YXJzMkR1NWxtTHFGTnlOY3psekVmcDMzX2l0SHJwSWFZZDZCbzZpNUh2Q3U1b2R2ZF9BTzVfZmRPRnZ1VEpTNWlRaFpBY3c?oc=5",
+       "published_at": "2026-11-10T00:20:05+08:00"
+      },
+      {
+       "name": "Google News · WHO 疫情通报",
+       "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE9rRW0tU29rZDM5NFF5eWxMaGhmZ3BuX1VVYTA4T01WT2ExNkNhZk82MTRjVGNjd2tqWVVtcTJ1WlpEeFliOHNwbWhMTzE1VjJmNlFDT0VpYWlPOHBMd3pkRzRrcWt1Y1BFLTY4TEhhQ083dnlyeGc?oc=5",
+       "published_at": "2026-11-10T00:20:05+08:00"
+      },
+      {
+       "name": "Google News · WHO 疫情通报",
+       "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOcmJ4TEM5eE1XY3h2N2RzUDNMUF9SYnJfT1Z6QnhwOUxHNFZKMVcteGd6M0hTYnhyN3NxQ1dMNFRhM09GUWVYblRjSnpOMTBCaWZYRmppZ2ZYVFhSdkRKYTZDNk13Ym0zbUpCeDB5ZUNPLXFRY1hGa3J3Um9mR0djby1taWFRTEI3b1ZjTDBMcVZNVmZVbmhCNGU0NUpxQ0xDLS1iNVR0Tno2RDNEcDh0TEhuRzBudw?oc=5",
+       "published_at": "2026-11-10T00:20:05+08:00"
+      },
+      {
+       "name": "Google News · WHO 疫情通报",
+       "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE5lS1dPM1ZrczV5WGJqWEdjcGtjZDVGdVlmVnU4UDRQb0NQMURiYm5EN2hsQmx1QktwUGpCVVE5QVN2XzFIZ18xM0hyR3dOUUJIVEZoTnZUM2dVQU1nQnVNc3E1VjEyUQ?oc=5",
+       "published_at": "2026-11-10T00:20:05+08:00"
+      },
+      {
+       "name": "Google News · WHO 疫情通报",
+       "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE02ampXVmd0Ry1mWmU3V0dmcXBGZVVXZEh6ZC1OVU04eGFBYm9nbnZ3Um8wWXIxZmc2TV85OGVud0trcFpSUHBPZGE1OS16cjA?oc=5",
+       "published_at": "2026-11-10T00:20:05+08:00"
+      },
+      {
+       "name": "Google News · WHO 疫情通报",
+       "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPTHFZdUJwc3hnMEE5TWpEMTczcmI5X0lVbnJxa3EzbENhUksxN1hBQmpvRDZfNDdzNVZUYmxsN2J1UFkzRWlaWEgwYnNUalhSeUlnQlBlbmlkOThncUg3enBxMktVSHhocVNmbl9QVUpZOGpKbXlTbHYtVjBibVREMDJsRHBUT2VmQkhhOVJ3a3c4VF83THl4XzdyUW9YZF9aSjVKYzEwZzlESENyMlE?oc=5",
+       "published_at": "2026-11-10T00:20:05+08:00"
+      },
+      {
+       "name": "Google News · WHO 疫情通报",
+       "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxNNlJwdnBUY2xqU2Q1Rm84ZDVuNGJsR3A2T0xvZmN5eV81X1lyRHZvNGJaYzhySFAtV0swVWw3QW4xeERxc1hKWW5tUTFWWFdNQVhWZkJ6eFdiQ2xnTEV5ZHpEQlpTeVVmRnZheWNUZUx6X0pXQzAwNkZhcVNnNU9uc3IycXBoaWhpV0VKSW9tTlhERkVtajRxcW8yU3VwSUtvYUxVU2p1TmFCUUdaTS0tUzJVMGU2U2hQS0VFbkxmU29FMmdwbm16bEMyZw?oc=5",
+       "published_at": "2026-11-09T06:20:02+08:00"
+      },
+      {
+       "name": "Google News · WHO 疫情通报",
+       "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPSy1ZVEZaamF4QlpnVEdwZjJWampyX3ZCd3dGNE10Vi02NU1DUnVTcjZKcUFHaTVaNkFZcXZVZTZfbHBLYWxPT1VsYzlTUnZaaVJpUGZCaTkyUmV2Q1BJRlhTZ2F5ZHVpamU0cU9FallkZlBzSTE3OGUyYmtkVGdJb0Z4VHNBTVhTN2I2QUE2YjZuSHFoWTNDNURLUEJObnFsN2xvdFpkekpiMkE5aWtyNWNkZUVSTWxrc3p1QjlB?oc=5",
+       "published_at": "2026-11-09T02:20:04+08:00"
+      },
+      {
+       "name": "Google News · WHO 疫情通报",
+       "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPbmVRSmVueU9xTHlaWl8tWElDTzM3VUhkQ1JWZUZ6X1dyN0I5YlZDRXV3Y1pJYUktY3dKX3pEQkZnYnBPUFRvaFRyWXdRcmw4cWRMbFVmQkpheGxzMklqUEVTenI0cE9TOERzMUVmVXF2ZzVRcFdXT2pBQ1NfaTJVWWFHT2l6aHc?oc=5",
+       "published_at": "2026-11-09T00:20:03+08:00"
+      },
+      {
+       "name": "Google News · WHO 疫情通报",
+       "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE9KOXNrZFN0Q2I3dms0VXI5ZTZQNmY1bXNuX2RGalFrWG5MeW9EU3R3N1VFWGdJNERhaF9MdWc2Zk83SjFmOUp1R0NybmlQMVU?oc=5",
+       "published_at": "2026-11-09T00:20:03+08:00"
+      },
+      {
+       "name": "Google News · WHO 疫情通报",
+       "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNeHczS1k3SE9JbldJdkp5YmRLa0pkZ0xBV1pqVmh1a0lGckN1VDVYd3RtbWVCaVJGVGNHYkJqNTUzNWh0X005OElRN2tNQVlzbzFjbTdueUExdEJrUGhLZVg1S1NaOWRkSndxV25QeWNxVG1YXzZBVTZFUWwyWkh4RDhKNTB0aURrbjFXMVlNRVdqT1dFTko2MDdiS29Tb3JGOHBvUElLNXNaUk5hejVyOHpsUE14ekk?oc=5",
+       "published_at": "2026-11-09T00:20:03+08:00"
+      },
+      {
+       "name": "Google News · WHO 疫情通报",
+       "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE9Uc0JhYmRKZDl2Smd5OHFCQ3lTOWNmYXJndGJodkxYWFctZGZDNDJYY2oyUWtET0g4MlFMOVp4UDJZazZaS2RrTzZOVU92Qnp4NGtYajBSS09WSkpNNlZFbnN6TjJqZw?oc=5",
+       "published_at": "2026-11-07T01:20:04+08:00"
+      },
+      {
+       "name": "Google News · WHO 疫情通报",
+       "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE5JSG9TWUpqSXUxWktTNnpJcDFyN1ItLXk2MDhBWDJHUTE3ZzF2VmhDY1o5VVFyR3N2ZVRIclBXVFpIS0RiNVd4ZTJOWXpQYlR0eGtpNnpsYVJaODJMSFZzamZGWXEyUQ?oc=5",
+       "published_at": "2026-11-07T01:20:04+08:00"
+      },
+      {
+       "name": "Google News · WHO 疫情通报",
+       "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxQQkljREtoMFJfVDBHS01xLWtDTDQtLUNCNTNhLV9RVEdDX3l3cFg0QXZkVGNPY3NpYmdUYnFHWGM1RmsxTVQtV3VVb0dESWxieU53ZUg4NXdGMjkzN3NIUnZ2Sl9neElScU5iX1lPb3dOUWtOUDJzNXlwT2tfWEV3TVpoZjRGRkhzT2NFeFI5RGJLSWVTeEw3eVNoNm9FSlF6b1VSbWpRWVNPUDhUSGhmR0tLTFlmWWdwN1lURmxmWHJ0Rjg5eWtFYVpfM1IzbWdxU2NzTUY4MzdHYVUweGZBc215Rmg?oc=5",
+       "published_at": "2026-11-07T00:20:12+08:00"
+      },
+      {
+       "name": "Google News · WHO 疫情通报",
+       "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTFB6LUUzTlZpTF9rTGpoR2w4bFBpcEhjTml3YXlEb3AzbC1CamFyMDd3bUZ5Q253SENOdjFIckktY1ZXUXlyLURfRDNhMk5UQ3dEQ2FQdi1YR2dKQ2ZwWUJfdElRZ0U?oc=5",
+       "published_at": "2026-11-07T00:20:08+08:00"
+      },
+      {
+       "name": "Google News · WHO 疫情通报",
+       "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBMNi1IaVJfbUJ1ZnlCMmF5Yy15ZFczaEwta3o4aFAybUtGSk1rMHd2bEpvT24ySzNVVkd3X0VXTE9QanJUbE0wSlVubE5pTGxBamtaNEI3M1pfS2ZZWXYzRTlrUGt0QQ?oc=5",
+       "published_at": "2026-11-07T00:20:08+08:00"
       }
      ],
-     "source_count": 11,
+     "source_count": 29,
      "tags": [
       "gnews",
       "who"
@@ -2819,7 +2815,7 @@
      "source_name": "WHO 新闻稿",
      "source_id": "who-news",
      "published_at": "2026-11-10T00:20:32+08:00",
-     "age_h": 15.1,
+     "age_h": 16.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2876,7 +2872,7 @@
      "source_name": "Google News · 广东疫情",
      "source_id": "gnews-health-gd",
      "published_at": "2026-11-10T00:20:05+08:00",
-     "age_h": 15.1,
+     "age_h": 16.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2914,7 +2910,7 @@
      "source_name": "Google News · 广东疫情",
      "source_id": "gnews-health-gd",
      "published_at": "2026-11-10T00:20:05+08:00",
-     "age_h": 15.1,
+     "age_h": 16.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2953,7 +2949,7 @@
      "source_name": "Google News · 广东疫情",
      "source_id": "gnews-health-gd",
      "published_at": "2026-11-10T00:20:05+08:00",
-     "age_h": 15.1,
+     "age_h": 16.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2992,7 +2988,7 @@
      "source_name": "Google News · WHO 疫情通报",
      "source_id": "gnews-who",
      "published_at": "2026-11-10T14:20:03+08:00",
-     "age_h": 1.1,
+     "age_h": 2.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3040,7 +3036,7 @@
      "source_name": "Google News · WHO 疫情通报",
      "source_id": "gnews-who",
      "published_at": "2026-11-10T00:20:06+08:00",
-     "age_h": 15.1,
+     "age_h": 16.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3088,7 +3084,7 @@
      "source_name": "Google News · 广东疫情",
      "source_id": "gnews-health-gd",
      "published_at": "2026-11-06T12:20:04+08:00",
-     "age_h": 99.1,
+     "age_h": 100.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3132,7 +3128,7 @@
      "source_name": "Google News · WHO 疫情通报",
      "source_id": "gnews-who",
      "published_at": "2026-11-10T02:20:06+08:00",
-     "age_h": 13.1,
+     "age_h": 14.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3175,7 +3171,7 @@
      "source_name": "WHO 新闻稿",
      "source_id": "who-news",
      "published_at": "2026-11-10T00:20:32+08:00",
-     "age_h": 15.1,
+     "age_h": 16.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3212,7 +3208,7 @@
      "source_name": "WHO 新闻稿",
      "source_id": "who-news",
      "published_at": "2026-11-10T00:20:32+08:00",
-     "age_h": 15.1,
+     "age_h": 16.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3249,7 +3245,7 @@
      "source_name": "WHO 新闻稿",
      "source_id": "who-news",
      "published_at": "2026-11-10T00:20:32+08:00",
-     "age_h": 15.1,
+     "age_h": 16.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3280,7 +3276,7 @@
    "key": "tech",
    "name": "🧠 科技圈热点",
    "sub": "Techmeme / HN / Lobsters / Phoronix",
-   "total": 167,
+   "total": 170,
    "items": [
     {
      "id": "sig-94bf6fd5c2b90de6",
@@ -3294,7 +3290,7 @@
      "source_name": "LWN 头条",
      "source_id": "lwn-headlines",
      "published_at": "2026-11-10T00:20:20+08:00",
-     "age_h": 15.1,
+     "age_h": 16.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3331,7 +3327,7 @@
      "source_name": "Proxmox 官方论坛",
      "source_id": "proxmox-forum",
      "published_at": "2026-11-10T15:20:13+08:00",
-     "age_h": 0.1,
+     "age_h": 1.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3369,7 +3365,7 @@
      "source_name": "Cloudflare 博客",
      "source_id": "cloudflare-blog",
      "published_at": "2026-11-10T00:20:18+08:00",
-     "age_h": 15.1,
+     "age_h": 16.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3407,7 +3403,7 @@
      "source_name": "Ars Technica",
      "source_id": "ars-technica",
      "published_at": "2026-11-10T04:20:16+08:00",
-     "age_h": 11.1,
+     "age_h": 12.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3444,7 +3440,7 @@
      "source_name": "Cloudflare 博客",
      "source_id": "cloudflare-blog",
      "published_at": "2026-11-09T00:20:18+08:00",
-     "age_h": 39.1,
+     "age_h": 40.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3482,7 +3478,7 @@
      "source_name": "PostgreSQL 新闻",
      "source_id": "postgres-news",
      "published_at": "2026-11-07T19:13:59+08:00",
-     "age_h": 68.2,
+     "age_h": 69.2,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3520,7 +3516,7 @@
      "source_name": "Techmeme（推特科技圈人工版）",
      "source_id": "techmeme",
      "published_at": "2026-11-10T07:20:02+08:00",
-     "age_h": 8.1,
+     "age_h": 9.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -3634,14 +3630,14 @@
      "category": "tech",
      "kind": "signal",
      "tier": "read",
-     "score": 51.0,
+     "score": 48.0,
      "title": "Application (OCI) CT: start task fails with \"unable to get PID for CT\" although the CT starts, runs and stops normally",
      "summary": "Hi, I run an application container (OCI image) with a short-lived entrypoint on Proxmox VE 9.x. Every start task ends in error, although the container does start, runs its job and exits cleanly. Setup - lxc-pve: 7.0.0-2, pve-container: 6.1.18 (after apt full-upgrade today; same behaviour before and ",
      "url": "https://forum.proxmox.com/threads/application-oci-ct-start-task-fails-with-unable-to-get-pid-for-ct-although-the-ct-starts-runs-and-stops-normally.187484/",
      "source_name": "Proxmox 官方论坛",
      "source_id": "proxmox-forum",
      "published_at": "2026-11-09T17:20:15+08:00",
-     "age_h": 22.1,
+     "age_h": 23.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -3669,11 +3665,6 @@
        "published_at": "2026-11-10T03:20:04+08:00"
       },
       {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261109/p35#a261109p35",
-       "published_at": "2026-11-10T02:20:05+08:00"
-      },
-      {
        "name": "Hacker News 头条",
        "url": "https://www.anthropic.com/claude-fable-and-mythos-5-2",
        "published_at": "2026-11-10T02:01:10+08:00"
@@ -3694,7 +3685,7 @@
        "published_at": "2026-11-08T00:20:24+08:00"
       }
      ],
-     "source_count": 8,
+     "source_count": 7,
      "tags": [
       "buzz",
       "pve",
@@ -3713,7 +3704,7 @@
      "source_name": "Techmeme（推特科技圈人工版）",
      "source_id": "techmeme",
      "published_at": "2026-11-10T15:20:15+08:00",
-     "age_h": 0.1,
+     "age_h": 1.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -3798,7 +3789,7 @@
      "source_name": "Techmeme（推特科技圈人工版）",
      "source_id": "techmeme",
      "published_at": "2026-11-10T00:20:27+08:00",
-     "age_h": 15.1,
+     "age_h": 16.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -3883,7 +3874,7 @@
      "source_name": "Techmeme（推特科技圈人工版）",
      "source_id": "techmeme",
      "published_at": "2026-11-06T08:42:27+08:00",
-     "age_h": 102.7,
+     "age_h": 103.7,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -3948,7 +3939,7 @@
      "source_name": "Proxmox 官方论坛",
      "source_id": "proxmox-forum",
      "published_at": "2026-11-09T08:20:09+08:00",
-     "age_h": 31.1,
+     "age_h": 32.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -3993,18 +3984,18 @@
  ],
  "sideline": [
   {
-   "id": "sig-c8d5556ff83244cd",
+   "id": "sig-99182d2ad7284d92",
    "category": "health",
    "kind": "signal",
    "tier": "sideline",
-   "score": 106.5,
-   "title": "The Pacific nations have done their part on climate change. Now COP31 must deliver - World Health Organization (WHO)",
-   "summary": "The Pacific nations have done their part on climate change. Now COP31 must deliver World Health Organization (WHO)",
-   "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxQekpFUHdSa3dQSVhLcncxTEc2SEtqMThDTFNMeTNydTNmLXBRQkZLb2dPVmNaOTFlMm1tT21RaGI3ZXN1NDFEVGQyVlE4RVJ6dDZOdDRsaHdUUFZWTmhvNGp6MmNRY0xGQmdTbnlKQ3V5LWFydkVxSjZ6bThOQS1PNVlVVnpUV0lOU1N5bWNDeU91UlphcU1YbFlNTGM3b2tXQ2dCU0pKcmdLMWNFenJVRU5WRlpqWW1Jd3YwdzdmUVl3RS1ENzZyZnREV0dIeGhobXQxQkdoX2QxbHpiSW5Z?oc=5",
+   "score": 112.5,
+   "title": "World AMR Awareness Week 2026 - World Health Organization (WHO)",
+   "summary": "World AMR Awareness Week 2026 World Health Organization (WHO)",
+   "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPcFV5YW90ZmlFZHY0NGwwVXFiMWF3VXctWWg1NFZEZFNvSUlOOGVQdlAtRG5kVnN6WlQwRDdyZ0FicGpYQ0dlYmtUemY2c0hZcGJxU1BjR3Y4SzBwLTRrdnJjRU52VEV3YS12YmV4eXpKVEplZ1VoRkdZWHhBbVdyRzlxZTlCYlZ5a29UQnZzLUMzTVcxQTZqc1JFSWI5RVl1eGVsNmt6Qml1Y2VubFZrZi0zZzVhM0g5bWRQa3A2WlFwT3MtQ3BZ?oc=5",
    "source_name": "Google News · WHO 疫情通报",
    "source_id": "gnews-who",
-   "published_at": "2026-11-10T14:20:02+08:00",
-   "age_h": 1.1,
+   "published_at": "2026-11-10T16:20:05+08:00",
+   "age_h": 0.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4016,6 +4007,16 @@
     "parents": []
    },
    "sources": [
+    {
+     "name": "Google News · WHO 疫情通报",
+     "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPcFV5YW90ZmlFZHY0NGwwVXFiMWF3VXctWWg1NFZEZFNvSUlOOGVQdlAtRG5kVnN6WlQwRDdyZ0FicGpYQ0dlYmtUemY2c0hZcGJxU1BjR3Y4SzBwLTRrdnJjRU52VEV3YS12YmV4eXpKVEplZ1VoRkdZWHhBbVdyRzlxZTlCYlZ5a29UQnZzLUMzTVcxQTZqc1JFSWI5RVl1eGVsNmt6Qml1Y2VubFZrZi0zZzVhM0g5bWRQa3A2WlFwT3MtQ3BZ?oc=5",
+     "published_at": "2026-11-10T16:20:05+08:00"
+    },
+    {
+     "name": "Google News · WHO 疫情通报",
+     "url": "https://news.google.com/rss/articles/CBMigAJBVV95cUxPdUF3UWFrRzVONVlIclN6OTZUSDY5ZjIxSUhGNVNWbnBLSHJ6Ti0wbU5yWkZ0TkljWmpPU0RYc2lOVDhDOXNfQjBQUmtLUWxzSW9LODJfYzlQSXNsWmktRkllNlpWLVVIQWNnQ0I0WGVITVFRMFlla2FveGh6VUdDYkZqUWVPYmdYNTV6YmxQVlJWR3g3UUVMMGpkRzJiTDgwbFRHLTJ1UENOWnFGeHpBYkI5VWJneDMzek5HTXhTVS1zdW02RkRUSlp4aGpVbVRaejVZRVIzd3dzSWg0OEVOUmlvVWEwYzlMUy1hYk5jOGNxeW5MZ1pmT256YW1fUGhI?oc=5",
+     "published_at": "2026-11-10T16:20:05+08:00"
+    },
     {
      "name": "Google News · WHO 疫情通报",
      "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxQekpFUHdSa3dQSVhLcncxTEc2SEtqMThDTFNMeTNydTNmLXBRQkZLb2dPVmNaOTFlMm1tT21RaGI3ZXN1NDFEVGQyVlE4RVJ6dDZOdDRsaHdUUFZWTmhvNGp6MmNRY0xGQmdTbnlKQ3V5LWFydkVxSjZ6bThOQS1PNVlVVnpUV0lOU1N5bWNDeU91UlphcU1YbFlNTGM3b2tXQ2dCU0pKcmdLMWNFenJVRU5WRlpqWW1Jd3YwdzdmUVl3RS1ENzZyZnREV0dIeGhobXQxQkdoX2QxbHpiSW5Z?oc=5",
@@ -4172,168 +4173,7 @@
      "published_at": "2026-11-05T18:14:48+08:00"
     }
    ],
-   "source_count": 31,
-   "tags": [
-    "gnews",
-    "who"
-   ]
-  },
-  {
-   "id": "sig-b93b09999e051f85",
-   "category": "health",
-   "kind": "signal",
-   "tier": "sideline",
-   "score": 91.5,
-   "title": "Plague - WHO | Regional Office for Africa",
-   "summary": "Plague WHO | Regional Office for Africa",
-   "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFB2S2k1RGU5UGJHZVlEc1U5NE1XVGYxbjRFWFhwSFhfMkdab29JbXRjMU1kbEJ1R0dhTmFPOWNCeFFFdjZjVDNEMkltYl9YZVdLalpHTjFzX3k?oc=5",
-   "source_name": "Google News · WHO 疫情通报",
-   "source_id": "gnews-who",
-   "published_at": "2026-11-10T11:20:06+08:00",
-   "age_h": 4.1,
-   "cvss": null,
-   "in_the_wild": false,
-   "flags": [],
-   "why": "养生/生活类，不是通报",
-   "action": "",
-   "region": {
-    "level": "global",
-    "name": "global",
-    "parents": []
-   },
-   "sources": [
-    {
-     "name": "Google News · WHO 疫情通报",
-     "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFB2S2k1RGU5UGJHZVlEc1U5NE1XVGYxbjRFWFhwSFhfMkdab29JbXRjMU1kbEJ1R0dhTmFPOWNCeFFFdjZjVDNEMkltYl9YZVdLalpHTjFzX3k?oc=5",
-     "published_at": "2026-11-10T11:20:06+08:00"
-    },
-    {
-     "name": "Google News · WHO 疫情通报",
-     "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNUkkyWUZpS0hoZndqTTNxTVBhY2I3ek45dExXdUw2alJkZFNTSmJDdHU2eHZfZzJiY1lyM1ZCa252c2NnMG9oTHpCNlBYOXJzWWhxN3pOYkstRUR6VFQwZTJXYkZCWGIxX0xyZWZVTnRTNEJXalNIYXJ6N2tTVmtkOTlUZXRSWXgxN3lvMTRpVTlXaDFDNHBFUQ?oc=5",
-     "published_at": "2026-11-10T10:20:06+08:00"
-    },
-    {
-     "name": "Google News · WHO 疫情通报",
-     "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE1vY1Q0bWtFWEFIZEpNTDFSNUYyY0s3X3NBU0FKcmh2MHNzQjVsS0pXWlpncUg0c1UwcTBFVlM1MzA5S21xSTRWRVlrdm03eFBtcTFfYzZJcGRvc1lxay1ibFlwN1BLNTZaVEZMUw?oc=5",
-     "published_at": "2026-11-10T10:20:06+08:00"
-    },
-    {
-     "name": "Google News · WHO 疫情通报",
-     "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPVEdZSmx1Um9QaVk2cjFaajhtRF9zdUV3VnQwNUJiZmx1cU9BRnlyOTBDdUdHUkRVUTdqaDNTYS11QTVkZmo0STVlNy11c182N1FZVGpLSGpSVE4zcEhkdFd5bGhuRVVjTlI4TXpNNlFURThoYkdqQnQ1bF9KcVluVTRpMnNadWRVUVFhakJTRXNQNTdNUkR5Z25uY042cE02S3hRckpyWGo4NUxlQ3NENUlTQWlvaVdXbTFjNGFoQ0d2c2JLQlpJ?oc=5",
-     "published_at": "2026-11-10T09:20:05+08:00"
-    },
-    {
-     "name": "Google News · WHO 疫情通报",
-     "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE1yWWRfLTRDTVdqZkJyamROQXMtLUpIYzMxVjRHNFY3dTAzbF95N3VTVkY3SXc0RkQwazZia0xPd3J3b2FsTVpNUWRsVGdvZ196ODVFTmJnODNyZVc1ZjI4azRNSkZuZEpRYWNjSGVPWTBUbzl5Ympj?oc=5",
-     "published_at": "2026-11-10T06:20:04+08:00"
-    },
-    {
-     "name": "Google News · WHO 疫情通报",
-     "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE84VUVqdW5QeFhJbThLZmJneVFqa0o1S0lmOFZrY09sYVhPLWdDVUZibWZDMUJNNnBtMzg3ODEyTUdJVzMyWjRrZ0ZyTU1ZVHBjRDYzWEdMVDJfR21VYkFRRTJMMmNGZnM?oc=5",
-     "published_at": "2026-11-10T04:20:05+08:00"
-    },
-    {
-     "name": "Google News · WHO 疫情通报",
-     "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNU09Scmd2ZlB6UVNwWFpOck1MOWMzSUV1WFBtRng1LXNIZ1ltaGpjcF9tUWh6MjlTb1dEODVZNzlEbk1wWW9uSURLZWw2UFE3TEtRaTh2cF9taXNzeE1wS1ZBVmlCN0xLWEdIdms1VmUxTWhsaVFsWHJseERjdmtnRWNKRHZOZXF0c3p4SURwQW1PMUFYZlp6d0tIWFV2YWE0NXg1N1VUN2d1cnpfY3hJd2RVdW8?oc=5",
-     "published_at": "2026-11-10T03:20:04+08:00"
-    },
-    {
-     "name": "Google News · WHO 疫情通报",
-     "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxOOWxZVmdRUzNaX0g4NTJMck5Xa3o3Zk1WeEYwclIxUTk2aDdGRl9idlFGVkZJdDBUVVgwTXFWWDFFM3pUOURKd1pRUE1SZXgyQkNZWWdqWm1fV1ROU3NjZHRGT1dOTldPSDNNOFZScDhyMG9CbzZ2dWNwS29EQy1NX2tMYTFfcTZPZERLdHRYUWNGYW92RjNQSVA3RjJNOFhpMU14aWtwZE41UFRXZjV0NDgzMENYaFdaSFVFUG5uR1NxY1JvMDFz?oc=5",
-     "published_at": "2026-11-10T02:20:04+08:00"
-    },
-    {
-     "name": "Google News · WHO 疫情通报",
-     "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE5ZcFY3TDFGUXZKNHY1R0tJQ1VJTVl4d0VKUTlSTjRnSERpY1B1Y0FtNWR6Ym1iTGtjOFUzT1djTmRmRjlGOWVOU1U2RGdGLWtTQ25aMTBia3JJRVJwelZuOTkzNXk1TU5laFZXaVhQWQ?oc=5",
-     "published_at": "2026-11-10T01:20:08+08:00"
-    },
-    {
-     "name": "Google News · WHO 疫情通报",
-     "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQb1dmYzItbDFNb3RZbHZVQVZuMkhJVjZXR0UtYlloSDZVZWZRUVptbklvdVp5Z3EzcTFqR2x5R3RSRmhHSU0ydkoxOEQyTnFqR1o1M1FwRGtYZkVsalMxd2NZUWhUNnU1ek9Ja2ZKU1Y3Q1J0TVV4T09ldTlNNEFFeG0tcXJRc1lZS21iNUxZR2VUelJrWVBJaThRaGlqS0xJMFR3QjFJNXlRVDkzRE1nTzV4RHRDMVVLRGxyaW9B?oc=5",
-     "published_at": "2026-11-10T00:20:05+08:00"
-    },
-    {
-     "name": "Google News · WHO 疫情通报",
-     "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPcjBQT2FNRThzdDkzRl9Kb3BPaGhWTHd0VWstUWs5cnFFYWNOSGRrSEJZSkU5X3l4WnY0OHFmYkZWSFYxdERSZmh6OWdiTUVIa0RSV3dTZExNclF6LUl1ZDRvRDJHa053aVhDRVA0RmFjd3VSdzdDNXhYdkJhSXpTV0hTSjJzQUdpdVZfQTNUNlRiX1Z1Ql9CbW1SdmtmU3lybzVyRTh5azdhOEJObzZxNU9lME1ZQlNldG9oZA?oc=5",
-     "published_at": "2026-11-10T00:20:05+08:00"
-    },
-    {
-     "name": "Google News · WHO 疫情通报",
-     "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTFBiSmZvR1dIOHV2UDFueHNxd0V0aGZKZG1KR1B0YXJzMkR1NWxtTHFGTnlOY3psekVmcDMzX2l0SHJwSWFZZDZCbzZpNUh2Q3U1b2R2ZF9BTzVfZmRPRnZ1VEpTNWlRaFpBY3c?oc=5",
-     "published_at": "2026-11-10T00:20:05+08:00"
-    },
-    {
-     "name": "Google News · WHO 疫情通报",
-     "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE9rRW0tU29rZDM5NFF5eWxMaGhmZ3BuX1VVYTA4T01WT2ExNkNhZk82MTRjVGNjd2tqWVVtcTJ1WlpEeFliOHNwbWhMTzE1VjJmNlFDT0VpYWlPOHBMd3pkRzRrcWt1Y1BFLTY4TEhhQ083dnlyeGc?oc=5",
-     "published_at": "2026-11-10T00:20:05+08:00"
-    },
-    {
-     "name": "Google News · WHO 疫情通报",
-     "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOcmJ4TEM5eE1XY3h2N2RzUDNMUF9SYnJfT1Z6QnhwOUxHNFZKMVcteGd6M0hTYnhyN3NxQ1dMNFRhM09GUWVYblRjSnpOMTBCaWZYRmppZ2ZYVFhSdkRKYTZDNk13Ym0zbUpCeDB5ZUNPLXFRY1hGa3J3Um9mR0djby1taWFRTEI3b1ZjTDBMcVZNVmZVbmhCNGU0NUpxQ0xDLS1iNVR0Tno2RDNEcDh0TEhuRzBudw?oc=5",
-     "published_at": "2026-11-10T00:20:05+08:00"
-    },
-    {
-     "name": "Google News · WHO 疫情通报",
-     "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE5lS1dPM1ZrczV5WGJqWEdjcGtjZDVGdVlmVnU4UDRQb0NQMURiYm5EN2hsQmx1QktwUGpCVVE5QVN2XzFIZ18xM0hyR3dOUUJIVEZoTnZUM2dVQU1nQnVNc3E1VjEyUQ?oc=5",
-     "published_at": "2026-11-10T00:20:05+08:00"
-    },
-    {
-     "name": "Google News · WHO 疫情通报",
-     "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE02ampXVmd0Ry1mWmU3V0dmcXBGZVVXZEh6ZC1OVU04eGFBYm9nbnZ3Um8wWXIxZmc2TV85OGVud0trcFpSUHBPZGE1OS16cjA?oc=5",
-     "published_at": "2026-11-10T00:20:05+08:00"
-    },
-    {
-     "name": "Google News · WHO 疫情通报",
-     "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPTHFZdUJwc3hnMEE5TWpEMTczcmI5X0lVbnJxa3EzbENhUksxN1hBQmpvRDZfNDdzNVZUYmxsN2J1UFkzRWlaWEgwYnNUalhSeUlnQlBlbmlkOThncUg3enBxMktVSHhocVNmbl9QVUpZOGpKbXlTbHYtVjBibVREMDJsRHBUT2VmQkhhOVJ3a3c4VF83THl4XzdyUW9YZF9aSjVKYzEwZzlESENyMlE?oc=5",
-     "published_at": "2026-11-10T00:20:05+08:00"
-    },
-    {
-     "name": "Google News · WHO 疫情通报",
-     "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxNNlJwdnBUY2xqU2Q1Rm84ZDVuNGJsR3A2T0xvZmN5eV81X1lyRHZvNGJaYzhySFAtV0swVWw3QW4xeERxc1hKWW5tUTFWWFdNQVhWZkJ6eFdiQ2xnTEV5ZHpEQlpTeVVmRnZheWNUZUx6X0pXQzAwNkZhcVNnNU9uc3IycXBoaWhpV0VKSW9tTlhERkVtajRxcW8yU3VwSUtvYUxVU2p1TmFCUUdaTS0tUzJVMGU2U2hQS0VFbkxmU29FMmdwbm16bEMyZw?oc=5",
-     "published_at": "2026-11-09T06:20:02+08:00"
-    },
-    {
-     "name": "Google News · WHO 疫情通报",
-     "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPSy1ZVEZaamF4QlpnVEdwZjJWampyX3ZCd3dGNE10Vi02NU1DUnVTcjZKcUFHaTVaNkFZcXZVZTZfbHBLYWxPT1VsYzlTUnZaaVJpUGZCaTkyUmV2Q1BJRlhTZ2F5ZHVpamU0cU9FallkZlBzSTE3OGUyYmtkVGdJb0Z4VHNBTVhTN2I2QUE2YjZuSHFoWTNDNURLUEJObnFsN2xvdFpkekpiMkE5aWtyNWNkZUVSTWxrc3p1QjlB?oc=5",
-     "published_at": "2026-11-09T02:20:04+08:00"
-    },
-    {
-     "name": "Google News · WHO 疫情通报",
-     "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPbmVRSmVueU9xTHlaWl8tWElDTzM3VUhkQ1JWZUZ6X1dyN0I5YlZDRXV3Y1pJYUktY3dKX3pEQkZnYnBPUFRvaFRyWXdRcmw4cWRMbFVmQkpheGxzMklqUEVTenI0cE9TOERzMUVmVXF2ZzVRcFdXT2pBQ1NfaTJVWWFHT2l6aHc?oc=5",
-     "published_at": "2026-11-09T00:20:03+08:00"
-    },
-    {
-     "name": "Google News · WHO 疫情通报",
-     "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE9KOXNrZFN0Q2I3dms0VXI5ZTZQNmY1bXNuX2RGalFrWG5MeW9EU3R3N1VFWGdJNERhaF9MdWc2Zk83SjFmOUp1R0NybmlQMVU?oc=5",
-     "published_at": "2026-11-09T00:20:03+08:00"
-    },
-    {
-     "name": "Google News · WHO 疫情通报",
-     "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNeHczS1k3SE9JbldJdkp5YmRLa0pkZ0xBV1pqVmh1a0lGckN1VDVYd3RtbWVCaVJGVGNHYkJqNTUzNWh0X005OElRN2tNQVlzbzFjbTdueUExdEJrUGhLZVg1S1NaOWRkSndxV25QeWNxVG1YXzZBVTZFUWwyWkh4RDhKNTB0aURrbjFXMVlNRVdqT1dFTko2MDdiS29Tb3JGOHBvUElLNXNaUk5hejVyOHpsUE14ekk?oc=5",
-     "published_at": "2026-11-09T00:20:03+08:00"
-    },
-    {
-     "name": "Google News · WHO 疫情通报",
-     "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE9Uc0JhYmRKZDl2Smd5OHFCQ3lTOWNmYXJndGJodkxYWFctZGZDNDJYY2oyUWtET0g4MlFMOVp4UDJZazZaS2RrTzZOVU92Qnp4NGtYajBSS09WSkpNNlZFbnN6TjJqZw?oc=5",
-     "published_at": "2026-11-07T01:20:04+08:00"
-    },
-    {
-     "name": "Google News · WHO 疫情通报",
-     "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE5JSG9TWUpqSXUxWktTNnpJcDFyN1ItLXk2MDhBWDJHUTE3ZzF2VmhDY1o5VVFyR3N2ZVRIclBXVFpIS0RiNVd4ZTJOWXpQYlR0eGtpNnpsYVJaODJMSFZzamZGWXEyUQ?oc=5",
-     "published_at": "2026-11-07T01:20:04+08:00"
-    },
-    {
-     "name": "Google News · WHO 疫情通报",
-     "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTFB6LUUzTlZpTF9rTGpoR2w4bFBpcEhjTml3YXlEb3AzbC1CamFyMDd3bUZ5Q253SENOdjFIckktY1ZXUXlyLURfRDNhMk5UQ3dEQ2FQdi1YR2dKQ2ZwWUJfdElRZ0U?oc=5",
-     "published_at": "2026-11-07T00:20:08+08:00"
-    },
-    {
-     "name": "Google News · WHO 疫情通报",
-     "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBMNi1IaVJfbUJ1ZnlCMmF5Yy15ZFczaEwta3o4aFAybUtGSk1rMHd2bEpvT24ySzNVVkd3X0VXTE9QanJUbE0wSlVubE5pTGxBamtaNEI3M1pfS2ZZWXYzRTlrUGt0QQ?oc=5",
-     "published_at": "2026-11-07T00:20:08+08:00"
-    }
-   ],
-   "source_count": 26,
+   "source_count": 33,
    "tags": [
     "gnews",
     "who"
@@ -4351,7 +4191,7 @@
    "source_name": "selfh.st 自托管周报",
    "source_id": "selfh-st",
    "published_at": "2026-11-10T01:20:29+08:00",
-   "age_h": 14.1,
+   "age_h": 15.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4435,6 +4275,92 @@
    ]
   },
   {
+   "id": "sig-bac00bcd1b0865f1",
+   "category": "health",
+   "kind": "signal",
+   "tier": "sideline",
+   "score": 46.5,
+   "title": "Trump says US would help Russia amid reported fatal case of pneumonic plague - ABC News - Breaking News, Latest News and Videos",
+   "summary": "Trump says US would help Russia amid reported fatal case of pneumonic plague ABC News - Breaking News, Latest News and Videos",
+   "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQMk0wTjU5Q0dyT01nZjJQRmwyM2duellWaEN3T21XZEVqTTFiS1NEcGI1VU5kcU13eFk1RE81Sk9zQzJVbkdETTZzSnRiUlBuZTA2U2EtVEpIRmRUSEdpTURfaTJKR1c5dnlKV1F5Z3dTU051VGdGSi1tUnF2LXhIS3k5Mm5FQ1ZzcGtpZ3JBYXUtbE9HQVZzRF9EQTdLLU9qdHN6YnpEbXRWd9IBrwFBVV95cUxPTDFBd1dMazFiUGptc190MXpwanUwcVpjSkswdTJoMVdBcldya0ktbUM0OFpXeEpTRWV0Zlcxcl9QWlEyNWZNdUwtcXJOWDF4OWJqRzFWVGNsMEhHUnAyY1p6NWhvQjB1SGM3Zkpocnp5bGdrNUNfUW1SZ0NKVDZZQk54Q3NMU0o5T3ZFRmlDRVZzdnJMa2JMQWZjeG1WNHJQb2FqaDZmNldUSlktT1hZ?oc=5",
+   "source_name": "Google News · WHO 疫情通报",
+   "source_id": "gnews-who",
+   "published_at": "2026-11-10T16:20:07+08:00",
+   "age_h": 0.1,
+   "cvss": null,
+   "in_the_wild": false,
+   "flags": [],
+   "why": "养生/生活类，不是通报",
+   "action": "",
+   "region": {
+    "level": "global",
+    "name": "global",
+    "parents": []
+   },
+   "sources": [
+    {
+     "name": "Google News · WHO 疫情通报",
+     "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQMk0wTjU5Q0dyT01nZjJQRmwyM2duellWaEN3T21XZEVqTTFiS1NEcGI1VU5kcU13eFk1RE81Sk9zQzJVbkdETTZzSnRiUlBuZTA2U2EtVEpIRmRUSEdpTURfaTJKR1c5dnlKV1F5Z3dTU051VGdGSi1tUnF2LXhIS3k5Mm5FQ1ZzcGtpZ3JBYXUtbE9HQVZzRF9EQTdLLU9qdHN6YnpEbXRWd9IBrwFBVV95cUxPTDFBd1dMazFiUGptc190MXpwanUwcVpjSkswdTJoMVdBcldya0ktbUM0OFpXeEpTRWV0Zlcxcl9QWlEyNWZNdUwtcXJOWDF4OWJqRzFWVGNsMEhHUnAyY1p6NWhvQjB1SGM3Zkpocnp5bGdrNUNfUW1SZ0NKVDZZQk54Q3NMU0o5T3ZFRmlDRVZzdnJMa2JMQWZjeG1WNHJQb2FqaDZmNldUSlktT1hZ?oc=5",
+     "published_at": "2026-11-10T16:20:07+08:00"
+    },
+    {
+     "name": "Google News · WHO 疫情通报",
+     "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPaVFxQTZQbEFJdm9jTU5qVFFlbUh1Z2tCRDhCZHBlY3NneVhwN0VEV1lJOUlZVjVoNUxfMGVsbmVpcGkwVTF6TWVRWTlhb0xSamJaZU5QMFJoZ0lNME1BT0FoRlJCSmNnWW81cXN0QVBqb2RhSWhJTDRmYWE4eW4tcUdMVlFjcTBVVTVCMGFKOF9RMjhUX2ZJTFRnTzVyLW0zbk930gGoAUFVX3lxTE50VnEwRi1SSDJvaTZ0Z2VjVjZaNWlrZGlZa3BneElvZjJzcUZoRWlIZ0hXTzV4QW1TY21oVVRuMVRGZHB5X09fU3NFVWhtVVpNN3Q2aWR3UkpUM3lOamItODI2R2VWdnhjRnhQNC1ub1hqQzhmUUVRVG5idWt1Q0VIcVQ2NzRVWUF4N1NWclk4ZVZqSEF4RHBFYUpzNnl5SHZMbDhYdHlRMw?oc=5",
+     "published_at": "2026-11-10T04:20:06+08:00"
+    },
+    {
+     "name": "Google News · WHO 疫情通报",
+     "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNWWZnWjVwU3ZKQ19SWkFOWTVrb2FIMUhadkN5bHBIc0JxUWV1c09mTDBiVElxRFE1WEhITHRVZWNqZlFxM2Rxb2FoWGFZeTk2Q0lKT1Q2dDYxdkREVGR3Tmk3d3Vzd0lWWER0M2FSSGxDVWNmRW41WHdEajBycklPSjhRMUl5dEhEc0tTc1RTTVVtdy1lODhMdEgyZm12SXJoeFNBYXI1RF9xX3hPQnZfWtIBtgFBVV95cUxQWWpCTk1xMHhwU2JrQVVmNGlod1R6cmVIdTd0ZzlMVUIyT2hGUmE4RXF1UllUS1FfQ0RxYlppUEk0MTVidmdQQ2J2LVZJMG9mUTJ2YlR5dEM0Z0xiQkxYTTdSVGE4Q2R6VjZ3dDQzSFBQT0RMblBfZVd0bXhkNVlzWG41LS1fdWRPY290STN3MWpDNzhWa3NpcUVSMGNfeWVXRGpNNElyTC1tZTJnX0c5Q3hhUGdYdw?oc=5",
+     "published_at": "2026-11-10T00:20:06+08:00"
+    },
+    {
+     "name": "Google News · WHO 疫情通报",
+     "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPWDZHUXdQQl9hOUN1N0hOb2c1NFVNaXdaNzlGUFlaMmZDR3poLUIzajllQkwyTDJIbmVjNmVxTzFKd2xwRjJnWEstbUdmVHI5dkdwMjc2aTNJaW1FODNfQlZnRTZDZ0hyLUZIbEt5b2N6NWxsRFNXWmpuenBTaGZqM1RHYm8wLUpReER4ei1EOFdHRkxfaWYwdEV1RzDSAaIBQVVfeXFMTzZOYWhBZjdzcVBVY19QbnhkblNhczd5aHJzeFMxMEJjV0V2NmRCR2pEd3VhcGFYRTFQbjlCU3RlNEhEcmExLTZ6SU1WdW10NW4xSWNBUmpUUUlrakpKcmlUQnBiQ3EtZHE4dnNqaDNBWnBIZUMyTEJuOEk1c29VREpfaWJ2VDliM01qbjZub2RLZnkybmRiMXYyOFA0aDNQc3lB?oc=5",
+     "published_at": "2026-11-10T00:20:06+08:00"
+    },
+    {
+     "name": "Google News · WHO 疫情通报",
+     "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNQVpoN0llaXNHWHZ6OWk0endMWXVfNGRJdXBXSlN6MG9ubDFNQjNFM3ppUG41Y1c2X1ViNVdpSG80WEp1akI5QTI3N0FpNlBSZ0p6Mk5rcjhGQWJ5S09ib1A4ZHZaMTFObHpRY2lrQzhBcFVDeWhmVlhubUtoZkZjb21iUkVpODdxdjZ1VUhsUkFhd21GbnRfdG5xUm9NUVBIaUHSAacBQVVfeXFMTzRGX3dQUGxMZWNwOTd2UF8xWW5SeWQ4R0VVZTl5Tld1YUFTYjNvYm5RckdLbTI3VDJ2ZVdkTUl6Zk9WbE0yRXJNRTAwZW9NaVcxOUFSZWVQMmtyZlh3WWhrdFNjcjhBamtpODZkdEptUDJaaEFLaHcyQXVyWElfR2k0cXVQa3FXVzRwa293VlFQRXJ3N29NVll5SS1SZGlfd1E1S1p0ZG8?oc=5",
+     "published_at": "2026-11-09T20:20:10+08:00"
+    },
+    {
+     "name": "Google News · WHO 疫情通报",
+     "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNM3BjODZZSDd0eHFXOVNIaGZpazY2OFZPWjJRUGpudU9hLXV5TExZUWhsS0xLeWFteG5ERlBSanh0TmJNTGRUVjR5cDllN1NWeUJsZUNJX1RkWkVuTGZRZW9jZ2Y1Q1lkSXB4LXdnTm1RZzJBQVNQdU0xWHY5YnFZQmx6bk5IRUVuLTg5LVdySWpKc1VrTDB1UkE4V0lmTlR6ZEVF0gGoAUFVX3lxTE1mcXJiOEhyZzVjUk9DeW80XzZ3VXdxUW9uekRkekZGbkJuMVFVSDQxUUkwUlpRUHdsMVRqVDkwODB3WFJFVnZJbkNaWWNoc3doTFU3dWUySml5cVZ1OUNoaERvcTRKd29mdEJINFZfWHlMQTdMWUJwajA5dWlLWkpYU1lWSEt6Q29US2RieHlPM1Zjb1RMbWh6M3pMejd1eEpWekVRZ3R3dw?oc=5",
+     "published_at": "2026-11-09T14:20:05+08:00"
+    },
+    {
+     "name": "Google News · WHO 疫情通报",
+     "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNZG56YlN0MDdsU2pKSThXS1dhalk2SjlGX2RzdGpjck0zcG84OU5LOEZXX1IwVzBmVkxhRThyOXFZZUJ2dW9LOGxPQmZHXzNlQTZORERGX0RRZTVMTXlrT3RWQkxTU2phZm44N0drMHctakk5UEJyTy1qNG5SRmpTOFpOMHlKeUdTSkRacmVrMUdTdkXSAZgBQVVfeXFMUHRRNF9FcG13Sjkya2RFNDJaMVg3VUNOWjM0ZlVFcTlQWERiTHZuTjFsMHgzY0xuOW9EQjlPVE9IYWdpQmJ3eEJDdEFwNE5kWTFjSVFCVHUtaWtYTERKM1hGN1ZBV1pwV1ZsX1JEZzZ6NmpyT05LdHZIcnI2WHE4WGlnT3pZZGZYOVJFajlxVGJCMEZTVlhqV0I?oc=5",
+     "published_at": "2026-11-09T11:20:05+08:00"
+    },
+    {
+     "name": "Google News · WHO 疫情通报",
+     "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQcm9OZXoxbTF4eVZzc1Z3cWdJaDJoTHhjVG9CWVJ3VkFFV1ZtNWtNTnlzUFRMeGdxc0xWZFAtV3NfWm5USmo0QnFTYy1TaG5vNTF0ckVOSkZrMWl4V1BQd25RLXZaNnFiZ2IyMjczZUNTVFlhdVotaWJvY1VhX1R4WnhfZG4xem0tN1Z6Y25GendFOE5uYWpDSGxwVHpvQXdmbkhYX2J3?oc=5",
+     "published_at": "2026-11-09T08:20:03+08:00"
+    },
+    {
+     "name": "Google News · WHO 疫情通报",
+     "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNMndFcnFqeFdqTUE0Y0ZmNFdhQ1ViX2dXWWJtbjQyelNpYUZ3TjlLMnRjamxHSmFvRTZzc3VHTFltckRKVkdFQzJLenB5UDhFUVd6dmhnLTZlbE92UzkzcVMwMWRXbkF6WDJlcEFDa3ZSZFkwLXRPYVVrVjlQUk1XakpXSl9Wd0tsa3ZHOUJzQUJHUWFkUjJ1cXZKelVxNGxKMlFDUmlR0gGrAUFVX3lxTE53WjhWUE9JcEJQYjFsVDU5amhWbWs5cldIbllpbTVrd0NvamFpVy1WTUFhMVdfSkFxdzhKeWhHY0ZlWUdYQ0JPV2E3am5QR0ZORjRISUI4S2ZVVy1IMTNyRUk4OC1taTlwbGk4N0VfempYekNwWmNnSUpBcmNUNnlZaEFiSVBhTWZkY1ZwOG5tN1ZmRml5cWhOLUEwVURETzZuQVN2bGp4VS1rSQ?oc=5",
+     "published_at": "2026-11-08T11:20:06+08:00"
+    },
+    {
+     "name": "Google News · WHO 疫情通报",
+     "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOUDd6TTN2ZEdHQ3JZYWdkYldYWTNrcGM3ZXZieG5DNmQ5Y1JPa3hlX0kyU2ZLSnFEY3kwUDdrRENtTDRBazBkdHQtaXBsVFVlYXJCTDJCVnl6Nkw4ZHNJdU9SdXlOMm84LXNTcDh5Z0p4ZUhZdFBhV2d4SkVpaWxaejlZWktJQjJJUVF2NlFTWDZ1T2tLS3JDS9IBngFBVV95cUxOSkw1Q0RKcTR0ektvbnVWUW0ySVo4X2FJZzlQOE93XzQtOU1IY3dONTVHbWRlTnlmVy1OSThBVWhOWnFpQzlwcE9jcWlIQmkyRE9BazdFLXNvcVk2MFdUNzYwM1hpa2dWSWlDbm9QNFZKa1R5UVJvSG1WX0VLUVBPNHk0dDZLZXR1VHNQRFpndExNMHlPT01QbzFoNjczZw?oc=5",
+     "published_at": "2026-11-06T10:20:09+08:00"
+    },
+    {
+     "name": "Google News · WHO 疫情通报",
+     "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNbjhrSXk5N050MzMwOFlsa053OUpaOGNtYnEtLXBjRDJ0eG1aZ01EeG9kYWFaMVBpVGpxYUxORkV6SDNkM1B2UFZBcGNWaEFvNG83NUdqYm92MlNRLS1zRlA2V0Z1eV9iNUlLQjlNSGRqbkY4ZmxobzdWbldNcXBudC1NczY0RkJDeHBlU0F4aThoZUZmUDc2SHBNT05DVGctT0FGREtLY29GZUYzY0HSAbMBQVVfeXFMTXFnUksta0FSUTNuYXVCVzRvS2V3S3VnbkdhY0N1dmhfX20yUlpZMmltVEYwcGZIanl2alVrLWpIQi1uUl9rbHllN2hHTUE0Q2h3OHR3Nkc0Tk5BRDB3Tnoza3V2bnlVUnJNVEhmTVRPbFhTOGtSMDFqaUhBMlNzaXU4eEtHZkhMNnh1UmtfN0VmS1RWT3dycmgwR1FxbmhCU3NWR2FyalhORnRDekUtUjU0TnM?oc=5",
+     "published_at": "2026-11-05T18:14:49+08:00"
+    }
+   ],
+   "source_count": 11,
+   "tags": [
+    "gnews",
+    "who"
+   ]
+  },
+  {
    "id": "sig-f8077848c252f5d4",
    "category": "tech",
    "kind": "signal",
@@ -4446,7 +4372,7 @@
    "source_name": "LWN 头条",
    "source_id": "lwn-headlines",
    "published_at": "2026-11-10T00:20:20+08:00",
-   "age_h": 15.1,
+   "age_h": 16.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4496,7 +4422,7 @@
    "source_name": "Phoronix（Linux 硬件/内核）",
    "source_id": "phoronix",
    "published_at": "2026-11-10T00:20:06+08:00",
-   "age_h": 15.1,
+   "age_h": 16.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4546,7 +4472,7 @@
    "source_name": "Caddy 社区",
    "source_id": "caddy-community",
    "published_at": "2026-11-10T00:20:15+08:00",
-   "age_h": 15.1,
+   "age_h": 16.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4587,7 +4513,7 @@
    "source_name": "Phoronix（Linux 硬件/内核）",
    "source_id": "phoronix",
    "published_at": "2026-11-10T04:20:05+08:00",
-   "age_h": 11.1,
+   "age_h": 12.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4632,7 +4558,7 @@
    "source_name": "PostgreSQL 新闻",
    "source_id": "postgres-news",
    "published_at": "2026-11-10T00:20:17+08:00",
-   "age_h": 15.1,
+   "age_h": 16.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4674,7 +4600,7 @@
    "source_name": "Google News · 广东疫情",
    "source_id": "gnews-health-gd",
    "published_at": "2026-11-10T00:20:05+08:00",
-   "age_h": 15.1,
+   "age_h": 16.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [
@@ -4722,7 +4648,7 @@
    "source_name": "LWN 头条",
    "source_id": "lwn-headlines",
    "published_at": "2026-11-10T00:20:20+08:00",
-   "age_h": 15.1,
+   "age_h": 16.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4763,7 +4689,7 @@
    "source_name": "PostgreSQL 新闻",
    "source_id": "postgres-news",
    "published_at": "2026-11-10T00:20:17+08:00",
-   "age_h": 15.1,
+   "age_h": 16.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4799,7 +4725,7 @@
    "source_name": "Caddy 社区",
    "source_id": "caddy-community",
    "published_at": "2026-11-10T00:20:15+08:00",
-   "age_h": 15.1,
+   "age_h": 16.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4835,7 +4761,7 @@
    "source_name": "Caddy 社区",
    "source_id": "caddy-community",
    "published_at": "2026-11-10T00:20:15+08:00",
-   "age_h": 15.1,
+   "age_h": 16.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4871,7 +4797,7 @@
    "source_name": "Caddy 社区",
    "source_id": "caddy-community",
    "published_at": "2026-11-10T00:20:15+08:00",
-   "age_h": 15.1,
+   "age_h": 16.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4907,7 +4833,7 @@
    "source_name": "Phoronix（Linux 硬件/内核）",
    "source_id": "phoronix",
    "published_at": "2026-11-10T00:20:06+08:00",
-   "age_h": 15.1,
+   "age_h": 16.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4947,7 +4873,7 @@
    "source_name": "Cloudflare 博客",
    "source_id": "cloudflare-blog",
    "published_at": "2026-11-10T01:20:18+08:00",
-   "age_h": 14.1,
+   "age_h": 15.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4983,7 +4909,7 @@
    "source_name": "Cloudflare 博客",
    "source_id": "cloudflare-blog",
    "published_at": "2026-11-10T01:20:18+08:00",
-   "age_h": 14.1,
+   "age_h": 15.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -5019,7 +4945,7 @@
    "source_name": "Cloudflare 博客",
    "source_id": "cloudflare-blog",
    "published_at": "2026-11-10T00:20:18+08:00",
-   "age_h": 15.1,
+   "age_h": 16.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -5055,7 +4981,7 @@
    "source_name": "Cloudflare 博客",
    "source_id": "cloudflare-blog",
    "published_at": "2026-11-10T00:20:18+08:00",
-   "age_h": 15.1,
+   "age_h": 16.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -5091,7 +5017,7 @@
    "source_name": "Cloudflare 博客",
    "source_id": "cloudflare-blog",
    "published_at": "2026-11-10T00:20:18+08:00",
-   "age_h": 15.1,
+   "age_h": 16.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -5124,7 +5050,7 @@
    "ok": true,
    "error": null,
    "items": 17,
-   "seconds": 1.4
+   "seconds": 1.1
   },
   {
    "id": "oss-sec",
@@ -5133,7 +5059,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 1.0
+   "seconds": 2.2
   },
   {
    "id": "ubuntu-usn",
@@ -5142,7 +5068,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.3
+   "seconds": 1.0
   },
   {
    "id": "nvd-critical",
@@ -5150,8 +5076,8 @@
    "category": "security",
    "ok": true,
    "error": null,
-   "items": 40,
-   "seconds": 1.3
+   "items": 42,
+   "seconds": 1.2
   },
   {
    "id": "cisa-kev",
@@ -5160,7 +5086,7 @@
    "ok": true,
    "error": null,
    "items": 4,
-   "seconds": 2.1
+   "seconds": 2.5
   },
   {
    "id": "gnews-sec",
@@ -5169,7 +5095,7 @@
    "ok": true,
    "error": null,
    "items": 12,
-   "seconds": 1.7
+   "seconds": 5.1
   },
   {
    "id": "gnews-health-gd",
@@ -5178,7 +5104,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.5
+   "seconds": 6.0
   },
   {
    "id": "gnews-who",
@@ -5187,7 +5113,7 @@
    "ok": true,
    "error": null,
    "items": 24,
-   "seconds": 1.5
+   "seconds": 3.1
   },
   {
    "id": "techmeme",
@@ -5195,8 +5121,8 @@
    "category": "tech",
    "ok": true,
    "error": null,
-   "items": 12,
-   "seconds": 11.8
+   "items": 0,
+   "seconds": 16.9
   },
   {
    "id": "hn",
@@ -5232,7 +5158,7 @@
    "ok": true,
    "error": null,
    "items": 30,
-   "seconds": 1.0
+   "seconds": 1.3
   },
   {
    "id": "arch-advisory",
@@ -5241,7 +5167,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 1.5
+   "seconds": 3.3
   },
   {
    "id": "gentoo-glsa",
@@ -5250,16 +5176,16 @@
    "ok": true,
    "error": null,
    "items": 20,
-   "seconds": 0.8
+   "seconds": 2.8
   },
   {
    "id": "ghsa-critical",
    "name": "GitHub Advisory（critical）",
    "category": "security",
-   "ok": true,
-   "error": null,
-   "items": 3,
-   "seconds": 1.2
+   "ok": false,
+   "error": "RuntimeError: HTTPError: HTTP Error 403: rate limit exceeded",
+   "items": 0,
+   "seconds": 10.7
   },
   {
    "id": "rustsec",
@@ -5268,7 +5194,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 1.2
+   "seconds": 2.7
   },
   {
    "id": "cisa-advisories",
@@ -5286,7 +5212,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 2.5
+   "seconds": 0.8
   },
   {
    "id": "seclists-fulldisc",
@@ -5295,7 +5221,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 3.1
+   "seconds": 1.1
   },
   {
    "id": "talos",
@@ -5304,7 +5230,7 @@
    "ok": true,
    "error": null,
    "items": 5,
-   "seconds": 4.0
+   "seconds": 9.1
   },
   {
    "id": "unit42",
@@ -5313,7 +5239,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.6
+   "seconds": 1.7
   },
   {
    "id": "securelist",
@@ -5322,7 +5248,7 @@
    "ok": true,
    "error": null,
    "items": 8,
-   "seconds": 3.6
+   "seconds": 3.2
   },
   {
    "id": "mssecblog",
@@ -5331,7 +5257,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 5.0
+   "seconds": 3.9
   },
   {
    "id": "msrc",
@@ -5340,7 +5266,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 5.8
+   "seconds": 7.2
   },
   {
    "id": "schneier",
@@ -5349,7 +5275,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.0
+   "seconds": 0.8
   },
   {
    "id": "mozilla-sec",
@@ -5358,7 +5284,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 4.3
+   "seconds": 1.5
   },
   {
    "id": "anquanke",
@@ -5394,7 +5320,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 1.0
+   "seconds": 1.1
   },
   {
    "id": "caddy-community",
@@ -5403,7 +5329,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 2.7
+   "seconds": 3.2
   },
   {
    "id": "caddy-releases",
@@ -5412,7 +5338,7 @@
    "ok": true,
    "error": null,
    "items": 9,
-   "seconds": 2.4
+   "seconds": 9.5
   },
   {
    "id": "redis-releases",
@@ -5421,7 +5347,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.3
+   "seconds": 2.3
   },
   {
    "id": "grafana-rel",
@@ -5430,7 +5356,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.3
+   "seconds": 1.5
   },
   {
    "id": "grafana-blog",
@@ -5439,7 +5365,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 5.2
+   "seconds": 1.8
   },
   {
    "id": "postgres-news",
@@ -5448,16 +5374,16 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.1
+   "seconds": 1.0
   },
   {
    "id": "docker-blog",
    "name": "Docker 博客",
    "category": "tech",
-   "ok": true,
-   "error": null,
-   "items": 10,
-   "seconds": 2.4
+   "ok": false,
+   "error": "RuntimeError: URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1029)>",
+   "items": 0,
+   "seconds": 11.3
   },
   {
    "id": "cloudflare-blog",
@@ -5466,7 +5392,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 0.7
+   "seconds": 2.0
   },
   {
    "id": "mihomo-rel",
@@ -5475,7 +5401,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.7
+   "seconds": 2.4
   },
   {
    "id": "immich-rel",
@@ -5484,7 +5410,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 1.3
+   "seconds": 1.5
   },
   {
    "id": "selfh-st",
@@ -5493,16 +5419,16 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 5.0
+   "seconds": 75.0
   },
   {
    "id": "jeffgeerling",
    "name": "Jeff Geerling（homelab/PVE）",
    "category": "tech",
-   "ok": true,
-   "error": null,
-   "items": 15,
-   "seconds": 84.6
+   "ok": false,
+   "error": "RuntimeError: URLError: <urlopen error _ssl.c:1012: The handshake operation timed out>",
+   "items": 0,
+   "seconds": 79.9
   },
   {
    "id": "linux-kernel-releases",
@@ -5520,7 +5446,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 1.0
+   "seconds": 1.1
   },
   {
    "id": "servethehome",
@@ -5538,7 +5464,7 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 0.4
+   "seconds": 1.3
   },
   {
    "id": "simonwillison",
@@ -5547,16 +5473,16 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 25.1
+   "seconds": 8.9
   },
   {
    "id": "go-blog",
    "name": "Go 官方博客",
    "category": "tech",
    "ok": false,
-   "error": "RuntimeError: URLError: <urlopen error _ssl.c:1012: The handshake operation timed out>",
+   "error": "RuntimeError: TimeoutError: The read operation timed out",
    "items": 0,
-   "seconds": 64.2
+   "seconds": 71.5
   },
   {
    "id": "rust-blog",
@@ -5565,7 +5491,7 @@
    "ok": true,
    "error": null,
    "items": 10,
-   "seconds": 0.9
+   "seconds": 1.0
   },
   {
    "id": "github-blog",
@@ -5607,10 +5533,10 @@
    "id": "ruanyifeng",
    "name": "阮一峰博客",
    "category": "tech",
-   "ok": true,
-   "error": null,
-   "items": 3,
-   "seconds": 6.2
+   "ok": false,
+   "error": "RuntimeError: URLError: <urlopen error _ssl.c:1012: The handshake operation timed out>",
+   "items": 0,
+   "seconds": 88.2
   },
   {
    "id": "hko-warning",
@@ -5637,15 +5563,15 @@
    "ok": true,
    "error": null,
    "items": 15,
-   "seconds": 6.0
+   "seconds": 2.5
   }
  ],
  "stats": {
-  "facts_in": 2561,
-  "clusters": 1195,
-  "items": 1076,
+  "facts_in": 2584,
+  "clusters": 1206,
+  "items": 1086,
   "dropped_noise": 6,
-  "ledger_rows": "2687→2586"
+  "ledger_rows": "2709→2609"
  },
  "disclaimer": "只做信息整理，不替代官方公告；行动建议需人判断。"
 }
