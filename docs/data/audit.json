@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-11-11T02:16:52+00:00",
-  "source_updated": "2026-11-11T01:42:44.002061+00:00",
+  "generated_at": "2026-11-11T09:52:21+00:00",
+  "source_updated": "2026-11-11T04:49:57.852925+00:00",
   "summary": {
     "status": "pass",
     "checks_passed": 4,
@@ -13,101 +13,107 @@
       "label": "标题中立化覆盖率",
       "status": "pass",
       "threshold": ">= 0.90",
-      "observed": 0.9633,
+      "observed": 0.92,
       "metric": {
-        "processed": 289,
+        "processed": 276,
         "total": 300
       },
-      "detail": "11/300 条标题与英文原文完全相同，未走中立化"
+      "detail": "24/300 条标题与英文原文完全相同，未走中立化"
     },
     {
       "id": "coverage.summary",
       "label": "摘要中立化覆盖率",
       "status": "pass",
       "threshold": ">= 0.90",
-      "observed": 0.9867,
+      "observed": 0.9833,
       "metric": {
-        "processed": 296,
+        "processed": 295,
         "total": 300
       },
-      "detail": "4/300 条摘要与英文原文完全相同，未走中立化"
+      "detail": "5/300 条摘要与英文原文完全相同，未走中立化"
     },
     {
       "id": "coverage.by_source",
       "label": "按来源覆盖率",
       "status": "pass",
       "threshold": "0% 源占比 < 0.50",
-      "observed": 0.9633,
+      "observed": 0.92,
       "metric": {
         "zero_rate_sources": 0,
-        "sources_total": 26
+        "sources_total": 27
       },
-      "detail": "全部 26 个来源均有中立化产出"
+      "detail": "全部 27 个来源均有中立化产出"
     },
     {
       "id": "neutrality",
       "label": "中立度残留",
       "status": "pass",
       "threshold": "<= 0.05",
-      "observed": 0.0,
+      "observed": 0.0072,
       "metric": {
-        "processed": 289,
-        "hits": 0
+        "processed": 276,
+        "hits": 2
       },
-      "detail": "已加工 289 条中 0 条仍含情绪/反讽残留（0.0%）"
+      "detail": "已加工 276 条中 2 条仍含情绪/反讽残留（0.7%）"
     }
   ],
   "by_source": [
     {
-      "source": "Deadline",
-      "total": 24,
-      "processed": 24,
+      "source": "Al Jazeera",
+      "total": 26,
+      "processed": 26,
       "rate": 1.0
     },
     {
       "source": "Phys.org",
-      "total": 24,
-      "processed": 24,
+      "total": 26,
+      "processed": 26,
+      "rate": 1.0
+    },
+    {
+      "source": "Deadline",
+      "total": 21,
+      "processed": 21,
+      "rate": 1.0
+    },
+    {
+      "source": "中新网",
+      "total": 20,
+      "processed": 6,
+      "rate": 0.3
+    },
+    {
+      "source": "界面新闻",
+      "total": 20,
+      "processed": 14,
+      "rate": 0.7
+    },
+    {
+      "source": "BBC",
+      "total": 18,
+      "processed": 18,
       "rate": 1.0
     },
     {
       "source": "Variety",
-      "total": 23,
-      "processed": 23,
+      "total": 17,
+      "processed": 17,
       "rate": 1.0
     },
     {
-      "source": "Al Jazeera",
-      "total": 22,
-      "processed": 22,
-      "rate": 1.0
-    },
-    {
-      "source": "MarketWatch",
-      "total": 20,
-      "processed": 20,
-      "rate": 1.0
-    },
-    {
-      "source": "Hollywood Reporter",
-      "total": 16,
-      "processed": 16,
-      "rate": 1.0
-    },
-    {
-      "source": "BBC",
+      "source": "CNBC",
       "total": 15,
       "processed": 15,
       "rate": 1.0
     },
     {
-      "source": "CNBC",
-      "total": 14,
-      "processed": 14,
+      "source": "France 24",
+      "total": 15,
+      "processed": 15,
       "rate": 1.0
     },
     {
-      "source": "Engadget",
+      "source": "MarketWatch",
       "total": 14,
       "processed": 14,
       "rate": 1.0
@@ -119,61 +125,31 @@
       "rate": 1.0
     },
     {
-      "source": "France 24",
-      "total": 11,
-      "processed": 11,
+      "source": "Hollywood Reporter",
+      "total": 12,
+      "processed": 12,
       "rate": 1.0
     },
     {
-      "source": "TechCrunch",
-      "total": 11,
-      "processed": 11,
+      "source": "Mashable",
+      "total": 12,
+      "processed": 12,
       "rate": 1.0
     },
     {
-      "source": "The Verge",
+      "source": "中新网财经",
+      "total": 12,
+      "processed": 8,
+      "rate": 0.6667
+    },
+    {
+      "source": "Engadget",
       "total": 10,
       "processed": 10,
       "rate": 1.0
     },
     {
-      "source": "中新网",
-      "total": 10,
-      "processed": 3,
-      "rate": 0.3
-    },
-    {
-      "source": "界面新闻",
-      "total": 10,
-      "processed": 6,
-      "rate": 0.6
-    },
-    {
-      "source": "Mashable",
-      "total": 9,
-      "processed": 9,
-      "rate": 1.0
-    },
-    {
-      "source": "The Next Web",
-      "total": 9,
-      "processed": 9,
-      "rate": 1.0
-    },
-    {
-      "source": "Ars Technica",
-      "total": 8,
-      "processed": 8,
-      "rate": 1.0
-    },
-    {
       "source": "CNET",
-      "total": 8,
-      "processed": 8,
-      "rate": 1.0
-    },
-    {
-      "source": "Financial Times",
       "total": 8,
       "processed": 8,
       "rate": 1.0
@@ -185,15 +161,45 @@
       "rate": 1.0
     },
     {
-      "source": "NPR",
+      "source": "Ars Technica",
+      "total": 6,
+      "processed": 6,
+      "rate": 1.0
+    },
+    {
+      "source": "TechCrunch",
+      "total": 6,
+      "processed": 6,
+      "rate": 1.0
+    },
+    {
+      "source": "DW",
       "total": 5,
       "processed": 5,
       "rate": 1.0
     },
     {
-      "source": "DW",
+      "source": "NPR",
       "total": 4,
       "processed": 4,
+      "rate": 1.0
+    },
+    {
+      "source": "The Verge",
+      "total": 4,
+      "processed": 4,
+      "rate": 1.0
+    },
+    {
+      "source": "Financial Times",
+      "total": 3,
+      "processed": 3,
+      "rate": 1.0
+    },
+    {
+      "source": "ScienceDaily",
+      "total": 2,
+      "processed": 2,
       "rate": 1.0
     },
     {
@@ -203,9 +209,9 @@
       "rate": 1.0
     },
     {
-      "source": "中新网财经",
-      "total": 2,
-      "processed": 2,
+      "source": "The Next Web",
+      "total": 1,
+      "processed": 1,
       "rate": 1.0
     },
     {
@@ -215,7 +221,22 @@
       "rate": 1.0
     }
   ],
-  "neutrality_hits": [],
+  "neutrality_hits": [
+    {
+      "source": "France 24",
+      "title": "Haiti PM praises Bukele after Salvadoran troops help destroy gang headquarters",
+      "zh_title": "在萨尔瓦多军队帮助摧毁帮派总部后，海地总理赞扬布克莱",
+      "rule": "emotion",
+      "matched": "摧毁"
+    },
+    {
+      "source": "BBC",
+      "title": "Headquarters of Haitian gang destroyed, El Salvador's president says",
+      "zh_title": "萨尔瓦多总统说，海地帮派的总部被摧毁",
+      "rule": "emotion",
+      "matched": "摧毁"
+    }
+  ],
   "dead_sources": [
     "Reuters",
     "AP News",
@@ -230,31 +251,32 @@
       "加载中…"
     ],
     "actually_producing": [
-      "Deadline",
-      "Phys.org",
-      "Variety",
       "Al Jazeera",
-      "MarketWatch",
-      "Hollywood Reporter",
-      "BBC",
-      "CNBC",
-      "Engadget",
-      "TechRadar",
-      "France 24",
-      "TechCrunch",
-      "The Verge",
+      "Phys.org",
+      "Deadline",
       "中新网",
       "界面新闻",
+      "BBC",
+      "Variety",
+      "CNBC",
+      "France 24",
+      "MarketWatch",
+      "TechRadar",
+      "Hollywood Reporter",
       "Mashable",
-      "The Next Web",
-      "Ars Technica",
-      "CNET",
-      "Financial Times",
-      "CBS News",
-      "NPR",
-      "DW",
-      "ZDNet",
       "中新网财经",
+      "Engadget",
+      "CNET",
+      "CBS News",
+      "Ars Technica",
+      "TechCrunch",
+      "DW",
+      "NPR",
+      "The Verge",
+      "Financial Times",
+      "ScienceDaily",
+      "ZDNet",
+      "The Next Web",
       "Wired"
     ],
     "false_claims": []
