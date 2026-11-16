@@ -89,6 +89,11 @@ LIFE = ("物价", "菜价", "油价", "电价", "水价", "燃气", "补贴", "�
 CAT_BONUS = {"society": 3.0, "life": 3.0, "culture": 4.0, "travel": 4.0,
              "health": 2.0, "education": 2.0, "technology": 1.0,
              "finance": 0.0, "business": 0.0, "science": 1.0}
+# 2026-11-16 用户拍板：「太离地的新闻情愿空缺也不要报 尽量报珠三角或者大湾区这些地域新闻」。
+# 硬门槛：标题/摘要里没有任何珠三角、大湾区字眼、也不是本地源来的稿 → 整条不进池。
+# 宁可当天只有 1 条甚至 0 条（视频侧会自动跳过要闻段），也不念「药科大学建校九十周年」这种离地稿。
+GBA = ("珠三角", "大湾区", "粤港澳", "广东", "广州", "深圳", "佛山", "东莞", "珠海", "中山",
+       "惠州", "江门", "肇庆", "香港", "澳门", "粤")
 LOCAL = ("广州", "广东", "粤港澳", "大湾区", "佛山", "南海", "深圳", "珠海", "东莞", "中山")
 
 
@@ -135,6 +140,9 @@ def pick(articles: list[dict], now: dt.datetime, window_h: float, limit: int) ->
         title = zh or raw
         if latin_ratio(title) > 0.35:           # 机翻残缺 / 英文残留
             continue
+        # dayoo.json 用 published_at / title，news.json 用 published / zh_title，这里统一
+        if not a.get("published") and a.get("published_at"):
+            a["published"] = a["published_at"]
         try:
             when = dt.datetime.fromisoformat(a["published"])
         except Exception:
@@ -154,6 +162,10 @@ def pick(articles: list[dict], now: dt.datetime, window_h: float, limit: int) ->
         ct = clean_title(title)
         if len(ct) < 6:
             continue
+        # 地域门槛（2026-11-16）：本地源直通，其它源必须提到珠三角/大湾区地名
+        _gba = a.get("region") == "gba" or any(k in blob for k in GBA)
+        if not _gba:
+            continue
 
         category = (a.get("category") or "").strip()
         score = 3.0                                        # 原生中文基数
@@ -164,7 +176,9 @@ def pick(articles: list[dict], now: dt.datetime, window_h: float, limit: int) ->
         score += min(4.5, 1.5 * has(blob, LIFE))
         score += CAT_BONUS.get(category, 0.0)
         score += max(0.0, 3.0 - age_h / 10.0)               # 越新越好
-        if any(k in ct for k in LOCAL):
+        if a.get("region") == "gba":
+            score += 6.0                                    # 本地源（大洋网广州/广东频道）最高优先
+        elif any(k in ct for k in LOCAL):
             score += 3.0                                    # 本地优先：观众是广州街坊
         # 上口性：标题里没有事件动词、也没有具体数字的，视频侧的口播门禁会整条丢掉
         # （「赓续药学薪火奔赴百年之约」这种），所以站点侧先筛一次，保证 3 条都念得出来。
@@ -238,6 +252,15 @@ def main() -> int:
         return 1
     data = json.loads(src.read_text("utf-8"))
     articles = data.get("articles") or []
+    # 2026-11-16：并入大洋网（广州日报）本地稿——广东省内 RSS 全死，只能抓频道列表页
+    dayoo = ROOT / "data" / "dayoo.json"
+    if dayoo.exists():
+        try:
+            extra = (json.loads(dayoo.read_text("utf-8")) or {}).get("articles") or []
+            articles = articles + extra
+            print(f"[brief] 并入大洋网本地稿 {len(extra)} 条")
+        except Exception as e:
+            print(f"!! 大洋网稿件读取失败：{str(e)[:60]}")
     try:
         now = dt.datetime.fromisoformat(str(data.get("updated")))
     except Exception:
