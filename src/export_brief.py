@@ -137,6 +137,28 @@ def bigrams(t: str) -> set[str]:
     return {zh[i:i + 2] for i in range(len(zh) - 1)}
 
 
+# 相对时间必须落成绝对日期（2026-11-16 用户抓到的 bug）：
+# 11-16 的稿写「流星雨之王后天凌晨迎来极大」，第二天早上（11-17）照读「后天」，
+# 观众听到的「后天」其实是 11-19 —— 差咗两日，等于报错。
+# 口径：一律按稿件发布日解析成「M月D号」，视频读出来就唔会有歧义。
+_REL_DAYS = [("大后天", 3), ("后天", 2), ("明日", 1), ("明天", 1), ("今日", 0), ("今天", 0),
+             ("昨日", -1), ("昨天", -1), ("前日", -2), ("前天", -2)]
+
+
+def absolutize_time(title: str, published: str) -> str:
+    if not title or not published:
+        return title
+    try:
+        base = dt.datetime.fromisoformat(published).astimezone(dt.timezone(dt.timedelta(hours=8))).date()
+    except Exception:
+        return title
+    for word, off in _REL_DAYS:
+        if word in title:
+            d = base + dt.timedelta(days=off)
+            return title.replace(word, f"{d.month}月{d.day}号", 1)
+    return title
+
+
 def pick(articles: list[dict], now: dt.datetime, window_h: float, limit: int) -> list[dict]:
     stats_pool: list[dict] = []      # 公报数字：只在「一条文化/生活稿都挑不到」时兜底
     scored: list[dict] = []
@@ -175,7 +197,7 @@ def pick(articles: list[dict], now: dt.datetime, window_h: float, limit: int) ->
         # 只用中文原生稿：实测机器翻译会出「据《华尔日报》报道」「全世界都是长条形的美国」这种句子
         if (a.get("original_lang") or "zh") != "zh":
             continue
-        ct = clean_title(title)
+        ct = absolutize_time(clean_title(title), a.get("published") or "")
         if len(ct) < 6:
             continue
         # 地域门槛（2026-11-16）：本地源直通，其它源必须提到珠三角/大湾区地名
@@ -215,11 +237,21 @@ def pick(articles: list[dict], now: dt.datetime, window_h: float, limit: int) ->
         if "将于" in ct or "即将" in ct or "有望" in ct:
             continue                                         # 纯规划稿（「将推…廊道」「拟建…」）直接丢
         score -= 2.0 * has(ct, FUTURE)
+        # id / time 兜底：大洋网本地稿没有 id、也没有现成的 time 字段，
+        # 视频画面右下角「来源 时间」会变成「广州日报」后面空白（11-17 实测踩到）。
+        _id = a.get("id") or a.get("link") or a.get("url") or title
+        _time = (a.get("time") or "").strip()
+        if not _time:
+            try:
+                _time = dt.datetime.fromisoformat(a["published"]).astimezone(
+                    dt.timezone(dt.timedelta(hours=8))).strftime("%H:%M")
+            except Exception:
+                _time = ""
         item = {
-            "id": a.get("id", ""), "title": ct, "full_title": title,
+            "id": str(abs(hash(str(_id))) % (10 ** 12)), "title": ct, "full_title": title,
             "brief": (a.get("zh_summary") or "").strip(),
-            "source": a.get("source", ""), "time": a.get("time", ""),
-            "published": a.get("published", ""), "url": a.get("link", ""),
+            "source": a.get("source", ""), "time": _time,
+            "published": a.get("published", ""), "url": a.get("link") or a.get("url", ""),
             "category": category, "score": round(score, 1),
         }
         (stats_pool if is_stats else scored).append(item)
