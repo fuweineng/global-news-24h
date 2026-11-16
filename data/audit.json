@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-11-16T03:12:33+00:00",
-  "source_updated": "2026-11-16T00:42:18.236702+00:00",
+  "generated_at": "2026-11-16T12:05:59+00:00",
+  "source_updated": "2026-11-16T04:53:14.258285+00:00",
   "summary": {
     "status": "pass",
     "checks_passed": 4,
@@ -13,80 +13,74 @@
       "label": "标题中立化覆盖率",
       "status": "pass",
       "threshold": ">= 0.90",
-      "observed": 0.95,
+      "observed": 0.9167,
       "metric": {
-        "processed": 285,
+        "processed": 275,
         "total": 300
       },
-      "detail": "15/300 条标题与英文原文完全相同，未走中立化"
+      "detail": "25/300 条标题与英文原文完全相同，未走中立化"
     },
     {
       "id": "coverage.summary",
       "label": "摘要中立化覆盖率",
       "status": "pass",
       "threshold": ">= 0.90",
-      "observed": 0.98,
+      "observed": 0.9833,
       "metric": {
-        "processed": 294,
+        "processed": 295,
         "total": 300
       },
-      "detail": "6/300 条摘要与英文原文完全相同，未走中立化"
+      "detail": "5/300 条摘要与英文原文完全相同，未走中立化"
     },
     {
       "id": "coverage.by_source",
       "label": "按来源覆盖率",
       "status": "pass",
       "threshold": "0% 源占比 < 0.50",
-      "observed": 0.95,
+      "observed": 0.9167,
       "metric": {
         "zero_rate_sources": 0,
-        "sources_total": 26
+        "sources_total": 23
       },
-      "detail": "全部 26 个来源均有中立化产出"
+      "detail": "全部 23 个来源均有中立化产出"
     },
     {
       "id": "neutrality",
       "label": "中立度残留",
       "status": "pass",
       "threshold": "<= 0.05",
-      "observed": 0.0035,
+      "observed": 0.0073,
       "metric": {
-        "processed": 285,
-        "hits": 1
+        "processed": 275,
+        "hits": 2
       },
-      "detail": "已加工 285 条中 1 条仍含情绪/反讽残留（0.4%）"
+      "detail": "已加工 275 条中 2 条仍含情绪/反讽残留（0.7%）"
     }
   ],
   "by_source": [
     {
+      "source": "Al Jazeera",
+      "total": 33,
+      "processed": 33,
+      "rate": 1.0
+    },
+    {
       "source": "Engadget",
-      "total": 28,
-      "processed": 28,
+      "total": 31,
+      "processed": 31,
       "rate": 1.0
     },
     {
       "source": "TechRadar",
-      "total": 27,
-      "processed": 27,
-      "rate": 1.0
-    },
-    {
-      "source": "Al Jazeera",
-      "total": 24,
-      "processed": 24,
-      "rate": 1.0
-    },
-    {
-      "source": "France 24",
-      "total": 20,
-      "processed": 20,
+      "total": 26,
+      "processed": 26,
       "rate": 1.0
     },
     {
       "source": "界面新闻",
       "total": 20,
-      "processed": 15,
-      "rate": 0.75
+      "processed": 10,
+      "rate": 0.5
     },
     {
       "source": "BBC",
@@ -101,55 +95,67 @@
       "rate": 1.0
     },
     {
-      "source": "MarketWatch",
-      "total": 14,
-      "processed": 14,
-      "rate": 1.0
-    },
-    {
-      "source": "Phys.org",
-      "total": 14,
-      "processed": 14,
-      "rate": 1.0
-    },
-    {
-      "source": "DW",
-      "total": 13,
-      "processed": 13,
-      "rate": 1.0
+      "source": "中新网",
+      "total": 16,
+      "processed": 6,
+      "rate": 0.375
     },
     {
       "source": "Deadline",
+      "total": 14,
+      "processed": 14,
+      "rate": 1.0
+    },
+    {
+      "source": "France 24",
+      "total": 14,
+      "processed": 14,
+      "rate": 1.0
+    },
+    {
+      "source": "Financial Times",
+      "total": 12,
+      "processed": 12,
+      "rate": 1.0
+    },
+    {
+      "source": "中新网财经",
+      "total": 12,
+      "processed": 7,
+      "rate": 0.5833
+    },
+    {
+      "source": "Hollywood Reporter",
       "total": 11,
       "processed": 11,
       "rate": 1.0
     },
     {
-      "source": "Hollywood Reporter",
+      "source": "DW",
       "total": 10,
       "processed": 10,
+      "rate": 1.0
+    },
+    {
+      "source": "Phys.org",
+      "total": 9,
+      "processed": 9,
+      "rate": 1.0
+    },
+    {
+      "source": "CNBC",
+      "total": 8,
+      "processed": 8,
+      "rate": 1.0
+    },
+    {
+      "source": "Mashable",
+      "total": 8,
+      "processed": 8,
       "rate": 1.0
     },
     {
       "source": "The Verge",
-      "total": 10,
-      "processed": 10,
-      "rate": 1.0
-    },
-    {
-      "source": "中新网财经",
-      "total": 10,
-      "processed": 5,
-      "rate": 0.5
-    },
-    {
-      "source": "中新网",
-      "total": 9,
-      "processed": 4,
-      "rate": 0.4444
-    },
-    {
-      "source": "Financial Times",
       "total": 8,
       "processed": 8,
       "rate": 1.0
@@ -161,7 +167,13 @@
       "rate": 1.0
     },
     {
-      "source": "Mashable",
+      "source": "MarketWatch",
+      "total": 7,
+      "processed": 7,
+      "rate": 1.0
+    },
+    {
+      "source": "TechCrunch",
       "total": 7,
       "processed": 7,
       "rate": 1.0
@@ -173,24 +185,6 @@
       "rate": 1.0
     },
     {
-      "source": "CNBC",
-      "total": 6,
-      "processed": 6,
-      "rate": 1.0
-    },
-    {
-      "source": "ScienceDaily",
-      "total": 6,
-      "processed": 6,
-      "rate": 1.0
-    },
-    {
-      "source": "TechCrunch",
-      "total": 6,
-      "processed": 6,
-      "rate": 1.0
-    },
-    {
       "source": "NPR",
       "total": 4,
       "processed": 4,
@@ -198,18 +192,6 @@
     },
     {
       "source": "Ars Technica",
-      "total": 2,
-      "processed": 2,
-      "rate": 1.0
-    },
-    {
-      "source": "CNET",
-      "total": 1,
-      "processed": 1,
-      "rate": 1.0
-    },
-    {
-      "source": "Sky Sports",
       "total": 1,
       "processed": 1,
       "rate": 1.0
@@ -220,6 +202,13 @@
       "source": "The Verge",
       "title": "Vulcan rocket fails, destroying 40 Amazon Leo satellites",
       "zh_title": "Vulcan 火箭发射失败，摧毁了 40 颗亚马逊 Leo 卫星",
+      "rule": "emotion",
+      "matched": "摧毁"
+    },
+    {
+      "source": "DW",
+      "title": "Rocket from Boeing-Lockheed firm fails mid-flight, destroys payload of Amazon satellites",
+      "zh_title": "波音-洛克希德公司的火箭在飞行中发生故障，摧毁了亚马逊卫星的有效载荷",
       "rule": "emotion",
       "matched": "摧毁"
     }
@@ -238,32 +227,29 @@
       "加载中…"
     ],
     "actually_producing": [
+      "Al Jazeera",
       "Engadget",
       "TechRadar",
-      "Al Jazeera",
-      "France 24",
       "界面新闻",
       "BBC",
       "Variety",
-      "MarketWatch",
-      "Phys.org",
-      "DW",
-      "Deadline",
-      "Hollywood Reporter",
-      "The Verge",
-      "中新网财经",
       "中新网",
+      "Deadline",
+      "France 24",
       "Financial Times",
-      "CBS News",
-      "Mashable",
-      "The Next Web",
+      "中新网财经",
+      "Hollywood Reporter",
+      "DW",
+      "Phys.org",
       "CNBC",
-      "ScienceDaily",
+      "Mashable",
+      "The Verge",
+      "CBS News",
+      "MarketWatch",
       "TechCrunch",
+      "The Next Web",
       "NPR",
-      "Ars Technica",
-      "CNET",
-      "Sky Sports"
+      "Ars Technica"
     ],
     "false_claims": []
   }
