@@ -41,6 +41,7 @@ POL = (
     "纪检", "落马", "双开", "抗议", "示威", "部长", "五角大楼", "外交部", "国防部",
     "参议院", "众议院", "北约", "导弹", "军舰", "停火", "和谈", "执政党", "反对党", "投票",
     "国务院", "人大", "政协", "省委", "市委", "常委会", "书记", "市长", "省长",
+    "APEC", "亚太经合",
 )
 CRIME = (
     "身亡", "遇难", "死亡", "枪击", "持刀", "被刺", "刺伤", "逮捕", "恐袭", "恐怖", "爆炸",
@@ -53,6 +54,13 @@ ADMIN = ("座谈", "调研", "部署", "推进会", "专题赛", "以赛促", "�
 # 明星八卦 / 体育比分：账号不做；演出、展览、开业不在其中
 GOSSIP = ("绯闻", "恋情", "离婚", "结婚", "红毯", "颁奖礼", "剧透", "收视率", "票房榜",
           "明星", "带货", "塌房", "道歉")
+# 天气预报类：视频里天气段已经讲咗，要闻唔再重复（用户口径：轻量、唔讲两次）
+WXNEWS = ("冷空气", "降温", "台风", "回南天", "暴雨预警", "高温预警", "寒潮", "气温将", "降雨过程")
+# 特写 / 人物 / 故事：有文采但冇「今日发生咗咩事」，早安片唔讲（用户 2026-11-16）
+STORY = ("故事", "特写", "讲述", "回忆", "访谈", "人物志", "纪实", "系列报道", "手记", "观察",
+         "深度", "专栏", "侧记", "背后", "记一位", "这些年", "他们的",
+         "日常", "图集", "组图", "掠影", "镜头", "瞬间", "影像", "一日",
+         "特别报道", "专题报道", "策划", "融媒", "报道组")
 SPORT = ("联赛", "锦标赛", "世界杯", "进球", "比分", "夺冠")
 # 股市行情：一早讲涨跌，跟街坊生活没有落点
 STOCK = ("A股", "A 股", "沪指", "深成指", "创业板", "个股", "飘绿", "收跌", "涨停", "跌停",
@@ -150,11 +158,19 @@ def pick(articles: list[dict], now: dt.datetime, window_h: float, limit: int) ->
         age_h = (now - when).total_seconds() / 3600
         if age_h < 0 or age_h > window_h:
             continue
+        # 时效硬门槛（2026-11-16 用户：没有时效的不算新闻）：窗口 30h 兜住跨夜，
+        # 但超过 24h 的稿只在本地源不够时才作兜底，不给主位。
+        stale = age_h > 24
         blob = title + " " + (a.get("zh_summary") or "") + " " + (a.get("summary") or "")[:160]
         if has(blob, POL) or has(title, POL):
             continue
+        if has(title, WXNEWS):
+            continue
+        if title.rstrip("。！").endswith("报道") and not has(title, EVENT):
+            continue
         if (has(title, CRIME) or has(title, ADMIN) or has(title, GOSSIP)
-                or has(title, SPORT) or has(title, STOCK) or has(title, FINREPORT)):
+                or has(title, SPORT) or has(title, STOCK) or has(title, FINREPORT)
+                or has(title, STORY)):
             continue
         # 只用中文原生稿：实测机器翻译会出「据《华尔日报》报道」「全世界都是长条形的美国」这种句子
         if (a.get("original_lang") or "zh") != "zh":
@@ -176,6 +192,12 @@ def pick(articles: list[dict], now: dt.datetime, window_h: float, limit: int) ->
         score += min(4.5, 1.5 * has(blob, LIFE))
         score += CAT_BONUS.get(category, 0.0)
         score += max(0.0, 3.0 - age_h / 10.0)               # 越新越好
+        if stale:
+            score -= 4.0                                   # 过 24h 只作兜底
+        if "中新网" in (a.get("source") or ""):
+            # 用户 2026-11-16：「中新网感觉不好，总是讲故事，没有时效的不算新闻」
+            # 不当主位；本地源够数时自然排在后面。
+            score -= 4.0
         if a.get("region") == "gba":
             score += 6.0                                    # 本地源（大洋网广州/广东频道）最高优先
         elif any(k in ct for k in LOCAL):
