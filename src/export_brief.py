@@ -54,6 +54,11 @@ ADMIN = ("座谈", "调研", "部署", "推进会", "专题赛", "以赛促", "�
 GOSSIP = ("绯闻", "恋情", "离婚", "结婚", "红毯", "颁奖礼", "剧透", "收视率", "票房榜",
           "明星", "带货", "塌房", "道歉")
 SPORT = ("联赛", "锦标赛", "世界杯", "进球", "比分", "夺冠")
+# 股市行情：一早讲涨跌，跟街坊生活没有落点
+STOCK = ("A股", "A 股", "沪指", "深成指", "创业板", "个股", "飘绿", "收跌", "涨停", "跌停",
+         "午评", "早盘", "收盘", "北向资金", "恒指", "纳指")
+# 投行研报/预测：不是「昨日发生的事」，早安片不讲
+FINREPORT = ("高盛", "摩根", "瑞银", "花旗", "野村", "中金", "研报", "评级", "目标价", "料将", "展望")
 
 # ── 公报数字：降权到「只够兜底」────────────────────────────────────────────
 # 规划/未来时：还没发生的事，念出来像公文（「将推…廊道」「拟建…」）
@@ -70,6 +75,10 @@ CULTURE = ("庙会", "灯会", "花市", "迎春花市", "非遗", "民俗", "�
 TRAVEL = ("景区", "景点", "公园", "花海", "赏花", "花期", "露营", "民宿", "自驾", "旅游",
           "游客", "门票", "绿道", "步道", "登山", "海岛", "古镇", "乡村游", "研学",
           "航线", "首航", "邮轮", "主题乐园", "动物园", "植物园", "湿地")
+# 事件动词：早安片要的是「有事发生」，不是「准备推什么」；没有事件动词的文化稿念出来是口号
+EVENT = ("开幕", "开业", "开园", "开馆", "开展", "举办", "举行", "亮相", "登场", "推出",
+         "开市", "迎客", "开放", "上演", "首演", "上映", "开街", "回归", "焕新", "启幕",
+         "开展", "迎来")
 OPENING = ("开业", "开馆", "开园", "开幕", "新店", "首店", "首发", "启用", "试运营",
            "投入运营", "落成", "焕新", "重开", "全新亮相", "对外开放", "免费开放")
 LIFE = ("物价", "菜价", "油价", "电价", "水价", "燃气", "补贴", "社保", "医保", "养老", "就业",
@@ -93,8 +102,14 @@ def clean_title(t: str) -> str:
     t = re.sub(r"^[（(][^）)]{0,20}[）)]", "", t)          # （乡村行·看振兴）（深圳APEC）
     t = re.sub(r"^题[:：]\s*", "", t)
     t = re.sub(r"^[丨\-—\s]+", "", t)
-    t = re.sub(r"\s+", " ", t)
-    return t.strip()
+    t = re.sub(r"\s+", " ", t).strip()
+    # 中新网标题常写成「口号 正文」（「赓续药学薪火奔赴百年之约 中国药科大学迎来建校九十周年」），
+    # 前半句是标语，念出来没有信息 —— 有后半段带事件动词时就只用后半段。
+    if " " in t:
+        head, tail = t.split(" ", 1)
+        if len(head) >= 5 and len(tail) >= 6 and any(k in tail for k in EVENT):
+            t = tail.strip()
+    return t
 
 
 def latin_ratio(t: str) -> float:
@@ -130,7 +145,8 @@ def pick(articles: list[dict], now: dt.datetime, window_h: float, limit: int) ->
         blob = title + " " + (a.get("zh_summary") or "") + " " + (a.get("summary") or "")[:160]
         if has(blob, POL) or has(title, POL):
             continue
-        if has(title, CRIME) or has(title, ADMIN) or has(title, GOSSIP) or has(title, SPORT):
+        if (has(title, CRIME) or has(title, ADMIN) or has(title, GOSSIP)
+                or has(title, SPORT) or has(title, STOCK) or has(title, FINREPORT)):
             continue
         # 只用中文原生稿：实测机器翻译会出「据《华尔日报》报道」「全世界都是长条形的美国」这种句子
         if (a.get("original_lang") or "zh") != "zh":
@@ -144,15 +160,25 @@ def pick(articles: list[dict], now: dt.datetime, window_h: float, limit: int) ->
         score += min(9.0, 3.0 * has(blob, CULTURE))
         score += min(9.0, 3.0 * has(blob, TRAVEL))
         score += min(9.0, 3.0 * has(blob, OPENING))
+        score += min(6.0, 3.0 * has(blob, EVENT))            # 「有事发生」的稿子优先
         score += min(4.5, 1.5 * has(blob, LIFE))
         score += CAT_BONUS.get(category, 0.0)
         score += max(0.0, 3.0 - age_h / 10.0)               # 越新越好
         if any(k in ct for k in LOCAL):
             score += 3.0                                    # 本地优先：观众是广州街坊
+        # 上口性：标题里没有事件动词、也没有具体数字的，视频侧的口播门禁会整条丢掉
+        # （「赓续药学薪火奔赴百年之约」这种），所以站点侧先筛一次，保证 3 条都念得出来。
+        if not (has(ct, EVENT) or re.search(r"[\d０-９]", ct)):
+            continue
         is_stats = has(ct, STATS) > 0
         if is_stats:
             score -= 8.0                                    # 「某地消费品有多少」不是民生，只作兜底
-        score -= 2.0 * has(ct, FUTURE)                       # 规划稿：还没发生，听着像公文
+        if has(ct, FUTURE) and not has(ct, EVENT):
+            continue
+        # 「昨日要闻」只能讲已经发生的事：预告稿（将于…启幕/即将开幕）念出来时态是反的
+        if "将于" in ct or "即将" in ct or "有望" in ct:
+            continue                                         # 纯规划稿（「将推…廊道」「拟建…」）直接丢
+        score -= 2.0 * has(ct, FUTURE)
         item = {
             "id": a.get("id", ""), "title": ct, "full_title": title,
             "brief": (a.get("zh_summary") or "").strip(),
