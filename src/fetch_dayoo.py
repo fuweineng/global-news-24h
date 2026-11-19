@@ -70,8 +70,11 @@ def parse(html: str, source: str) -> list[dict]:
                                         12, 0, tzinfo=dt.timezone(dt.timedelta(hours=8))).isoformat()
             except ValueError:
                 published = ""
+        # 列表页只有日期、没有具体时刻：与其编一个 12:00，不如画面写「11月16日」
+        _tlabel = f"{int(d.group(2))}月{int(d.group(3))}日" if d else ""
         items.append({"title": title, "url": href if href.startswith("http") else "https://news.dayoo.com" + href,
-                      "source": source, "published_at": published, "language": "zh",
+                      "source": source, "time": _tlabel,
+                      "published_at": published, "language": "zh",
                       "original_lang": "zh", "region": "gba", "summary": ""})
     return items
 
