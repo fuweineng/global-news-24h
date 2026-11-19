@@ -1,12 +1,12 @@
 {
  "schema_version": "1.0.0",
- "generated_at": "2026-11-19T21:24:26+08:00",
- "as_of": "2026-11-19T21:24:26+08:00",
+ "generated_at": "2026-11-19T22:24:27+08:00",
+ "as_of": "2026-11-19T22:24:27+08:00",
  "counts": {
-  "act": 28,
-  "watch": 39,
-  "read": 299,
-  "sideline": 958
+  "act": 31,
+  "watch": 42,
+  "read": 300,
+  "sideline": 959
  },
  "overview": "",
  "sections": [
@@ -14,29 +14,29 @@
    "key": "security",
    "name": "🔐 安全漏洞",
    "sub": "内核 / 发行版 / 容器 / 你的栈",
-   "total": 58,
+   "total": 63,
    "items": [
     {
-     "id": "sig-dbf67bf1a1e1f7bf",
+     "id": "sig-4861abe6acf306b3",
      "category": "security",
      "kind": "signal",
      "tier": "act",
-     "score": 349.0,
-     "title": "CVE-2026-53998 Phoenix is an AI observability and evaluation platform. From 13.0.0 until 15.7.0, the applyChatTemplate GraphQL query passed attacker-controlled F-string templa",
-     "summary": "Phoenix is an AI observability and evaluation platform. From 13.0.0 until 15.7.0, the applyChatTemplate GraphQL query passed attacker-controlled F-string templates to FStringTemplateFormatter._format, while DotDict.__getattr__ did not prevent traversal through Python private attributes. A crafted fi",
-     "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-53998",
+     "score": 548.4,
+     "title": "CVE-2026-131875 fqterm before 0.9.11 contains a heap out-of-bounds write vulnerability in FQTermDecode that allows malicious servers to corrupt memory by sending CSI sequences",
+     "summary": "fqterm before 0.9.11 contains a heap out-of-bounds write vulnerability in FQTermDecode that allows malicious servers to corrupt memory by sending CSI sequences with unbounded parameter indexes. Attackers controlling a telnet or SSH server, or intercepting cleartext telnet, can send over 30 semicolon",
+     "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-131875",
      "source_name": "NVD 严重/高危",
      "source_id": "nvd-critical",
-     "published_at": "2026-11-16T20:19:06+08:00",
-     "age_h": 73.1,
-     "cvss": 10.0,
+     "published_at": "2026-11-18T03:17:42+08:00",
+     "age_h": 43.1,
+     "cvss": 8.8,
      "in_the_wild": false,
      "flags": [
-      "cvss10",
-      "stack:py",
+      "cvss8.8",
+      "stack:web",
       "core"
      ],
-     "why": "命中你嘅栈：py；核心包；CVSS 10",
+     "why": "命中你嘅栈：web；核心包；CVSS 8.8",
      "action": "先查受影响版本，再决定即刻打补丁",
      "region": {
       "level": "global",
@@ -46,17 +46,157 @@
      "sources": [
       {
        "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-116449",
+       "published_at": "2026-11-18T16:17:59+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-54422",
+       "published_at": "2026-11-18T16:17:54+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-58402",
+       "published_at": "2026-11-18T16:17:54+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-54417",
+       "published_at": "2026-11-18T16:17:53+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-54418",
+       "published_at": "2026-11-18T16:17:53+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-54419",
+       "published_at": "2026-11-18T16:17:53+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-51030",
+       "published_at": "2026-11-18T16:17:52+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-51028",
+       "published_at": "2026-11-18T16:17:51+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-51029",
+       "published_at": "2026-11-18T16:17:51+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-48021",
+       "published_at": "2026-11-18T16:17:50+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-48023",
+       "published_at": "2026-11-18T16:17:50+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-48025",
+       "published_at": "2026-11-18T16:17:50+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2019-25785",
+       "published_at": "2026-11-18T16:17:49+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2016-20106",
+       "published_at": "2026-11-18T16:17:48+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2018-25442",
+       "published_at": "2026-11-18T16:17:48+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2018-25443",
+       "published_at": "2026-11-18T16:17:48+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2019-25782",
+       "published_at": "2026-11-18T16:17:48+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2012-20007",
+       "published_at": "2026-11-18T16:17:47+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2012-20008",
+       "published_at": "2026-11-18T16:17:47+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-82171",
+       "published_at": "2026-11-18T15:17:43+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-15263",
+       "published_at": "2026-11-18T15:17:42+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-116448",
+       "published_at": "2026-11-18T15:17:33+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-111507",
+       "published_at": "2026-11-18T15:17:32+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-116447",
+       "published_at": "2026-11-18T15:17:32+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-95787",
+       "published_at": "2026-11-18T14:17:45+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-95788",
+       "published_at": "2026-11-18T14:17:45+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-95789",
+       "published_at": "2026-11-18T14:17:45+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-126763",
+       "published_at": "2026-11-18T14:17:30+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123123",
        "published_at": "2026-11-18T14:17:29+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-116764",
-       "published_at": "2026-11-18T14:17:27+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-107515",
+       "published_at": "2026-11-18T14:17:21+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-107515",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-107516",
        "published_at": "2026-11-18T14:17:21+08:00"
       },
       {
@@ -66,23 +206,48 @@
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-121481",
-       "published_at": "2026-11-18T12:17:04+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-113699",
+       "published_at": "2026-11-18T13:17:24+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-121482",
-       "published_at": "2026-11-18T12:17:04+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-107518",
+       "published_at": "2026-11-18T13:17:23+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-107494",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130673",
+       "published_at": "2026-11-18T12:17:10+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130674",
+       "published_at": "2026-11-18T12:17:10+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130675",
+       "published_at": "2026-11-18T12:17:10+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130648",
+       "published_at": "2026-11-18T12:17:05+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-111508",
        "published_at": "2026-11-18T12:17:01+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-19707",
-       "published_at": "2026-11-18T10:16:55+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129149",
+       "published_at": "2026-11-18T11:17:38+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129705",
+       "published_at": "2026-11-18T10:16:54+08:00"
       },
       {
        "name": "NVD 严重/高危",
@@ -101,18 +266,18 @@
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-117520",
-       "published_at": "2026-11-18T06:17:28+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-2235",
+       "published_at": "2026-11-18T08:17:19+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-107739",
-       "published_at": "2026-11-18T06:17:27+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-131959",
+       "published_at": "2026-11-18T08:17:19+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-107740",
-       "published_at": "2026-11-18T06:17:27+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123132",
+       "published_at": "2026-11-18T06:17:29+08:00"
       },
       {
        "name": "NVD 严重/高危",
@@ -126,8 +291,88 @@
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-131871",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-131875",
+       "published_at": "2026-11-18T03:17:42+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-131800",
        "published_at": "2026-11-18T03:17:41+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-107950",
+       "published_at": "2026-11-18T03:17:40+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-125276",
+       "published_at": "2026-11-18T03:17:40+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-131820",
+       "published_at": "2026-11-18T02:17:41+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-88711",
+       "published_at": "2026-11-18T02:17:41+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-116637",
+       "published_at": "2026-11-18T02:17:40+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-119469",
+       "published_at": "2026-11-18T02:17:40+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-110307",
+       "published_at": "2026-11-18T02:17:39+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-112740",
+       "published_at": "2026-11-18T01:17:49+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-92182",
+       "published_at": "2026-11-18T00:18:49+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-131852",
+       "published_at": "2026-11-18T00:18:43+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-131849",
+       "published_at": "2026-11-18T00:18:42+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-131850",
+       "published_at": "2026-11-18T00:18:42+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-131851",
+       "published_at": "2026-11-18T00:18:42+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-126975",
+       "published_at": "2026-11-18T00:18:38+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-126976",
+       "published_at": "2026-11-18T00:18:38+08:00"
       },
       {
        "name": "NVD 严重/高危",
@@ -146,12 +391,32 @@
       },
       {
        "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-126970",
+       "published_at": "2026-11-18T00:18:37+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-126971",
+       "published_at": "2026-11-18T00:18:37+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-126972",
        "published_at": "2026-11-18T00:18:37+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-118630",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-126973",
+       "published_at": "2026-11-18T00:18:37+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-126974",
+       "published_at": "2026-11-18T00:18:37+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-126962",
        "published_at": "2026-11-18T00:18:36+08:00"
       },
       {
@@ -161,8 +426,13 @@
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130020",
-       "published_at": "2026-11-17T23:17:52+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-126967",
+       "published_at": "2026-11-18T00:18:36+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-114822",
+       "published_at": "2026-11-17T22:18:10+08:00"
       },
       {
        "name": "NVD 严重/高危",
@@ -171,542 +441,7 @@
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-114828",
-       "published_at": "2026-11-17T22:18:10+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-114815",
-       "published_at": "2026-11-17T22:18:09+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-114818",
-       "published_at": "2026-11-17T22:18:09+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-114809",
-       "published_at": "2026-11-17T22:18:08+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-114799",
-       "published_at": "2026-11-17T22:18:07+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-114788",
-       "published_at": "2026-11-17T22:18:06+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-101848",
-       "published_at": "2026-11-17T22:18:05+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-114785",
-       "published_at": "2026-11-17T22:18:05+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-101693",
-       "published_at": "2026-11-17T22:18:04+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130955",
-       "published_at": "2026-11-17T21:17:51+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130956",
-       "published_at": "2026-11-17T21:17:51+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130957",
-       "published_at": "2026-11-17T21:17:51+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130940",
-       "published_at": "2026-11-17T21:17:49+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130931",
-       "published_at": "2026-11-17T21:17:48+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130932",
-       "published_at": "2026-11-17T21:17:48+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130934",
-       "published_at": "2026-11-17T21:17:48+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130926",
-       "published_at": "2026-11-17T21:17:47+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130860",
-       "published_at": "2026-11-17T20:17:51+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130839",
-       "published_at": "2026-11-17T20:17:48+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130841",
-       "published_at": "2026-11-17T20:17:48+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-119292",
-       "published_at": "2026-11-17T20:17:36+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-119293",
-       "published_at": "2026-11-17T20:17:36+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-93299",
-       "published_at": "2026-11-17T19:18:03+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-84855",
-       "published_at": "2026-11-17T19:18:02+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-85646",
-       "published_at": "2026-11-17T19:18:02+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-85648",
-       "published_at": "2026-11-17T19:18:02+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-77942",
-       "published_at": "2026-11-17T19:18:01+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-77943",
-       "published_at": "2026-11-17T19:18:01+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-16780",
-       "published_at": "2026-11-17T19:17:57+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-18826",
-       "published_at": "2026-11-17T19:17:57+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-18827",
-       "published_at": "2026-11-17T19:17:57+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-65132",
-       "published_at": "2026-11-17T17:18:08+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130801",
-       "published_at": "2026-11-17T17:18:05+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130802",
-       "published_at": "2026-11-17T17:18:05+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130803",
-       "published_at": "2026-11-17T17:18:05+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-100967",
-       "published_at": "2026-11-17T17:17:43+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-100968",
-       "published_at": "2026-11-17T17:17:43+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-122141",
-       "published_at": "2026-11-17T16:17:40+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-100971",
-       "published_at": "2026-11-17T16:17:34+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-100975",
-       "published_at": "2026-11-17T16:17:34+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-100963",
-       "published_at": "2026-11-17T16:17:33+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123050",
-       "published_at": "2026-11-17T15:17:33+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129287",
-       "published_at": "2026-11-17T11:17:28+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129280",
-       "published_at": "2026-11-17T11:17:27+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129281",
-       "published_at": "2026-11-17T11:17:27+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129282",
-       "published_at": "2026-11-17T11:17:27+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129286",
-       "published_at": "2026-11-17T11:17:27+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129272",
-       "published_at": "2026-11-17T11:17:26+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129273",
-       "published_at": "2026-11-17T11:17:26+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129274",
-       "published_at": "2026-11-17T11:17:26+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129275",
-       "published_at": "2026-11-17T11:17:26+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-125162",
-       "published_at": "2026-11-17T11:17:25+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-119621",
-       "published_at": "2026-11-17T11:17:24+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-118496",
-       "published_at": "2026-11-17T10:17:21+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-118498",
-       "published_at": "2026-11-17T10:17:21+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130382",
-       "published_at": "2026-11-17T02:17:22+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130375",
-       "published_at": "2026-11-17T02:17:21+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130351",
-       "published_at": "2026-11-17T02:17:16+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130074",
-       "published_at": "2026-11-16T22:18:22+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-62336",
-       "published_at": "2026-11-16T20:19:07+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-53998",
-       "published_at": "2026-11-16T20:19:06+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-126526",
-       "published_at": "2026-11-16T20:19:00+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-101327",
-       "published_at": "2026-11-16T19:17:23+08:00"
-      },
-      {
-       "name": "Linux 内核 CVE 公告",
-       "url": "https://lore.kernel.org/linux-cve-announce/2026111639-CVE-2026-99299-8a84@gregkh/",
-       "published_at": "2026-11-16T17:59:53+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-84443",
-       "published_at": "2026-11-16T17:17:35+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129236",
-       "published_at": "2026-11-16T17:17:31+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129943",
-       "published_at": "2026-11-16T15:17:29+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129872",
-       "published_at": "2026-11-16T15:17:25+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-99299",
-       "published_at": "2026-11-16T10:17:03+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124672",
-       "published_at": "2026-11-16T09:17:13+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129540",
-       "published_at": "2026-11-16T02:17:12+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123006",
-       "published_at": "2026-11-15T21:16:53+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129451",
-       "published_at": "2026-11-15T13:16:58+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129445",
-       "published_at": "2026-11-15T10:16:53+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-114452",
-       "published_at": "2026-11-15T07:16:54+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124673",
-       "published_at": "2026-11-15T07:16:54+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129359",
-       "published_at": "2026-11-15T03:16:51+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129354",
-       "published_at": "2026-11-15T01:18:03+08:00"
-      }
-     ],
-     "source_count": 103,
-     "tags": [
-      "cve",
-      "kernel"
-     ]
-    },
-    {
-     "id": "sig-2cec79c1b2f795e0",
-     "category": "security",
-     "kind": "signal",
-     "tier": "act",
-     "score": 292.3,
-     "title": "CVE-2026-131800 A stored cross-site scripting vulnerability was identified in GitHub Enterprise Server that allowed an organization member with permission to manage custom-prop",
-     "summary": "A stored cross-site scripting vulnerability was identified in GitHub Enterprise Server that allowed an organization member with permission to manage custom-property definitions and edit property values to add an attacker-controlled SSH authentication key to the personal account of another member thr",
-     "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-131800",
-     "source_name": "NVD 严重/高危",
-     "source_id": "nvd-critical",
-     "published_at": "2026-11-18T03:17:41+08:00",
-     "age_h": 42.1,
-     "cvss": 8.3,
-     "in_the_wild": false,
-     "flags": [
-      "cvss8.3",
-      "stack:web",
-      "core"
-     ],
-     "why": "命中你嘅栈：web；核心包；CVSS 8.3",
-     "action": "先查受影响版本，再决定即刻打补丁",
-     "region": {
-      "level": "global",
-      "name": "global",
-      "parents": []
-     },
-     "sources": [
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-126763",
-       "published_at": "2026-11-18T14:17:30+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-110009",
-       "published_at": "2026-11-18T14:17:25+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130648",
-       "published_at": "2026-11-18T12:17:05+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-126706",
-       "published_at": "2026-11-18T11:17:38+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129149",
-       "published_at": "2026-11-18T11:17:38+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-110486",
-       "published_at": "2026-11-18T11:17:37+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-126708",
-       "published_at": "2026-11-18T10:16:54+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129705",
-       "published_at": "2026-11-18T10:16:54+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130491",
-       "published_at": "2026-11-18T10:16:54+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-131800",
-       "published_at": "2026-11-18T03:17:41+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-107950",
-       "published_at": "2026-11-18T03:17:40+08:00"
-      },
-      {
-       "name": "oss-security 邮件列表",
-       "url": "https://seclists.org/oss-sec/2026/q4/746",
-       "published_at": "2026-11-18T02:20:03+08:00"
-      },
-      {
-       "name": "oss-security 邮件列表",
-       "url": "https://seclists.org/oss-sec/2026/q4/744",
-       "published_at": "2026-11-18T02:20:03+08:00"
-      },
-      {
-       "name": "oss-security 邮件列表",
-       "url": "https://seclists.org/oss-sec/2026/q4/743",
-       "published_at": "2026-11-18T02:20:03+08:00"
-      },
-      {
-       "name": "oss-security 邮件列表",
-       "url": "https://seclists.org/oss-sec/2026/q4/742",
-       "published_at": "2026-11-18T02:20:03+08:00"
-      },
-      {
-       "name": "oss-security 邮件列表",
-       "url": "https://seclists.org/oss-sec/2026/q4/741",
-       "published_at": "2026-11-18T02:20:03+08:00"
-      },
-      {
-       "name": "oss-security 邮件列表",
-       "url": "https://seclists.org/oss-sec/2026/q4/740",
-       "published_at": "2026-11-18T02:20:03+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-116637",
-       "published_at": "2026-11-18T02:17:40+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-131852",
-       "published_at": "2026-11-18T00:18:43+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-131848",
-       "published_at": "2026-11-18T00:18:42+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-131849",
-       "published_at": "2026-11-18T00:18:42+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-131851",
-       "published_at": "2026-11-18T00:18:42+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-114822",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-114827",
        "published_at": "2026-11-17T22:18:10+08:00"
       },
       {
@@ -726,6 +461,11 @@
       },
       {
        "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-114815",
+       "published_at": "2026-11-17T22:18:09+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-114817",
        "published_at": "2026-11-17T22:18:09+08:00"
       },
@@ -733,6 +473,21 @@
        "name": "NVD 严重/高危",
        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-114819",
        "published_at": "2026-11-17T22:18:09+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-114809",
+       "published_at": "2026-11-17T22:18:08+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-114799",
+       "published_at": "2026-11-17T22:18:07+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-114788",
+       "published_at": "2026-11-17T22:18:06+08:00"
       },
       {
        "name": "NVD 严重/高危",
@@ -761,6 +516,11 @@
       },
       {
        "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-114785",
+       "published_at": "2026-11-17T22:18:05+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-101838",
        "published_at": "2026-11-17T22:18:04+08:00"
       },
@@ -771,32 +531,82 @@
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-102529",
-       "published_at": "2026-11-17T21:17:36+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130960",
+       "published_at": "2026-11-17T21:17:52+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130851",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130957",
+       "published_at": "2026-11-17T21:17:51+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130944",
+       "published_at": "2026-11-17T21:17:50+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130948",
+       "published_at": "2026-11-17T21:17:50+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130938",
+       "published_at": "2026-11-17T21:17:49+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130930",
+       "published_at": "2026-11-17T21:17:48+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130926",
+       "published_at": "2026-11-17T21:17:47+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130918",
+       "published_at": "2026-11-17T21:17:46+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130917",
+       "published_at": "2026-11-17T21:17:45+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130856",
+       "published_at": "2026-11-17T20:17:51+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130849",
        "published_at": "2026-11-17T20:17:50+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130853",
-       "published_at": "2026-11-17T20:17:50+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130838",
+       "published_at": "2026-11-17T20:17:48+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-62267",
-       "published_at": "2026-11-17T19:18:00+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130839",
+       "published_at": "2026-11-17T20:17:48+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21600",
-       "published_at": "2026-11-17T18:17:57+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130840",
+       "published_at": "2026-11-17T20:17:48+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21601",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130841",
+       "published_at": "2026-11-17T20:17:48+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21605",
        "published_at": "2026-11-17T18:17:57+08:00"
       },
       {
@@ -811,12 +621,17 @@
       },
       {
        "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21593",
+       "published_at": "2026-11-17T18:17:56+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21594",
        "published_at": "2026-11-17T18:17:56+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21595",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21596",
        "published_at": "2026-11-17T18:17:56+08:00"
       },
       {
@@ -831,12 +646,432 @@
       },
       {
        "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21590",
+       "published_at": "2026-11-17T18:17:55+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21592",
+       "published_at": "2026-11-17T18:17:55+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-65132",
+       "published_at": "2026-11-17T17:18:08+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130801",
+       "published_at": "2026-11-17T17:18:05+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-126558",
+       "published_at": "2026-11-17T17:18:00+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-126552",
+       "published_at": "2026-11-17T17:17:59+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-100967",
+       "published_at": "2026-11-17T17:17:43+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-100968",
+       "published_at": "2026-11-17T17:17:43+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-65106",
+       "published_at": "2026-11-17T16:17:52+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-122149",
+       "published_at": "2026-11-17T16:17:40+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-100980",
+       "published_at": "2026-11-17T16:17:35+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-100971",
+       "published_at": "2026-11-17T16:17:34+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-100972",
+       "published_at": "2026-11-17T16:17:34+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-100975",
+       "published_at": "2026-11-17T16:17:34+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-100977",
+       "published_at": "2026-11-17T16:17:34+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-100963",
+       "published_at": "2026-11-17T16:17:33+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-77224",
+       "published_at": "2026-11-17T15:17:42+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123050",
+       "published_at": "2026-11-17T15:17:33+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-82025",
+       "published_at": "2026-11-17T14:17:47+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130584",
+       "published_at": "2026-11-17T14:17:45+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-120387",
+       "published_at": "2026-11-17T05:18:33+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-125275",
+       "published_at": "2026-11-17T03:17:00+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130380",
+       "published_at": "2026-11-17T02:17:22+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130382",
+       "published_at": "2026-11-17T02:17:22+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-79614",
+       "published_at": "2026-11-17T02:17:22+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130374",
+       "published_at": "2026-11-17T02:17:21+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130369",
+       "published_at": "2026-11-17T02:17:20+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130366",
+       "published_at": "2026-11-17T02:17:19+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130361",
+       "published_at": "2026-11-17T02:17:18+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130351",
+       "published_at": "2026-11-17T02:17:16+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-12487",
+       "published_at": "2026-11-17T02:17:13+08:00"
+      },
+      {
+       "name": "oss-security 邮件列表",
+       "url": "https://seclists.org/oss-sec/2026/q4/707",
+       "published_at": "2026-11-17T00:20:05+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130071",
+       "published_at": "2026-11-16T22:18:22+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130072",
+       "published_at": "2026-11-16T22:18:22+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-111760",
+       "published_at": "2026-11-16T21:17:18+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-126526",
+       "published_at": "2026-11-16T20:19:00+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124223",
+       "published_at": "2026-11-16T20:18:56+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-5809",
+       "published_at": "2026-11-16T15:17:06+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-77033",
+       "published_at": "2026-11-16T13:17:23+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-19732",
+       "published_at": "2026-11-16T13:17:22+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-67250",
+       "published_at": "2026-11-16T12:17:59+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21175",
+       "published_at": "2026-11-16T12:17:58+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21176",
+       "published_at": "2026-11-16T12:17:58+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21151",
+       "published_at": "2026-11-16T12:17:55+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21152",
+       "published_at": "2026-11-16T12:17:55+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21153",
+       "published_at": "2026-11-16T12:17:55+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-82156",
+       "published_at": "2026-11-16T04:16:44+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123006",
+       "published_at": "2026-11-15T21:16:53+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-125832",
+       "published_at": "2026-11-15T14:17:26+08:00"
+      }
+     ],
+     "source_count": 169,
+     "tags": [
+      "cve",
+      "oss"
+     ]
+    },
+    {
+     "id": "sig-bec13992852921ba",
+     "category": "security",
+     "kind": "signal",
+     "tier": "act",
+     "score": 216.7,
+     "title": "CVE-2026-127143 LMS (Lan Management System) is vulnerable to privilege escalation in the lmsd daemon. The daemon loads the libraries listed in the LMS database without checking",
+     "summary": "LMS (Lan Management System) is vulnerable to privilege escalation in the lmsd daemon. The daemon loads the libraries listed in the LMS database without checking that they come from a trusted location. An attacker with access to the web server process or with write access to the LMS database can regi",
+     "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-127143",
+     "source_name": "NVD 严重/高危",
+     "source_id": "nvd-critical",
+     "published_at": "2026-11-18T13:17:25+08:00",
+     "age_h": 33.1,
+     "cvss": 9.4,
+     "in_the_wild": false,
+     "flags": [
+      "cvss9.4",
+      "stack:web",
+      "core"
+     ],
+     "why": "命中你嘅栈：web；核心包；CVSS 9.4",
+     "action": "先查受影响版本，再决定即刻打补丁",
+     "region": {
+      "level": "global",
+      "name": "global",
+      "parents": []
+     },
+     "sources": [
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-116764",
+       "published_at": "2026-11-18T14:17:27+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-127143",
+       "published_at": "2026-11-18T13:17:25+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-109860",
+       "published_at": "2026-11-18T13:17:24+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-121481",
+       "published_at": "2026-11-18T12:17:04+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-119220",
+       "published_at": "2026-11-18T12:17:02+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-107494",
+       "published_at": "2026-11-18T12:17:01+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-126706",
+       "published_at": "2026-11-18T11:17:38+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-19707",
+       "published_at": "2026-11-18T10:16:55+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-116643",
+       "published_at": "2026-11-18T02:17:40+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-114204",
+       "published_at": "2026-11-18T02:17:39+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-126969",
+       "published_at": "2026-11-18T00:18:37+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130020",
+       "published_at": "2026-11-17T23:17:52+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-114828",
+       "published_at": "2026-11-17T22:18:10+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-114818",
+       "published_at": "2026-11-17T22:18:09+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130931",
+       "published_at": "2026-11-17T21:17:48+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130934",
+       "published_at": "2026-11-17T21:17:48+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-102529",
+       "published_at": "2026-11-17T21:17:36+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130622",
+       "published_at": "2026-11-17T20:17:44+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130623",
+       "published_at": "2026-11-17T20:17:44+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-62267",
+       "published_at": "2026-11-17T19:18:00+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-86061",
+       "published_at": "2026-11-17T18:17:59+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21600",
+       "published_at": "2026-11-17T18:17:57+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21601",
+       "published_at": "2026-11-17T18:17:57+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21602",
+       "published_at": "2026-11-17T18:17:57+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21603",
+       "published_at": "2026-11-17T18:17:57+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21591",
        "published_at": "2026-11-17T18:17:55+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-122149",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-104100",
+       "published_at": "2026-11-17T18:17:46+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130802",
+       "published_at": "2026-11-17T17:18:05+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130803",
+       "published_at": "2026-11-17T17:18:05+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-122147",
        "published_at": "2026-11-17T16:17:40+08:00"
       },
       {
@@ -846,23 +1081,13 @@
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-77224",
-       "published_at": "2026-11-17T15:17:42+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130627",
-       "published_at": "2026-11-17T15:17:40+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-118789",
        "published_at": "2026-11-17T15:17:32+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130603",
-       "published_at": "2026-11-17T14:17:47+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-107190",
+       "published_at": "2026-11-17T14:17:32+08:00"
       },
       {
        "name": "NVD 严重/高危",
@@ -876,8 +1101,13 @@
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21609",
-       "published_at": "2026-11-17T10:17:21+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-119622",
+       "published_at": "2026-11-17T11:17:24+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-125159",
+       "published_at": "2026-11-17T11:17:24+08:00"
       },
       {
        "name": "NVD 严重/高危",
@@ -905,24 +1135,9 @@
        "published_at": "2026-11-17T05:18:29+08:00"
       },
       {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130374",
-       "published_at": "2026-11-17T02:17:21+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130369",
-       "published_at": "2026-11-17T02:17:20+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130072",
-       "published_at": "2026-11-16T22:18:22+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-57150",
-       "published_at": "2026-11-16T21:17:29+08:00"
+       "name": "oss-security 邮件列表",
+       "url": "https://seclists.org/oss-sec/2026/q4/712",
+       "published_at": "2026-11-17T00:20:05+08:00"
       },
       {
        "name": "NVD 严重/高危",
@@ -931,38 +1146,33 @@
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-111760",
-       "published_at": "2026-11-16T21:17:18+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-120699",
+       "published_at": "2026-11-16T21:17:20+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129295",
-       "published_at": "2026-11-16T18:17:30+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-53998",
+       "published_at": "2026-11-16T20:19:06+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129297",
-       "published_at": "2026-11-16T18:17:30+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-83817",
+       "published_at": "2026-11-16T19:17:53+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-100101",
-       "published_at": "2026-11-16T17:17:26+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-91115",
+       "published_at": "2026-11-16T17:17:37+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-101892",
-       "published_at": "2026-11-16T17:17:26+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129236",
+       "published_at": "2026-11-16T17:17:31+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-15707",
-       "published_at": "2026-11-16T12:17:53+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-116288",
-       "published_at": "2026-11-16T12:17:43+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-110710",
+       "published_at": "2026-11-16T13:17:18+08:00"
       },
       {
        "name": "NVD 严重/高危",
@@ -971,69 +1181,59 @@
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129525",
-       "published_at": "2026-11-15T22:17:19+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129453",
+       "published_at": "2026-11-15T14:17:26+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123002",
-       "published_at": "2026-11-15T22:17:18+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129452",
+       "published_at": "2026-11-15T13:16:59+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123638",
-       "published_at": "2026-11-15T22:17:18+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129451",
+       "published_at": "2026-11-15T13:16:58+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-125617",
-       "published_at": "2026-11-15T22:17:18+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129450",
+       "published_at": "2026-11-15T12:17:20+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-126338",
-       "published_at": "2026-11-15T22:17:18+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129449",
+       "published_at": "2026-11-15T11:17:10+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-125423",
-       "published_at": "2026-11-15T21:16:54+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-82663",
-       "published_at": "2026-11-15T10:16:54+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129349",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129445",
        "published_at": "2026-11-15T10:16:53+08:00"
       },
       {
-       "name": "oss-security 邮件列表",
-       "url": "https://seclists.org/oss-sec/2026/q4/692",
-       "published_at": "2026-11-15T00:20:05+08:00"
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129444",
+       "published_at": "2026-11-15T09:16:44+08:00"
       }
      ],
-     "source_count": 84,
+     "source_count": 58,
      "tags": [
       "cve",
       "oss"
      ]
     },
     {
-     "id": "sig-4861abe6acf306b3",
+     "id": "sig-6cc265796f92eb84",
      "category": "security",
      "kind": "signal",
      "tier": "act",
-     "score": 221.4,
-     "title": "CVE-2026-131875 fqterm before 0.9.11 contains a heap out-of-bounds write vulnerability in FQTermDecode that allows malicious servers to corrupt memory by sending CSI sequences",
-     "summary": "fqterm before 0.9.11 contains a heap out-of-bounds write vulnerability in FQTermDecode that allows malicious servers to corrupt memory by sending CSI sequences with unbounded parameter indexes. Attackers controlling a telnet or SSH server, or intercepting cleartext telnet, can send over 30 semicolon",
-     "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-131875",
+     "score": 154.4,
+     "title": "CVE-2026-129855 RedAmon before 7.8.0 contains a missing authentication vulnerability in the kali-sandbox terminal server that allows unauthenticated attackers to obtain a root",
+     "summary": "RedAmon before 7.8.0 contains a missing authentication vulnerability in the kali-sandbox terminal server that allows unauthenticated attackers to obtain a root shell by connecting to its WebSocket listener on port 8016. Attackers who can reach the port from co-resident containers or the host loopbac",
+     "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129855",
      "source_name": "NVD 严重/高危",
      "source_id": "nvd-critical",
-     "published_at": "2026-11-18T03:17:42+08:00",
-     "age_h": 42.1,
+     "published_at": "2026-11-16T15:17:22+08:00",
+     "age_h": 79.1,
      "cvss": 8.8,
      "in_the_wild": false,
      "flags": [
@@ -1051,248 +1251,33 @@
      "sources": [
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-107516",
-       "published_at": "2026-11-18T14:17:21+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-127218",
+       "published_at": "2026-11-16T19:17:35+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-132121",
-       "published_at": "2026-11-18T13:17:27+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129295",
+       "published_at": "2026-11-16T18:17:30+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-113699",
-       "published_at": "2026-11-18T13:17:24+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129297",
+       "published_at": "2026-11-16T18:17:30+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-107518",
-       "published_at": "2026-11-18T13:17:23+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-104007",
+       "published_at": "2026-11-16T17:17:27+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130673",
-       "published_at": "2026-11-18T12:17:10+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-100101",
+       "published_at": "2026-11-16T17:17:26+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130675",
-       "published_at": "2026-11-18T12:17:10+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130650",
-       "published_at": "2026-11-18T12:17:06+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-111508",
-       "published_at": "2026-11-18T12:17:01+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-131959",
-       "published_at": "2026-11-18T08:17:19+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-131875",
-       "published_at": "2026-11-18T03:17:42+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-131820",
-       "published_at": "2026-11-18T02:17:41+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-116643",
-       "published_at": "2026-11-18T02:17:40+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-110307",
-       "published_at": "2026-11-18T02:17:39+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-114202",
-       "published_at": "2026-11-18T02:17:39+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-114204",
-       "published_at": "2026-11-18T02:17:39+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-114205",
-       "published_at": "2026-11-18T02:17:39+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-111801",
-       "published_at": "2026-11-18T01:17:49+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-112740",
-       "published_at": "2026-11-18T01:17:49+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-92182",
-       "published_at": "2026-11-18T00:18:49+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-126969",
-       "published_at": "2026-11-18T00:18:37+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130856",
-       "published_at": "2026-11-17T20:17:51+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130857",
-       "published_at": "2026-11-17T20:17:51+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130849",
-       "published_at": "2026-11-17T20:17:50+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130848",
-       "published_at": "2026-11-17T20:17:49+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21602",
-       "published_at": "2026-11-17T18:17:57+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21603",
-       "published_at": "2026-11-17T18:17:57+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21605",
-       "published_at": "2026-11-17T18:17:57+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21593",
-       "published_at": "2026-11-17T18:17:56+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21596",
-       "published_at": "2026-11-17T18:17:56+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21592",
-       "published_at": "2026-11-17T18:17:55+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-126558",
-       "published_at": "2026-11-17T17:18:00+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-126552",
-       "published_at": "2026-11-17T17:17:59+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-65106",
-       "published_at": "2026-11-17T16:17:52+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-100980",
-       "published_at": "2026-11-17T16:17:35+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-100972",
-       "published_at": "2026-11-17T16:17:34+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-100977",
-       "published_at": "2026-11-17T16:17:34+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130615",
-       "published_at": "2026-11-17T14:17:47+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130584",
-       "published_at": "2026-11-17T14:17:45+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130587",
-       "published_at": "2026-11-17T14:17:45+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130589",
-       "published_at": "2026-11-17T14:17:45+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-107190",
-       "published_at": "2026-11-17T14:17:32+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-125275",
-       "published_at": "2026-11-17T03:17:00+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-79614",
-       "published_at": "2026-11-17T02:17:22+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-86676",
-       "published_at": "2026-11-17T02:17:22+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130361",
-       "published_at": "2026-11-17T02:17:18+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-12487",
-       "published_at": "2026-11-17T02:17:13+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130082",
-       "published_at": "2026-11-16T22:18:24+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130071",
-       "published_at": "2026-11-16T22:18:22+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-120698",
-       "published_at": "2026-11-16T22:18:14+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129955",
+       "published_at": "2026-11-16T15:17:31+08:00"
       },
       {
        "name": "NVD 严重/高危",
@@ -1301,8 +1286,28 @@
       },
       {
        "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129952",
+       "published_at": "2026-11-16T15:17:30+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129943",
+       "published_at": "2026-11-16T15:17:29+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129947",
        "published_at": "2026-11-16T15:17:29+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129948",
+       "published_at": "2026-11-16T15:17:29+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129941",
+       "published_at": "2026-11-16T15:17:28+08:00"
       },
       {
        "name": "NVD 严重/高危",
@@ -1316,33 +1321,123 @@
       },
       {
        "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129875",
+       "published_at": "2026-11-16T15:17:26+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129877",
+       "published_at": "2026-11-16T15:17:26+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129878",
+       "published_at": "2026-11-16T15:17:26+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129879",
+       "published_at": "2026-11-16T15:17:26+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129870",
+       "published_at": "2026-11-16T15:17:25+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129872",
+       "published_at": "2026-11-16T15:17:25+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129873",
        "published_at": "2026-11-16T15:17:25+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-5809",
-       "published_at": "2026-11-16T15:17:06+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129857",
+       "published_at": "2026-11-16T15:17:23+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-77033",
-       "published_at": "2026-11-16T13:17:23+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129855",
+       "published_at": "2026-11-16T15:17:22+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-19732",
-       "published_at": "2026-11-16T13:17:22+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129550",
+       "published_at": "2026-11-16T12:17:53+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-82156",
-       "published_at": "2026-11-16T04:16:44+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129545",
+       "published_at": "2026-11-16T12:17:52+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-125832",
-       "published_at": "2026-11-15T14:17:26+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129547",
+       "published_at": "2026-11-16T12:17:52+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-116288",
+       "published_at": "2026-11-16T12:17:43+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129784",
+       "published_at": "2026-11-16T11:16:45+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129540",
+       "published_at": "2026-11-16T02:17:12+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129494",
+       "published_at": "2026-11-16T01:17:20+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129493",
+       "published_at": "2026-11-16T01:17:19+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-127958",
+       "published_at": "2026-11-15T22:17:19+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129337",
+       "published_at": "2026-11-15T22:17:19+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-126338",
+       "published_at": "2026-11-15T22:17:18+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-125423",
+       "published_at": "2026-11-15T21:16:54+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129483",
+       "published_at": "2026-11-15T14:17:27+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-110984",
+       "published_at": "2026-11-15T07:16:53+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129464",
+       "published_at": "2026-11-15T02:17:21+08:00"
       },
       {
        "name": "NVD 严重/高危",
@@ -1350,7 +1445,7 @@
        "published_at": "2026-11-15T02:17:21+08:00"
       }
      ],
-     "source_count": 60,
+     "source_count": 39,
      "tags": [
       "cve"
      ]
@@ -1360,14 +1455,14 @@
      "category": "security",
      "kind": "signal",
      "tier": "act",
-     "score": 127.3,
+     "score": 151.3,
      "title": "CVE-2026-109858 CAST Imaging has multiple path traversal vulnerabilities in various endpoints. The application does not properly validate the path parameters, allowing an authe",
      "summary": "CAST Imaging has multiple path traversal vulnerabilities in various endpoints. The application does not properly validate the path parameters, allowing an authenticated attacker to use \"../\" sequences to escape the intended directory and read arbitrary files. Critically, by reading \"/proc/self/envir",
      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-109858",
      "source_name": "NVD 严重/高危",
      "source_id": "nvd-critical",
      "published_at": "2026-11-18T13:17:23+08:00",
-     "age_h": 32.1,
+     "age_h": 33.1,
      "cvss": 8.3,
      "in_the_wild": false,
      "flags": [
@@ -1385,23 +1480,33 @@
      "sources": [
       {
        "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-95823",
+       "published_at": "2026-11-18T15:17:44+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-132150",
+       "published_at": "2026-11-18T15:17:41+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-109857",
+       "published_at": "2026-11-18T13:17:23+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-109858",
        "published_at": "2026-11-18T13:17:23+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-125829",
-       "published_at": "2026-11-18T08:17:19+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-126708",
+       "published_at": "2026-11-18T10:16:54+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-75795",
-       "published_at": "2026-11-18T06:17:30+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-123132",
-       "published_at": "2026-11-18T06:17:29+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130491",
+       "published_at": "2026-11-18T10:16:54+08:00"
       },
       {
        "name": "NVD 严重/高危",
@@ -1420,43 +1525,38 @@
       },
       {
        "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-117520",
+       "published_at": "2026-11-18T06:17:28+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-120390",
+       "published_at": "2026-11-18T06:17:28+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-120391",
        "published_at": "2026-11-18T06:17:28+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130644",
-       "published_at": "2026-11-18T04:17:14+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-107739",
+       "published_at": "2026-11-18T06:17:27+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-112117",
-       "published_at": "2026-11-18T02:17:39+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-107740",
+       "published_at": "2026-11-18T06:17:27+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-105929",
-       "published_at": "2026-11-18T02:17:38+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129246",
+       "published_at": "2026-11-17T17:18:02+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-121716",
-       "published_at": "2026-11-17T20:17:36+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-104100",
-       "published_at": "2026-11-17T18:17:46+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-119725",
-       "published_at": "2026-11-17T17:17:53+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-119726",
-       "published_at": "2026-11-17T17:17:53+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-122141",
+       "published_at": "2026-11-17T16:17:40+08:00"
       },
       {
        "name": "NVD 严重/高危",
@@ -1474,14 +1574,44 @@
        "published_at": "2026-11-17T16:17:40+08:00"
       },
       {
-       "name": "oss-security 邮件列表",
-       "url": "https://seclists.org/oss-sec/2026/q4/704",
-       "published_at": "2026-11-17T00:20:05+08:00"
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130603",
+       "published_at": "2026-11-17T14:17:47+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-130290",
-       "published_at": "2026-11-16T22:18:24+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129280",
+       "published_at": "2026-11-17T11:17:27+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129282",
+       "published_at": "2026-11-17T11:17:27+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129273",
+       "published_at": "2026-11-17T11:17:26+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129274",
+       "published_at": "2026-11-17T11:17:26+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-119621",
+       "published_at": "2026-11-17T11:17:24+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-121864",
+       "published_at": "2026-11-17T09:17:26+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-69154",
+       "published_at": "2026-11-16T22:18:25+08:00"
       },
       {
        "name": "NVD 严重/高危",
@@ -1490,23 +1620,33 @@
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129703",
-       "published_at": "2026-11-16T09:17:13+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-101327",
+       "published_at": "2026-11-16T19:17:23+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-125780",
-       "published_at": "2026-11-15T14:17:25+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-104692",
+       "published_at": "2026-11-16T17:17:27+08:00"
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124671",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-101352",
+       "published_at": "2026-11-16T17:17:26+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-128835",
+       "published_at": "2026-11-16T14:17:06+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-82663",
+       "published_at": "2026-11-15T10:16:54+08:00"
+      },
+      {
+       "name": "NVD 严重/高危",
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124673",
        "published_at": "2026-11-15T07:16:54+08:00"
-      },
-      {
-       "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-110984",
-       "published_at": "2026-11-15T07:16:53+08:00"
       },
       {
        "name": "NVD 严重/高危",
@@ -1520,34 +1660,28 @@
       },
       {
        "name": "NVD 严重/高危",
-       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-129360",
-       "published_at": "2026-11-15T04:16:45+08:00"
-      },
-      {
-       "name": "oss-security 邮件列表",
-       "url": "https://seclists.org/oss-sec/2026/q4/699",
-       "published_at": "2026-11-15T00:20:05+08:00"
+       "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-114451",
+       "published_at": "2026-11-15T07:16:53+08:00"
       }
      ],
-     "source_count": 29,
+     "source_count": 37,
      "tags": [
-      "cve",
-      "oss"
+      "cve"
      ]
     },
     {
-     "id": "sig-35fc4d769143b8ce",
+     "id": "sig-5258ef3c248682cf",
      "category": "security",
      "kind": "signal",
      "tier": "act",
-     "score": 73.5,
-     "title": "USN-9149-1: MiniMagick vulnerability",
-     "summary": "It was discovered that MiniMagick passed the file names and URLs given to Image.open directly to Kernel#open. If an application opened an image from an untrusted file name or URL, an attacker could possibly use this issue to execute arbitrary commands.",
-     "url": "https://ubuntu.com/security/notices/USN-9149-1",
+     "score": 79.5,
+     "title": "USN-9148-1: Mechanize vulnerability",
+     "summary": "It was discovered that Mechanize used Kernel#open to open local files in several methods. If an application passed untrusted input as a local file name to one of these methods, an attacker could possibly use this issue to execute arbitrary commands.",
+     "url": "https://ubuntu.com/security/notices/USN-9148-1",
      "source_name": "Ubuntu 安全公告",
      "source_id": "ubuntu-usn",
      "published_at": "2026-11-19T00:20:01+08:00",
-     "age_h": 21.1,
+     "age_h": 22.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -1564,7 +1698,42 @@
      "sources": [
       {
        "name": "Ubuntu 安全公告",
-       "url": "https://ubuntu.com/security/notices/USN-9149-1",
+       "url": "https://ubuntu.com/security/notices/USN-9152-1",
+       "published_at": "2026-11-19T06:20:03+08:00"
+      },
+      {
+       "name": "Ubuntu 安全公告",
+       "url": "https://ubuntu.com/security/notices/USN-9150-1",
+       "published_at": "2026-11-19T00:20:01+08:00"
+      },
+      {
+       "name": "Ubuntu 安全公告",
+       "url": "https://ubuntu.com/security/notices/USN-9148-1",
+       "published_at": "2026-11-19T00:20:01+08:00"
+      },
+      {
+       "name": "Ubuntu 安全公告",
+       "url": "https://ubuntu.com/security/notices/USN-9147-1",
+       "published_at": "2026-11-19T00:20:01+08:00"
+      },
+      {
+       "name": "Ubuntu 安全公告",
+       "url": "https://ubuntu.com/security/notices/USN-9145-1",
+       "published_at": "2026-11-19T00:20:01+08:00"
+      },
+      {
+       "name": "Ubuntu 安全公告",
+       "url": "https://ubuntu.com/security/notices/USN-9144-1",
+       "published_at": "2026-11-19T00:20:01+08:00"
+      },
+      {
+       "name": "Ubuntu 安全公告",
+       "url": "https://ubuntu.com/security/notices/USN-9143-1",
+       "published_at": "2026-11-19T00:20:01+08:00"
+      },
+      {
+       "name": "Ubuntu 安全公告",
+       "url": "https://ubuntu.com/security/notices/USN-9151-1",
        "published_at": "2026-11-19T00:20:01+08:00"
       },
       {
@@ -1604,116 +1773,8 @@
       },
       {
        "name": "Ubuntu 安全公告",
-       "url": "https://ubuntu.com/security/notices/USN-9111-1",
-       "published_at": "2026-11-17T21:20:15+08:00"
-      },
-      {
-       "name": "Ubuntu 安全公告",
-       "url": "https://ubuntu.com/security/notices/USN-9107-1",
-       "published_at": "2026-11-17T21:20:15+08:00"
-      },
-      {
-       "name": "Ubuntu 安全公告",
-       "url": "https://ubuntu.com/security/notices/USN-9103-1",
-       "published_at": "2026-11-17T20:20:24+08:00"
-      },
-      {
-       "name": "Ubuntu 安全公告",
-       "url": "https://ubuntu.com/security/notices/USN-9093-1",
-       "published_at": "2026-11-17T03:20:04+08:00"
-      },
-      {
-       "name": "Ubuntu 安全公告",
-       "url": "https://ubuntu.com/security/notices/USN-9084-1",
-       "published_at": "2026-11-17T00:20:06+08:00"
-      },
-      {
-       "name": "Ubuntu 安全公告",
-       "url": "https://ubuntu.com/security/notices/USN-9089-1",
-       "published_at": "2026-11-17T00:20:06+08:00"
-      },
-      {
-       "name": "Ubuntu 安全公告",
-       "url": "https://ubuntu.com/security/notices/USN-9088-1",
-       "published_at": "2026-11-17T00:20:06+08:00"
-      }
-     ],
-     "source_count": 15,
-     "tags": [
-      "ubuntu"
-     ]
-    },
-    {
-     "id": "sig-5258ef3c248682cf",
-     "category": "security",
-     "kind": "signal",
-     "tier": "act",
-     "score": 58.5,
-     "title": "USN-9148-1: Mechanize vulnerability",
-     "summary": "It was discovered that Mechanize used Kernel#open to open local files in several methods. If an application passed untrusted input as a local file name to one of these methods, an attacker could possibly use this issue to execute arbitrary commands.",
-     "url": "https://ubuntu.com/security/notices/USN-9148-1",
-     "source_name": "Ubuntu 安全公告",
-     "source_id": "ubuntu-usn",
-     "published_at": "2026-11-19T00:20:01+08:00",
-     "age_h": 21.1,
-     "cvss": null,
-     "in_the_wild": false,
-     "flags": [
-      "stack:kernel",
-      "core"
-     ],
-     "why": "命中你嘅栈：kernel；核心包",
-     "action": "先查受影响版本，再决定即刻打补丁",
-     "region": {
-      "level": "global",
-      "name": "global",
-      "parents": []
-     },
-     "sources": [
-      {
-       "name": "Ubuntu 安全公告",
-       "url": "https://ubuntu.com/security/notices/USN-9152-1",
-       "published_at": "2026-11-19T06:20:03+08:00"
-      },
-      {
-       "name": "Ubuntu 安全公告",
-       "url": "https://ubuntu.com/security/notices/USN-9153-1",
-       "published_at": "2026-11-19T05:20:01+08:00"
-      },
-      {
-       "name": "Ubuntu 安全公告",
-       "url": "https://ubuntu.com/security/notices/USN-9150-1",
-       "published_at": "2026-11-19T00:20:01+08:00"
-      },
-      {
-       "name": "Ubuntu 安全公告",
-       "url": "https://ubuntu.com/security/notices/USN-9148-1",
-       "published_at": "2026-11-19T00:20:01+08:00"
-      },
-      {
-       "name": "Ubuntu 安全公告",
-       "url": "https://ubuntu.com/security/notices/USN-9147-1",
-       "published_at": "2026-11-19T00:20:01+08:00"
-      },
-      {
-       "name": "Ubuntu 安全公告",
-       "url": "https://ubuntu.com/security/notices/USN-9145-1",
-       "published_at": "2026-11-19T00:20:01+08:00"
-      },
-      {
-       "name": "Ubuntu 安全公告",
-       "url": "https://ubuntu.com/security/notices/USN-9144-1",
-       "published_at": "2026-11-19T00:20:01+08:00"
-      },
-      {
-       "name": "Ubuntu 安全公告",
-       "url": "https://ubuntu.com/security/notices/USN-9143-1",
-       "published_at": "2026-11-19T00:20:01+08:00"
-      },
-      {
-       "name": "Ubuntu 安全公告",
-       "url": "https://ubuntu.com/security/notices/USN-9151-1",
-       "published_at": "2026-11-19T00:20:01+08:00"
+       "url": "https://ubuntu.com/security/notices/USN-9094-1",
+       "published_at": "2026-11-17T06:20:01+08:00"
       },
       {
        "name": "Ubuntu 安全公告",
@@ -1721,24 +1782,24 @@
        "published_at": "2026-11-17T00:20:06+08:00"
       }
      ],
-     "source_count": 10,
+     "source_count": 17,
      "tags": [
       "ubuntu"
      ]
     },
     {
-     "id": "sig-06d9a748bb4575d9",
+     "id": "sig-9e7fa474f13a5824",
      "category": "security",
      "kind": "signal",
      "tier": "act",
-     "score": 52.5,
-     "title": "USN-9164-1: Linux kernel (FIPS) vulnerabilities",
-     "summary": "Demi Marie Obenour and Simon Gaiser discovered that several Xen para- virtualization device frontends did not properly restrict the access rights of device backends. An attacker could possibly use a malicious Xen backend to gain access to memory pages of a guest VM or cause a denial of service in th",
-     "url": "https://ubuntu.com/security/notices/USN-9164-1",
+     "score": 76.5,
+     "title": "USN-9171-1: Linux kernel vulnerabilities",
+     "summary": "Several security issues were discovered in the Linux kernel. An attacker could possibly use these to compromise the system. This update corrects flaws in the following subsystems: - IPv4 networking; - Ethernet bridge; - Netfilter; - XFRM subsystem; (CVE-2026-98432, CVE-2026-99999)",
+     "url": "https://ubuntu.com/security/notices/USN-9171-1",
      "source_name": "Ubuntu 安全公告",
      "source_id": "ubuntu-usn",
-     "published_at": "2026-11-19T19:20:03+08:00",
-     "age_h": 2.1,
+     "published_at": "2026-11-19T22:20:03+08:00",
+     "age_h": 0.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -1753,6 +1814,31 @@
       "parents": []
      },
      "sources": [
+      {
+       "name": "Ubuntu 安全公告",
+       "url": "https://ubuntu.com/security/notices/USN-9171-1",
+       "published_at": "2026-11-19T22:20:03+08:00"
+      },
+      {
+       "name": "Ubuntu 安全公告",
+       "url": "https://ubuntu.com/security/notices/USN-9170-1",
+       "published_at": "2026-11-19T22:20:03+08:00"
+      },
+      {
+       "name": "Ubuntu 安全公告",
+       "url": "https://ubuntu.com/security/notices/USN-9169-1",
+       "published_at": "2026-11-19T22:20:03+08:00"
+      },
+      {
+       "name": "Ubuntu 安全公告",
+       "url": "https://ubuntu.com/security/notices/USN-9168-1",
+       "published_at": "2026-11-19T22:20:03+08:00"
+      },
+      {
+       "name": "Ubuntu 安全公告",
+       "url": "https://ubuntu.com/security/notices/USN-9165-1",
+       "published_at": "2026-11-19T22:20:03+08:00"
+      },
       {
        "name": "Ubuntu 安全公告",
        "url": "https://ubuntu.com/security/notices/USN-9164-1",
@@ -1785,6 +1871,21 @@
       },
       {
        "name": "Ubuntu 安全公告",
+       "url": "https://ubuntu.com/security/notices/USN-8979-2",
+       "published_at": "2026-11-18T00:20:04+08:00"
+      },
+      {
+       "name": "Ubuntu 安全公告",
+       "url": "https://ubuntu.com/security/notices/USN-9115-1",
+       "published_at": "2026-11-18T00:20:04+08:00"
+      },
+      {
+       "name": "Ubuntu 安全公告",
+       "url": "https://ubuntu.com/security/notices/USN-9124-1",
+       "published_at": "2026-11-18T00:20:04+08:00"
+      },
+      {
+       "name": "Ubuntu 安全公告",
        "url": "https://ubuntu.com/security/notices/USN-9027-2",
        "published_at": "2026-11-17T00:20:06+08:00"
       },
@@ -1794,7 +1895,7 @@
        "published_at": "2026-11-17T00:20:06+08:00"
       }
      ],
-     "source_count": 8,
+     "source_count": 16,
      "tags": [
       "ubuntu"
      ]
@@ -1811,7 +1912,7 @@
      "source_name": "CISA 安全公告",
      "source_id": "cisa-advisories",
      "published_at": "2026-11-17T00:20:17+08:00",
-     "age_h": 69.1,
+     "age_h": 70.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -1878,6 +1979,74 @@
      ]
     },
     {
+     "id": "sig-35fc4d769143b8ce",
+     "category": "security",
+     "kind": "signal",
+     "tier": "act",
+     "score": 49.5,
+     "title": "USN-9149-1: MiniMagick vulnerability",
+     "summary": "It was discovered that MiniMagick passed the file names and URLs given to Image.open directly to Kernel#open. If an application opened an image from an untrusted file name or URL, an attacker could possibly use this issue to execute arbitrary commands.",
+     "url": "https://ubuntu.com/security/notices/USN-9149-1",
+     "source_name": "Ubuntu 安全公告",
+     "source_id": "ubuntu-usn",
+     "published_at": "2026-11-19T00:20:01+08:00",
+     "age_h": 22.1,
+     "cvss": null,
+     "in_the_wild": false,
+     "flags": [
+      "stack:kernel",
+      "core"
+     ],
+     "why": "命中你嘅栈：kernel；核心包",
+     "action": "先查受影响版本，再决定即刻打补丁",
+     "region": {
+      "level": "global",
+      "name": "global",
+      "parents": []
+     },
+     "sources": [
+      {
+       "name": "Ubuntu 安全公告",
+       "url": "https://ubuntu.com/security/notices/USN-9149-1",
+       "published_at": "2026-11-19T00:20:01+08:00"
+      },
+      {
+       "name": "Ubuntu 安全公告",
+       "url": "https://ubuntu.com/security/notices/USN-9111-1",
+       "published_at": "2026-11-17T21:20:15+08:00"
+      },
+      {
+       "name": "Ubuntu 安全公告",
+       "url": "https://ubuntu.com/security/notices/USN-9107-1",
+       "published_at": "2026-11-17T21:20:15+08:00"
+      },
+      {
+       "name": "Ubuntu 安全公告",
+       "url": "https://ubuntu.com/security/notices/USN-9103-1",
+       "published_at": "2026-11-17T20:20:24+08:00"
+      },
+      {
+       "name": "Ubuntu 安全公告",
+       "url": "https://ubuntu.com/security/notices/USN-9084-1",
+       "published_at": "2026-11-17T00:20:06+08:00"
+      },
+      {
+       "name": "Ubuntu 安全公告",
+       "url": "https://ubuntu.com/security/notices/USN-9089-1",
+       "published_at": "2026-11-17T00:20:06+08:00"
+      },
+      {
+       "name": "Ubuntu 安全公告",
+       "url": "https://ubuntu.com/security/notices/USN-9088-1",
+       "published_at": "2026-11-17T00:20:06+08:00"
+      }
+     ],
+     "source_count": 7,
+     "tags": [
+      "ubuntu"
+     ]
+    },
+    {
      "id": "sig-68c63ecc5b45257e",
      "category": "security",
      "kind": "signal",
@@ -1889,7 +2058,7 @@
      "source_name": "Google News · 漏洞",
      "source_id": "gnews-sec",
      "published_at": "2026-11-19T14:20:02+08:00",
-     "age_h": 7.1,
+     "age_h": 8.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -1948,7 +2117,7 @@
      "source_name": "oss-security 邮件列表",
      "source_id": "oss-sec",
      "published_at": "2026-11-19T11:20:03+08:00",
-     "age_h": 10.1,
+     "age_h": 11.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -1991,7 +2160,7 @@
      "source_name": "oss-security 邮件列表",
      "source_id": "oss-sec",
      "published_at": "2026-11-18T00:20:03+08:00",
-     "age_h": 45.1,
+     "age_h": 46.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2035,7 +2204,7 @@
      "source_name": "Google News · 漏洞",
      "source_id": "gnews-sec",
      "published_at": "2026-11-19T00:20:00+08:00",
-     "age_h": 21.1,
+     "age_h": 22.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2085,7 +2254,7 @@
      "url": "https://open-meteo.com/",
      "source_name": "Open-Meteo 集合预报（GFS/ECMWF/ICON/JMA/GEM）",
      "published_at": "2026-11-17T23:37:47+08:00",
-     "age_h": 45.8,
+     "age_h": 46.8,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -2116,7 +2285,7 @@
      "source_name": "香港天文台天气警告",
      "source_id": "hko-warning",
      "published_at": "2026-11-19T00:20:24+08:00",
-     "age_h": 21.1,
+     "age_h": 22.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -2152,7 +2321,7 @@
      "source_name": "香港天文台实时天气",
      "source_id": "hko-current",
      "published_at": "2026-11-19T19:20:26+08:00",
-     "age_h": 2.1,
+     "age_h": 3.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -2181,7 +2350,7 @@
    "key": "health",
    "name": "🦠 疫情与公共卫生",
    "sub": "广东本地优先，其次 WHO",
-   "total": 53,
+   "total": 52,
    "items": [
     {
      "id": "sig-0ce56574d7cb5cfb",
@@ -2195,7 +2364,7 @@
      "source_name": "Google News · WHO 疫情通报",
      "source_id": "gnews-who",
      "published_at": "2026-11-19T01:20:02+08:00",
-     "age_h": 20.1,
+     "age_h": 21.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2308,7 +2477,7 @@
      "source_name": "Google News · 广东疫情",
      "source_id": "gnews-health-gd",
      "published_at": "2026-11-19T00:20:01+08:00",
-     "age_h": 21.1,
+     "age_h": 22.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -2394,7 +2563,7 @@
      "source_name": "Google News · WHO 疫情通报",
      "source_id": "gnews-who",
      "published_at": "2026-11-19T21:20:06+08:00",
-     "age_h": 0.1,
+     "age_h": 1.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2457,7 +2626,7 @@
      "source_name": "Google News · WHO 疫情通报",
      "source_id": "gnews-who",
      "published_at": "2026-11-19T00:20:04+08:00",
-     "age_h": 21.1,
+     "age_h": 22.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2504,18 +2673,18 @@
      ]
     },
     {
-     "id": "sig-77c6f10775c02f94",
+     "id": "sig-f18f3ad631479de2",
      "category": "health",
      "kind": "signal",
      "tier": "read",
      "score": 25.5,
-     "title": "Global Monkeypox: Current Situation - Centers for Disease Control and Prevention | CDC (.gov)",
-     "summary": "Global Monkeypox: Current Situation Centers for Disease Control and Prevention | CDC (.gov)",
-     "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5hN2FwbDA2U3VfUENnOFJ0LTNvTUs2U3VWbzlKYnJpMElxZ05qLVhwRDJBMUxjVGhucGNMa042ODJrVll2bjdOWXlFZ3FHMXA1SVVxSVJqYmlPem5nZnh6WHN4LXF2YmlIelE?oc=5",
+     "title": "Popular cruise ship rocked by illness outbreak as nearly 150 passengers and crew fall victim - Fox News",
+     "summary": "Popular cruise ship rocked by illness outbreak as nearly 150 passengers and crew fall victim Fox News",
+     "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxOTDZFbXJla19vTmxUdllHSXZDN3BRck5tWTBmekFZcTgtR3ktSG9mdVluRlRKd09PM0JNaUVmT19HZzFESVVlVUxreE9oNzZWZElmTlVsakhadWxJMWozSEVmWjBQOHlUcS1GLXNCZ0tuMERYMDZSNU1YWXRTTk5rVGRrbHoyVDh6WWcxQm1yY3l1T1lMMm00eE1NM3dWTi1xYkZxem9mcjd1SjdnNEpTOENnQdIBuAFBVV95cUxORmpTdEsxVWJuak5LdXR5ZkFvc0xRU0k5cllPdFN0eTlhWXcxV3VHR0V2UElRT3lCU2JzQWt1RVRjQVFra081YnlpYjZpR2dKaloyOFNxU2JqSXk2aHRoSC00QlhoeWY0cTJuS3E3T0JZV0hBX0ZmNWlFT0pKSXc4SkZHYU9XeDhIby16NloyTjBxRy0wdl83NnFKQXVkUEpTbExMakVkUERrcXY1LVhoUmtRX3V2bkJo?oc=5",
      "source_name": "Google News · WHO 疫情通报",
      "source_id": "gnews-who",
-     "published_at": "2026-11-19T15:20:06+08:00",
-     "age_h": 6.1,
+     "published_at": "2026-11-19T22:20:07+08:00",
+     "age_h": 0.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2531,23 +2700,23 @@
      "sources": [
       {
        "name": "Google News · WHO 疫情通报",
-       "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5hN2FwbDA2U3VfUENnOFJ0LTNvTUs2U3VWbzlKYnJpMElxZ05qLVhwRDJBMUxjVGhucGNMa042ODJrVll2bjdOWXlFZ3FHMXA1SVVxSVJqYmlPem5nZnh6WHN4LXF2YmlIelE?oc=5",
-       "published_at": "2026-11-19T15:20:06+08:00"
+       "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxOTDZFbXJla19vTmxUdllHSXZDN3BRck5tWTBmekFZcTgtR3ktSG9mdVluRlRKd09PM0JNaUVmT19HZzFESVVlVUxreE9oNzZWZElmTlVsakhadWxJMWozSEVmWjBQOHlUcS1GLXNCZ0tuMERYMDZSNU1YWXRTTk5rVGRrbHoyVDh6WWcxQm1yY3l1T1lMMm00eE1NM3dWTi1xYkZxem9mcjd1SjdnNEpTOENnQdIBuAFBVV95cUxORmpTdEsxVWJuak5LdXR5ZkFvc0xRU0k5cllPdFN0eTlhWXcxV3VHR0V2UElRT3lCU2JzQWt1RVRjQVFra081YnlpYjZpR2dKaloyOFNxU2JqSXk2aHRoSC00QlhoeWY0cTJuS3E3T0JZV0hBX0ZmNWlFT0pKSXc4SkZHYU9XeDhIby16NloyTjBxRy0wdl83NnFKQXVkUEpTbExMakVkUERrcXY1LVhoUmtRX3V2bkJo?oc=5",
+       "published_at": "2026-11-19T22:20:07+08:00"
       },
       {
        "name": "Google News · WHO 疫情通报",
-       "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1Xb2M3MTlzZjZoNFc5QlFXTkhpcDIxTFBQc050QnBtQkQwczJnM2daRUZGQzFfcl80RmZGYy1qLXRXeUF0Y1hmejlfemVQVk5uNldZclZscUpiQ1hSX1FsdXB1MG4?oc=5",
-       "published_at": "2026-11-16T02:20:05+08:00"
+       "url": "https://news.google.com/rss/articles/CBMi-wFBVV95cUxPOGJsZHNwMDRQMU5UekJGNUZlRXhTbGZ2NjRiVWxHSWtfaUNKcnN3LWVJdVl2QVdaVzFoNWZ5ZVBYRGVnaXVkZmswU2FWM0RjU0FLcVdfM3N0c1dzdFd4WGF0Snh0OHVNS2xPT05Kck9IVGJLMGpRU1JVY0dBNWVMYVZpcW9wZDBSa19vOWN6MHZSVFdqX0tGNEVPU01UOGc5bjYyQ2N2SUZNYWw1R0hHXzVDN0lEaTNFNWhzS0xSemx5TFhpVXVOdGIwdHM0dnZyZ2hCN3plcDRPN1cxN0s2MW5tT0w4UkdrZzlrVDFiODJnN2VMNlBjRG9pbw?oc=5",
+       "published_at": "2026-11-19T11:20:06+08:00"
       },
       {
        "name": "Google News · WHO 疫情通报",
-       "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9kU2puTzAxZ3ktbE1vNzU0RU9xZTlMYzIyb3JRaENuSnJJdnllQUJDeWs3TElwZmJmYU84dkFsc1ZKaEw0N2dTUHFVSlktVE91ejM0TG10YkRVellCcXo2X3VR?oc=5",
-       "published_at": "2026-11-16T00:20:04+08:00"
+       "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPaVFxQTZQbEFJdm9jTU5qVFFlbUh1Z2tCRDhCZHBlY3NneVhwN0VEV1lJOUlZVjVoNUxfMGVsbmVpcGkwVTF6TWVRWTlhb0xSamJaZU5QMFJoZ0lNME1BT0FoRlJCSmNnWW81cXN0QVBqb2RhSWhJTDRmYWE4eW4tcUdMVlFjcTBVVTVCMGFKOF9RMjhUX2ZJTFRnTzVyLW0zbk930gGoAUFVX3lxTE50VnEwRi1SSDJvaTZ0Z2VjVjZaNWlrZGlZa3BneElvZjJzcUZoRWlIZ0hXTzV4QW1TY21oVVRuMVRGZHB5X09fU3NFVWhtVVpNN3Q2aWR3UkpUM3lOamItODI2R2VWdnhjRnhQNC1ub1hqQzhmUUVRVG5idWt1Q0VIcVQ2NzRVWUF4N1NWclk4ZVZqSEF4RHBFYUpzNnl5SHZMbDhYdHlRMw?oc=5",
+       "published_at": "2026-11-18T00:20:08+08:00"
       },
       {
        "name": "Google News · WHO 疫情通报",
-       "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE1BYmhYTXpjS2ZwUTZfeE1tbzFyb0E4YmtHM0dMcWdPZTV4Y1luUm9tSzctd0tsZnB0QTBfWlVURXRTNTFPb2ljdE9Kd19rZ1Qybnp2UkFRc2RvTm9NMTRnU2ZjYzlIZzh3bVNfbTA2MmNhWFBqOG9uVGFuMHE?oc=5",
-       "published_at": "2026-11-16T00:20:04+08:00"
+       "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOcUFwVS0zSEltM0xmUmUtbFFEODJLWENQMl94QzhmcjRZVmp4RFRhT3g2Rm0tUDUyOGkxTXZnTng1eXFDWEtzN01YMDFnVTh2M0lDdFU3akNHY3czbkRhZ2hwelBmSzdzNXMwQjE3SmRRVm8teFdONE5JSEZLVXBYajdtaklZQTlYdWRQa2w5WHhQLTFHY2ZpVjFWZU5SbjB1ZnNnQTZMMmIxY0k?oc=5",
+       "published_at": "2026-11-15T00:20:07+08:00"
       }
      ],
      "source_count": 4,
@@ -2568,7 +2737,7 @@
      "source_name": "WHO 新闻稿",
      "source_id": "who-news",
      "published_at": "2026-11-19T01:20:21+08:00",
-     "age_h": 20.1,
+     "age_h": 21.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2615,7 +2784,7 @@
      "source_name": "WHO 新闻稿",
      "source_id": "who-news",
      "published_at": "2026-11-19T01:20:21+08:00",
-     "age_h": 20.1,
+     "age_h": 21.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2658,7 +2827,7 @@
      "source_name": "WHO 新闻稿",
      "source_id": "who-news",
      "published_at": "2026-11-19T00:20:28+08:00",
-     "age_h": 21.1,
+     "age_h": 22.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2700,7 +2869,7 @@
      "source_name": "Google News · 广东疫情",
      "source_id": "gnews-health-gd",
      "published_at": "2026-11-19T21:20:04+08:00",
-     "age_h": 0.1,
+     "age_h": 1.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2738,7 +2907,7 @@
      "source_name": "WHO 新闻稿",
      "source_id": "who-news",
      "published_at": "2026-11-19T01:20:21+08:00",
-     "age_h": 20.1,
+     "age_h": 21.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2775,7 +2944,7 @@
      "source_name": "Google News · 广东疫情",
      "source_id": "gnews-health-gd",
      "published_at": "2026-11-17T12:20:03+08:00",
-     "age_h": 57.1,
+     "age_h": 58.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2818,7 +2987,7 @@
      "source_name": "Google News · 广东疫情",
      "source_id": "gnews-health-gd",
      "published_at": "2026-11-17T09:20:04+08:00",
-     "age_h": 60.1,
+     "age_h": 61.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2850,7 +3019,7 @@
    "key": "tech",
    "name": "🧠 科技圈热点",
    "sub": "Techmeme / HN / Lobsters / Phoronix",
-   "total": 249,
+   "total": 252,
    "items": [
     {
      "id": "sig-710cebdae6978e3c",
@@ -2864,7 +3033,7 @@
      "source_name": "LWN 头条",
      "source_id": "lwn-headlines",
      "published_at": "2026-11-19T09:20:15+08:00",
-     "age_h": 12.1,
+     "age_h": 13.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2906,7 +3075,7 @@
      "source_name": "Cloudflare 博客",
      "source_id": "cloudflare-blog",
      "published_at": "2026-11-19T00:20:17+08:00",
-     "age_h": 21.1,
+     "age_h": 22.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2944,7 +3113,7 @@
      "source_name": "PostgreSQL 新闻",
      "source_id": "postgres-news",
      "published_at": "2026-11-19T00:20:17+08:00",
-     "age_h": 21.1,
+     "age_h": 22.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -2982,7 +3151,7 @@
      "source_name": "LWN 头条",
      "source_id": "lwn-headlines",
      "published_at": "2026-11-16T01:20:20+08:00",
-     "age_h": 92.1,
+     "age_h": 93.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [
@@ -3008,18 +3177,128 @@
      ]
     },
     {
+     "id": "sig-647a1d425a9e9ba2",
+     "category": "tech",
+     "kind": "signal",
+     "tier": "read",
+     "score": 61.0,
+     "title": "Sources: TSMC and Samsung have suspended some chip shipments to Chinese customers while they apply for US Commerce Department licenses, after new US curbs (Financial Times)",
+     "summary": "Financial Times : Sources: TSMC and Samsung have suspended some chip shipments to Chinese customers while they apply for US Commerce Department licenses, after new US curbs Halt comes after US commerce department introduces new export controls Taiwan Semiconductor Manufacturing Company and Samsung E",
+     "url": "https://www.techmeme.com/261119/p11#a261119p11",
+     "source_name": "Techmeme（推特科技圈人工版）",
+     "source_id": "techmeme",
+     "published_at": "2026-11-19T19:20:07+08:00",
+     "age_h": 3.1,
+     "cvss": null,
+     "in_the_wild": false,
+     "flags": [],
+     "why": "圈内在聊嘅大事",
+     "action": "",
+     "region": {
+      "level": "global",
+      "name": "global",
+      "parents": []
+     },
+     "sources": [
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261119/p11#a261119p11",
+       "published_at": "2026-11-19T19:20:07+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261119/p8#a261119p8",
+       "published_at": "2026-11-19T16:20:08+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261119/p6#a261119p6",
+       "published_at": "2026-11-19T16:20:08+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261118/p46#a261118p46",
+       "published_at": "2026-11-19T07:20:04+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261118/p24#a261118p24",
+       "published_at": "2026-11-19T00:20:06+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261118/p3#a261118p3",
+       "published_at": "2026-11-18T15:20:08+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261117/p37#a261117p37",
+       "published_at": "2026-11-18T01:20:07+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261117/p6#a261117p6",
+       "published_at": "2026-11-17T17:20:07+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261116/p27#a261116p27",
+       "published_at": "2026-11-17T01:20:05+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261116/p15#a261116p15",
+       "published_at": "2026-11-16T20:20:42+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261116/p9#a261116p9",
+       "published_at": "2026-11-16T17:33:53+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261116/p2#a261116p2",
+       "published_at": "2026-11-16T15:20:06+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261115/p14#a261115p14",
+       "published_at": "2026-11-16T04:20:03+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261115/p13#a261115p13",
+       "published_at": "2026-11-16T03:20:03+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261115/p9#a261115p9",
+       "published_at": "2026-11-16T00:20:05+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261114/p7#a261114p7",
+       "published_at": "2026-11-15T01:20:25+08:00"
+      }
+     ],
+     "source_count": 16,
+     "tags": [
+      "buzz"
+     ]
+    },
+    {
      "id": "sig-433b5ec18f4603cd",
      "category": "tech",
      "kind": "signal",
      "tier": "read",
-     "score": 67.0,
+     "score": 58.0,
      "title": "Temu owner PDD reports Q3 revenue flat YoY at ~$16.2B, below ~$17.3B est., and net profit up 0.7% to ~$4.43B, above ~$3.7B est., as Temu's user base shrinks (Tracy Qu/Wall Street Journal)",
      "summary": "",
      "url": "https://www.techmeme.com/261119/p27#a261119p27",
      "source_name": "Techmeme（推特科技圈人工版）",
      "source_id": "techmeme",
      "published_at": "2026-11-19T21:20:24+08:00",
-     "age_h": 0.1,
+     "age_h": 1.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -3043,18 +3322,8 @@
       },
       {
        "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261119/p3#a261119p3",
-       "published_at": "2026-11-19T15:20:08+08:00"
-      },
-      {
-       "name": "Techmeme（推特科技圈人工版）",
        "url": "https://www.techmeme.com/261118/p47#a261118p47",
        "published_at": "2026-11-19T08:20:04+08:00"
-      },
-      {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261118/p7#a261118p7",
-       "published_at": "2026-11-18T19:20:17+08:00"
       },
       {
        "name": "Techmeme（推特科技圈人工版）",
@@ -3108,11 +3377,6 @@
       },
       {
        "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261115/p29#a261115p29",
-       "published_at": "2026-11-16T17:33:53+08:00"
-      },
-      {
-       "name": "Techmeme（推特科技圈人工版）",
        "url": "https://www.techmeme.com/261116/p8#a261116p8",
        "published_at": "2026-11-16T17:12:19+08:00"
       },
@@ -3122,24 +3386,24 @@
        "published_at": "2026-11-16T13:20:15+08:00"
       }
      ],
-     "source_count": 18,
+     "source_count": 15,
      "tags": [
       "buzz"
      ]
     },
     {
-     "id": "sig-647a1d425a9e9ba2",
+     "id": "sig-d8d48e6128b3c685",
      "category": "tech",
      "kind": "signal",
      "tier": "read",
-     "score": 67.0,
-     "title": "Sources: TSMC and Samsung have suspended some chip shipments to Chinese customers while they apply for US Commerce Department licenses, after new US curbs (Financial Times)",
-     "summary": "Financial Times : Sources: TSMC and Samsung have suspended some chip shipments to Chinese customers while they apply for US Commerce Department licenses, after new US curbs Halt comes after US commerce department introduces new export controls Taiwan Semiconductor Manufacturing Company and Samsung E",
-     "url": "https://www.techmeme.com/261119/p11#a261119p11",
+     "score": 52.0,
+     "title": "GTA VI's 5,000-strong team eschewed AI and procedural generation in favor of handcrafted \"fidelity\", with 30,000 unique NPCs and an in-game video game system (Joseph Bernstein/New York Times)",
+     "summary": "Joseph Bernstein / New York Times : GTA VI's 5,000-strong team eschewed AI and procedural generation in favor of handcrafted fidelity , with 30,000 unique NPCs and an in-game video game system A few months ago, when I started to brag to people that I might be getting an advance copy of Grand Theft A",
+     "url": "https://www.techmeme.com/261119/p25#a261119p25",
      "source_name": "Techmeme（推特科技圈人工版）",
      "source_id": "techmeme",
-     "published_at": "2026-11-19T19:20:07+08:00",
-     "age_h": 2.1,
+     "published_at": "2026-11-19T22:20:12+08:00",
+     "age_h": 0.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -3153,8 +3417,13 @@
      "sources": [
       {
        "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261119/p11#a261119p11",
-       "published_at": "2026-11-19T19:20:07+08:00"
+       "url": "https://www.techmeme.com/261119/p25#a261119p25",
+       "published_at": "2026-11-19T22:20:12+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261119/p23#a261119p23",
+       "published_at": "2026-11-19T22:20:12+08:00"
       },
       {
        "name": "Techmeme（推特科技圈人工版）",
@@ -3163,13 +3432,13 @@
       },
       {
        "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261119/p8#a261119p8",
-       "published_at": "2026-11-19T16:20:08+08:00"
+       "url": "https://www.techmeme.com/261119/p4#a261119p4",
+       "published_at": "2026-11-19T15:20:08+08:00"
       },
       {
        "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261119/p6#a261119p6",
-       "published_at": "2026-11-19T16:20:08+08:00"
+       "url": "https://www.techmeme.com/261118/p57#a261118p57",
+       "published_at": "2026-11-19T11:20:05+08:00"
       },
       {
        "name": "Techmeme（推特科技圈人工版）",
@@ -3178,33 +3447,28 @@
       },
       {
        "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261118/p46#a261118p46",
-       "published_at": "2026-11-19T07:20:04+08:00"
-      },
-      {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261118/p24#a261118p24",
-       "published_at": "2026-11-19T00:20:06+08:00"
-      },
-      {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261117/p37#a261117p37",
-       "published_at": "2026-11-18T01:20:07+08:00"
-      },
-      {
-       "name": "Techmeme（推特科技圈人工版）",
        "url": "https://www.techmeme.com/261117/p17#a261117p17",
        "published_at": "2026-11-17T20:20:34+08:00"
       },
       {
        "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261117/p6#a261117p6",
-       "published_at": "2026-11-17T17:20:07+08:00"
+       "url": "https://www.techmeme.com/261116/p50#a261116p50",
+       "published_at": "2026-11-17T18:20:05+08:00"
       },
       {
        "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261116/p27#a261116p27",
+       "url": "https://www.techmeme.com/261116/p32#a261116p32",
        "published_at": "2026-11-17T01:20:05+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261116/p22#a261116p22",
+       "published_at": "2026-11-16T21:20:28+08:00"
+      },
+      {
+       "name": "Techmeme（推特科技圈人工版）",
+       "url": "https://www.techmeme.com/261116/p18#a261116p18",
+       "published_at": "2026-11-16T20:20:42+08:00"
       },
       {
        "name": "Techmeme（推特科技圈人工版）",
@@ -3213,36 +3477,11 @@
       },
       {
        "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261116/p15#a261116p15",
-       "published_at": "2026-11-16T20:20:42+08:00"
-      },
-      {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261116/p9#a261116p9",
-       "published_at": "2026-11-16T17:33:53+08:00"
-      },
-      {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261116/p2#a261116p2",
-       "published_at": "2026-11-16T15:20:06+08:00"
-      },
-      {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261115/p13#a261115p13",
-       "published_at": "2026-11-16T03:20:03+08:00"
-      },
-      {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261115/p9#a261115p9",
-       "published_at": "2026-11-16T00:20:05+08:00"
-      },
-      {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261114/p7#a261114p7",
-       "published_at": "2026-11-15T01:20:25+08:00"
+       "url": "https://www.techmeme.com/261116/p13#a261116p13",
+       "published_at": "2026-11-16T19:20:15+08:00"
       }
      ],
-     "source_count": 18,
+     "source_count": 13,
      "tags": [
       "buzz"
      ]
@@ -3252,14 +3491,14 @@
      "category": "tech",
      "kind": "signal",
      "tier": "read",
-     "score": 61.0,
+     "score": 52.0,
      "title": "Germany and Austria submit a proposal urging the EU to require TikTok to find a local owner for its European operations to combat TikTok's ties to Beijing (Bloomberg)",
      "summary": "Bloomberg : Germany and Austria submit a proposal urging the EU to require TikTok to find a local owner for its European operations to combat TikTok's ties to Beijing Germany and Austria have proposed requiring TikTok Inc. to find a local owner for its European operations, mirroring a similar move i",
      "url": "https://www.techmeme.com/261119/p21#a261119p21",
      "source_name": "Techmeme（推特科技圈人工版）",
      "source_id": "techmeme",
      "published_at": "2026-11-19T20:20:06+08:00",
-     "age_h": 1.1,
+     "age_h": 2.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -3290,11 +3529,6 @@
        "name": "Techmeme（推特科技圈人工版）",
        "url": "https://www.techmeme.com/261118/p55#a261118p55",
        "published_at": "2026-11-19T10:20:04+08:00"
-      },
-      {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261118/p30#a261118p30",
-       "published_at": "2026-11-19T00:20:06+08:00"
       },
       {
        "name": "Techmeme（推特科技圈人工版）",
@@ -3338,106 +3572,11 @@
       },
       {
        "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261116/p11#a261116p11",
-       "published_at": "2026-11-16T18:20:22+08:00"
-      },
-      {
-       "name": "Techmeme（推特科技圈人工版）",
        "url": "https://www.techmeme.com/261115/p18#a261115p18",
        "published_at": "2026-11-16T07:20:02+08:00"
-      },
-      {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261115/p6#a261115p6",
-       "published_at": "2026-11-16T00:20:05+08:00"
       }
      ],
-     "source_count": 16,
-     "tags": [
-      "buzz"
-     ]
-    },
-    {
-     "id": "sig-229f3ab4b3f0458e",
-     "category": "tech",
-     "kind": "signal",
-     "tier": "read",
-     "score": 46.0,
-     "title": "Variational, which offers blockchain-based derivatives tied to cryptocurrencies and traditional assets, raised a $110M Series B at a $1.5B valuation (Jason Shubnell/The Block)",
-     "summary": "Jason Shubnell / The Block : Variational, which offers blockchain-based derivatives tied to cryptocurrencies and traditional assets, raised a $110M Series B at a $1.5B valuation Traditional markets account for more than half of daily trading volume on its Omni trading platform.",
-     "url": "https://www.techmeme.com/261118/p31#a261118p31",
-     "source_name": "Techmeme（推特科技圈人工版）",
-     "source_id": "techmeme",
-     "published_at": "2026-11-19T02:20:03+08:00",
-     "age_h": 19.1,
-     "cvss": null,
-     "in_the_wild": false,
-     "flags": [],
-     "why": "圈内在聊嘅大事",
-     "action": "",
-     "region": {
-      "level": "global",
-      "name": "global",
-      "parents": []
-     },
-     "sources": [
-      {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261118/p31#a261118p31",
-       "published_at": "2026-11-19T02:20:03+08:00"
-      },
-      {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261118/p17#a261118p17",
-       "published_at": "2026-11-18T20:20:28+08:00"
-      },
-      {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261118/p5#a261118p5",
-       "published_at": "2026-11-18T17:20:37+08:00"
-      },
-      {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261117/p72#a261117p72",
-       "published_at": "2026-11-18T13:20:02+08:00"
-      },
-      {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261117/p29#a261117p29",
-       "published_at": "2026-11-18T00:20:36+08:00"
-      },
-      {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261117/p32#a261117p32",
-       "published_at": "2026-11-18T00:20:36+08:00"
-      },
-      {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261117/p15#a261117p15",
-       "published_at": "2026-11-17T20:20:34+08:00"
-      },
-      {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261116/p29#a261116p29",
-       "published_at": "2026-11-17T01:20:05+08:00"
-      },
-      {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261115/p3#a261115p3",
-       "published_at": "2026-11-16T00:20:05+08:00"
-      },
-      {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261114/p5#a261114p5",
-       "published_at": "2026-11-15T01:20:25+08:00"
-      },
-      {
-       "name": "Techmeme（推特科技圈人工版）",
-       "url": "https://www.techmeme.com/261114/p3#a261114p3",
-       "published_at": "2026-11-15T01:20:25+08:00"
-      }
-     ],
-     "source_count": 11,
+     "source_count": 13,
      "tags": [
       "buzz"
      ]
@@ -3454,7 +3593,7 @@
      "source_name": "Proxmox 官方论坛",
      "source_id": "proxmox-forum",
      "published_at": "2026-11-19T00:20:12+08:00",
-     "age_h": 21.1,
+     "age_h": 22.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -3495,7 +3634,7 @@
      "source_name": "Proxmox 官方论坛",
      "source_id": "proxmox-forum",
      "published_at": "2026-11-19T02:20:08+08:00",
-     "age_h": 19.1,
+     "age_h": 20.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -3531,7 +3670,7 @@
      "source_name": "Proxmox 官方论坛",
      "source_id": "proxmox-forum",
      "published_at": "2026-11-17T19:20:21+08:00",
-     "age_h": 50.1,
+     "age_h": 51.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -3577,7 +3716,7 @@
      "source_name": "Proxmox 官方论坛",
      "source_id": "proxmox-forum",
      "published_at": "2026-11-19T15:20:12+08:00",
-     "age_h": 6.1,
+     "age_h": 7.1,
      "cvss": null,
      "in_the_wild": false,
      "flags": [],
@@ -3622,7 +3761,7 @@
    "source_name": "Google News · WHO 疫情通报",
    "source_id": "gnews-who",
    "published_at": "2026-11-19T16:20:04+08:00",
-   "age_h": 5.1,
+   "age_h": 6.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -3833,7 +3972,7 @@
    "source_name": "selfh.st 自托管周报",
    "source_id": "selfh-st",
    "published_at": "2026-11-19T00:20:25+08:00",
-   "age_h": 21.1,
+   "age_h": 22.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -3928,7 +4067,7 @@
    "source_name": "LWN 头条",
    "source_id": "lwn-headlines",
    "published_at": "2026-11-19T00:20:21+08:00",
-   "age_h": 21.1,
+   "age_h": 22.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -3977,72 +4116,6 @@
    ]
   },
   {
-   "id": "sig-bac00bcd1b0865f1",
-   "category": "health",
-   "kind": "signal",
-   "tier": "sideline",
-   "score": 34.5,
-   "title": "Trump says US would help Russia amid reported fatal case of pneumonic plague - ABC News - Breaking News, Latest News and Videos",
-   "summary": "Trump says US would help Russia amid reported fatal case of pneumonic plague ABC News - Breaking News, Latest News and Videos",
-   "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQMk0wTjU5Q0dyT01nZjJQRmwyM2duellWaEN3T21XZEVqTTFiS1NEcGI1VU5kcU13eFk1RE81Sk9zQzJVbkdETTZzSnRiUlBuZTA2U2EtVEpIRmRUSEdpTURfaTJKR1c5dnlKV1F5Z3dTU051VGdGSi1tUnF2LXhIS3k5Mm5FQ1ZzcGtpZ3JBYXUtbE9HQVZzRF9EQTdLLU9qdHN6YnpEbXRWd9IBrwFBVV95cUxPTDFBd1dMazFiUGptc190MXpwanUwcVpjSkswdTJoMVdBcldya0ktbUM0OFpXeEpTRWV0Zlcxcl9QWlEyNWZNdUwtcXJOWDF4OWJqRzFWVGNsMEhHUnAyY1p6NWhvQjB1SGM3Zkpocnp5bGdrNUNfUW1SZ0NKVDZZQk54Q3NMU0o5T3ZFRmlDRVZzdnJMa2JMQWZjeG1WNHJQb2FqaDZmNldUSlktT1hZ?oc=5",
-   "source_name": "Google News · WHO 疫情通报",
-   "source_id": "gnews-who",
-   "published_at": "2026-11-19T00:20:04+08:00",
-   "age_h": 21.1,
-   "cvss": null,
-   "in_the_wild": false,
-   "flags": [],
-   "why": "养生/生活类，不是通报",
-   "action": "",
-   "region": {
-    "level": "global",
-    "name": "global",
-    "parents": []
-   },
-   "sources": [
-    {
-     "name": "Google News · WHO 疫情通报",
-     "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQMk0wTjU5Q0dyT01nZjJQRmwyM2duellWaEN3T21XZEVqTTFiS1NEcGI1VU5kcU13eFk1RE81Sk9zQzJVbkdETTZzSnRiUlBuZTA2U2EtVEpIRmRUSEdpTURfaTJKR1c5dnlKV1F5Z3dTU051VGdGSi1tUnF2LXhIS3k5Mm5FQ1ZzcGtpZ3JBYXUtbE9HQVZzRF9EQTdLLU9qdHN6YnpEbXRWd9IBrwFBVV95cUxPTDFBd1dMazFiUGptc190MXpwanUwcVpjSkswdTJoMVdBcldya0ktbUM0OFpXeEpTRWV0Zlcxcl9QWlEyNWZNdUwtcXJOWDF4OWJqRzFWVGNsMEhHUnAyY1p6NWhvQjB1SGM3Zkpocnp5bGdrNUNfUW1SZ0NKVDZZQk54Q3NMU0o5T3ZFRmlDRVZzdnJMa2JMQWZjeG1WNHJQb2FqaDZmNldUSlktT1hZ?oc=5",
-     "published_at": "2026-11-19T00:20:04+08:00"
-    },
-    {
-     "name": "Google News · WHO 疫情通报",
-     "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPaVFxQTZQbEFJdm9jTU5qVFFlbUh1Z2tCRDhCZHBlY3NneVhwN0VEV1lJOUlZVjVoNUxfMGVsbmVpcGkwVTF6TWVRWTlhb0xSamJaZU5QMFJoZ0lNME1BT0FoRlJCSmNnWW81cXN0QVBqb2RhSWhJTDRmYWE4eW4tcUdMVlFjcTBVVTVCMGFKOF9RMjhUX2ZJTFRnTzVyLW0zbk930gGoAUFVX3lxTE50VnEwRi1SSDJvaTZ0Z2VjVjZaNWlrZGlZa3BneElvZjJzcUZoRWlIZ0hXTzV4QW1TY21oVVRuMVRGZHB5X09fU3NFVWhtVVpNN3Q2aWR3UkpUM3lOamItODI2R2VWdnhjRnhQNC1ub1hqQzhmUUVRVG5idWt1Q0VIcVQ2NzRVWUF4N1NWclk4ZVZqSEF4RHBFYUpzNnl5SHZMbDhYdHlRMw?oc=5",
-     "published_at": "2026-11-18T00:20:08+08:00"
-    },
-    {
-     "name": "Google News · WHO 疫情通报",
-     "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNQVpoN0llaXNHWHZ6OWk0endMWXVfNGRJdXBXSlN6MG9ubDFNQjNFM3ppUG41Y1c2X1ViNVdpSG80WEp1akI5QTI3N0FpNlBSZ0p6Mk5rcjhGQWJ5S09ib1A4ZHZaMTFObHpRY2lrQzhBcFVDeWhmVlhubUtoZkZjb21iUkVpODdxdjZ1VUhsUkFhd21GbnRfdG5xUm9NUVBIaUHSAacBQVVfeXFMTzRGX3dQUGxMZWNwOTd2UF8xWW5SeWQ4R0VVZTl5Tld1YUFTYjNvYm5RckdLbTI3VDJ2ZVdkTUl6Zk9WbE0yRXJNRTAwZW9NaVcxOUFSZWVQMmtyZlh3WWhrdFNjcjhBamtpODZkdEptUDJaaEFLaHcyQXVyWElfR2k0cXVQa3FXVzRwa293VlFQRXJ3N29NVll5SS1SZGlfd1E1S1p0ZG8?oc=5",
-     "published_at": "2026-11-18T00:20:08+08:00"
-    },
-    {
-     "name": "Google News · WHO 疫情通报",
-     "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNM3BjODZZSDd0eHFXOVNIaGZpazY2OFZPWjJRUGpudU9hLXV5TExZUWhsS0xLeWFteG5ERlBSanh0TmJNTGRUVjR5cDllN1NWeUJsZUNJX1RkWkVuTGZRZW9jZ2Y1Q1lkSXB4LXdnTm1RZzJBQVNQdU0xWHY5YnFZQmx6bk5IRUVuLTg5LVdySWpKc1VrTDB1UkE4V0lmTlR6ZEVF0gGoAUFVX3lxTE1mcXJiOEhyZzVjUk9DeW80XzZ3VXdxUW9uekRkekZGbkJuMVFVSDQxUUkwUlpRUHdsMVRqVDkwODB3WFJFVnZJbkNaWWNoc3doTFU3dWUySml5cVZ1OUNoaERvcTRKd29mdEJINFZfWHlMQTdMWUJwajA5dWlLWkpYU1lWSEt6Q29US2RieHlPM1Zjb1RMbWh6M3pMejd1eEpWekVRZ3R3dw?oc=5",
-     "published_at": "2026-11-17T08:20:04+08:00"
-    },
-    {
-     "name": "Google News · WHO 疫情通报",
-     "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNZG56YlN0MDdsU2pKSThXS1dhalk2SjlGX2RzdGpjck0zcG84OU5LOEZXX1IwVzBmVkxhRThyOXFZZUJ2dW9LOGxPQmZHXzNlQTZORERGX0RRZTVMTXlrT3RWQkxTU2phZm44N0drMHctakk5UEJyTy1qNG5SRmpTOFpOMHlKeUdTSkRacmVrMUdTdkXSAZgBQVVfeXFMUHRRNF9FcG13Sjkya2RFNDJaMVg3VUNOWjM0ZlVFcTlQWERiTHZuTjFsMHgzY0xuOW9EQjlPVE9IYWdpQmJ3eEJDdEFwNE5kWTFjSVFCVHUtaWtYTERKM1hGN1ZBV1pwV1ZsX1JEZzZ6NmpyT05LdHZIcnI2WHE4WGlnT3pZZGZYOVJFajlxVGJCMEZTVlhqV0I?oc=5",
-     "published_at": "2026-11-17T06:20:09+08:00"
-    },
-    {
-     "name": "Google News · WHO 疫情通报",
-     "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNMndFcnFqeFdqTUE0Y0ZmNFdhQ1ViX2dXWWJtbjQyelNpYUZ3TjlLMnRjamxHSmFvRTZzc3VHTFltckRKVkdFQzJLenB5UDhFUVd6dmhnLTZlbE92UzkzcVMwMWRXbkF6WDJlcEFDa3ZSZFkwLXRPYVVrVjlQUk1XakpXSl9Wd0tsa3ZHOUJzQUJHUWFkUjJ1cXZKelVxNGxKMlFDUmlR0gGrAUFVX3lxTE53WjhWUE9JcEJQYjFsVDU5amhWbWs5cldIbllpbTVrd0NvamFpVy1WTUFhMVdfSkFxdzhKeWhHY0ZlWUdYQ0JPV2E3am5QR0ZORjRISUI4S2ZVVy1IMTNyRUk4OC1taTlwbGk4N0VfempYekNwWmNnSUpBcmNUNnlZaEFiSVBhTWZkY1ZwOG5tN1ZmRml5cWhOLUEwVURETzZuQVN2bGp4VS1rSQ?oc=5",
-     "published_at": "2026-11-17T02:20:04+08:00"
-    },
-    {
-     "name": "Google News · WHO 疫情通报",
-     "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQcm9OZXoxbTF4eVZzc1Z3cWdJaDJoTHhjVG9CWVJ3VkFFV1ZtNWtNTnlzUFRMeGdxc0xWZFAtV3NfWm5USmo0QnFTYy1TaG5vNTF0ckVOSkZrMWl4V1BQd25RLXZaNnFiZ2IyMjczZUNTVFlhdVotaWJvY1VhX1R4WnhfZG4xem0tN1Z6Y25GendFOE5uYWpDSGxwVHpvQXdmbkhYX2J3?oc=5",
-     "published_at": "2026-11-17T00:20:18+08:00"
-    }
-   ],
-   "source_count": 7,
-   "tags": [
-    "gnews",
-    "who"
-   ]
-  },
-  {
    "id": "sig-5df3d3d6d3fc5ae2",
    "category": "tech",
    "kind": "signal",
@@ -4054,7 +4127,7 @@
    "source_name": "Phoronix（Linux 硬件/内核）",
    "source_id": "phoronix",
    "published_at": "2026-11-19T19:20:06+08:00",
-   "age_h": 2.1,
+   "age_h": 3.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4099,7 +4172,7 @@
    "source_name": "Caddy 社区",
    "source_id": "caddy-community",
    "published_at": "2026-11-19T00:20:22+08:00",
-   "age_h": 21.1,
+   "age_h": 22.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4140,7 +4213,7 @@
    "source_name": "Cloudflare 博客",
    "source_id": "cloudflare-blog",
    "published_at": "2026-11-19T00:20:17+08:00",
-   "age_h": 21.1,
+   "age_h": 22.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4182,7 +4255,7 @@
    "source_name": "PostgreSQL 新闻",
    "source_id": "postgres-news",
    "published_at": "2026-11-19T00:20:17+08:00",
-   "age_h": 21.1,
+   "age_h": 22.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4212,6 +4285,67 @@
    ]
   },
   {
+   "id": "sig-bac00bcd1b0865f1",
+   "category": "health",
+   "kind": "signal",
+   "tier": "sideline",
+   "score": 31.5,
+   "title": "Trump says US would help Russia amid reported fatal case of pneumonic plague - ABC News - Breaking News, Latest News and Videos",
+   "summary": "Trump says US would help Russia amid reported fatal case of pneumonic plague ABC News - Breaking News, Latest News and Videos",
+   "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQMk0wTjU5Q0dyT01nZjJQRmwyM2duellWaEN3T21XZEVqTTFiS1NEcGI1VU5kcU13eFk1RE81Sk9zQzJVbkdETTZzSnRiUlBuZTA2U2EtVEpIRmRUSEdpTURfaTJKR1c5dnlKV1F5Z3dTU051VGdGSi1tUnF2LXhIS3k5Mm5FQ1ZzcGtpZ3JBYXUtbE9HQVZzRF9EQTdLLU9qdHN6YnpEbXRWd9IBrwFBVV95cUxPTDFBd1dMazFiUGptc190MXpwanUwcVpjSkswdTJoMVdBcldya0ktbUM0OFpXeEpTRWV0Zlcxcl9QWlEyNWZNdUwtcXJOWDF4OWJqRzFWVGNsMEhHUnAyY1p6NWhvQjB1SGM3Zkpocnp5bGdrNUNfUW1SZ0NKVDZZQk54Q3NMU0o5T3ZFRmlDRVZzdnJMa2JMQWZjeG1WNHJQb2FqaDZmNldUSlktT1hZ?oc=5",
+   "source_name": "Google News · WHO 疫情通报",
+   "source_id": "gnews-who",
+   "published_at": "2026-11-19T00:20:04+08:00",
+   "age_h": 22.1,
+   "cvss": null,
+   "in_the_wild": false,
+   "flags": [],
+   "why": "养生/生活类，不是通报",
+   "action": "",
+   "region": {
+    "level": "global",
+    "name": "global",
+    "parents": []
+   },
+   "sources": [
+    {
+     "name": "Google News · WHO 疫情通报",
+     "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQMk0wTjU5Q0dyT01nZjJQRmwyM2duellWaEN3T21XZEVqTTFiS1NEcGI1VU5kcU13eFk1RE81Sk9zQzJVbkdETTZzSnRiUlBuZTA2U2EtVEpIRmRUSEdpTURfaTJKR1c5dnlKV1F5Z3dTU051VGdGSi1tUnF2LXhIS3k5Mm5FQ1ZzcGtpZ3JBYXUtbE9HQVZzRF9EQTdLLU9qdHN6YnpEbXRWd9IBrwFBVV95cUxPTDFBd1dMazFiUGptc190MXpwanUwcVpjSkswdTJoMVdBcldya0ktbUM0OFpXeEpTRWV0Zlcxcl9QWlEyNWZNdUwtcXJOWDF4OWJqRzFWVGNsMEhHUnAyY1p6NWhvQjB1SGM3Zkpocnp5bGdrNUNfUW1SZ0NKVDZZQk54Q3NMU0o5T3ZFRmlDRVZzdnJMa2JMQWZjeG1WNHJQb2FqaDZmNldUSlktT1hZ?oc=5",
+     "published_at": "2026-11-19T00:20:04+08:00"
+    },
+    {
+     "name": "Google News · WHO 疫情通报",
+     "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNQVpoN0llaXNHWHZ6OWk0endMWXVfNGRJdXBXSlN6MG9ubDFNQjNFM3ppUG41Y1c2X1ViNVdpSG80WEp1akI5QTI3N0FpNlBSZ0p6Mk5rcjhGQWJ5S09ib1A4ZHZaMTFObHpRY2lrQzhBcFVDeWhmVlhubUtoZkZjb21iUkVpODdxdjZ1VUhsUkFhd21GbnRfdG5xUm9NUVBIaUHSAacBQVVfeXFMTzRGX3dQUGxMZWNwOTd2UF8xWW5SeWQ4R0VVZTl5Tld1YUFTYjNvYm5RckdLbTI3VDJ2ZVdkTUl6Zk9WbE0yRXJNRTAwZW9NaVcxOUFSZWVQMmtyZlh3WWhrdFNjcjhBamtpODZkdEptUDJaaEFLaHcyQXVyWElfR2k0cXVQa3FXVzRwa293VlFQRXJ3N29NVll5SS1SZGlfd1E1S1p0ZG8?oc=5",
+     "published_at": "2026-11-18T00:20:08+08:00"
+    },
+    {
+     "name": "Google News · WHO 疫情通报",
+     "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNM3BjODZZSDd0eHFXOVNIaGZpazY2OFZPWjJRUGpudU9hLXV5TExZUWhsS0xLeWFteG5ERlBSanh0TmJNTGRUVjR5cDllN1NWeUJsZUNJX1RkWkVuTGZRZW9jZ2Y1Q1lkSXB4LXdnTm1RZzJBQVNQdU0xWHY5YnFZQmx6bk5IRUVuLTg5LVdySWpKc1VrTDB1UkE4V0lmTlR6ZEVF0gGoAUFVX3lxTE1mcXJiOEhyZzVjUk9DeW80XzZ3VXdxUW9uekRkekZGbkJuMVFVSDQxUUkwUlpRUHdsMVRqVDkwODB3WFJFVnZJbkNaWWNoc3doTFU3dWUySml5cVZ1OUNoaERvcTRKd29mdEJINFZfWHlMQTdMWUJwajA5dWlLWkpYU1lWSEt6Q29US2RieHlPM1Zjb1RMbWh6M3pMejd1eEpWekVRZ3R3dw?oc=5",
+     "published_at": "2026-11-17T08:20:04+08:00"
+    },
+    {
+     "name": "Google News · WHO 疫情通报",
+     "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNZG56YlN0MDdsU2pKSThXS1dhalk2SjlGX2RzdGpjck0zcG84OU5LOEZXX1IwVzBmVkxhRThyOXFZZUJ2dW9LOGxPQmZHXzNlQTZORERGX0RRZTVMTXlrT3RWQkxTU2phZm44N0drMHctakk5UEJyTy1qNG5SRmpTOFpOMHlKeUdTSkRacmVrMUdTdkXSAZgBQVVfeXFMUHRRNF9FcG13Sjkya2RFNDJaMVg3VUNOWjM0ZlVFcTlQWERiTHZuTjFsMHgzY0xuOW9EQjlPVE9IYWdpQmJ3eEJDdEFwNE5kWTFjSVFCVHUtaWtYTERKM1hGN1ZBV1pwV1ZsX1JEZzZ6NmpyT05LdHZIcnI2WHE4WGlnT3pZZGZYOVJFajlxVGJCMEZTVlhqV0I?oc=5",
+     "published_at": "2026-11-17T06:20:09+08:00"
+    },
+    {
+     "name": "Google News · WHO 疫情通报",
+     "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNMndFcnFqeFdqTUE0Y0ZmNFdhQ1ViX2dXWWJtbjQyelNpYUZ3TjlLMnRjamxHSmFvRTZzc3VHTFltckRKVkdFQzJLenB5UDhFUVd6dmhnLTZlbE92UzkzcVMwMWRXbkF6WDJlcEFDa3ZSZFkwLXRPYVVrVjlQUk1XakpXSl9Wd0tsa3ZHOUJzQUJHUWFkUjJ1cXZKelVxNGxKMlFDUmlR0gGrAUFVX3lxTE53WjhWUE9JcEJQYjFsVDU5amhWbWs5cldIbllpbTVrd0NvamFpVy1WTUFhMVdfSkFxdzhKeWhHY0ZlWUdYQ0JPV2E3am5QR0ZORjRISUI4S2ZVVy1IMTNyRUk4OC1taTlwbGk4N0VfempYekNwWmNnSUpBcmNUNnlZaEFiSVBhTWZkY1ZwOG5tN1ZmRml5cWhOLUEwVURETzZuQVN2bGp4VS1rSQ?oc=5",
+     "published_at": "2026-11-17T02:20:04+08:00"
+    },
+    {
+     "name": "Google News · WHO 疫情通报",
+     "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQcm9OZXoxbTF4eVZzc1Z3cWdJaDJoTHhjVG9CWVJ3VkFFV1ZtNWtNTnlzUFRMeGdxc0xWZFAtV3NfWm5USmo0QnFTYy1TaG5vNTF0ckVOSkZrMWl4V1BQd25RLXZaNnFiZ2IyMjczZUNTVFlhdVotaWJvY1VhX1R4WnhfZG4xem0tN1Z6Y25GendFOE5uYWpDSGxwVHpvQXdmbkhYX2J3?oc=5",
+     "published_at": "2026-11-17T00:20:18+08:00"
+    }
+   ],
+   "source_count": 6,
+   "tags": [
+    "gnews",
+    "who"
+   ]
+  },
+  {
    "id": "sig-7fb2b6025853ed21",
    "category": "tech",
    "kind": "signal",
@@ -4223,7 +4357,7 @@
    "source_name": "Caddy 社区",
    "source_id": "caddy-community",
    "published_at": "2026-11-19T00:20:22+08:00",
-   "age_h": 21.1,
+   "age_h": 22.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4259,7 +4393,7 @@
    "source_name": "Caddy 社区",
    "source_id": "caddy-community",
    "published_at": "2026-11-19T00:20:22+08:00",
-   "age_h": 21.1,
+   "age_h": 22.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4295,7 +4429,7 @@
    "source_name": "Caddy 社区",
    "source_id": "caddy-community",
    "published_at": "2026-11-19T00:20:22+08:00",
-   "age_h": 21.1,
+   "age_h": 22.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4331,7 +4465,7 @@
    "source_name": "PostgreSQL 新闻",
    "source_id": "postgres-news",
    "published_at": "2026-11-19T00:20:17+08:00",
-   "age_h": 21.1,
+   "age_h": 22.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4367,7 +4501,7 @@
    "source_name": "PostgreSQL 新闻",
    "source_id": "postgres-news",
    "published_at": "2026-11-19T00:20:17+08:00",
-   "age_h": 21.1,
+   "age_h": 22.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4403,7 +4537,7 @@
    "source_name": "Docker 博客",
    "source_id": "docker-blog",
    "published_at": "2026-11-19T01:20:15+08:00",
-   "age_h": 20.1,
+   "age_h": 21.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4444,7 +4578,7 @@
    "source_name": "Google News · 广东疫情",
    "source_id": "gnews-health-gd",
    "published_at": "2026-11-19T19:20:04+08:00",
-   "age_h": 2.1,
+   "age_h": 3.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [
@@ -4487,7 +4621,7 @@
    "source_name": "Caddy 社区",
    "source_id": "caddy-community",
    "published_at": "2026-11-19T00:20:22+08:00",
-   "age_h": 21.1,
+   "age_h": 22.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4523,7 +4657,7 @@
    "source_name": "Caddy 社区",
    "source_id": "caddy-community",
    "published_at": "2026-11-19T00:20:22+08:00",
-   "age_h": 21.1,
+   "age_h": 22.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4559,7 +4693,7 @@
    "source_name": "Caddy 社区",
    "source_id": "caddy-community",
    "published_at": "2026-11-19T00:20:22+08:00",
-   "age_h": 21.1,
+   "age_h": 22.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4595,7 +4729,7 @@
    "source_name": "Caddy 社区",
    "source_id": "caddy-community",
    "published_at": "2026-11-19T00:20:22+08:00",
-   "age_h": 21.1,
+   "age_h": 22.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -4631,7 +4765,7 @@
    "source_name": "Caddy 社区",
    "source_id": "caddy-community",
    "published_at": "2026-11-19T00:20:22+08:00",
-   "age_h": 21.1,
+   "age_h": 22.1,
    "cvss": null,
    "in_the_wild": false,
    "flags": [],
@@ -5181,11 +5315,11 @@
   }
  ],
  "stats": {
-  "facts_in": 2498,
-  "clusters": 1324,
-  "items": 1324,
+  "facts_in": 2547,
+  "clusters": 1332,
+  "items": 1332,
   "dropped_noise": 4,
-  "ledger_rows": "7571→7481"
+  "ledger_rows": "7598→7539"
  },
  "disclaimer": "只做信息整理，不替代官方公告；行动建议需人判断。"
 }
