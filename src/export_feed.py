@@ -48,6 +48,8 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--limit", type=int, default=5, help="早安口播子集条数")
     ap.add_argument("--window", type=float, default=30.0)
+    # 2026-11-19 用户：早安「昨日要闻」只讲广州地区；珠三角留给应急片。
+    ap.add_argument("--city", default="gz", help="早安口播子集只取该城市（默认 gz；all=不过滤）")
     args = ap.parse_args()
 
     weather = {}
@@ -64,7 +66,12 @@ def main() -> int:
 
     articles = news.get("articles") or []
     now = dt.datetime.now(dt.timezone.utc)
-    picked = pick(articles, now, args.window, args.limit) if articles else []
+    # 早安抚子集：只取广州地区（news_all 保留全量，供应急片按珠三角口径用）
+    pool = articles
+    if (args.city or "").lower() != "all":
+        pool = [a for a in articles if str(a.get("city") or "").lower() == args.city]
+        print(f"[feed] 早安抚子集口径：city={args.city} → {len(pool)}/{len(articles)} 条")
+    picked = pick(pool, now, args.window, args.limit) if pool else []
 
     feed = {
         "schema_version": SCHEMA,
