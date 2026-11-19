@@ -41,7 +41,7 @@ ROOT = Path(__file__).resolve().parent.parent
 WX = ROOT / "data" / "weather.json"
 NEWS = ROOT / "data" / "gba_news.json"
 OUTS = [ROOT / "data" / "feed.json", ROOT / "docs" / "data" / "feed.json"]
-SCHEMA = "2.0.0"
+SCHEMA = "2.1.0"
 
 
 def main() -> int:

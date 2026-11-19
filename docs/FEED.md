@@ -17,21 +17,29 @@ cron 每小时 :35（/root/nanhai/nanhai-cron.sh）
 Worker 是纯静态资源（`wrangler.toml` 的 `[assets] directory = ./docs`），
 所以 `docs/data/*.json` 推上去就等于线上文件，没有额外路由。
 
-## 二、feed.json 结构（schema 2.0.0）
+## 二、feed.json 结构（schema 2.1.0）
 
 ```jsonc
 {
-  "schema_version": "2.0.0",
+  "schema_version": "2.1.0",
   "generated_at": "2026-11-19T06:14:00+00:00",
   "weather": {
     "as_of": "…",                       // 天气抓取时间
     "source": "open-meteo",
     "cities": [                         // 10 城，顺序同 gba_common.CITIES
-      {"key":"gz","name":"广州","date":"2026-11-19","code":3,"text":"阴天",
-       "t_min":16,"t_max":22,"rain_prob":8,"humidity":48,
-       "current_temp":18.2,"apparent":17.1,
+      {"key":"gz","name":"广州",
+       // 扁平镜像（旧消费方）
+       "date":"2026-11-19","code":3,"text":"阴天","t_min":16,"t_max":22,"rain_prob":8,
+       "humidity":48,"current_temp":18.2,"apparent":17.1,
        "wind_dir":"北风","wind_level":"3","wind_kph":14.0,"uv":3.1,
-       "tomorrow":{"date":"2026-11-20","code":61,"text":"小雨","t_min":15,"t_max":20,"rain_prob":60}}
+       "tomorrow":{"date":"2026-11-20","code":61,"text":"小雨","t_min":15,"t_max":20,"rain_prob":60},
+       // 完整结构（2.1.0 新增，视频侧按日期取；days = 今天/明天/后天）
+       "current":{"code":3,"text":"阴","t":18.2,"feels":17.1,"humidity":48,
+                  "wind_kph":14.0,"wind_dir":"北风","wind_level":"3",
+                  "gust_kph":27.0,"gust_level":"4"},
+       "days":[{"date":"2026-11-19","code":3,"text":"阴天","t_min":16,"t_max":22,
+                "rain_prob":8,"rain_am":8,"rain_pm":0,"rain_hours":0,"rain_mm":0.0,
+                "cloud":88,"humidity_day":50,"uv":3.1,"sunrise":"06:42","sunset":"17:41"}]}
     ]
   },
   "news": {                             // 早安口播子集（export_brief 同一套口径）
@@ -52,6 +60,7 @@ Worker 是纯静态资源（`wrangler.toml` 的 `[assets] directory = ./docs`）
 | `time` | 画面/口播用的日期标签（「11月19日」），列表页没有时刻就不编时间 |
 | `text` | WMO 码 + 温湿雨风后的口语化结论（沿用 /root/vbox 已验证口径） |
 | `status` | `ok` 有新增 / `dup` 全是重复 / `empty` 为空 / `error` 抓取失败 |
+| `days[]` | 今天/明天/后天；视频只认这三天，更远日期回退直连 Open-Meteo |
 | `score` | 早安子集打分（export_brief 内一套规则，两处共用不再漂移） |
 
 ## 三、源清单（2026-11-19 实测）
@@ -86,6 +95,19 @@ Worker 是纯静态资源（`wrangler.toml` 的 `[assets] directory = ./docs`）
 - 另外照旧查 nanhai.json 新鲜度、signals 条数、仓库冲突、facts 停更
 
 异常推 ntfy `pve-alert`，正常不吵。
+
+## 四·五、视频流接入（2026-11-19）
+
+`/root/vbox/bin/fetch_briefing.py` 已改为 **feed 优先**：
+
+- `fetch_weather(day)` → 先 `feed_weather(day)`（本地副本优先 → HTTP），feed 覆盖今天/明天/后天；
+  更远日期（提前多日预渲染）自动回退直连 Open-Meteo，行为不变
+- `fetch_news()` → 先 `feed_news()`（读 `news.items`，只做字段对齐 + 政治复检 + D-1 优先）
+- feed 整个不可用 → 回退旧路径（brief.json + 直连 Open-Meteo），出片不中断
+- 实测：`--date 2026-11-19` 走 feed（天气源/要闻源均显示 feed.json）；`--date 2026-11-25`
+  天气回退直连、新闻仍用 feed；`make check` / `make preview` 均通过，天气卡与新闻卡数值完整
+
+cron 侧 `export_feed.py --limit 8`：给视频侧留 8 条候选（实际最多用 2 条）。
 
 ## 五、回滚
 
