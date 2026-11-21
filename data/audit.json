@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-11-20T18:51:30+00:00",
-  "source_updated": "2026-11-20T14:59:04.376644+00:00",
+  "generated_at": "2026-11-21T00:57:45+00:00",
+  "source_updated": "2026-11-20T22:32:02.466755+00:00",
   "summary": {
     "status": "warn",
     "checks_passed": 3,
@@ -11,14 +11,14 @@
     {
       "id": "coverage.title",
       "label": "标题中立化覆盖率",
-      "status": "warn",
+      "status": "pass",
       "threshold": ">= 0.90",
-      "observed": 0.8967,
+      "observed": 0.9833,
       "metric": {
-        "processed": 269,
+        "processed": 295,
         "total": 300
       },
-      "detail": "31/300 条标题与英文原文完全相同，未走中立化"
+      "detail": "5/300 条标题与英文原文完全相同，未走中立化"
     },
     {
       "id": "coverage.summary",
@@ -35,63 +35,93 @@
     {
       "id": "coverage.by_source",
       "label": "按来源覆盖率",
-      "status": "pass",
+      "status": "warn",
       "threshold": "0% 源占比 < 0.50",
-      "observed": 0.8967,
+      "observed": 0.9833,
       "metric": {
-        "zero_rate_sources": 0,
-        "sources_total": 32
+        "zero_rate_sources": 1,
+        "sources_total": 29
       },
-      "detail": "全部 32 个来源均有中立化产出"
+      "detail": "1 个源加工率为 0（共 29 个源）：中新网文化"
     },
     {
       "id": "neutrality",
       "label": "中立度残留",
       "status": "pass",
       "threshold": "<= 0.05",
-      "observed": 0.0,
+      "observed": 0.0068,
       "metric": {
-        "processed": 269,
-        "hits": 0
+        "processed": 295,
+        "hits": 2
       },
-      "detail": "已加工 269 条中 0 条仍含情绪/反讽残留（0.0%）"
+      "detail": "已加工 295 条中 2 条仍含情绪/反讽残留（0.7%）"
     }
   ],
   "by_source": [
     {
-      "source": "界面新闻",
-      "total": 20,
-      "processed": 14,
-      "rate": 0.7
+      "source": "Deadline",
+      "total": 19,
+      "processed": 19,
+      "rate": 1.0
     },
     {
-      "source": "Financial Times",
+      "source": "France 24",
+      "total": 17,
+      "processed": 17,
+      "rate": 1.0
+    },
+    {
+      "source": "Phys.org",
+      "total": 17,
+      "processed": 17,
+      "rate": 1.0
+    },
+    {
+      "source": "TechRadar",
       "total": 16,
       "processed": 16,
       "rate": 1.0
     },
     {
-      "source": "中新网社会",
+      "source": "界面新闻",
       "total": 16,
-      "processed": 3,
-      "rate": 0.1875
+      "processed": 16,
+      "rate": 1.0
     },
     {
-      "source": "Variety",
+      "source": "Al Jazeera",
       "total": 15,
       "processed": 15,
       "rate": 1.0
     },
     {
-      "source": "中新网财经",
+      "source": "Financial Times",
       "total": 15,
-      "processed": 12,
-      "rate": 0.8
+      "processed": 15,
+      "rate": 1.0
     },
     {
-      "source": "Al Jazeera",
+      "source": "CNBC",
       "total": 14,
       "processed": 14,
+      "rate": 1.0
+    },
+    {
+      "source": "MarketWatch",
+      "total": 14,
+      "processed": 14,
+      "rate": 1.0
+    },
+    {
+      "source": "Variety",
+      "total": 14,
+      "processed": 14,
+      "rate": 1.0
+    },
+    {
+      "source": "Ars Technica",
+      "total": 13,
+      "processed": 13,
       "rate": 1.0
     },
     {
@@ -101,157 +131,124 @@
       "rate": 1.0
     },
     {
-      "source": "Phys.org",
+      "source": "DW",
+      "total": 13,
+      "processed": 13,
+      "rate": 1.0
+    },
+    {
+      "source": "Engadget",
       "total": 12,
       "processed": 12,
       "rate": 1.0
     },
     {
-      "source": "中新网",
+      "source": "Hollywood Reporter",
       "total": 12,
-      "processed": 11,
-      "rate": 0.9167
-    },
-    {
-      "source": "DW",
-      "total": 11,
-      "processed": 11,
-      "rate": 1.0
-    },
-    {
-      "source": "Deadline",
-      "total": 11,
-      "processed": 11,
+      "processed": 12,
       "rate": 1.0
     },
     {
       "source": "Mashable",
+      "total": 12,
+      "processed": 12,
+      "rate": 1.0
+    },
+    {
+      "source": "The Next Web",
+      "total": 12,
+      "processed": 12,
+      "rate": 1.0
+    },
+    {
+      "source": "The Verge",
       "total": 11,
       "processed": 11,
       "rate": 1.0
     },
     {
-      "source": "中新网文化",
-      "total": 11,
-      "processed": 3,
-      "rate": 0.2727
-    },
-    {
-      "source": "CNBC",
-      "total": 10,
-      "processed": 10,
-      "rate": 1.0
-    },
-    {
-      "source": "France 24",
-      "total": 10,
-      "processed": 10,
-      "rate": 1.0
-    },
-    {
-      "source": "TechRadar",
-      "total": 10,
-      "processed": 10,
-      "rate": 1.0
-    },
-    {
-      "source": "The Next Web",
-      "total": 10,
-      "processed": 10,
-      "rate": 1.0
-    },
-    {
-      "source": "Wired",
-      "total": 10,
-      "processed": 10,
-      "rate": 1.0
-    },
-    {
-      "source": "Hollywood Reporter",
-      "total": 9,
-      "processed": 9,
-      "rate": 1.0
-    },
-    {
       "source": "NPR",
-      "total": 9,
-      "processed": 9,
-      "rate": 1.0
-    },
-    {
-      "source": "MarketWatch",
       "total": 8,
       "processed": 8,
-      "rate": 1.0
-    },
-    {
-      "source": "中新网教育",
-      "total": 8,
-      "processed": 8,
-      "rate": 1.0
-    },
-    {
-      "source": "Engadget",
-      "total": 7,
-      "processed": 7,
-      "rate": 1.0
-    },
-    {
-      "source": "ScienceDaily",
-      "total": 7,
-      "processed": 7,
-      "rate": 1.0
-    },
-    {
-      "source": "Ars Technica",
-      "total": 6,
-      "processed": 6,
-      "rate": 1.0
-    },
-    {
-      "source": "中新网健康",
-      "total": 5,
-      "processed": 5,
       "rate": 1.0
     },
     {
       "source": "TechCrunch",
+      "total": 8,
+      "processed": 8,
+      "rate": 1.0
+    },
+    {
+      "source": "CNET",
+      "total": 7,
+      "processed": 7,
+      "rate": 1.0
+    },
+    {
+      "source": "中新网",
+      "total": 6,
+      "processed": 4,
+      "rate": 0.6667
+    },
+    {
+      "source": "中新网财经",
+      "total": 5,
+      "processed": 4,
+      "rate": 0.8
+    },
+    {
+      "source": "Wired",
       "total": 4,
       "processed": 4,
       "rate": 1.0
     },
     {
       "source": "CBS News",
-      "total": 3,
-      "processed": 3,
-      "rate": 1.0
-    },
-    {
-      "source": "The Verge",
-      "total": 3,
-      "processed": 3,
-      "rate": 1.0
-    },
-    {
-      "source": "CNET",
       "total": 2,
       "processed": 2,
       "rate": 1.0
     },
     {
-      "source": "中新网生活",
+      "source": "中新网文化",
+      "total": 2,
+      "processed": 0,
+      "rate": 0.0
+    },
+    {
+      "source": "ZDNet",
       "total": 1,
       "processed": 1,
       "rate": 1.0
     },
     {
-      "source": "联合国新闻",
+      "source": "中新网健康",
+      "total": 1,
+      "processed": 1,
+      "rate": 1.0
+    },
+    {
+      "source": "中新网社会",
       "total": 1,
       "processed": 1,
       "rate": 1.0
     }
   ],
-  "neutrality_hits": [],
+  "neutrality_hits": [
+    {
+      "source": "Variety",
+      "title": "‘War’ Creator George Kay on Writing the Celebrity Divorce Drama, That Shocking Season Finale and the Real Couple Who Inspired a Key Scene: ‘It’s Probably an Awful Moment in Someone’s Life’",
+      "zh_title": "《战争》的创作者 George Kay 谈到创作名人离婚剧情、令人震惊的季终集以及启发关键场景的真实夫妻：“这可能是某人生命中糟糕的时刻”",
+      "rule": "emotion",
+      "matched": "震惊"
+    },
+    {
+      "source": "Hollywood Reporter",
+      "title": "“The Secrecy Was Insane:” The Making of ‘The Hunger Games: Sunrise on the Reaping,’ From Locked Safes to Original Cast’s Return",
+      "zh_title": "“保密工作简直疯了”：《饥饿游戏：D- 日黎明》的幕后故事，从上锁的保险箱到原班人马的回归",
+      "rule": "emotion",
+      "matched": "疯了"
+    }
+  ],
   "dead_sources": [
     "Reuters",
     "AP News",
@@ -266,38 +263,35 @@
       "加载中…"
     ],
     "actually_producing": [
-      "界面新闻",
-      "Financial Times",
-      "中新网社会",
-      "Variety",
-      "中新网财经",
-      "Al Jazeera",
-      "BBC",
-      "Phys.org",
-      "中新网",
-      "DW",
       "Deadline",
-      "Mashable",
-      "中新网文化",
-      "CNBC",
       "France 24",
+      "Phys.org",
       "TechRadar",
-      "The Next Web",
-      "Wired",
-      "Hollywood Reporter",
-      "NPR",
+      "界面新闻",
+      "Al Jazeera",
+      "Financial Times",
+      "CNBC",
       "MarketWatch",
-      "中新网教育",
-      "Engadget",
-      "ScienceDaily",
+      "Variety",
       "Ars Technica",
-      "中新网健康",
-      "TechCrunch",
-      "CBS News",
+      "BBC",
+      "DW",
+      "Engadget",
+      "Hollywood Reporter",
+      "Mashable",
+      "The Next Web",
       "The Verge",
+      "NPR",
+      "TechCrunch",
       "CNET",
-      "中新网生活",
-      "联合国新闻"
+      "中新网",
+      "中新网财经",
+      "Wired",
+      "CBS News",
+      "中新网文化",
+      "ZDNet",
+      "中新网健康",
+      "中新网社会"
     ],
     "false_claims": []
   }
