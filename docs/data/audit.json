@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-11-24T16:29:37+00:00",
-  "source_updated": "2026-11-24T08:32:25.603900+00:00",
+  "generated_at": "2026-11-25T01:07:28+00:00",
+  "source_updated": "2026-11-25T00:20:47.609572+00:00",
   "summary": {
     "status": "warn",
     "checks_passed": 3,
@@ -11,55 +11,85 @@
     {
       "id": "coverage.title",
       "label": "标题中立化覆盖率",
-      "status": "warn",
+      "status": "pass",
       "threshold": ">= 0.90",
-      "observed": 0.8533,
+      "observed": 0.9667,
       "metric": {
-        "processed": 256,
+        "processed": 290,
         "total": 300
       },
-      "detail": "44/300 条标题与英文原文完全相同，未走中立化"
+      "detail": "10/300 条标题与英文原文完全相同，未走中立化"
     },
     {
       "id": "coverage.summary",
       "label": "摘要中立化覆盖率",
       "status": "pass",
       "threshold": ">= 0.90",
-      "observed": 0.97,
+      "observed": 0.9933,
       "metric": {
-        "processed": 291,
+        "processed": 298,
         "total": 300
       },
-      "detail": "9/300 条摘要与英文原文完全相同，未走中立化"
+      "detail": "2/300 条摘要与英文原文完全相同，未走中立化"
     },
     {
       "id": "coverage.by_source",
       "label": "按来源覆盖率",
-      "status": "pass",
+      "status": "warn",
       "threshold": "0% 源占比 < 0.50",
-      "observed": 0.8533,
+      "observed": 0.9667,
       "metric": {
-        "zero_rate_sources": 0,
+        "zero_rate_sources": 1,
         "sources_total": 29
       },
-      "detail": "全部 29 个来源均有中立化产出"
+      "detail": "1 个源加工率为 0（共 29 个源）：中新网财经"
     },
     {
       "id": "neutrality",
       "label": "中立度残留",
       "status": "pass",
       "threshold": "<= 0.05",
-      "observed": 0.0039,
+      "observed": 0.0,
       "metric": {
-        "processed": 256,
-        "hits": 1
+        "processed": 290,
+        "hits": 0
       },
-      "detail": "已加工 256 条中 1 条仍含情绪/反讽残留（0.4%）"
+      "detail": "已加工 290 条中 0 条仍含情绪/反讽残留（0.0%）"
     }
   ],
   "by_source": [
     {
       "source": "Al Jazeera",
+      "total": 20,
+      "processed": 20,
+      "rate": 1.0
+    },
+    {
+      "source": "Deadline",
+      "total": 20,
+      "processed": 20,
+      "rate": 1.0
+    },
+    {
+      "source": "Hollywood Reporter",
+      "total": 20,
+      "processed": 20,
+      "rate": 1.0
+    },
+    {
+      "source": "Mashable",
+      "total": 20,
+      "processed": 20,
+      "rate": 1.0
+    },
+    {
+      "source": "Phys.org",
+      "total": 20,
+      "processed": 20,
+      "rate": 1.0
+    },
+    {
+      "source": "TechRadar",
       "total": 20,
       "processed": 20,
       "rate": 1.0
@@ -71,39 +101,15 @@
       "rate": 1.0
     },
     {
-      "source": "中新网",
-      "total": 20,
-      "processed": 11,
-      "rate": 0.55
-    },
-    {
-      "source": "中新网财经",
-      "total": 20,
-      "processed": 15,
-      "rate": 0.75
-    },
-    {
-      "source": "界面新闻",
-      "total": 20,
-      "processed": 14,
-      "rate": 0.7
-    },
-    {
-      "source": "中新网社会",
-      "total": 18,
-      "processed": 4,
-      "rate": 0.2222
-    },
-    {
-      "source": "Deadline",
-      "total": 15,
-      "processed": 15,
+      "source": "MarketWatch",
+      "total": 17,
+      "processed": 17,
       "rate": 1.0
     },
     {
-      "source": "Phys.org",
-      "total": 14,
-      "processed": 14,
+      "source": "Engadget",
+      "total": 15,
+      "processed": 15,
       "rate": 1.0
     },
     {
@@ -113,19 +119,13 @@
       "rate": 1.0
     },
     {
-      "source": "Financial Times",
+      "source": "TechCrunch",
       "total": 13,
       "processed": 13,
       "rate": 1.0
     },
     {
-      "source": "Hollywood Reporter",
-      "total": 13,
-      "processed": 13,
-      "rate": 1.0
-    },
-    {
-      "source": "TechRadar",
+      "source": "The Verge",
       "total": 13,
       "processed": 13,
       "rate": 1.0
@@ -137,75 +137,69 @@
       "rate": 1.0
     },
     {
-      "source": "Mashable",
-      "total": 12,
-      "processed": 12,
+      "source": "Ars Technica",
+      "total": 10,
+      "processed": 10,
       "rate": 1.0
+    },
+    {
+      "source": "界面新闻",
+      "total": 10,
+      "processed": 7,
+      "rate": 0.7
     },
     {
       "source": "BBC",
-      "total": 11,
-      "processed": 11,
+      "total": 9,
+      "processed": 9,
       "rate": 1.0
     },
     {
-      "source": "Wired",
-      "total": 11,
-      "processed": 11,
-      "rate": 1.0
-    },
-    {
-      "source": "中新网文化",
-      "total": 8,
-      "processed": 1,
-      "rate": 0.125
-    },
-    {
-      "source": "The Verge",
+      "source": "CBS News",
       "total": 7,
       "processed": 7,
       "rate": 1.0
     },
     {
-      "source": "CBS News",
+      "source": "The Next Web",
+      "total": 7,
+      "processed": 7,
+      "rate": 1.0
+    },
+    {
+      "source": "中新网",
+      "total": 7,
+      "processed": 4,
+      "rate": 0.5714
+    },
+    {
+      "source": "Financial Times",
       "total": 6,
       "processed": 6,
       "rate": 1.0
     },
     {
-      "source": "Engadget",
-      "total": 6,
-      "processed": 6,
-      "rate": 1.0
-    },
-    {
-      "source": "CNET",
+      "source": "Wired",
       "total": 5,
       "processed": 5,
       "rate": 1.0
     },
     {
       "source": "DW",
-      "total": 5,
-      "processed": 5,
+      "total": 3,
+      "processed": 3,
       "rate": 1.0
     },
     {
-      "source": "中新网健康",
-      "total": 4,
+      "source": "中新网社会",
+      "total": 3,
+      "processed": 1,
+      "rate": 0.3333
+    },
+    {
+      "source": "CNET",
+      "total": 2,
       "processed": 2,
-      "rate": 0.5
-    },
-    {
-      "source": "MarketWatch",
-      "total": 3,
-      "processed": 3,
-      "rate": 1.0
-    },
-    {
-      "source": "The Next Web",
-      "total": 3,
-      "processed": 3,
       "rate": 1.0
     },
     {
@@ -215,33 +209,31 @@
       "rate": 1.0
     },
     {
-      "source": "TechCrunch",
+      "source": "ZDNet",
       "total": 2,
       "processed": 2,
       "rate": 1.0
     },
     {
-      "source": "中新网教育",
+      "source": "中新网财经",
       "total": 2,
-      "processed": 2,
-      "rate": 1.0
+      "processed": 0,
+      "rate": 0.0
     },
     {
-      "source": "中新网生活",
-      "total": 2,
+      "source": "ScienceDaily",
+      "total": 1,
       "processed": 1,
-      "rate": 0.5
-    }
-  ],
-  "neutrality_hits": [
+      "rate": 1.0
+    },
     {
-      "source": "Variety",
-      "title": "Zosia Mamet Slams ‘Mad Men’ Boss Matthew Weiner as ‘Horrible’ Because He ‘Rules With Fear’: ‘He Dressed Me Down for 45 Minutes’",
-      "zh_title": "Zosia Mamet 痛批《广告狂人》的制片人 Matthew Weiner“太可怕”，因为他“以恐惧治人”：“他训了我 45 分钟。”",
-      "rule": "emotion",
-      "matched": "太可怕"
+      "source": "中新网健康",
+      "total": 1,
+      "processed": 1,
+      "rate": 1.0
     }
   ],
+  "neutrality_hits": [],
   "dead_sources": [
     "Reuters",
     "AP News",
@@ -257,34 +249,34 @@
     ],
     "actually_producing": [
       "Al Jazeera",
-      "Variety",
-      "中新网",
-      "中新网财经",
-      "界面新闻",
-      "中新网社会",
       "Deadline",
-      "Phys.org",
-      "CNBC",
-      "Financial Times",
       "Hollywood Reporter",
-      "TechRadar",
-      "France 24",
       "Mashable",
-      "BBC",
-      "Wired",
-      "中新网文化",
-      "The Verge",
-      "CBS News",
-      "Engadget",
-      "CNET",
-      "DW",
-      "中新网健康",
+      "Phys.org",
+      "TechRadar",
+      "Variety",
       "MarketWatch",
-      "The Next Web",
-      "NPR",
+      "Engadget",
+      "CNBC",
       "TechCrunch",
-      "中新网教育",
-      "中新网生活"
+      "The Verge",
+      "France 24",
+      "Ars Technica",
+      "界面新闻",
+      "BBC",
+      "CBS News",
+      "The Next Web",
+      "中新网",
+      "Financial Times",
+      "Wired",
+      "DW",
+      "中新网社会",
+      "CNET",
+      "NPR",
+      "ZDNet",
+      "中新网财经",
+      "ScienceDaily",
+      "中新网健康"
     ],
     "false_claims": []
   }
