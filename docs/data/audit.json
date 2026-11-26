@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-11-26T13:12:38+00:00",
-  "source_updated": "2026-11-26T06:59:50.026065+00:00",
+  "generated_at": "2026-11-26T22:37:35+00:00",
+  "source_updated": "2026-11-26T17:35:48.893766+00:00",
   "summary": {
     "status": "warn",
-    "checks_passed": 2,
+    "checks_passed": 3,
     "checks_total": 4
   },
   "checks": [
@@ -13,36 +13,36 @@
       "label": "标题中立化覆盖率",
       "status": "warn",
       "threshold": ">= 0.90",
-      "observed": 0.8567,
+      "observed": 0.89,
       "metric": {
-        "processed": 257,
+        "processed": 267,
         "total": 300
       },
-      "detail": "43/300 条标题与英文原文完全相同，未走中立化"
+      "detail": "33/300 条标题与英文原文完全相同，未走中立化"
     },
     {
       "id": "coverage.summary",
       "label": "摘要中立化覆盖率",
       "status": "pass",
       "threshold": ">= 0.90",
-      "observed": 0.9633,
+      "observed": 0.98,
       "metric": {
-        "processed": 289,
+        "processed": 294,
         "total": 300
       },
-      "detail": "11/300 条摘要与英文原文完全相同，未走中立化"
+      "detail": "6/300 条摘要与英文原文完全相同，未走中立化"
     },
     {
       "id": "coverage.by_source",
       "label": "按来源覆盖率",
-      "status": "warn",
+      "status": "pass",
       "threshold": "0% 源占比 < 0.50",
-      "observed": 0.8567,
+      "observed": 0.89,
       "metric": {
-        "zero_rate_sources": 1,
-        "sources_total": 31
+        "zero_rate_sources": 0,
+        "sources_total": 32
       },
-      "detail": "1 个源加工率为 0（共 31 个源）：中新网生活"
+      "detail": "全部 32 个来源均有中立化产出"
     },
     {
       "id": "neutrality",
@@ -51,69 +51,51 @@
       "threshold": "<= 0.05",
       "observed": 0.0,
       "metric": {
-        "processed": 257,
+        "processed": 267,
         "hits": 0
       },
-      "detail": "已加工 257 条中 0 条仍含情绪/反讽残留（0.0%）"
+      "detail": "已加工 267 条中 0 条仍含情绪/反讽残留（0.0%）"
     }
   ],
   "by_source": [
     {
-      "source": "Variety",
+      "source": "Wired",
       "total": 20,
       "processed": 20,
       "rate": 1.0
     },
     {
-      "source": "界面新闻",
+      "source": "中新网财经",
       "total": 20,
-      "processed": 9,
-      "rate": 0.45
+      "processed": 15,
+      "rate": 0.75
     },
     {
-      "source": "Mashable",
+      "source": "界面新闻",
       "total": 19,
-      "processed": 19,
-      "rate": 1.0
+      "processed": 13,
+      "rate": 0.6842
     },
     {
-      "source": "Deadline",
+      "source": "BBC",
       "total": 18,
       "processed": 18,
       "rate": 1.0
     },
     {
-      "source": "Phys.org",
-      "total": 18,
-      "processed": 18,
-      "rate": 1.0
-    },
-    {
-      "source": "TechRadar",
-      "total": 17,
-      "processed": 17,
-      "rate": 1.0
+      "source": "中新网社会",
+      "total": 16,
+      "processed": 6,
+      "rate": 0.375
     },
     {
       "source": "Al Jazeera",
-      "total": 16,
-      "processed": 16,
-      "rate": 1.0
-    },
-    {
-      "source": "Hollywood Reporter",
       "total": 15,
       "processed": 15,
       "rate": 1.0
     },
     {
-      "source": "中新网财经",
-      "total": 14,
-      "processed": 5,
-      "rate": 0.3571
-    },
-    {
-      "source": "Financial Times",
+      "source": "Variety",
       "total": 13,
       "processed": 13,
       "rate": 1.0
@@ -121,14 +103,8 @@
     {
       "source": "中新网",
       "total": 13,
-      "processed": 3,
-      "rate": 0.2308
-    },
-    {
-      "source": "CNBC",
-      "total": 12,
-      "processed": 12,
-      "rate": 1.0
+      "processed": 10,
+      "rate": 0.7692
     },
     {
       "source": "France 24",
@@ -137,87 +113,105 @@
       "rate": 1.0
     },
     {
-      "source": "中新网社会",
-      "total": 12,
-      "processed": 4,
-      "rate": 0.3333
+      "source": "DW",
+      "total": 11,
+      "processed": 11,
+      "rate": 1.0
     },
     {
-      "source": "Wired",
+      "source": "NPR",
+      "total": 11,
+      "processed": 11,
+      "rate": 1.0
+    },
+    {
+      "source": "Deadline",
       "total": 10,
       "processed": 10,
       "rate": 1.0
     },
     {
-      "source": "BBC",
-      "total": 9,
-      "processed": 9,
+      "source": "Hollywood Reporter",
+      "total": 10,
+      "processed": 10,
       "rate": 1.0
     },
     {
-      "source": "中新网健康",
-      "total": 9,
-      "processed": 9,
+      "source": "Phys.org",
+      "total": 10,
+      "processed": 10,
       "rate": 1.0
     },
     {
-      "source": "DW",
-      "total": 7,
-      "processed": 7,
+      "source": "TechRadar",
+      "total": 10,
+      "processed": 10,
       "rate": 1.0
     },
     {
-      "source": "MarketWatch",
-      "total": 7,
-      "processed": 7,
-      "rate": 1.0
-    },
-    {
-      "source": "中新网文化",
-      "total": 6,
-      "processed": 2,
-      "rate": 0.3333
-    },
-    {
-      "source": "CBS News",
-      "total": 5,
-      "processed": 5,
-      "rate": 1.0
-    },
-    {
-      "source": "NPR",
-      "total": 5,
-      "processed": 5,
-      "rate": 1.0
-    },
-    {
-      "source": "Engadget",
-      "total": 4,
-      "processed": 4,
+      "source": "The Next Web",
+      "total": 10,
+      "processed": 10,
       "rate": 1.0
     },
     {
       "source": "The Verge",
-      "total": 4,
-      "processed": 4,
+      "total": 10,
+      "processed": 10,
       "rate": 1.0
     },
     {
-      "source": "CNET",
-      "total": 3,
-      "processed": 3,
+      "source": "中新网文化",
+      "total": 10,
+      "processed": 1,
+      "rate": 0.1
+    },
+    {
+      "source": "MarketWatch",
+      "total": 9,
+      "processed": 9,
+      "rate": 1.0
+    },
+    {
+      "source": "Mashable",
+      "total": 9,
+      "processed": 9,
+      "rate": 1.0
+    },
+    {
+      "source": "CNBC",
+      "total": 8,
+      "processed": 8,
+      "rate": 1.0
+    },
+    {
+      "source": "Engadget",
+      "total": 8,
+      "processed": 8,
+      "rate": 1.0
+    },
+    {
+      "source": "CBS News",
+      "total": 6,
+      "processed": 6,
+      "rate": 1.0
+    },
+    {
+      "source": "Financial Times",
+      "total": 5,
+      "processed": 5,
       "rate": 1.0
     },
     {
       "source": "ScienceDaily",
-      "total": 3,
-      "processed": 3,
+      "total": 5,
+      "processed": 5,
       "rate": 1.0
     },
     {
-      "source": "中新网教育",
-      "total": 3,
-      "processed": 3,
+      "source": "中新网健康",
+      "total": 4,
+      "processed": 4,
       "rate": 1.0
     },
     {
@@ -233,7 +227,13 @@
       "rate": 1.0
     },
     {
-      "source": "The Next Web",
+      "source": "ZDNet",
+      "total": 1,
+      "processed": 1,
+      "rate": 1.0
+    },
+    {
+      "source": "中新网教育",
       "total": 1,
       "processed": 1,
       "rate": 1.0
@@ -241,8 +241,14 @@
     {
       "source": "中新网生活",
       "total": 1,
-      "processed": 0,
-      "rate": 0.0
+      "processed": 1,
+      "rate": 1.0
+    },
+    {
+      "source": "联合国新闻",
+      "total": 1,
+      "processed": 1,
+      "rate": 1.0
     }
   ],
   "neutrality_hits": [],
@@ -260,37 +266,38 @@
       "加载中…"
     ],
     "actually_producing": [
-      "Variety",
+      "Wired",
+      "中新网财经",
       "界面新闻",
-      "Mashable",
+      "BBC",
+      "中新网社会",
+      "Al Jazeera",
+      "Variety",
+      "中新网",
+      "France 24",
+      "DW",
+      "NPR",
       "Deadline",
+      "Hollywood Reporter",
       "Phys.org",
       "TechRadar",
-      "Al Jazeera",
-      "Hollywood Reporter",
-      "中新网财经",
-      "Financial Times",
-      "中新网",
-      "CNBC",
-      "France 24",
-      "中新网社会",
-      "Wired",
-      "BBC",
-      "中新网健康",
-      "DW",
-      "MarketWatch",
-      "中新网文化",
-      "CBS News",
-      "NPR",
-      "Engadget",
+      "The Next Web",
       "The Verge",
-      "CNET",
+      "中新网文化",
+      "MarketWatch",
+      "Mashable",
+      "CNBC",
+      "Engadget",
+      "CBS News",
+      "Financial Times",
       "ScienceDaily",
-      "中新网教育",
+      "中新网健康",
       "Ars Technica",
       "TechCrunch",
-      "The Next Web",
-      "中新网生活"
+      "ZDNet",
+      "中新网教育",
+      "中新网生活",
+      "联合国新闻"
     ],
     "false_claims": []
   }
